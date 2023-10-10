@@ -5,6 +5,7 @@ import "./globals.css";
 export default function Home() {
   return (
     <div className="bg-black min-h-screen flex justify-center items-center h-screen">
+    {/* <div> */}
       <Head>
         <title>yogiyo</title>
         <meta name="description" content="clone yogiyo"></meta>
