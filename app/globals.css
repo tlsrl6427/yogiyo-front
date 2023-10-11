@@ -6,19 +6,20 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  font-size: 48px;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (max-width: 767px) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    font-size: 14px;
   }
 }
-
 
 .web-container {
   width: 360px;
   height: 640px;
   border: solid 1px #fff;
 }
+
+
