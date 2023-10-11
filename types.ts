@@ -5,8 +5,8 @@
 */
 export interface MaketInfoType {
   info: {
-    name: string;
-    rate?: number;
+    name?: string;
+    rate?: string;
     img?: string;
     delay?: string;
     delFee?: string;

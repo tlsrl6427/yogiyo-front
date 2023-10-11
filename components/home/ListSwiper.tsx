@@ -31,7 +31,7 @@ const ListSwiper = ({ dataList }: ListSwiperProps) => {
             return (
               <SwiperSlide key={i}>
                 <MarketInfoCard info={
-                  {'name': '롯데리아',}
+                  {}
                 }
                 />
               </SwiperSlide>
