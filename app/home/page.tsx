@@ -1,13 +1,16 @@
-import MaketInfoCard from "@/components/common/MaketInfoCard";
+import Header from "@/components/common/Header";
+import Banner from "@/components/home/Banner";
+import GridIconMenu from "@/components/home/GridIconMenu";
+import MyOrderedEateries from "@/components/home/MyOrderedEateries";
+
 const Home = () => {
-  const info = {
-    name: '롯데리아',
-    rate: 4.6,
-  }
+
   return (
-    <div className="flex h-screen justify-center items-center">
-      <div className="flex h-3/6 w-screen border-b-2 border-gray-500"></div>
-      <MaketInfoCard info={info} />
+    <div className="flex flex-col gap-4 max-w-[400px]">
+      <Header />
+      <Banner />
+      <GridIconMenu />
+      <MyOrderedEateries />
     </div>
   );
 }

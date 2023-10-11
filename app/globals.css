@@ -4,8 +4,8 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255; */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,4 +25,9 @@ body {
   width: 360px;
   height: 640px;
   border: solid 1px #fff;
+}
+
+/* swiper 설정 */
+.swiper-slide {
+  flex: 1 1 0;
 }
