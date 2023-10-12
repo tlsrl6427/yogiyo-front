@@ -32,9 +32,9 @@ const GridIconMenu = () => {
     {
       gridIconList.map((menuName, i) => {
         return (
-          <Link href={''} key={i} className="w-full h-full flex flex-col justify-center items-center border border-black">
+          <Link href={'home/marketList'} key={i} className="w-full h-full flex flex-col justify-center items-center border border-black">
             {/* 아이콘 들어감 */}
-            <span className="text-[9px] font-bold tracking-tight">{menuName}</span>
+            <span className="text-[10px] font-bold tracking-tighter whitespace-nowrap">{menuName}</span>
           </Link>
         )
       })

@@ -26,8 +26,3 @@ body {
   height: 640px;
   border: solid 1px #fff;
 }
-
-/* swiper 설정 */
-.swiper-slide {
-  flex: 1 1 0;
-}

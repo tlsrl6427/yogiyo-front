@@ -1,4 +1,3 @@
-
 import ListSwiper from "./ListSwiper"
 
 const MyOrderedEateries = () => {
