@@ -1,30 +1,5 @@
 import Link from "next/link";
-
-const gridIconList = [
-  '전체',
-  '할인가게',
-  '치킨',
-  '중국집',
-  '버거',
-  '한식',
-  '카페/디저트',
-  '분식',
-  '피자/양식',
-  '일식/돈까스',
-  '족발/보쌈',
-  '찜/탕',
-  '샌드위치',
-  '회/초밥',
-  '아시안',
-  '고기/구이',
-  '샐러드',
-  '도시락/죽',
-  '야식',
-  '프랜차이즈',
-  '1인분주문',
-  '신규맛집',
-  '밀키트',
-]
+import { gridIconList } from "@/lib/commonData";
 
 const GridIconMenu = () => {
   return (

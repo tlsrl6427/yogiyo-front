@@ -5,7 +5,7 @@ import { Poppins } from "next/font/google";
 const poppins = Poppins({
   weight: ["400", "600"],
   subsets: ["latin"],
-});
+}); 
 
 export const metadata: Metadata = {
   title: "yogiyo front test",

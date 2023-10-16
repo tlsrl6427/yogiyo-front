@@ -1,8 +1,10 @@
+import MenuList from "@/components/home/marketList/menuList"
+
 const MarketList = () => {
   return (
-    <>
-      몰랑!
-    </>
+    <div className="w-full pt-[50px]">
+      <MenuList />
+    </div>
   )
 }
 
