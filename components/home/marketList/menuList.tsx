@@ -20,14 +20,13 @@ const MenuList = () => {
       <Swiper 
         style={swiperStyle}
         slidesPerView={'auto'}
-        // centeredSlides={true}
         slideToClickedSlide={true}
       >
         {
           gridIconList?.map((menu, i) => {
             return (
               <SwiperSlide style={slideStyle} key={i}>
-                <p className="whitespace-nowrap text-slate-500 sex">{menu}</p>
+                <p className="whitespace-nowrap text-slate-500">{menu}</p>
               </SwiperSlide>
             )
           })
