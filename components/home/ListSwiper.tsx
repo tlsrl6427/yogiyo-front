@@ -15,6 +15,10 @@ interface ListSwiperProps {
   dataList?: MaketInfoType[];
 }
 
+const slideStyle = {
+  flex: '1 1 0'
+}
+
 const ListSwiper = ({ dataList }: ListSwiperProps) => {
 
   //임시 더미데이터
@@ -29,7 +33,7 @@ const ListSwiper = ({ dataList }: ListSwiperProps) => {
         {
           dummy?.map((_, i) => {
             return (
-              <SwiperSlide key={i}>
+              <SwiperSlide style={slideStyle} key={i}>
                 <MarketInfoCard info={
                   {}
                 }
