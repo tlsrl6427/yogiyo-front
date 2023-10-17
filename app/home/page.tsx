@@ -7,7 +7,7 @@ import SearchBarLink from "@/components/home/SearchBarLink";
 const Home = () => {
 
   return (
-    <div className="flex flex-col max-w-[400px] pt-[50px]">
+    <div className="flex flex-col w-full pt-[50px]">
       <Header />
       {/* <Banner /> */}
       <SearchBarLink />
