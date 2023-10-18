@@ -6,24 +6,24 @@ import GridIconMenu from '@/components/home/GridIconMenu';
 import MyOrderedEateries from '@/components/home/MyOrderedEateries';
 import NewEateries from '@/components/home/NewEateries';
 import SearchBarLink from '@/components/home/SearchBarLink';
+import Footer from '@/components/common/Footer';
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full pt-[50px]">
-      {/* <div> */}
+    <div>
       <Head>
         <title>yogiyo</title>
         <meta name="description" content="clone yogiyo"></meta>
       </Head>
       <main className="flex flex-col w-full pt-[50px]">
         <Header />
-        {/* <Banner /> */}
         <SearchBarLink />
         <GridIconMenu />
         <div className="p-1.5 bg-slate-100" />
         <MyOrderedEateries />
         <div className="p-1.5 bg-slate-100" />
         <NewEateries />
+        <Footer />
       </main>
     </div>
   );

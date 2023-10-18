@@ -30,7 +30,8 @@ const Footer = () => {
         const IconComponent = iconList[i];
         return (
           <Link href={routerPath[i]} className={`w-[20%] flex flex-col gap-1 justify-center items-center py-[15px] ${
-            isFirstRootHome(pathname, routerPath[i]) ? 'text-black' : 'text-slate-500'
+            // 현재 페이지 경로가 footer의 Icon과 같거나, || 최상위 도메인 Home이거나 를 만족할 때 해당 Footer Icon 색상 변경
+            isFirstRootHome(pathname, routerPath[i]) || (pathname === '/' && i === 0) ? 'text-black' : 'text-slate-500'
           }`} key={i}>
             <IconComponent style={{fontSize: '1.4rem'}}/>
             <span className="text-[0.8rem]">{name}</span>
