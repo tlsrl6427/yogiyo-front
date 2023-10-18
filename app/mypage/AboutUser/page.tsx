@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-const Test = () => {
+const AboutUser = () => {
   return (
     <div className="">
       <div className="flex pl-5 pr-5 pt-3 pb-3 border-b">
@@ -61,4 +61,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default AboutUser;
