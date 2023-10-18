@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+import RecoilRootWrapper from './RecoilRootWrapper';
 
 const poppins = Poppins({
   weight: ['400', '600'],
@@ -13,10 +14,16 @@ export const metadata: Metadata = {
   keywords: ['yogiyo', 'clone'],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body className={poppins.className}>{children}</body>
+      <body className={poppins.className}>
+        <RecoilRootWrapper>{children}</RecoilRootWrapper>
+      </body>
     </html>
   );
 }
