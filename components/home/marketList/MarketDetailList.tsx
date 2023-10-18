@@ -8,14 +8,17 @@ const dummyCon = {
   address: '어디동 어디시',
   categories: '',
   img: '',
-}
+};
 
-const dummy = new Array(10).fill(dummyCon)
+const dummy = new Array(10).fill(dummyCon);
 
 const MaketDetailCard = (info: any) => {
   return (
-    <Link href='' className="mt-[20px] ml-[20px] mr-[20px] pb-[20px] border-b border-slate-200 flex gap-4">
-      <div className='w-[90px] h-[90px] rounded-xl bg-slate-300'>
+    <Link
+      href=""
+      className="mt-[20px] ml-[20px] mr-[20px] pb-[20px] border-b border-slate-200 flex gap-4"
+    >
+      <div className="w-[90px] h-[90px] rounded-xl bg-slate-300">
         <img></img>
       </div>
       <div>
@@ -35,15 +38,13 @@ const MaketDetailCard = (info: any) => {
         </div>
       </div>
     </Link>
-  )
-}
+  );
+};
 
 const MarketDetailList = () => {
   return (
     <div className="flex flex-col">
-      {dummy?.map((info, i) => (
-        <MaketDetailCard key={i} info={info} />
-      ))}
+      {dummy?.map((info, i) => <MaketDetailCard key={i} info={info} />)}
     </div>
   );
 };
