@@ -22,4 +22,4 @@ export const gridIconList = [
   '1인분주문',
   '신규맛집',
   '밀키트',
-]
+];

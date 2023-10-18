@@ -4,7 +4,7 @@ const Header = () => {
       {/* 임시 헤더입니다 */}
       <p className="w-screen text-center">Header</p>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

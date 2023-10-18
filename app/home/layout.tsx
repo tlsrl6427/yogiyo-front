@@ -1,9 +1,10 @@
-import React from "react";
-import Header from "@/components/common/Header";
+import React from 'react';
+import Header from '@/components/common/Header';
+import Footer from '@/components/common/Footer';
 
 interface Props {
   children: React.ReactNode;
-};
+}
 
 const HomeLayout = ({ children }: Props) => {
   return (
@@ -11,8 +12,9 @@ const HomeLayout = ({ children }: Props) => {
       {/* @ts-ignore */}
       <Header />
       <>{children}</>
+      <Footer />
     </div>
   );
-}
+};
 
 export default HomeLayout;

@@ -1,20 +1,24 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
-import RecoilRootWrapper from "./RecoilRootWrapper";
+import './globals.css';
+import type { Metadata } from 'next';
+import { Poppins } from 'next/font/google';
+import RecoilRootWrapper from './RecoilRootWrapper';
 
 const poppins = Poppins({
-  weight: ["400", "600"],
-  subsets: ["latin"],
-}); 
+  weight: ['400', '600'],
+  subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
-  title: "yogiyo front test",
-  description: "test app",
-  keywords: ["yogiyo", "clone"],
+  title: 'yogiyo front test',
+  description: 'test app',
+  keywords: ['yogiyo', 'clone'],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className={poppins.className}>

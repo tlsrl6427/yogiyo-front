@@ -1,16 +1,16 @@
-import Image from "next/image";
-import Head from "next/head";
-import "./globals.css";
-import Header from "@/components/common/Header";
-import GridIconMenu from "@/components/home/GridIconMenu";
-import MyOrderedEateries from "@/components/home/MyOrderedEateries";
-import NewEateries from "@/components/home/NewEateries";
-import SearchBarLink from "@/components/home/SearchBarLink";
+import Image from 'next/image';
+import Head from 'next/head';
+import './globals.css';
+import Header from '@/components/common/Header';
+import GridIconMenu from '@/components/home/GridIconMenu';
+import MyOrderedEateries from '@/components/home/MyOrderedEateries';
+import NewEateries from '@/components/home/NewEateries';
+import SearchBarLink from '@/components/home/SearchBarLink';
 
 export default function Home() {
   return (
     <div className="flex flex-col w-full pt-[50px]">
-    {/* <div> */}
+      {/* <div> */}
       <Head>
         <title>yogiyo</title>
         <meta name="description" content="clone yogiyo"></meta>
