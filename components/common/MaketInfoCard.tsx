@@ -26,7 +26,7 @@ const MarketInfoCard = ({ info }: MaketInfoType) => {
       </div>
       <div className="text-sm flex items-center gap-2">
         <span>배달요금</span>
-         <p className="font-bold">{info.delFee || '3,000원'}</p>
+        <p className="font-bold">{info.delFee || '3,000원'}</p>
       </div>
     </Link>
   );
