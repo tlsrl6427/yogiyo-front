@@ -43,7 +43,7 @@ const MaketDetailCard = (info: any) => {
 
 const MarketDetailList = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col pt-[100px]">
       {dummy?.map((info, i) => <MaketDetailCard key={i} info={info} />)}
     </div>
   );

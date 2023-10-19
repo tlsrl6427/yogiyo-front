@@ -15,7 +15,7 @@ export default function Home() {
         <title>yogiyo</title>
         <meta name="description" content="clone yogiyo"></meta>
       </Head>
-      <main className="flex flex-col w-full pt-[50px]">
+      <main className="flex flex-col w-full pt-[50px] pb-[70px]">
         <Header />
         <SearchBarLink />
         <GridIconMenu />

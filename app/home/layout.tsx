@@ -8,7 +8,7 @@ interface Props {
 
 const HomeLayout = ({ children }: Props) => {
   return (
-    <div className="flex">
+    <div className="pt-[50px] pb-[70px]">
       {/* @ts-ignore */}
       <Header />
       <>{children}</>

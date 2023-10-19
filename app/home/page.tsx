@@ -7,7 +7,7 @@ import Footer from '@/components/common/Footer';
 
 const Home = () => {
   return (
-    <div className="flex flex-col w-full pt-[50px]">
+    <div className="flex flex-col w-full">
       <SearchBarLink />
       <GridIconMenu />
       <div className="p-1.5 bg-slate-100" />

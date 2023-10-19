@@ -32,7 +32,7 @@ const MenuList = () => {
   return (
     <div
       ref={parentRef}
-      className="w-full border-b overflow-hidden relative z-10"
+      className="w-full border-b overflow-hidden fixed z-10 top-[50px] left-0"
     >
       <div
         ref={childRef}
@@ -44,9 +44,9 @@ const MenuList = () => {
             onClick={(e) => {
               handleGrandchildClick(e), setSelectMenu(menu);
             }}
-            className={`flex items-center whitespace-nowrap cursor-pointer ${
+            className={`flex text-[1rem] items-center whitespace-nowrap cursor-pointer font-bold ${
               selectMenu === menu
-                ? 'text-black font-extrabold border-b-[3px] border-black h-[100%] leading-[100%]'
+                ? 'text-black border-b-[3px] border-black h-[100%] leading-[100%]'
                 : 'text-slate-500'
             }`}
           >
