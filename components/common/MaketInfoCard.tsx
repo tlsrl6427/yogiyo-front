@@ -1,5 +1,5 @@
 import { AiFillStar } from 'react-icons/ai';
-import type { MaketInfoType } from '@/types';
+import type { MaketInfoType } from '@/lib/types';
 import Link from 'next/link';
 
 const MarketInfoCard = ({ info }: MaketInfoType) => {

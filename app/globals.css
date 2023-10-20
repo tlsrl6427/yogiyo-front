@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-size: 48px;
+  /* font-size: 48px; */
   box-sizing: border-box;
 }
 
@@ -12,4 +12,3 @@
     font-size: 14px;
   }
 }
-
