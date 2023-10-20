@@ -1,7 +1,21 @@
-export default function Home() {
+import Header from '@/components/common/Header';
+import GridIconMenu from '@/components/home/GridIconMenu';
+import MyOrderedEateries from '@/components/home/MyOrderedEateries';
+import NewEateries from '@/components/home/NewEateries';
+import SearchBarLink from '@/components/home/SearchBarLink';
+import Footer from '@/components/common/Footer';
+
+const Home = () => {
   return (
-    <div className="flex h-screen justify-center items-center">
-      <div className="flex h-3/6 w-screen border-b-2 border-gray-500"></div>
+    <div className="flex flex-col w-full">
+      <SearchBarLink />
+      <GridIconMenu />
+      <div className="p-1.5 bg-slate-100" />
+      <MyOrderedEateries />
+      <div className="p-1.5 bg-slate-100" />
+      <NewEateries />
     </div>
   );
-}
+};
+
+export default Home;

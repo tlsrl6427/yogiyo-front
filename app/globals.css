@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-size: 48px; 
+  /* font-size: 48px; */
   box-sizing: border-box;
 }
 
@@ -11,10 +11,4 @@
   :root {
     font-size: 14px;
   }
-}
-
-.web-container {
-  width: 360px;
-  height: 640px;
-  border: solid 1px #fff;
 }
