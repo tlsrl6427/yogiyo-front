@@ -58,7 +58,7 @@ const OptionList = () => {
 
     if (toggle) {
       return (
-        <div className="bg-white flex flex-col gap-4 relative z-10 pb-6 cursor-pointer">
+        <div className="bg-white flex flex-col gap-4 fixed top-[150px] left-0 z-10 w-full pb-6 cursor-pointer ">
           {menu.list.map((value: string, i: number) => (
             <p
               key={i}
@@ -93,7 +93,7 @@ const OptionList = () => {
 
   return (
     <>
-      <div className="w-full overflow-hidden relative z-10">
+      <div className="w-full overflow-hidden fixed top-[100px] left-0 z-10">
         <div className="no-scroll top-0 left-0 overflow-x-auto h-[50px] flex px-[20px] items-center gap-4 text-sm absoulte bg-white">
           <div
             onClick={() => {
@@ -142,7 +142,7 @@ const OptionList = () => {
           onClick={() => {
             setToggleDropDown(false);
           }}
-          className="w-full h-full absolute top-[100px] left-0 bg-black bg-opacity-10 z-90"
+          className="w-full h-full fixed top-[100px] left-0 bg-black bg-opacity-10 z-90"
         ></div>
       ) : null}
       <style jsx>{`
