@@ -1,8 +1,15 @@
-'use client'
+'use client';
 import React from 'react';
 import Link from 'next/link';
 
 const AboutUser = () => {
+  const kakaoIcon = {
+    backgroundImage: `url(/img/kakaoLogoEdge.svg)`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+  };
+
   return (
     <div className="">
       <div className="flex pl-5 pr-5 pt-3 pb-3 border-b">
@@ -11,7 +18,9 @@ const AboutUser = () => {
           <p className="pt-1 text-slate-700 font-semibold">oolllb@naver.com</p>
         </div>
         <div className="w-1/6 flex relative">
-          <div className="absolute top-1/2 transform -translate-y-1/2 right-0 ">로고</div>
+          <div className="absolute top-1/2 transform -translate-y-1/2 right-0 w-7 h-7">
+            <i className="w-full h-full block rounded-[50%]" style={kakaoIcon} />
+          </div>
         </div>
       </div>
 
@@ -32,7 +41,9 @@ const AboutUser = () => {
         </div>
         <div className="w-1/6 flex relative">
           <div className="absolute top-1/2 transform -translate-y-1/2 right-0 ">
-            <Link href="../mypage/ChangeNickName">이동</Link>
+            <Link href="/mypage/ChangePhoneNumber">
+              <p className="pt-1 pb-1 pl-3 pr-3 border border-slate-300 text-sm">변경</p>
+            </Link>
           </div>
         </div>
       </div>
@@ -44,13 +55,9 @@ const AboutUser = () => {
         </div>
         <div className="w-1/6 flex relative">
           <div className="absolute top-1/2 transform -translate-y-1/2 right-0 ">
-            <button
-              onClick={() => {
-                console.log(1);
-              }}
-            >
-              변경
-            </button>
+            <Link href="/mypage/ChangeNickName">
+              <p className="pt-1 pb-1 pl-3 pr-3 border border-slate-300 text-sm">변경</p>
+            </Link>
           </div>
         </div>
       </div>

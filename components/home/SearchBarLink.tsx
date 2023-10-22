@@ -6,9 +6,20 @@ import { Autoplay } from 'swiper/modules';
 import { FiSearch } from 'react-icons/fi';
 import 'swiper/css';
 
-const dummy = new Array(10)
-  .fill('')
-  .map((_, i) => (i + 1).toString() + '.가게이름 들어가영');
+const dummyMaketList = [
+  '버거킹',
+  '맘스터치',
+  '본죽',
+  '밀양돼지국밥',
+  '그놈포차',
+  '푸라닥',
+  '동키치킨',
+  '제일스시',
+  '네오피자',
+  '베스킨라빈스',
+];
+
+const dummy = new Array(10).fill('').map((_, i) => (i + 1).toString() + '. ' + dummyMaketList[i]);
 
 const swiperStyle = {
   flex: '1',
