@@ -1,0 +1,29 @@
+@keyframes margin-left-0-to-50 {
+  from {
+    margin-left: 0;
+  }
+  to {
+    margin-left: 50%;
+  }
+}
+
+.underline-animation-to-right {
+  animation-name: margin-left-0-to-50;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes margin-left-50-to-0 {
+  from {
+    margin-left: 50%;
+  }
+  to {
+    margin-left: 0;
+  }
+}
+
+.underline-animation-to-left {
+  animation-name: margin-left-50-to-0;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
