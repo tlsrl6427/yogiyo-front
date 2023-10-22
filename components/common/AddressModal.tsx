@@ -80,11 +80,41 @@ const AddressModal = () => {
 
   return (
     <>
+<<<<<<< HEAD
       {/* 모달창 제외 백그라운드 */}
+=======
+      <div
+        className={`fixed bottom-0 left-0 w-full transition-all duration-300 ease-in-out bg-white z-10 rounded-t-3xl overflow-hidden ${
+          height ? 'h-full' : 'h-[50%]'
+        }`}
+      >
+        <div
+          onClick={() => setHeight(!height)}
+          className="cursor-pointer h-8 flex justify-center items-center"
+        >
+          {/* click 영역 */}
+          <p className="w-[50px] h-[5px] bg-slate-300 rounded-xl"></p>
+        </div>
+        <h2 className="text-[1.2rem] font-[900] text-center pt-[15px] pb-[25px]">주소 설정</h2>
+        <form className="flex-1 px-[10px] relative">
+          <FiSearch style={searchIconStyle} />
+          <input
+            className="rounded-[10px] bg-slate-200 w-[100%] p-[12px] pl-[40px] text-[0.9rem]"
+            type="text"
+            placeholder="건물명, 도로명 또는 지번으로 검색"
+          />
+        </form>
+        <p className="flex justify-center items-center gap-1 pt-[15px] pb-[15px] cursor-pointer">
+          <AiOutlineAim /> 현재 위치로 주소 찾기
+        </p>
+        <div className="w-full h-[10px] bg-slate-200"></div>
+      </div>
+>>>>>>> 48371c1 ([feat] kakao icon svg 등록, 변경 버튼, 링크 연결)
       <div
         onClick={() => setIsModal(false)}
         className="w-full h-full fixed bottom-0 left-0 z-90 opacity-40 bg-black"
       />
+<<<<<<< HEAD
       {/* 모달 본문 */}
       {!isDetailMap ? (
         !isFindMap ? (
@@ -149,6 +179,8 @@ const AddressModal = () => {
       ) : (
         <DetailMap />
       )}
+=======
+>>>>>>> 48371c1 ([feat] kakao icon svg 등록, 변경 버튼, 링크 연결)
     </>
   );
 };
