@@ -8,8 +8,8 @@ export const headerModalState = atom({
 
 export const currentCoord = atom<Coordinate | null>({
   key: 'currentCoord',
-  default: null
-})
+  default: null,
+});
 
 export const currentAddress = atom({
   key: 'currentAddress',
