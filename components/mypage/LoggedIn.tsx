@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Link from 'next/link';
 import { BiChevronRight } from 'react-icons/bi';
 import { BiHeart } from 'react-icons/bi';
 import { BiGift } from 'react-icons/bi';
