@@ -30,10 +30,7 @@ const MenuList = () => {
   };
 
   return (
-    <div
-      ref={parentRef}
-      className="w-full border-b overflow-hidden fixed z-10 top-[50px] left-0"
-    >
+    <div ref={parentRef} className="w-full border-b overflow-hidden fixed z-10 top-[50px] left-0">
       <div
         ref={childRef}
         className="no-scroll top-0 left-0 overflow-x-auto h-[50px] flex px-[20px] items-center gap-4 text-sm absoulte bg-white"

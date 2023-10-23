@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link'
+import Link from 'next/link';
 import { BiChevronRight } from 'react-icons/bi';
 import { BiHeart } from 'react-icons/bi';
 import { BiGift } from 'react-icons/bi';
@@ -20,7 +20,9 @@ const LoggedIn = () => {
         </div>
         <div className="w-1/6 flex relative">
           <div className="absolute top-1/2 transform -translate-y-1/2 right-0 ">
-            <Link href="../../mypage/AboutUser"><BiChevronRight color="grey" size="24px" /></Link>
+            <Link href="../../mypage/AboutUser">
+              <BiChevronRight color="grey" size="24px" />
+            </Link>
           </div>
         </div>
       </div>

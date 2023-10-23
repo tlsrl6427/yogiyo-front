@@ -9,12 +9,7 @@ export const metadata: Metadata = {
   keywords: ['yogiyo', 'clone'],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
       <body className={noto_sans.className}>
