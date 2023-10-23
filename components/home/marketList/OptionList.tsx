@@ -13,20 +13,8 @@ interface SelectMenuState {
 
 const menu = {
   sort: ['주문 많은순', '리뷰 많은순', '거리 가까운순', '별점 높은순'],
-  delFilter: [
-    '배달요금',
-    '무료',
-    '무료 ~ 1000원',
-    '무료 ~ 2000원',
-    '무료 ~ 3000원',
-  ],
-  orderAmount: [
-    '최소주문금액',
-    '5,000원 이하',
-    '10,000원 이하',
-    '12,000원 이하',
-    '15,000원 이하',
-  ],
+  delFilter: ['배달요금', '무료', '무료 ~ 1000원', '무료 ~ 2000원', '무료 ~ 3000원'],
+  orderAmount: ['최소주문금액', '5,000원 이하', '10,000원 이하', '12,000원 이하', '15,000원 이하'],
 };
 
 const OptionList = () => {
@@ -81,9 +69,7 @@ const OptionList = () => {
               }`}
             >
               {value}
-              {isSelected(menu.target, value) ? (
-                <BsCheck style={{ fontSize: '1.5rem' }} />
-              ) : null}
+              {isSelected(menu.target, value) ? <BsCheck style={{ fontSize: '1.5rem' }} /> : null}
             </p>
           ))}
         </div>
@@ -102,11 +88,7 @@ const OptionList = () => {
             className="px-[10px] py-[5px] border border-slate-300 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap"
           >
             {sortState}
-            {toggleDropDown && selectMenu.target === 'sort' ? (
-              <IoIosArrowUp />
-            ) : (
-              <IoIosArrowDown />
-            )}
+            {toggleDropDown && selectMenu.target === 'sort' ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </div>
           <div
             onClick={() => {

@@ -5,11 +5,11 @@ const GridIconMenu = () => {
   const bgIcon = (param: number) => {
     return {
       backgroundImage: `url(/img/menu_icon_${param + 1}.svg)`,
-      backgroundSize: 'cover', 
+      backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center'
-    }
-  }
+      backgroundPosition: 'center',
+    };
+  };
 
   return (
     <div className="grid grid-cols-5 gap-4 min-h-[400px] p-4">

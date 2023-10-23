@@ -8,7 +8,7 @@ import 'swiper/css';
 import MarketInfoCard from '../common/MaketInfoCard';
 
 //사용할 타입
-import type { MaketInfoType } from '@/types';
+import type { MaketInfoType } from '@/lib/types';
 
 //넘겨받는 props의 type지정
 interface ListSwiperProps {
