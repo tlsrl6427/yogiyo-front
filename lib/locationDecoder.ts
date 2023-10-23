@@ -8,4 +8,4 @@ export const locationDecoder = (kakao: any, geocoder: any, coord: any) => {
       }
     });
   });
-}
+};

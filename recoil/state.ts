@@ -35,10 +35,10 @@ export const searchAddress = atom({
 export const isDetailMapState = atom({
   key: 'isDetailMapState',
   default: false,
-})
+});
 
 //주소찾기 창 state
 export const isFindMapState = atom({
   key: 'isFindMapState',
   default: false,
-})
+});
