@@ -38,8 +38,10 @@ const LoggedIn = () => {
             <p className="text-xs">선물함</p>
           </div>
           <div className="w-1/3 grid grid-rows-2 gap-2 place-content-center relative">
+          <Link href="/mypage/Review" >
             <BiMessageDots size="1.7rem" style={{ margin: '0 auto' }} />
             <p className="text-xs">리뷰관리</p>
+          </Link>
           </div>
         </div>
 
