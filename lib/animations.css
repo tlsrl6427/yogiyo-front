@@ -9,11 +9,7 @@
 
 .underline-animation-to-right {
   animation-name: margin-left-0-to-50;
-<<<<<<< HEAD
   animation-duration: 0.5s;
-=======
-  animation-duration: 1s;
->>>>>>> 8706a59 ([feat] 리뷰 관리 페이지 메뉴 탭 애니메이션)
   animation-fill-mode: forwards;
 }
 
@@ -28,7 +24,6 @@
 
 .underline-animation-to-left {
   animation-name: margin-left-50-to-0;
-<<<<<<< HEAD
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
 }
@@ -60,8 +55,3 @@
   animation-duration: 0.3s;
   animation-fill-mode:forwards;
 }
-=======
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-}
->>>>>>> 8706a59 ([feat] 리뷰 관리 페이지 메뉴 탭 애니메이션)
