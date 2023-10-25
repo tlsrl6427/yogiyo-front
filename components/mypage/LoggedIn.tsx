@@ -1,5 +1,6 @@
 import React from 'react';
-import Link from 'next/link'
+import Link from 'next/link';
+import Link from 'next/link';
 import { BiChevronRight } from 'react-icons/bi';
 import { BiHeart } from 'react-icons/bi';
 import { BiGift } from 'react-icons/bi';
@@ -20,7 +21,9 @@ const LoggedIn = () => {
         </div>
         <div className="w-1/6 flex relative">
           <div className="absolute top-1/2 transform -translate-y-1/2 right-0 ">
-            <Link href="../../mypage/AboutUser"><BiChevronRight color="grey" size="24px" /></Link>
+            <Link href="../../mypage/AboutUser">
+              <BiChevronRight color="grey" size="24px" />
+            </Link>
           </div>
         </div>
       </div>
@@ -36,11 +39,10 @@ const LoggedIn = () => {
             <p className="text-xs">선물함</p>
           </div>
           <div className="w-1/3 grid grid-rows-2 gap-2 place-content-center relative">
+          <Link href="/mypage/Review" >
             <BiMessageDots size="1.7rem" style={{ margin: '0 auto' }} />
             <p className="text-xs">리뷰관리</p>
-          </div>
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
-            <div className="bg-black rounded-md p-0.5 text-white text-[0.5rem]">최대 500포인트</div>
+          </Link>
           </div>
         </div>
 

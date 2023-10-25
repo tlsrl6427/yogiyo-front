@@ -4,7 +4,7 @@ import OptionList from '@/components/home/marketList/OptionList';
 
 const MarketList = () => {
   return (
-    <div className="w-full pt-[50px]">
+    <div className="w-full">
       <MenuList />
       <OptionList />
       <MarketDetailList />

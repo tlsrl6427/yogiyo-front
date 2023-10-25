@@ -11,3 +11,8 @@ export interface MaketInfoType {
     delFee?: string;
   };
 }
+
+export interface Coordinate {
+  lat: number;
+  lng: number;
+}
