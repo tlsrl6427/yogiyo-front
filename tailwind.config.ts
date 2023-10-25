@@ -13,8 +13,8 @@ const config: Config = {
         yopink: '#f90050',
         yopink2: '#fff478',
         yogrey: '#f5f5f5',
-        yogrey2: '#efefef'
-      }
+        yogrey2: '#efefef',
+      },
     },
   },
   plugins: [],
