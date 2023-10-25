@@ -1,5 +1,7 @@
 'use client';
 import { IoIosArrowDown } from 'react-icons/io';
+'use client';
+import { IoIosArrowDown } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
 import { headerModalState, currentCoord } from '@/recoil/state';
 import AddressModal from './AddressModal';
