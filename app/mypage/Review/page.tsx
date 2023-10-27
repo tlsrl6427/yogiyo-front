@@ -6,7 +6,7 @@ import CardOrder from '@/components/mypage/CardOrder';
 
 const Review = () => {
   return(
-    <div className='bg-yogrey2'>
+    <div className='bg-yogrey'>
       <TabMenu></TabMenu>
       <div className='p-4 bg-white'>
         <ToggleMenu></ToggleMenu>
