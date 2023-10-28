@@ -78,7 +78,7 @@ const Written = () => {
         <div className="pl-4 pr-4 flex-1 overflow-hidden whitespace-nowrap">
           <p className="overflow-hidden overflow-ellipsis">뼈다귀해장국2인..........??????????????asdfawef.</p>
           <div className="flex">{starArray.map((_, index) => (
-            <AiFillStar fill="#FDC912" className=""/>
+            <AiFillStar fill="#FDC912" className="" key={index}/>
           ))}</div>
           <div className="flex">
             <span>맛</span>
