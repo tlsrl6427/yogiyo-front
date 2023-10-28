@@ -21,3 +21,7 @@ export interface MenuOption {
   name: string
   content: string
 }
+
+export interface Tab {
+  name: string
+}

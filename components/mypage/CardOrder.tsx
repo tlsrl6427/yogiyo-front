@@ -7,9 +7,9 @@ import { AiFillStar } from 'react-icons/ai';
 import {BsChevronDown} from 'react-icons/bs';
 import {BsChevronUp} from 'react-icons/bs';
 import { MenuOption } from "@/lib/types";
+import { Tab } from "@/lib/types";
 
-const CardOrder = () => {
-
+const CardOrder = (tab: Tab) => {
 
   return (
     <div className="p-4 mb-2 bg-white">
@@ -29,8 +29,7 @@ const CardOrder = () => {
         </div>
       </div>
       <div className="w-full h-[2px] bg-yogrey mt-4 mb-4"></div>
-      <Writeable></Writeable>
-      <Written></Written>
+      {tab.name === 'writeable' ? <Writeable /> : <Written />}
     </div>
   )
 }
