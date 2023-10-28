@@ -12,7 +12,6 @@ import { extendTab } from "@/lib/types";
 
 const CardOrder = (tab: extendTab) => {
 
-  console.log(tab.test)
   return (
     <div className="p-4 mb-2 bg-white">
       <div className="flex">
