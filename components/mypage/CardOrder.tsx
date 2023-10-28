@@ -8,9 +8,11 @@ import {BsChevronDown} from 'react-icons/bs';
 import {BsChevronUp} from 'react-icons/bs';
 import { MenuOption } from "@/lib/types";
 import { Tab } from "@/lib/types";
+import { extendTab } from "@/lib/types";
 
-const CardOrder = (tab: Tab) => {
+const CardOrder = (tab: extendTab) => {
 
+  console.log(tab.test)
   return (
     <div className="p-4 mb-2 bg-white">
       <div className="flex">

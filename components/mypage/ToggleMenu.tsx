@@ -2,9 +2,9 @@
 import React, {useState, useEffect} from 'react';
 import '/lib/styles.css'
 import '/lib/animations.css'
-import { ChangeFunc, TabChange } from '@/lib/types';
+import { Tab } from '@/lib/types';
 
-const ToggleMenu = ( tab: TabChange ) => {
+const ToggleMenu = ( tab: Tab ) => {
   //상태 잘 변하는지 테스트용
   useEffect(()=>{
     console.log(tab.name, tab.initialLoad, tabAnimation)

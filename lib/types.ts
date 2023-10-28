@@ -23,15 +23,11 @@ export interface MenuOption {
 }
 
 export interface Tab {
+  initialLoad?: boolean
   name: string
+  handle?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export interface ChangeFunc {
-  
-}
-
-export interface TabChange {
-  initialLoad: boolean
-  name: string
-  handle: (e: React.ChangeEvent<HTMLInputElement>) => void
+export interface extendTab extends Tab {
+  test: string
 }

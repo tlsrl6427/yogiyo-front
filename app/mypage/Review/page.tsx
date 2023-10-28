@@ -28,8 +28,8 @@ const Review = () => {
         <p className='font-sm font-semibold'>포토리뷰 작성시 <span className='text-yopink'>100 포인트</span>를 드려요.</p>
       </div>
       {tabName2 === 'writeable' ? 
-        <CardOrder name="writeable"></CardOrder> :
-        <CardOrder name="written"></CardOrder>
+        <CardOrder name="writeable" test="bbb"></CardOrder> :
+        <CardOrder name="written" test="aaa"></CardOrder>
       }
     </div>
   )
