@@ -28,6 +28,9 @@ export interface Tab {
   handle?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export interface extendTab extends Tab {
-  test: string
+export interface InputBox {
+  title?: string
+  placeholder: string
+  type: string
+  style?: string
 }
