@@ -20,7 +20,9 @@ const config: Config = {
         yoblack: '#333333',
         yocgrey1: '#eef3f6',
         yocgrey2: '#dfe4e8',
-        yoyellow: '#FDC912'
+        yoyellow: '#FDC912',
+        kakao: '#F6E24B',
+        naver: '#77C261'
       },
     },
   },

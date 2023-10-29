@@ -24,7 +24,7 @@ const ToggleMenu = ( tab: Tab ) => {
             onChange={tab.handle}
           />
         <label htmlFor='writeable' className='w-1/2 z-10 h-full relative'>
-          <p className='absolute v-center2 w-full'>작성 가능한 리뷰(0)</p>
+          <p className='absolute transform-center w-full'>작성 가능한 리뷰(0)</p>
         </label>
         <input
             type="radio"
@@ -35,7 +35,7 @@ const ToggleMenu = ( tab: Tab ) => {
             onChange={tab.handle}
           />
         <label htmlFor='written' className='w-1/2 z-10 h-full relative'>
-          <p className='absolute v-center2 w-full'>작성한 리뷰(0)</p>
+          <p className='absolute transform-center w-full'>작성한 리뷰(0)</p>
         </label>
       </div>
       <div className={`absolute bg-white w-1/2 h-full rounded-xl border border-slate-300 top-0
