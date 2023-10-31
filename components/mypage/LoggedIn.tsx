@@ -4,23 +4,27 @@ import { BiChevronRight } from 'react-icons/bi';
 import { BiHeart } from 'react-icons/bi';
 import { BiGift } from 'react-icons/bi';
 import { BiMessageDots } from 'react-icons/bi';
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '@/recoil/state';
 
 const LoggedIn = () => {
+  const user = useRecoilValue(userAtom);
+
   return (
-    <div className="w-full">
+    <div className="w-full p-5">
       <div className="flex pt-5">
         <div className="h-auto w-5/6">
           <p>
-            <span className="font-bold text-xl">정수아</span>
+            <span className="font-bold text-xl">{user.nickname}</span>
             <span className="ml-2 text-xs text-yopink rounded-xl pt-0.5 pb-0.5 pl-1.5 pr-1.5 border border-yopink ">
               요기패스 구독중
             </span>
           </p>
-          <p className="text-xs pt-1.5 text-slate-500">sua.63836736@gmail.com</p>
+          <p className="text-xs pt-1.5 text-slate-500">{user.email}</p>
         </div>
         <div className="w-1/6 flex relative">
           <div className="absolute top-1/2 transform -translate-y-1/2 right-0">
-            <Link href="../../mypage/AboutUser">
+            <Link href="../../mypage/aboutuser">
               <BiChevronRight color="grey" size="24px" />
             </Link>
           </div>
