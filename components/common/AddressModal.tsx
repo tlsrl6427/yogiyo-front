@@ -37,8 +37,8 @@ const AddressModal = () => {
     color: '#999',
   };
 
-  const KAKAO_API_BASE_URL = 'https://dapi.kakao.com/v2/local/search/address.json';
-  const KAKAO_API_KEY = 'deaa5929c02757563300c7fc32c6ed62';
+  const KAKAO_API_BASE_URL = process.env.KAKAO_API_BASE_URL || ''
+  const KAKAO_API_KEY = process.env.KAKAO_API_KEY || ''
 
   const searchAddress = async (e: React.FormEvent) => {
     e.preventDefault();

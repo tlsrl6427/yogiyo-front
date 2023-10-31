@@ -10,3 +10,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.nanum-gothic {
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+.nanum-gothic-bold {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
+}
+
+.nanum-gothic-extra-bold {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 800;
+}

@@ -3,7 +3,6 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
 import { headerModalState, currentCoord } from '@/recoil/state';
 import AddressModal from './AddressModal';
-import { nanum_Gothic } from '@/lib/font';
 import { useEffect } from 'react';
 import { currentAddress } from '@/recoil/state';
 
@@ -39,9 +38,8 @@ const Header = () => {
     if (!curCoord) return; // 현재 유저의 위치 찾기 전이라면 return
 
     const kakaoMapScript = document.createElement('script');
-    const appkey = 'ccdd8cd50b257300e4319a9eea47e714';
     kakaoMapScript.async = false;
-    kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${appkey}&autoload=false&libraries=services`;
+    kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_APP_KEY}&autoload=false&libraries=services`;
     document.head.appendChild(kakaoMapScript);
 
     const onLoadKakaoAPI = () => {
@@ -74,8 +72,7 @@ const Header = () => {
     <header className="fixed gap-2 top-0 left-0 w-full h-[50px] flex justify-center items-center bg-white z-50">
       <p
         onClick={() => setIsModal(true)}
-        className={`text-center flex gap-2 items-center font-[800] text-[1.3rem] ${nanum_Gothic.className}`}
-      >
+        className={`text-center flex gap-2 items-center font-[800] text-[1.3rem] __className_e22756`}      >
         {curAdd} <IoIosArrowDown style={{ marginTop: '3px', fontSize: '1.2rem' }} />
       </p>
       {isModal ? <AddressModal /> : null}
