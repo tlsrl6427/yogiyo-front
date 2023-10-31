@@ -18,19 +18,28 @@ export interface Coordinate {
 }
 
 export interface MenuOption {
-  name: string
-  content: string
+  name: string;
+  content: string;
 }
 
 export interface Tab {
-  initialLoad?: boolean
-  name: string
-  handle?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  initialLoad?: boolean;
+  name: string;
+  handle?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface InputBox {
-  title?: string
-  placeholder: string
-  type: string
-  style?: string
+  title?: string;
+  placeholder: string;
+  type: string;
+  style?: string;
+}
+
+export interface User {
+  nickname: string;
+  email: string;
+  password?: string;
+  phone?: string;
+  authAt?: string;
+  providerType?: string;
 }
