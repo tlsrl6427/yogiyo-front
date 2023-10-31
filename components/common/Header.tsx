@@ -71,7 +71,7 @@ const Header = () => {
   }, [curCoord]);
 
   return (
-    <header className="fixed flex gap-2 top-0 left-0 w-full h-[50px] flex justify-center items-center bg-white z-50">
+    <header className="fixed gap-2 top-0 left-0 w-full h-[50px] flex justify-center items-center bg-white z-50">
       <p
         onClick={() => setIsModal(true)}
         className={`text-center flex gap-2 items-center font-[800] text-[1.3rem] ${nanum_Gothic.className}`}
