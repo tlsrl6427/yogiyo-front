@@ -3,12 +3,6 @@ import { useState, useEffect } from 'react';
 import { currentAddress, currentCoord } from '@/recoil/state';
 import { useRecoilState } from 'recoil';
 
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
-
 const KakaoMap = () => {
   const [curCoord, setCurCoord] = useRecoilState(currentCoord);
   const [curAdd, setCurAdd] = useRecoilState(currentAddress);

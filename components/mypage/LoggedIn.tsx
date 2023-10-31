@@ -19,7 +19,7 @@ const LoggedIn = () => {
           <p className="text-xs pt-1.5 text-slate-500">sua.63836736@gmail.com</p>
         </div>
         <div className="w-1/6 flex relative">
-          <div className="absolute top-1/2 transform -translate-y-1/2 right-0">
+          <div className="absolute top-1/2 transform -translate-y-1/2 right-0 ">
             <Link href="../../mypage/AboutUser">
               <BiChevronRight color="grey" size="24px" />
             </Link>

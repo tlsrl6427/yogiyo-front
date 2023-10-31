@@ -4,17 +4,13 @@ import { useRecoilState } from 'recoil';
 import { headerModalState, currentCoord } from '@/recoil/state';
 import AddressModal from './AddressModal';
 import { nanum_Gothic } from '@/lib/font';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { currentAddress } from '@/recoil/state';
 
 declare global {
   interface Window {
     kakao: any;
   }
-}
-interface Coordinate {
-  lat: number;
-  lng: number;
 }
 
 const Header = () => {
@@ -54,7 +50,7 @@ const Header = () => {
         // 주소-좌표 변환 객체를 생성
         const geocoder = new kakao.maps.services.Geocoder();
 
-        // 좌표 설정 (예시로 서울의 좌표를 사용)
+        // 좌표 설정
         const latlng = new kakao.maps.LatLng(curCoord.lat, curCoord.lng);
 
         // 좌표를 주소로 변환

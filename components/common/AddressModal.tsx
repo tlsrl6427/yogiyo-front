@@ -1,8 +1,23 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { headerModalState } from '@/recoil/state';
+import { headerModalState, isDetailMapState, isFindMapState } from '@/recoil/state';
 import { FiSearch } from 'react-icons/fi';
 import { AiOutlineAim } from 'react-icons/ai';
+import { MdArrowBackIosNew } from 'react-icons/md';
+import SearchAddressList from './SearchAddressList';
+import axios from 'axios';
+import DetailMap from './DetailMap';
+import FindMap from './FindMap';
+
+export const arrowStyle = {
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  fontSize: '1.7rem',
+  margin: '0 10px',
+  cursor: 'pointer',
+  color: '#333',
+};
 
 const AddressModal = () => {
   const [_, setIsModal] = useRecoilState(headerModalState);
@@ -11,10 +26,51 @@ const AddressModal = () => {
   const searchIconStyle = {
     position: 'absolute',
     top: '12px',
-    left: '25px',
+    left: '35px',
     fontSize: '1.1rem',
     color: '#999',
   };
+
+  const KAKAO_API_BASE_URL = 'https://dapi.kakao.com/v2/local/search/address.json';
+  const KAKAO_API_KEY = 'deaa5929c02757563300c7fc32c6ed62';
+
+  const searchAddress = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get(KAKAO_API_BASE_URL, {
+        headers: {
+          Authorization: `KakaoAK ${KAKAO_API_KEY}`,
+        },
+        params: {
+          query,
+        },
+      });
+      setResults(response.data.documents);
+      console.log(response.data.documents);
+    } catch (error) {
+      setResults([]);
+    }
+  };
+
+  // const { kakao } = window;
+  // const handleSearch = async (e: React.FormEvent) => {
+  //   e.preventDefault()
+  //   kakao.maps.load(() => {
+  //     if (kakao) {
+  //       const places = new kakao.maps.services.Places();
+
+  //       const callback = (data: any, status: any) => {
+  //         if (status === kakao.maps.services.Status.OK) {
+  //           const addresses = data.map((place: any) => place.address_name);
+  //           setResults(addresses);
+  //         }
+  //       };
+
+  //       places.keywordSearch(query, callback);
+
+  //     }
+  //   });
+  // };
 
   return (
     <>
