@@ -32,7 +32,7 @@
   from {
     left: 0;
   }
-  to{
+  to {
     left: 50%;
   }
 }
@@ -40,7 +40,7 @@
   from {
     left: 50%;
   }
-  to{
+  to {
     left: 0;
   }
 }
@@ -48,10 +48,10 @@
 .left-to-right {
   animation-name: left-to-right;
   animation-duration: 0.3s;
-  animation-fill-mode:forwards;
+  animation-fill-mode: forwards;
 }
 .right-to-left {
   animation-name: right-to-left;
   animation-duration: 0.3s;
-  animation-fill-mode:forwards;
+  animation-fill-mode: forwards;
 }
