@@ -2,14 +2,13 @@
 import { useState, useEffect } from 'react';
 import {
   searchCoord,
-  searchAddress,
   currentCoord,
   currentAddress,
   isDetailMapState,
   headerModalState,
   isFindMapState,
 } from '@/recoil/state';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { GrUserManager } from 'react-icons/gr';
 import { arrowStyle } from './AddressModal';
@@ -17,12 +16,12 @@ import { mapIconStyle } from './DetailMap';
 import { locationDecoder } from '@/lib/locationDecoder';
 
 const FindMap = () => {
-  const [coord, setCoord] = useRecoilState(currentCoord);
-  const [searchCo, setSearchCo] = useRecoilState(searchCoord);
-  const [headerModal, setHeaderModal] = useRecoilState(headerModalState);
+  const coord = useRecoilValue(currentCoord);
+  const setSearchCo = useSetRecoilState(searchCoord);
+  const setHeaderModal = useSetRecoilState(headerModalState);
   const [address, setAddress] = useRecoilState(currentAddress);
-  const [_, setIsDetail] = useRecoilState(isDetailMapState);
-  const [isFindMap, setIsFindMap] = useRecoilState(isFindMapState);
+  const setIsDetail = useSetRecoilState(isDetailMapState);
+  const setIsFindMap = useSetRecoilState(isFindMapState);
 
   const [centerCoord, setCenterCoord] = useState(coord);
 

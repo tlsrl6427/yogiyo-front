@@ -10,9 +10,10 @@ const SearchAddressList = ({ query, results }: Props) => {
   const [coord, setCoord] = useRecoilState(searchCoord);
   const [addresss, setAddress] = useRecoilState(searchAddress);
   const [isDetailMap, setIsDetailMap] = useRecoilState(isDetailMapState);
+  console.log(results);
   return (
     <div className="p-[20px]">
-      {results.length !== 0 ? (
+      {results && results.length !== 0 ? (
         <ul className="flex flex-col gap-[20px]">
           {results.map((address: any, index: number) => (
             <li
