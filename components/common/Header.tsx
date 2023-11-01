@@ -72,7 +72,8 @@ const Header = () => {
     <header className="fixed gap-2 top-0 left-0 w-full h-[50px] flex justify-center items-center bg-white z-50">
       <p
         onClick={() => setIsModal(true)}
-        className={`text-center flex gap-2 items-center font-[800] text-[1.3rem] __className_e22756`}      >
+        className={`text-center flex gap-2 items-center font-[800] text-[1.3rem] __className_e22756`}
+      >
         {curAdd} <IoIosArrowDown style={{ marginTop: '3px', fontSize: '1.2rem' }} />
       </p>
       {isModal ? <AddressModal /> : null}

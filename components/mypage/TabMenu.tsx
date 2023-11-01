@@ -11,11 +11,15 @@ const TabMenu = () => {
   }, [selectedTab]);
 
   const handleTabChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if(initialLoad) setInitialLoad(false);
+    if (initialLoad) setInitialLoad(false);
     setSelectedTab(e.target.value);
   };
 
-  const tabAnimation = initialLoad ? 'ml-0' : (selectedTab === 'deliveryAndTogo' ? 'underline-animation-to-left' : 'underline-animation-to-right' )
+  const tabAnimation = initialLoad
+    ? 'ml-0'
+    : selectedTab === 'deliveryAndTogo'
+    ? 'underline-animation-to-left'
+    : 'underline-animation-to-right';
 
   return (
     <div className="bg-yogrey">
@@ -54,9 +58,7 @@ const TabMenu = () => {
         </div>
       </div>
       <div className="pl-4 pr-4 border-b-2 border-slate-200">
-        <div
-          className={`${tabAnimation} bg-black h-[3px] w-1/2`}
-        ></div>
+        <div className={`${tabAnimation} bg-black h-[3px] w-1/2`}></div>
       </div>
     </div>
   );

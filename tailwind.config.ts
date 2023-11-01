@@ -22,7 +22,7 @@ const config: Config = {
         yocgrey2: '#dfe4e8',
         yoyellow: '#FDC912',
         kakao: '#F6E24B',
-        naver: '#77C261'
+        naver: '#77C261',
       },
     },
   },

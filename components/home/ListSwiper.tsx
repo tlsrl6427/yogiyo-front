@@ -23,8 +23,8 @@ const lastArrowStyle = {
   border: '1px solid #ccc',
   borderRadius: '50%',
   padding: '5px',
-  color: 'red'
-}
+  color: 'red',
+};
 
 const ListSwiper = ({ dataList }: ListSwiperProps) => {
   //임시 더미데이터
@@ -40,12 +40,17 @@ const ListSwiper = ({ dataList }: ListSwiperProps) => {
             </SwiperSlide>
           );
         })}
-        {dummy.length > 20 && <SwiperSlide style={slideStyle}>
-            <Link href={''} className='w-[90px] h-[170px] flex justify-center items-center flex-col gap-2 cursor-pointer'>
+        {dummy.length > 20 && (
+          <SwiperSlide style={slideStyle}>
+            <Link
+              href={''}
+              className="w-[90px] h-[170px] flex justify-center items-center flex-col gap-2 cursor-pointer"
+            >
               <IoIosArrowForward style={lastArrowStyle} />
               <span>더보기</span>
             </Link>
-          </SwiperSlide>}
+          </SwiperSlide>
+        )}
       </Swiper>
     </>
   );
