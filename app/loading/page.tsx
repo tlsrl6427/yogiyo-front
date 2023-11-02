@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react';
 import { postGoogleAuthCode } from '@/services/api';
 
 const Loading = () => {
-  const [user, setUser] = useState({})
-  
-  useEffect(()=>{
+  const [user, setUser] = useState({});
 
+  useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const code = queryParams.get('code');
     const scope = queryParams.get('scope');
@@ -14,14 +13,14 @@ const Loading = () => {
     const prompt = queryParams.get('prompt');
 
     const authSource = {
-      "email" : null,
-      "password" : null,
-      "authCode" : code,
-      "providerType" : "GOOGLE"
-    }
+      email: null,
+      password: null,
+      authCode: code,
+      providerType: 'GOOGLE',
+    };
 
-    postGoogleAuthCode(authSource)
-  },[])
+    postGoogleAuthCode(authSource);
+  }, []);
 
   return (
     <div className="w-screen h-screen bg-yopink">

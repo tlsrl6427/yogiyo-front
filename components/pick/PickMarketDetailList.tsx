@@ -15,8 +15,7 @@ interface Props {
 
 const dummy = new Array(10).fill(dummyCon);
 
-const PickMarketDetailList = ({pick}: Props) => {
-
+const PickMarketDetailList = ({ pick }: Props) => {
   return (
     <div className="flex flex-col bg-white">
       {dummy?.map((info, i) => <MarketCard key={i} info={info} pick={pick} />)}

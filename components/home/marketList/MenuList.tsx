@@ -1,57 +1,55 @@
 'use client';
 import { gridIconList } from '@/lib/commonData';
 import { useState, useRef, useEffect } from 'react';
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useCallback } from 'react';
-
 
 const MenuList = () => {
   const parentRef = useRef<HTMLDivElement | null>(null);
   const childRef = useRef<HTMLDivElement | null>(null);
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const queryMenu = searchParams.get('menu')
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const queryMenu = searchParams.get('menu');
   const [selectMenu, setSelectMenu] = useState(queryMenu);
 
   //현재 query값 변경 함수
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams)
-      params.set(name, value)
- 
-      return params.toString()
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
     },
-    [searchParams]
-  )
-  
+    [searchParams],
+  );
+
   const queryHandler = (menuname: string) => {
-    router.push(pathname + '?' + createQueryString('menu', menuname))
-  }
+    router.push(pathname + '?' + createQueryString('menu', menuname));
+  };
 
   //component 첫 진입 시 메뉴 하이라이트
   useEffect(() => {
-    handleGrandchild(null)
-  }, [queryMenu])
+    handleGrandchild(null);
+  }, [queryMenu]);
 
   //query값에 따른 메뉴 이동
-  const handleGrandchild = (event: React.MouseEvent<HTMLDivElement>|null) => {
+  const handleGrandchild = (event: React.MouseEvent<HTMLDivElement> | null) => {
     if (parentRef.current && childRef.current) {
-
-      let grandchildRect : any
-      let parentRect : any
+      let grandchildRect: any;
+      let parentRect: any;
 
       //클릭이벤트로 메뉴 이동할 경우
-      if(event){
+      if (event) {
         grandchildRect = event.currentTarget.getBoundingClientRect();
         parentRect = parentRef.current.getBoundingClientRect();
 
-      //첫 화면 진입일 경우
-      }else{
+        //첫 화면 진입일 경우
+      } else {
         const grandchild = Array.from(childRef.current.children).find(
-          child => child.textContent === queryMenu
+          (child) => child.textContent === queryMenu,
         );
-        if(grandchild){
+        if (grandchild) {
           grandchildRect = grandchild.getBoundingClientRect();
           parentRect = parentRef.current.getBoundingClientRect();
         }

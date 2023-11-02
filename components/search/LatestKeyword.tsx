@@ -1,8 +1,5 @@
 const LatestKeyword = () => {
-  return (
-    <>
-    </>
-  )
-}
+  return <></>;
+};
 
-export default LatestKeyword
+export default LatestKeyword;

@@ -42,10 +42,9 @@ const FindMap = () => {
       let map = new kakao.maps.Map(container, options);
 
       kakao.maps.event.addListener(map, 'dragend', async function () {
-
         //움직임 안내 문구 없애기
         setAction(true);
-        
+
         // 중앙 좌표 얻기
         const center = map.getCenter();
         const currentCoord = {
@@ -75,7 +74,11 @@ const FindMap = () => {
       </div>
       <div className="w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] relative">
         <GrUserManager style={mapIconStyle} />
-        {!action && <span className='px-[12px] py-[10px] bg-sky-600 text-white rounded-3xl absolute z-50 top-5 left-1/2 -translate-x-1/2 whitespace-nowrap'>지도를 움직여 위치를 설정하세요</span>}
+        {!action && (
+          <span className="px-[12px] py-[10px] bg-sky-600 text-white rounded-3xl absolute z-50 top-5 left-1/2 -translate-x-1/2 whitespace-nowrap">
+            지도를 움직여 위치를 설정하세요
+          </span>
+        )}
         <div id="map" style={{ width: '100%', height: '100%' }}></div>
       </div>
       <div className="flex flex-col gap-[10px] px-[20px]">
