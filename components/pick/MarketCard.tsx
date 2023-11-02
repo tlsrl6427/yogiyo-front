@@ -4,13 +4,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const MarketCard = ({info, pick}: any) => {
+  const [heart, setHeart] = useState(false)
 
   const heartStyle = {
     fontSize: '2rem',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    fill: heart? 'red': 'black'
   }
-
-  const [heart, setHeart] = useState(false)
 
   const heartHandler = () => {
     setHeart(!heart)
@@ -45,12 +45,12 @@ const MarketCard = ({info, pick}: any) => {
         <>
           {heart ? 
             <AiFillHeart 
-            style={heartStyle}
-            onClick={heartHandler}
+              style={heartStyle}
+              onClick={heartHandler}
             /> :
             <AiOutlineHeart
-            style={heartStyle}
-            onClick={heartHandler}
+              style={heartStyle}
+              onClick={heartHandler}
             />}
         </>
 
