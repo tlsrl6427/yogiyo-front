@@ -16,7 +16,12 @@ const GridIconMenu = () => {
       {gridIconList.map((menuName, i) => {
         return (
           <Link
-            href={'home/marketList'}
+            href={{
+              pathname: 'home/marketList',
+              query: {
+                menu: menuName
+              }
+            }}
             key={i}
             className="w-full h-full flex flex-col justify-center items-center"
           >
