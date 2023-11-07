@@ -32,13 +32,14 @@ const SearchHeader = () => {
     const recent = items ? JSON.parse(items) : []
 
     //중복제거
-    const setObj = new Set([...recent, nowKeyword])
+    const setObj = new Set([nowKeyword, ...recent])
     //배열로 다시 변환
     const result = Array.from(setObj)
     
     const jsonData = JSON.stringify(result)
     
     localStorage.setItem('recentSearchKeywords', jsonData)
+    router.push(`/search/searchResult/?searchKeyword=${nowKeyword}`)
   }
 
   return (
