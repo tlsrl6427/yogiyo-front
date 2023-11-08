@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import './globals.css';
-import Header from '@/components/common/Header';
+import Header from '@/components/header/Header';
 import GridIconMenu from '@/components/home/GridIconMenu';
 import MyOrderedEateries from '@/components/home/MyOrderedEateries';
 import NewEateries from '@/components/home/NewEateries';
