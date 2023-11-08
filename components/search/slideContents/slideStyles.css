@@ -20,12 +20,12 @@
 }
 
 .swiper-scrollbar {
-  top: 2.4rem!important;
-  bottom: auto!important;
+  top: 2.4rem !important;
+  bottom: auto !important;
 }
 
 .swiper-scrollbar-drag {
-  background-color: #333!important;
+  background-color: #333 !important;
 }
 
 .swiper-pagination {
