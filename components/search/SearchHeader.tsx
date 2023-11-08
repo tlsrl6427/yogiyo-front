@@ -21,26 +21,26 @@ const SearchHeader = () => {
     fontSize: '1.1rem',
   };
 
-  const [nowKeyword, setKeyword] = useState('')
+  const [nowKeyword, setKeyword] = useState('');
 
   //검색할 때 마다 로컬스토리지에 검색어 저장
   const formSearchHandler = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     //로컬스토리이지에서 데이터 가져오기
-    const items = localStorage.getItem('recentSearchKeywords')
-    const recent = items ? JSON.parse(items) : []
+    const items = localStorage.getItem('recentSearchKeywords');
+    const recent = items ? JSON.parse(items) : [];
 
     //중복제거
-    const setObj = new Set([nowKeyword, ...recent])
+    const setObj = new Set([nowKeyword, ...recent]);
     //배열로 다시 변환
-    const result = Array.from(setObj)
-    
-    const jsonData = JSON.stringify(result)
-    
-    localStorage.setItem('recentSearchKeywords', jsonData)
-    router.push(`/search/searchResult/?searchKeyword=${nowKeyword}`)
-  }
+    const result = Array.from(setObj);
+
+    const jsonData = JSON.stringify(result);
+
+    localStorage.setItem('recentSearchKeywords', jsonData);
+    router.push(`/search/searchResult/?searchKeyword=${nowKeyword}`);
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full h-[50px] flex justify-between items-center bg-white z-50">

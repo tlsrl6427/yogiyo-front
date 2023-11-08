@@ -1,5 +1,5 @@
 'use client';
-import MarketDetailList from '@/components/home/marketList/MarketDetailList';
+import MarketDetailList from '@/components/common/MarketDetailList';
 import MenuList from '@/components/home/marketList/MenuList';
 import OptionList from '@/components/home/marketList/OptionList';
 import { useSearchParams } from 'next/navigation';
@@ -13,6 +13,7 @@ const MarketList = () => {
     <div className="w-full">
       <MenuList />
       <OptionList />
+      <div className="h-[100px]" />
       <MarketDetailList />
     </div>
   );
