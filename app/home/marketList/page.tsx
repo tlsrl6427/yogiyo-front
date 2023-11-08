@@ -13,6 +13,7 @@ const MarketList = () => {
     <div className="w-full">
       <MenuList />
       <OptionList />
+      <div className="h-[100px]" />
       <MarketDetailList />
     </div>
   );

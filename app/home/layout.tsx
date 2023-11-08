@@ -8,12 +8,12 @@ interface Props {
 
 const HomeLayout = ({ children }: Props) => {
   return (
-    <div className="pt-[50px] pb-[70px]">
+    <main className="pt-[50px] pb-[70px]">
       {/* @ts-ignore */}
       <Header />
       <>{children}</>
       <Footer />
-    </div>
+    </main>
   );
 };
 

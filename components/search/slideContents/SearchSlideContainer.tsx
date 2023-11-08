@@ -7,6 +7,9 @@ import 'swiper/css/scrollbar';
 import './slideStyles.css';
 
 import { useSearchParams } from 'next/navigation';
+import MarketDetailList from '@/components/common/MarketDetailList';
+import SearchOptionList from './SearchOptionList';
+import KakaoMap from '@/components/common/KakaoMap';
 
 const SearchSlideContainer = () => {
   const searchParams = useSearchParams();
@@ -27,11 +30,23 @@ const SearchSlideContainer = () => {
   };
 
   return (
-    <div className="pt-[10px]">
+    <div className="search_swiper pt-[10px]">
       <Swiper pagination={pagination} scrollbar={{}} modules={[Scrollbar, Pagination]}>
-        <SwiperSlide>{queryKeyword}</SwiperSlide>
-        <SwiperSlide>2</SwiperSlide>
-        <SwiperSlide>3</SwiperSlide>
+        <SwiperSlide>
+          <div className="h-[30px] sticky top-0" />
+          <SearchOptionList />
+          <MarketDetailList />
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="h-[30px] sticky top-0" />
+          <SearchOptionList />
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="h-[30px] sticky top-0" />
+          <SearchOptionList />
+          <KakaoMap />
+          <MarketDetailList />
+        </SwiperSlide>
       </Swiper>
     </div>
   );
