@@ -1,13 +1,13 @@
 import { userAtom } from '@/recoil/state';
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { getNaverAuth } from '@/services/api';
+import { getGoogleAuthCode } from '@/services/api';
 
 const LoggedOut = () => {
   const [user, setUser] = useRecoilState(userAtom);
 
-  const handleLogin = async () => {
-    await getNaverAuth();
+  const handleLogin = () => {
+    getGoogleAuthCode();
 
     setUser({
       nickname: 'testuser',

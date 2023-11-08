@@ -8,6 +8,8 @@ import { useRecoilValue } from 'recoil';
 const Mypage = () => {
   const user = useRecoilValue(userAtom);
 
+  console.log(user);
+
   //요기요 매거진~ 서비스 약관 부분은 하나하나의 버튼 ui가 딱히 다른곳에서 쓰이는것 같지 않아서 여기 직접 넣는걸로
   return (
     <div className="w-screen relative">

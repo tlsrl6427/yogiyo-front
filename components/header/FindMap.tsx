@@ -2,14 +2,13 @@
 import { useState, useEffect } from 'react';
 import {
   searchCoord,
-  searchAddress,
   currentCoord,
   currentAddress,
   isDetailMapState,
   headerModalState,
   isFindMapState,
 } from '@/recoil/state';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { GrUserManager } from 'react-icons/gr';
 import { arrowStyle } from './AddressModal';
@@ -17,13 +16,15 @@ import { mapIconStyle } from './DetailMap';
 import { locationDecoder } from '@/lib/locationDecoder';
 
 const FindMap = () => {
-  const [coord, setCoord] = useRecoilState(currentCoord);
-  const [searchCo, setSearchCo] = useRecoilState(searchCoord);
-  const [headerModal, setHeaderModal] = useRecoilState(headerModalState);
+  const coord = useRecoilValue(currentCoord);
+  const setSearchCo = useSetRecoilState(searchCoord);
+  const setHeaderModal = useSetRecoilState(headerModalState);
   const [address, setAddress] = useRecoilState(currentAddress);
-  const [_, setIsDetail] = useRecoilState(isDetailMapState);
-  const [isFindMap, setIsFindMap] = useRecoilState(isFindMapState);
+  const setIsDetail = useSetRecoilState(isDetailMapState);
+  const setIsFindMap = useSetRecoilState(isFindMapState);
 
+  //마우스 드래그 이벤트 발생유무
+  const [action, setAction] = useState(false);
   const [centerCoord, setCenterCoord] = useState(coord);
 
   useEffect(() => {
@@ -41,6 +42,9 @@ const FindMap = () => {
       let map = new kakao.maps.Map(container, options);
 
       kakao.maps.event.addListener(map, 'dragend', async function () {
+        //움직임 안내 문구 없애기
+        setAction(true);
+
         // 중앙 좌표 얻기
         const center = map.getCenter();
         const currentCoord = {
@@ -70,12 +74,15 @@ const FindMap = () => {
       </div>
       <div className="w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] relative">
         <GrUserManager style={mapIconStyle} />
+        {!action && (
+          <span className="px-[12px] py-[10px] bg-sky-600 text-white rounded-3xl absolute z-50 top-5 left-1/2 -translate-x-1/2 whitespace-nowrap">
+            지도를 움직여 위치를 설정하세요
+          </span>
+        )}
         <div id="map" style={{ width: '100%', height: '100%' }}></div>
       </div>
       <div className="flex flex-col gap-[10px] px-[20px]">
         <p className="font-[500] text-[1.2rem]">{address}</p>
-        {/* <input type='text' className='p-[10px] border rounded-xl' placeholder='상세주소를 입력하세요 (건물명, 동/호수 등)'/> */}
-
         <span
           className="cursor-pointer bg-yopink text-white font-black text-[1.2rem] rounded-xl p-[10px] text-center"
           onClick={() => {

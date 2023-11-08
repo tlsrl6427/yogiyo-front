@@ -1,11 +1,9 @@
 'use client';
-//swiper는 useRef를 사용하나 SSR에서는 에러가 발생하므로
-//use client를 선언해서 해당 component는 CSR환경에서만 실행되도록 변경
-
-//사용할 모듈
+import { IoIosArrowForward } from 'react-icons/io';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import MarketInfoCard from '../common/MaketInfoCard';
+import Link from 'next/link';
 
 //사용할 타입
 import type { MaketInfoType } from '@/lib/types';
@@ -17,6 +15,15 @@ interface ListSwiperProps {
 
 const slideStyle = {
   flex: '1 1 0',
+};
+
+const lastArrowStyle = {
+  width: '35px',
+  height: '35px',
+  border: '1px solid #ccc',
+  borderRadius: '50%',
+  padding: '5px',
+  color: 'red',
 };
 
 const ListSwiper = ({ dataList }: ListSwiperProps) => {
@@ -33,6 +40,17 @@ const ListSwiper = ({ dataList }: ListSwiperProps) => {
             </SwiperSlide>
           );
         })}
+        {dummy.length > 20 && (
+          <SwiperSlide style={slideStyle}>
+            <Link
+              href={''}
+              className="w-[90px] h-[170px] flex justify-center items-center flex-col gap-2 cursor-pointer"
+            >
+              <IoIosArrowForward style={lastArrowStyle} />
+              <span>더보기</span>
+            </Link>
+          </SwiperSlide>
+        )}
       </Swiper>
     </>
   );

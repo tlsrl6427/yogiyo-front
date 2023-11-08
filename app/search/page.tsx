@@ -1,11 +1,10 @@
-import SearchHeader from '@/components/search/SearchHeader';
-import KakaoMap from '@/components/common/KakaoMap';
+'use client';
+import LatestKeyword from '@/components/search/LatestKeyword';
 
 const Search = () => {
   return (
     <div className="">
-      <SearchHeader />
-      <KakaoMap />
+      <LatestKeyword />
     </div>
   );
 };

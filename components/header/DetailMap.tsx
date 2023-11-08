@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { searchAddress, searchCoord, isDetailMapState, headerModalState } from '@/recoil/state';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { GrUserManager } from 'react-icons/gr';
 import { arrowStyle } from './AddressModal';
@@ -21,10 +21,10 @@ export const mapIconStyle = {
 };
 
 const DetailMap = () => {
-  const [coord, setCoord] = useRecoilState(searchCoord);
-  const [headerModal, setHeaderModal] = useRecoilState(headerModalState);
-  const [address, setAddress] = useRecoilState(searchAddress);
-  const [_, setIsDetail] = useRecoilState(isDetailMapState);
+  const coord = useRecoilValue(searchCoord);
+  const setHeaderModal = useSetRecoilState(headerModalState);
+  const address = useRecoilValue(searchAddress);
+  const setIsDetail = useSetRecoilState(isDetailMapState);
   useEffect(() => {
     if (!coord) return;
     const { kakao } = window;
