@@ -13,7 +13,7 @@ const dummy = new Array(10).fill(dummyCon);
 
 const MarketDetailList = () => {
   return (
-    <div className="flex flex-col pt-[100px]">
+    <div className="flex flex-col">
       {dummy?.map((info, i) => <MaketDetailCard key={i} info={info} />)}
     </div>
   );
