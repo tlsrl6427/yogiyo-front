@@ -1,17 +1,6 @@
 import { AiFillStar } from 'react-icons/ai';
 import Link from 'next/link';
 
-const dummyCon = {
-  id: 0,
-  name: '롯데리아',
-  callNumber: '0',
-  address: '어디동 어디시',
-  categories: '',
-  img: '',
-};
-
-const dummy = new Array(10).fill(dummyCon);
-
 const MaketDetailCard = (info: any) => {
   return (
     <Link
@@ -41,12 +30,4 @@ const MaketDetailCard = (info: any) => {
   );
 };
 
-const MarketDetailList = () => {
-  return (
-    <div className="flex flex-col pt-[100px]">
-      {dummy?.map((info, i) => <MaketDetailCard key={i} info={info} />)}
-    </div>
-  );
-};
-
-export default MarketDetailList;
+export default MaketDetailCard;

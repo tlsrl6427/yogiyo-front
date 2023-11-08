@@ -24,14 +24,10 @@ const KakaoMap = () => {
   }, [curCoord]);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center pt-4">
-      <div className="w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh]">
+    <div className="w-full flex flex-col items-center justify-center p-4">
+      <div className="w-full h-[25vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] border rounded-3xl overflow-hidden">
         <div id="map" style={{ width: '100%', height: '100%' }}></div>
       </div>
-      <p>
-        {curCoord?.lat} / {curCoord?.lng}
-      </p>
-      <p>{curAdd}</p>
     </div>
   );
 };

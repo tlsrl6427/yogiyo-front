@@ -1,5 +1,5 @@
 import { searchCoord, searchAddress, isDetailMapState } from '@/recoil/state';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 interface Props {
   results: any;
@@ -7,10 +7,9 @@ interface Props {
 }
 
 const SearchAddressList = ({ query, results }: Props) => {
-  const [coord, setCoord] = useRecoilState(searchCoord);
-  const [addresss, setAddress] = useRecoilState(searchAddress);
-  const [isDetailMap, setIsDetailMap] = useRecoilState(isDetailMapState);
-  console.log(results);
+  const setCoord = useSetRecoilState(searchCoord);
+  const setAddress = useSetRecoilState(searchAddress);
+  const setIsDetailMap = useSetRecoilState(isDetailMapState);
   return (
     <div className="p-[20px]">
       {results && results.length !== 0 ? (

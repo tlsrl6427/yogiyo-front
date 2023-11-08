@@ -1,0 +1,52 @@
+.search_swiper .swiper {
+  width: 100%;
+}
+
+.search_swiper .swiper-slide {
+  position: inherit !important;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.search_swiper .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.search_swiper .swiper-scrollbar {
+  position: fixed !important;
+  top: calc(60px + 2.4rem) !important;
+  bottom: auto !important;
+}
+
+.search_swiper .swiper-scrollbar-drag {
+  background-color: #333 !important;
+}
+
+.search_swiper .swiper-pagination {
+  width: 100%;
+  height: 50px;
+  padding: 10px 0;
+  position: fixed;
+  top: 50px;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  background: #fff;
+}
+
+.search_swiper .swiper-pagination-bullet {
+  flex: 1;
+  text-align: center;
+  line-height: 20px;
+  font-size: 1.2rem;
+  opacity: 1;
+  color: #999;
+}
+
+.search_swiper .swiper-pagination-bullet-active {
+  color: #333;
+  font-weight: bold;
+}

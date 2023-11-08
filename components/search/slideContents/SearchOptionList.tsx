@@ -17,7 +17,7 @@ const menu = {
   orderAmount: ['최소주문금액', '5,000원 이하', '10,000원 이하', '12,000원 이하', '15,000원 이하'],
 };
 
-const OptionList = () => {
+const SearchOptionList = () => {
   //메뉴 옵션 state
   const [sortState, setSortState] = useState(menu.sort[0]);
   const [delFilter, setDelFilter] = useState(menu.delFilter[0]);
@@ -46,7 +46,7 @@ const OptionList = () => {
 
     if (toggle) {
       return (
-        <div className="bg-white flex flex-col gap-4 fixed top-[150px] left-0 z-10 w-full pb-6 cursor-pointer ">
+        <div className="bg-white flex flex-col gap-4 sticky top-[150px] left-0 z-10 w-full pb-6 cursor-pointer ">
           {menu.list.map((value: string, i: number) => (
             <p
               key={i}
@@ -79,15 +79,13 @@ const OptionList = () => {
 
   return (
     <>
-      <div className="w-full overflow-hidden fixed top-[100px] left-0 z-10">
+      <div className="w-full py-[10px] overflow-hidden sticky top-[90px] left-0 z-10">
         <div className="no-scroll top-0 left-0 overflow-x-auto h-[50px] flex px-[20px] items-center gap-4 text-sm absoulte bg-white">
           <div
             onClick={() => {
               setMenuDropDown('sort');
             }}
-            className={`px-[10px] py-[5px] border border-slate-300 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap 
-            ${sortState !== menu.sort[0] && `bg-slate-900 text-white`}
-            `}
+            className="px-[10px] py-[5px] border border-slate-300 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap"
           >
             {sortState}
             {toggleDropDown && selectMenu.target === 'sort' ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -96,7 +94,7 @@ const OptionList = () => {
             onClick={() => {
               setMenuDropDown('delFilter');
             }}
-            className={`px-[10px] py-[5px] border border-slate-300 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap`}
+            className="px-[10px] py-[5px] border border-slate-300 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap"
           >
             {delFilter}
             {toggleDropDown && selectMenu.target === 'delFilter' ? (
@@ -141,4 +139,4 @@ const OptionList = () => {
   );
 };
 
-export default OptionList;
+export default SearchOptionList;
