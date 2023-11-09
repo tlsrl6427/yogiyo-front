@@ -53,5 +53,11 @@ export interface SocialLogin {
 
 export interface DynamicRoute {
   params ?: object;
-  
+
+}
+
+export interface NaverAuth {
+  client_id: string;
+  redirect_uri: string;
+  state: string;
 }

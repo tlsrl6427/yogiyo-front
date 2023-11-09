@@ -4,9 +4,10 @@ import 'lib/styles.css';
 import { GoX } from 'react-icons/go';
 import EmailJoin from '@/components/login/emailJoin';
 import EmailLogin from '@/components/login/emailLogin';
+import { getNaverAuth } from '@/services/api';
 
 const Login = () => {
-  const [view, setView] = useState(2);
+  const [view, setView] = useState(0);
 
   const yogiyoLogo = {
     backgroundImage: `url(/img/yogiyo_new_logo.svg)`,
@@ -14,6 +15,17 @@ const Login = () => {
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
   };
+
+  const reqauth = {
+    client_id : '0o_XScx3lU6SBOFvKmsc',
+    redirect_uri : 'https://yogiyo-front.vercel.app/loading/naver',
+    state: 'abc'
+  }
+
+  const handleAuth = () => {
+    getNaverAuth(reqauth);
+    console.log("handleAuth")
+  }
 
   return view === 0 ? (
     <div className="w-full h-screen p-2 flex flex-col">
@@ -23,7 +35,7 @@ const Login = () => {
       <div className="w-full p-4 mt-10 rounded-xl bg-kakao">
         <p className="font-semibold text-center">카카오로 로그인</p>
       </div>
-      <div className="w-full p-4 mt-3 rounded-xl bg-naver">
+      <div className="w-full p-4 mt-3 rounded-xl bg-naver" onClick={handleAuth}>
         <p className="font-semibold text-white text-center">네이버로 로그인</p>
       </div>
       <div className="w-full p-4 mt-3 rounded-xl bg-slate-200">
