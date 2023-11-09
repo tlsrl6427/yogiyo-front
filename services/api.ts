@@ -20,7 +20,6 @@ export const getNaverAuth = async () => {
 export const getNaverAuth = async (req: NaverAuth) => {
   const baseURL = 'https://nid.naver.com/oauth2.0/authorize';
   window.location.href=`${baseURL}?response_type=code&client_id=${req.client_id}&redirect_uri=${req.redirect_uri}&state=${req.state}`
-  //const res = await axios.post(baseURL, )
 };
 
 export const getGoogleAuthCode = () => {
