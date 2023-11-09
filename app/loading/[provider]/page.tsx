@@ -10,13 +10,14 @@ const Loading = ({params}: DynamicRoute) => {
   const queryString = useSearchParams();
   const code = queryString.get('code');
   const state = queryString.get('state');
+  const providerType = params.provider
 
   useEffect(()=> {
     const reqAuth = {
       email: null,
       password: null,
       authCode: code as string,
-      provider: params.provider
+      providerType: providerType.toUpperCase()
     }
     getAccessToken(reqAuth);
   },[])

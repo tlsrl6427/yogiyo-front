@@ -48,7 +48,7 @@ export interface SocialLogin {
   email: string | null;
   password : string | null;
   authCode : string;
-  provider : string;
+  providerType : string;
 }
 
 export interface DynamicRoute {
