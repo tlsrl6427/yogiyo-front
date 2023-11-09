@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SocialLogin } from '@/lib/types';
+import { NaverAuth, SocialLogin } from '@/lib/types';
 
 export const baseAxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -17,9 +17,10 @@ export const getNaverAuth = async () => {
 };
 */
 
-export const getNaverAuth = () => {
-  window.location.href =
-    'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=0o_XScx3lU6SBOFvKmsc&redirect_uri=http://localhost:3000/loading/&state=false';
+export const getNaverAuth = async (req: NaverAuth) => {
+  const baseURL = 'https://nid.naver.com/oauth2.0/authorize';
+  window.location.href=`${baseURL}?response_type=code&client_id=${req.client_id}&redirect_uri=${req.redirect_uri}&state=${req.state}`
+  //const res = await axios.post(baseURL, )
 };
 
 export const getGoogleAuthCode = () => {
