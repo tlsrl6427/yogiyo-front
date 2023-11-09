@@ -11,7 +11,6 @@ const Loading = () => {
     const scope = queryParams.get('scope');
     const authuser = queryParams.get('authuser');
     const prompt = queryParams.get('prompt');
-
     const authSource = {
       email: null,
       password: null,

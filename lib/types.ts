@@ -43,3 +43,15 @@ export interface User {
   authAt?: string;
   providerType?: string;
 }
+
+export interface SocialLogin {
+  email: string | null;
+  password : string | null;
+  authCode : string;
+  provider : string;
+}
+
+export interface DynamicRoute {
+  params ?: object;
+  
+}

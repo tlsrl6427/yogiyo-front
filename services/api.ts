@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { SocialLogin } from '@/lib/types';
 
 export const baseAxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
