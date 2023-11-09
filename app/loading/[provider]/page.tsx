@@ -15,7 +15,7 @@ const Loading = ({params}: DynamicRoute) => {
     const reqAuth = {
       email: null,
       password: null,
-      authCode: code,
+      authCode: code as string,
       provider: params.provider
     }
     getAccessToken(reqAuth);
