@@ -62,18 +62,20 @@ export const tokenAtom = atom({
 //현재 유저 주소 정보
 export const userAddress = atom({
   key: 'userAddress',
-  default: [{
-      "id" : 0,
-      "address" : {
-        "zipcode" : "",
-        "street" : "",
-        "detail" : ""
+  default: [
+    {
+      id: 0,
+      address: {
+        zipcode: '',
+        street: '',
+        detail: '',
       },
       // 선택된건지 확인용 임시로 넣음
-      "select": false,
-      "addressType" : "",
-      "nickname" : "",
-      "longitude" : 0,
-      "latitude" : 0
-    }]
-})
+      select: false,
+      addressType: '',
+      nickname: '',
+      longitude: 0,
+      latitude: 0,
+    },
+  ],
+});

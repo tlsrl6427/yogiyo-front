@@ -82,19 +82,21 @@ const SearchOptionList = () => {
     <>
       <div className="w-full py-[10px] overflow-hidden sticky top-[90px] left-0 z-10">
         <div className="no-scroll top-0 left-0 overflow-x-auto h-[50px] flex px-[20px] items-center gap-4 text-sm absoulte bg-white">
-          {(sortState !== menu.sort[0] || delFilter !== menu.delFilter[0] || orderAmount !== menu.orderAmount[0]) &&
-          <div
-            onClick={() => {
-              setSortState(menu.sort[0]),
-              setDelFilter(menu.delFilter[0]),
-              setOrderAmount(menu.orderAmount[0])
-            }}
-            className={`px-[10px] py-[5px] border border-slate-800 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap`}
-          >
-            <RiArrowGoBackFill />
-            초기화
-          </div>
-          }
+          {(sortState !== menu.sort[0] ||
+            delFilter !== menu.delFilter[0] ||
+            orderAmount !== menu.orderAmount[0]) && (
+            <div
+              onClick={() => {
+                setSortState(menu.sort[0]),
+                  setDelFilter(menu.delFilter[0]),
+                  setOrderAmount(menu.orderAmount[0]);
+              }}
+              className={`px-[10px] py-[5px] border border-slate-800 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap`}
+            >
+              <RiArrowGoBackFill />
+              초기화
+            </div>
+          )}
           <div
             onClick={() => {
               setMenuDropDown('sort');

@@ -17,9 +17,9 @@ const Header = () => {
   const [isModal, setIsModal] = useRecoilState(headerModalState);
   const [curCoord, setCurCoord] = useRecoilState(currentCoord);
   const [curAdd, setCurAdd] = useRecoilState(currentAddress);
-  const [memberAddress, setMemberAddress] = useRecoilState(userAddress)
+  const [memberAddress, setMemberAddress] = useRecoilState(userAddress);
 
-  console.log(memberAddress)
+  console.log(memberAddress);
 
   useEffect(() => {
     // 현재 유저의 위치 찾기
@@ -80,7 +80,8 @@ const Header = () => {
         onClick={() => setIsModal(true)}
         className={`text-center flex gap-2 items-center font-[800] text-[1.3rem] __className_e22756`}
       >
-        {memberAddress.length > 0 ? memberAddress[0]?.nickname : curAdd} <IoIosArrowDown style={{ marginTop: '3px', fontSize: '1.2rem' }} />
+        {memberAddress.length > 0 ? memberAddress[0]?.nickname : curAdd}{' '}
+        <IoIosArrowDown style={{ marginTop: '3px', fontSize: '1.2rem' }} />
       </p>
       {isModal ? <AddressModal /> : null}
     </header>
