@@ -12,7 +12,6 @@ import { addressApi } from '@/services/addressApi';
 import { fetchAddress } from '@/lib/fetchAddress';
 import UserAddressBtn from './addressModal/UserAddressBtn';
 
-
 export const arrowStyle = {
   position: 'absolute',
   top: '0',
@@ -124,12 +123,13 @@ const AddressModal = () => {
                   <div className="w-full h-[10px] bg-slate-200"></div>
                 </>
               )}
-              {!isFocused && (memberAddress.length > 0 ? memberAddress.map((addressTarget, i) => (
-                <UserAddressBtn key={i} addressTarget={addressTarget}/>
-              )) : 
-              // 나중에 집 추가 회사추가 등등 버튼 만들어야 함
-                null
-              )}
+              {!isFocused &&
+                (memberAddress.length > 0
+                  ? memberAddress.map((addressTarget, i) => (
+                      <UserAddressBtn key={i} addressTarget={addressTarget} />
+                    ))
+                  : // 나중에 집 추가 회사추가 등등 버튼 만들어야 함
+                    null)}
               {isFocused || query ? <SearchAddressList query={query} results={results} /> : null}
             </div>
           </>
