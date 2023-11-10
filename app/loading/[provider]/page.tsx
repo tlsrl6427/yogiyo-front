@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { DynamicRoute } from '@/lib/types';
 import { useSearchParams } from 'next/navigation';
-import { getAccessToken } from '@/services/api';
+import { getAccessToken } from '@/services/loginAPI';
 
 const Loading = ({params}: DynamicRoute) => {
   const [user, setUser] = useState({});
