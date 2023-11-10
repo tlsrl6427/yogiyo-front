@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NaverAuth, SocialLogin } from '@/lib/types';
+import { ReqAuth, SocialLogin } from '@/lib/types';
 
 export const baseAxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -17,10 +17,16 @@ export const getNaverAuth = async () => {
 };
 */
 
-export const getNaverAuth = async (req: NaverAuth) => {
+export const getNaverAuth = (req: ReqAuth) => {
   const baseURL = 'https://nid.naver.com/oauth2.0/authorize';
-  window.location.href=`${baseURL}?response_type=code&client_id=${req.client_id}&redirect_uri=${req.redirect_uri}&state=${req.state}`
+  window.location.href=`${baseURL}?response_type=${req.code}&client_id=${req.client_id}&redirect_uri=${req.redirect_uri}&state=${req.state}`
 };
+
+export const getKakaoAuth = async (req: ReqAuth) => {
+  const baseURL = 'https://kauth.kakao.com/oauth/authorize';
+  const res = await axios.post(baseURL, req)
+  console.log(res)
+}
 
 /*
 export const getGoogleAuthCode = () => {

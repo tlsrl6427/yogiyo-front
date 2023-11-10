@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { DynamicRoute } from '@/lib/types';
 import { useSearchParams } from 'next/navigation';
-import { getAccessToken } from '@/services/api';
+import { getAccessToken } from '@/services/loginAPI';
 
 const Loading = ({params}: DynamicRoute) => {
   const [user, setUser] = useState({});
@@ -15,7 +15,7 @@ const Loading = ({params}: DynamicRoute) => {
     const reqAuth = {
       email: null,
       password: null,
-      authCode: code,
+      authCode: code as string,
       provider: params.provider
     }
     getAccessToken(reqAuth);

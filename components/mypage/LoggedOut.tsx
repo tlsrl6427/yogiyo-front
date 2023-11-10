@@ -1,7 +1,7 @@
 import { userAtom } from '@/recoil/state';
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { getGoogleAuthCode } from '@/services/api';
+import { getGoogleAuthCode } from '@/services/loginAPI';
 
 const LoggedOut = () => {
   const [user, setUser] = useRecoilState(userAtom);

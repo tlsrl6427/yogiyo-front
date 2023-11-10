@@ -57,8 +57,9 @@ export interface DynamicRoute {
   };
 }
 
-export interface NaverAuth {
+export interface ReqAuth {
+  code: string;
   client_id: string;
   redirect_uri: string;
-  state: string;
+  state?: string;
 }
