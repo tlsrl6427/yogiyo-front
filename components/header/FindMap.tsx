@@ -86,9 +86,8 @@ const FindMap = () => {
         <span
           className="cursor-pointer bg-yopink text-white font-black text-[1.2rem] rounded-xl p-[10px] text-center"
           onClick={() => {
-            setIsDetail(false);
+            setIsDetail(true);
             setIsFindMap(false);
-            setHeaderModal(false);
             setSearchCo(centerCoord);
           }}
         >

@@ -7,13 +7,12 @@ import { useSearchParams } from 'next/navigation';
 const MarketList = () => {
   const searchParams = useSearchParams();
   const menu = searchParams.get('menu');
-  console.log(menu);
 
   return (
     <div className="w-full">
       <MenuList />
       <OptionList />
-      <div className="h-[100px]" />
+      <div className="h-[50px]" />
       <MarketDetailList />
     </div>
   );
