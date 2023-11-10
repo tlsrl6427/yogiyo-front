@@ -43,6 +43,20 @@ export interface User {
   authAt?: string;
 }
 
+export interface Address {
+  zipcode: string;
+  street: string;
+  detail: string;
+}
+
+export interface RegisterAddressRequest {
+  address: Address;
+  nickname: string;
+  addressType: string;
+  longitude: number;
+  latitude: number;
+}
+
 export interface SocialLogin {
   email : string | null,
   password : string | null,

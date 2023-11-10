@@ -13,7 +13,7 @@ export const currentCoord = atom<Coordinate | null>({
   default: null,
 });
 
-//현재주소
+//현재위치 주소
 export const currentAddress = atom<string | any>({
   key: 'currentAddress',
   default: '',
@@ -57,4 +57,23 @@ export const userAtom = atom<User>({
 export const tokenAtom = atom({
   key: 'token',
   default: null,
+});
+
+//현재 유저 주소 정보
+export const userAddress = atom({
+  key: 'userAddress',
+  default: [{
+      "id" : 0,
+      "address" : {
+        "zipcode" : "",
+        "street" : "",
+        "detail" : ""
+      },
+      // 선택된건지 확인용 임시로 넣음
+      "select": false,
+      "addressType" : "",
+      "nickname" : "",
+      "longitude" : 0,
+      "latitude" : 0
+    }]
 })
