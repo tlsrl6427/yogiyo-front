@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
 import { BsCheck } from 'react-icons/bs';
+import { RiArrowGoBackFill } from 'react-icons/ri';
 
 //menu 타입
 type MenuKey = 'sort' | 'delFilter' | 'orderAmount';
@@ -81,11 +82,26 @@ const SearchOptionList = () => {
     <>
       <div className="w-full py-[10px] overflow-hidden sticky top-[90px] left-0 z-10">
         <div className="no-scroll top-0 left-0 overflow-x-auto h-[50px] flex px-[20px] items-center gap-4 text-sm absoulte bg-white">
+          {(sortState !== menu.sort[0] || delFilter !== menu.delFilter[0] || orderAmount !== menu.orderAmount[0]) &&
+          <div
+            onClick={() => {
+              setSortState(menu.sort[0]),
+              setDelFilter(menu.delFilter[0]),
+              setOrderAmount(menu.orderAmount[0])
+            }}
+            className={`px-[10px] py-[5px] border border-slate-800 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap`}
+          >
+            <RiArrowGoBackFill />
+            초기화
+          </div>
+          }
           <div
             onClick={() => {
               setMenuDropDown('sort');
             }}
-            className="px-[10px] py-[5px] border border-slate-300 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap"
+            className={`px-[10px] py-[5px] border border-slate-300 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap 
+              ${sortState !== menu.sort[0] && `bg-slate-900 text-white`}
+            `}
           >
             {sortState}
             {toggleDropDown && selectMenu.target === 'sort' ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -94,7 +110,9 @@ const SearchOptionList = () => {
             onClick={() => {
               setMenuDropDown('delFilter');
             }}
-            className="px-[10px] py-[5px] border border-slate-300 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap"
+            className={`px-[10px] py-[5px] border border-slate-300 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap 
+            ${delFilter !== menu.delFilter[0] && `bg-slate-900 text-white`}
+            `}
           >
             {delFilter}
             {toggleDropDown && selectMenu.target === 'delFilter' ? (
@@ -107,7 +125,9 @@ const SearchOptionList = () => {
             onClick={() => {
               setMenuDropDown('orderAmount');
             }}
-            className="px-[10px] py-[5px] border border-slate-300 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap"
+            className={`px-[10px] py-[5px] border border-slate-300 rounded-2xl flex justify-center items-center gap-1 cursor-pointer whitespace-nowrap 
+            ${orderAmount !== menu.orderAmount[0] && `bg-slate-900 text-white`}
+            `}
           >
             {orderAmount}
             {toggleDropDown && selectMenu.target === 'orderAmount' ? (

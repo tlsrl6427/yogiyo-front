@@ -43,3 +43,17 @@ export interface User {
   authAt?: string;
   providerType?: string;
 }
+
+export interface Address {
+  zipcode: string;
+  street: string;
+  detail: string;
+}
+
+export interface RegisterAddressRequest {
+  address: Address;
+  nickname: string;
+  addressType: string;
+  longitude: number;
+  latitude: number;
+}
