@@ -12,7 +12,7 @@ export const getNaverAuth = (req: ReqAuth) => {
 
 export const getKakaoAuth = async (req: ReqAuth) => {
   const baseURL = 'https://kauth.kakao.com/oauth/authorize';
-  const res = await axios.post(baseURL, req)
+  const res = await axios.get(baseURL,{params: req})
   console.log(res)
 }
 
