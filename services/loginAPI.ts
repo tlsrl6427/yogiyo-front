@@ -19,8 +19,6 @@ export const getKakaoAuth = async (req: ReqAuth) => {
 export const getAccessToken = async (reqbody: SocialLogin) => {
   const headers = {
     'Content-Type': 'application/json',
-    'Content-Length': 162,
-    'Host': 'yogiyo-front.vercel.app'
   };
   const res = await baseAxiosInstance.post('/memberLogin', reqbody, {headers});
   console.log(res);
