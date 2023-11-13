@@ -12,8 +12,7 @@ export const getNaverAuth = (req: ReqAuth) => {
 
 export const getKakaoAuth = async (req: ReqAuth) => {
   const baseURL = 'https://kauth.kakao.com/oauth/authorize';
-  const res = await axios.get(baseURL,{params: req})
-  console.log(res)
+  window.location.href=`${baseURL}?response_type=${req.code}&client_id=${req.client_id}&redirect_uri=${req.redirect_uri}`
 }
 
 export const getAccessToken = async (reqbody: SocialLogin) => {

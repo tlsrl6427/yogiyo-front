@@ -33,7 +33,7 @@ const Login = () => {
       kakao : {
         code : 'code',
         client_id : '3ee478d16825909aed28e31c171446ba',
-        redirect_uri : 'https://yogiyo-front.vercel.app/loading/kakao',
+        redirect_uri : process.env.NEXT_PUBLIC_KAKAO_LOGIN_REDIRECT_URI as string,
       }
     }
 
