@@ -45,8 +45,6 @@ export interface User {
 }
 
 export interface SocialLogin {
-  email: string | null;
-  password : string | null;
   authCode : string;
   providerType : string;
 }
