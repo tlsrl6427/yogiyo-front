@@ -27,7 +27,7 @@ const Login = () => {
       naver : {
         code: 'code',
         client_id : '0o_XScx3lU6SBOFvKmsc',
-        redirect_uri : 'https://yogiyo-front.vercel.app/loading/naver',
+        redirect_uri : process.env.NEXT_PUBLIC_NAVER_LOGIN_REDIRECT_URI as string,
         state: 'abc'
       },
       kakao : {
