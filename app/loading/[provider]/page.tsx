@@ -14,8 +14,6 @@ const Loading = ({params}: DynamicRoute) => {
 
   useEffect(()=> {
     const reqAuth = {
-      //email: null,
-      //password: null,
       authCode: code as string,
       providerType: providerType.toUpperCase()
     }
