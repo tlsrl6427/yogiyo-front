@@ -43,6 +43,7 @@ export const getGoogleAuthCode = () => {
 
 export const getAccessToken = async (reqbody: SocialLogin) => {
   console.log(reqbody);
-  const res = await baseAxiosInstance.post('/memberLogin', reqbody);
+  //const res = await baseAxiosInstance.post('/memberLogin', reqbody);
+  const res = await axios.post('https://yogiyo-clone.shop/memberLogin', reqbody);
   console.log(res);
 }
