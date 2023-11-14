@@ -16,7 +16,6 @@ const Login = () => {
     backgroundPosition: 'center',
   };
 
-
   const handleAuth = (e: React.MouseEvent<HTMLDivElement>) => {
 
     const provider = e.currentTarget.id;
