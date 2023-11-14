@@ -19,8 +19,6 @@ const Header = () => {
   const [curAdd, setCurAdd] = useRecoilState(currentAddress);
   const [memberAddress, setMemberAddress] = useRecoilState(userAddress);
 
-  console.log(memberAddress);
-
   useEffect(() => {
     // 현재 유저의 위치 찾기
     if (navigator.geolocation) {
