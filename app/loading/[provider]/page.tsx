@@ -15,6 +15,8 @@ const Loading = ({params}: DynamicRoute) => {
   const state = queryString.get('state');
   const providerType = params.provider
 
+  console.log(`${token} TEST!`);
+
   useEffect(() => {
     const reqAuth = {
       email: null,
@@ -23,9 +25,9 @@ const Loading = ({params}: DynamicRoute) => {
       providerType: providerType.toUpperCase()
     }
     const asyncfunction = async () => {
-      const res = await getAccessToken(reqAuth);
-      console.log(res);
-      //setToken();
+      const headers = await getAccessToken(reqAuth);
+      const token = headers.authorization;
+      setToken(token);
     }
 
     const res = asyncfunction();
