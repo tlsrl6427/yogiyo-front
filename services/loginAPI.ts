@@ -32,7 +32,8 @@ export const getAccessToken = async (reqbody: SocialLogin) => {
 
 export const getUserInfo = async (token: string) => {
   const headers = {
-    'Authorization' : token,
+    //'Authorization' : token,
+    'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsInByb3ZpZGVyVHlwZSI6IkRFRkFVTFQiLCJleHAiOjE2OTQ5NjY4Mjh9.Ls1wnxU41I99ijXRyKfkYI2w3kd-Q_qA2QgCLgpDTKk'
   }
   console.log(headers);
   const res = await baseAxiosInstance.get('/member/mypage', {headers});
