@@ -47,6 +47,7 @@ export const isFindMapState = atom({
 export const userAtom = atom<User>({
   key: 'user',
   default: {
+    id: 'unknown',
     nickname: 'unknown',
     email: 'unknown',
   },
