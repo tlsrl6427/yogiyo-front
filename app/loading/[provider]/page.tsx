@@ -28,7 +28,9 @@ const Loading = ({params}: DynamicRoute) => {
     }
 
     const res = asyncfunction();
-    console.log(res);
+    //setToken();
+    console.log("!?")
+    console.log(res)
 
   },[])
 
