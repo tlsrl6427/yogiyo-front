@@ -24,7 +24,7 @@ export const getAccessToken = async (reqbody: SocialLogin) => {
   console.log(accessToken);
   //const id = resTokenAPI.data.id;
   const id='5abc';
-  console.log(accessToken);
+  console.log(resTokenAPI);
   const resUserInfo = await getUserInfo(accessToken);
   let userInfo = {...resUserInfo.data, id: id};
   console.log(userInfo);
