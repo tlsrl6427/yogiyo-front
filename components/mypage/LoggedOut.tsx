@@ -1,9 +1,6 @@
-import { userAtom } from '@/recoil/state';
 import React from 'react';
-import { useRecoilState } from 'recoil';
 
 const LoggedOut = () => {
-  const [user, setUser] = useRecoilState(userAtom);
 
   return (
     <div className="">
