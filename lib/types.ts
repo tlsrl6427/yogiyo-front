@@ -36,12 +36,11 @@ export interface InputBox {
 }
 
 export interface User {
+  id: string;
   nickname: string;
   email: string;
-  password?: string;
   phone?: string;
   authAt?: string;
-  providerType?: string;
 }
 
 export interface SocialLogin {

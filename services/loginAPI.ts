@@ -19,10 +19,15 @@ export const getAccessToken = async (reqbody: SocialLogin) => {
   const headers = {
     'Content-Type': 'application/json',
   };
-  const res = await baseAxiosInstance.post('/memberLogin', reqbody, {headers});
-  const resHeaders = res.headers;
-  const resDatas = res.data;
-  return {resHeaders, resDatas};
+  const resTokenAPI = await baseAxiosInstance.post('/memberLogin', reqbody, {headers});
+  const accessToken = resTokenAPI.headers.authorization;
+  console.log(accessToken);
+  const id = resTokenAPI.data.id;
+  console.log(id);
+  const resUserInfo = await getUserInfo(accessToken);
+  let userInfo = {...resUserInfo.data, id: id};
+  console.log(userInfo);
+  return {accessToken, userInfo};
 }
 
 export const getUserInfo = async (token: string) => {

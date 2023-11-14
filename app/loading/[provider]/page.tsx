@@ -29,12 +29,10 @@ const Loading = ({params}: DynamicRoute) => {
   }
   const asyncfunction = async () => {
     try{
-    const response = await getAccessToken(reqAuth);
-    const token = response.resHeaders.authorization;
-    setToken(token);
-    const userInfo = await getUserInfo(token);
-    setUser(response.resDatas);
-    router.push('/mypage')
+      const resLogin = await getAccessToken(reqAuth);
+      setToken(resLogin.accessToken);
+      setUser(resLogin.userInfo);
+      router.push('/mypage')
     }catch{
       router.push('/error?code=001')
     }
