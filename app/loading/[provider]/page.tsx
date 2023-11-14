@@ -8,14 +8,12 @@ import { tokenAtom } from '@/recoil/state';
 
 const Loading = ({params}: DynamicRoute) => {
   const [token, setToken] = useRecoilState(tokenAtom);
-  const [user, setUser] = useState({});
+  //const [user, setUser] = useState({});
 
   const queryString = useSearchParams();
   const code = queryString.get('code');
   const state = queryString.get('state');
   const providerType = params.provider
-
-  console.log(`${token} TEST!`);
 
   useEffect(() => {
     const reqAuth = {
