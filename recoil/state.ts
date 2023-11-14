@@ -55,3 +55,9 @@ export const userAtom = atom<User>({
     providerType: 'unknown',
   },
 });
+
+//액세스 토큰
+export const tokenAtom = atom({
+  key: 'token',
+  default: null,
+})
