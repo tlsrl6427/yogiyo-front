@@ -30,8 +30,8 @@ const Loading = ({params}: DynamicRoute) => {
   const asyncfunction = async () => {
     try{
       const resLogin = await getAccessToken(reqAuth);
-      setToken(resLogin.accessToken);
-      setUser(resLogin.userInfo);
+      //setToken(resLogin.accessToken);
+      //setUser(resLogin.userInfo);
       router.push('/mypage')
     }catch{
       router.push('/error?code=001')
