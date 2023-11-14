@@ -24,13 +24,11 @@ const Loading = ({params}: DynamicRoute) => {
     }
     const asyncfunction = async () => {
       const res = await getAccessToken(reqAuth);
-      return res;
+      console.log(res);
+      //setToken();
     }
 
     const res = asyncfunction();
-    //setToken();
-    console.log("!?")
-    console.log(res)
 
   },[])
 
