@@ -20,5 +20,5 @@ export const getAccessToken = async (reqbody: SocialLogin) => {
     'Content-Type': 'application/json',
   };
   const res = await baseAxiosInstance.post('/memberLogin', reqbody, {headers});
-  console.log(res);
+  //console.log(res);
 }
