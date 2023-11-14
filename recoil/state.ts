@@ -45,14 +45,10 @@ export const isFindMapState = atom({
 
 //로그인한 유저 정보
 export const userAtom = atom<User>({
-  key: 'userAtom',
+  key: 'user',
   default: {
     nickname: 'unknown',
     email: 'unknown',
-    password: 'unknown',
-    phone: 'unknown',
-    authAt: 'unknown',
-    providerType: 'unknown',
   },
 });
 

@@ -2,18 +2,17 @@
 import React from 'react';
 import LoggedOut from '../../components/mypage/LoggedOut';
 import LoggedIn from '../../components/mypage/LoggedIn';
-import { userAtom } from '@/recoil/state';
+import { tokenAtom } from '@/recoil/state';
 import { useRecoilValue } from 'recoil';
 
 const Mypage = () => {
-  const user = useRecoilValue(userAtom);
-
-  console.log(user)
+  const token = useRecoilValue(tokenAtom);
+  console.log(token);
 
   //요기요 매거진~ 서비스 약관 부분은 하나하나의 버튼 ui가 딱히 다른곳에서 쓰이는것 같지 않아서 여기 직접 넣는걸로
   return (
     <div className="w-screen relative">
-      <div className="w-full">{user.nickname === 'unknown' ? <LoggedOut /> : <LoggedIn />}</div>
+      <div className="w-full">{!token ? <LoggedOut /> : <LoggedIn />}</div>
       <div className="pt-5">
         <Menu text="요기요 매거진(베타)"></Menu>
         <MenuLine />
