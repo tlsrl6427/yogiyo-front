@@ -3,8 +3,11 @@ import { useEffect, useState } from 'react';
 import { DynamicRoute } from '@/lib/types';
 import { useSearchParams } from 'next/navigation';
 import { getAccessToken } from '@/services/loginAPI';
+import { useRecoilState } from 'recoil';
+import { tokenAtom } from '@/recoil/state';
 
 const Loading = ({params}: DynamicRoute) => {
+  const [token, setToken] = useRecoilState(tokenAtom);
   const [user, setUser] = useState({});
 
   const queryString = useSearchParams();
@@ -12,14 +15,21 @@ const Loading = ({params}: DynamicRoute) => {
   const state = queryString.get('state');
   const providerType = params.provider
 
-  useEffect(()=> {
+  useEffect(() => {
     const reqAuth = {
       email: null,
       password: null,
       authCode: code as string,
       providerType: providerType.toUpperCase()
     }
-    getAccessToken(reqAuth);
+    const asyncfunction = async () => {
+      const res = await getAccessToken(reqAuth);
+      return res;
+    }
+
+    const res = asyncfunction();
+    console.log(res);
+
   },[])
 
   return (
