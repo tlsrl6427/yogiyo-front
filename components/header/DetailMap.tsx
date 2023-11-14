@@ -79,6 +79,7 @@ const DetailMap = () => {
         return isAddressName;
       };
       addressApi.register({
+        here: true,
         address: {
           zipcode: '',
           street: address,

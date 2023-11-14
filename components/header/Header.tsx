@@ -1,7 +1,7 @@
 'use client';
 import { IoIosArrowDown } from 'react-icons/io';
-import { useRecoilState } from 'recoil';
-import { headerModalState, currentCoord, currentAddress, userAddress } from '@/recoil/state';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { headerModalState, currentCoord, currentAddress, userAddress, thisAddressId } from '@/recoil/state';
 import AddressModal from './AddressModal';
 import { useEffect } from 'react';
 import { addressApi } from '@/services/addressApi';
@@ -17,6 +17,7 @@ const Header = () => {
   const [isModal, setIsModal] = useRecoilState(headerModalState);
   const [curCoord, setCurCoord] = useRecoilState(currentCoord);
   const [curAdd, setCurAdd] = useRecoilState(currentAddress);
+  const [thisAdd, setThisAdd] = useRecoilState(thisAddressId);
   const [memberAddress, setMemberAddress] = useRecoilState(userAddress);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const Header = () => {
       );
     }
 
-    fetchAddress(setMemberAddress);
+    fetchAddress(setMemberAddress, setThisAdd);
   }, []);
 
   useEffect(() => {
@@ -78,7 +79,7 @@ const Header = () => {
         onClick={() => setIsModal(true)}
         className={`text-center flex gap-2 items-center font-[800] text-[1.3rem] __className_e22756`}
       >
-        {memberAddress.length > 0 ? memberAddress[0]?.nickname : curAdd}{' '}
+        {memberAddress.length > 0 ? thisAdd.nickname : curAdd}{' '}
         <IoIosArrowDown style={{ marginTop: '3px', fontSize: '1.2rem' }} />
       </p>
       {isModal ? <AddressModal /> : null}

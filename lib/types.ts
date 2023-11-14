@@ -50,6 +50,8 @@ export interface Address {
 }
 
 export interface RegisterAddressRequest {
+  id?: number;
+  here?: boolean;
   address: Address;
   nickname: string;
   addressType: string;
