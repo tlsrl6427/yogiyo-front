@@ -22,8 +22,9 @@ export const getAccessToken = async (reqbody: SocialLogin) => {
   const resTokenAPI = await baseAxiosInstance.post('/memberLogin', reqbody, {headers});
   const accessToken = resTokenAPI.headers.authorization;
   console.log(accessToken);
-  const id = resTokenAPI.data.id;
-  console.log(id);
+  //const id = resTokenAPI.data.id;
+  const id='5abc';
+  console.log(accessToken);
   const resUserInfo = await getUserInfo(accessToken);
   let userInfo = {...resUserInfo.data, id: id};
   console.log(userInfo);
