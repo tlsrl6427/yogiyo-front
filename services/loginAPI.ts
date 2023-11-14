@@ -25,9 +25,10 @@ export const getAccessToken = async (reqbody: SocialLogin) => {
   console.log(accessToken);
   const userId = resTokenAPI.data.userId;
   const resUserInfo = await getUserInfo(accessToken);
-  let userInfo = {...resUserInfo.data, id: userId};
-  console.log(userInfo);
-  return {accessToken, userInfo};
+  console.log(resUserInfo);
+  //let userInfo = {...resUserInfo.data, id: userId};
+  //console.log(userInfo);
+  //return {accessToken, userInfo};
 }
 
 export const getUserInfo = async (token: string) => {
@@ -35,7 +36,6 @@ export const getUserInfo = async (token: string) => {
     //'Authorization' : token,
     'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsInByb3ZpZGVyVHlwZSI6IkRFRkFVTFQiLCJleHAiOjE2OTQ5NjY4Mjh9.Ls1wnxU41I99ijXRyKfkYI2w3kd-Q_qA2QgCLgpDTKk'
   }
-  console.log(headers);
   const res = await baseAxiosInstance.get('/member/mypage', {headers});
-  return res.data;
+  return res;
 }
