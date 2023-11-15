@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import type { Coordinate, User } from '@/lib/types';
+import type { Coordinate, User, RegisterAddressRequest } from '@/lib/types';
 
 //헤더모달 state
 export const headerModalState = atom({
@@ -31,6 +31,24 @@ export const searchAddress = atom({
   default: '',
 });
 
+//현재 세팅된 주소 정보
+export const thisAddressId = atom<RegisterAddressRequest>({
+  key: 'thisAddressId',
+  default: {
+    id: 0,
+    address: {
+      zipcode: '',
+      street: '',
+      detail: '',
+    },
+    here: false,
+    addressType: '',
+    nickname: '',
+    longitude: 0,
+    latitude: 0,
+  },
+});
+
 //상세정보 입력창 state
 export const isDetailMapState = atom({
   key: 'isDetailMapState',
@@ -45,34 +63,22 @@ export const isFindMapState = atom({
 
 //로그인한 유저 정보
 export const userAtom = atom<User>({
-  key: 'userAtom',
+  key: 'user',
   default: {
+    id: 'unknown',
     nickname: 'unknown',
     email: 'unknown',
-    password: 'unknown',
-    phone: 'unknown',
-    authAt: 'unknown',
-    providerType: 'unknown',
   },
 });
 
+//액세스 토큰
+export const tokenAtom = atom({
+  key: 'token',
+  default: null,
+});
+
 //현재 유저 주소 정보
-export const userAddress = atom({
+export const userAddress = atom<RegisterAddressRequest[]>({
   key: 'userAddress',
-  default: [
-    {
-      id: 0,
-      address: {
-        zipcode: '',
-        street: '',
-        detail: '',
-      },
-      // 선택된건지 확인용 임시로 넣음
-      select: false,
-      addressType: '',
-      nickname: '',
-      longitude: 0,
-      latitude: 0,
-    },
-  ],
+  default: [],
 });

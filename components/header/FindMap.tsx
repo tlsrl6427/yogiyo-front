@@ -1,11 +1,10 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   searchCoord,
   currentCoord,
   currentAddress,
   isDetailMapState,
-  headerModalState,
   isFindMapState,
 } from '@/recoil/state';
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
@@ -18,7 +17,6 @@ import { locationDecoder } from '@/lib/locationDecoder';
 const FindMap = () => {
   const coord = useRecoilValue(currentCoord);
   const setSearchCo = useSetRecoilState(searchCoord);
-  const setHeaderModal = useSetRecoilState(headerModalState);
   const [address, setAddress] = useRecoilState(currentAddress);
   const setIsDetail = useSetRecoilState(isDetailMapState);
   const setIsFindMap = useSetRecoilState(isFindMapState);
@@ -27,19 +25,19 @@ const FindMap = () => {
   const [action, setAction] = useState(false);
   const [centerCoord, setCenterCoord] = useState(coord);
 
+  const mapRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!coord) return;
     const { kakao } = window;
     kakao.maps?.load(() => {
-      let container = document.getElementById('map');
-
       let options = {
         center: new kakao.maps.LatLng(coord.lat, coord.lng),
         level: 3,
       };
       const geocoder = new kakao.maps.services.Geocoder();
 
-      let map = new kakao.maps.Map(container, options);
+      let map = new kakao.maps.Map(mapRef.current, options);
 
       kakao.maps.event.addListener(map, 'dragend', async function () {
         //움직임 안내 문구 없애기
@@ -79,7 +77,7 @@ const FindMap = () => {
             지도를 움직여 위치를 설정하세요
           </span>
         )}
-        <div id="map" style={{ width: '100%', height: '100%' }}></div>
+        <div id="map" ref={mapRef} style={{ width: '100%', height: '100%' }}></div>
       </div>
       <div className="flex flex-col gap-[10px] px-[20px]">
         <p className="font-[500] text-[1.2rem]">{address}</p>

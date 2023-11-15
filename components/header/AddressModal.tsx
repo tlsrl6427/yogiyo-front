@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { headerModalState, isDetailMapState, isFindMapState, userAddress } from '@/recoil/state';
 import { FiSearch } from 'react-icons/fi';
 import { AiOutlineAim } from 'react-icons/ai';
@@ -8,8 +8,6 @@ import SearchAddressList from './SearchAddressList';
 import axios from 'axios';
 import DetailMap from './DetailMap';
 import FindMap from './FindMap';
-import { addressApi } from '@/services/addressApi';
-import { fetchAddress } from '@/lib/fetchAddress';
 import UserAddressBtn from './addressModal/UserAddressBtn';
 
 export const arrowStyle = {
@@ -24,9 +22,9 @@ export const arrowStyle = {
 
 const AddressModal = () => {
   const [_, setIsModal] = useRecoilState(headerModalState);
-  const [isDetailMap, setIsDetailMap] = useRecoilState(isDetailMapState);
+  const isDetailMap = useRecoilValue(isDetailMapState);
   const [isFindMap, setIsFindMap] = useRecoilState(isFindMapState);
-  const [memberAddress, setMemberAddress] = useRecoilState(userAddress);
+  const memberAddress = useRecoilValue(userAddress);
   const [height, setHeight] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -124,6 +122,7 @@ const AddressModal = () => {
                 </>
               )}
               {!isFocused &&
+                !query &&
                 (memberAddress.length > 0
                   ? memberAddress.map((addressTarget, i) => (
                       <UserAddressBtn key={i} addressTarget={addressTarget} />

@@ -36,12 +36,47 @@ export interface InputBox {
 }
 
 export interface User {
+  id: string;
   nickname: string;
   email: string;
-  password?: string;
   phone?: string;
   authAt?: string;
-  providerType?: string;
+}
+
+export interface Address {
+  zipcode: string;
+  street: string;
+  detail: string;
+}
+
+export interface RegisterAddressRequest {
+  id?: number;
+  here?: boolean;
+  address: Address;
+  nickname: string;
+  addressType: string;
+  longitude: number;
+  latitude: number;
+}
+
+export interface SocialLogin {
+  email: string | null;
+  password: string | null;
+  authCode: string;
+  providerType: string;
+}
+
+export interface DynamicRoute {
+  params: {
+    provider: string;
+  };
+}
+
+export interface ReqAuth {
+  code: string;
+  client_id: string;
+  redirect_uri: string;
+  state?: string;
 }
 
 export interface Address {

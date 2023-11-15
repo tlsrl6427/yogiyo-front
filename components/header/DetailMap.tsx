@@ -7,8 +7,10 @@ import {
   headerModalState,
   currentAddress,
   currentCoord,
+  userAddress,
+  thisAddressId,
 } from '@/recoil/state';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { GrUserManager } from 'react-icons/gr';
 import { arrowStyle } from './AddressModal';
@@ -16,6 +18,7 @@ import { BiHomeAlt } from 'react-icons/bi';
 import { BsBagDash } from 'react-icons/bs';
 import { FiMapPin } from 'react-icons/fi';
 import { addressApi } from '@/services/addressApi';
+import { fetchAddress } from '@/lib/fetchAddress';
 
 export const mapIconStyle = {
   position: 'absolute',
@@ -37,7 +40,7 @@ const buttonIconStyle = {
 
 const DetailMap = () => {
   //검색 좌표 및 주소
-  const [coord, setCoord] = useRecoilState(searchCoord);
+  const coord = useRecoilValue(searchCoord);
   const address = useRecoilValue(searchAddress);
 
   //현재 좌표 및 주소
@@ -47,6 +50,10 @@ const DetailMap = () => {
   //모달 상태
   const setHeaderModal = useSetRecoilState(headerModalState);
   const setIsDetail = useSetRecoilState(isDetailMapState);
+
+  //fetch후 상태저장
+  const setMemberAddress = useSetRecoilState(userAddress);
+  const setThisAdd = useSetRecoilState(thisAddressId);
 
   //상세주소
   const [detailAddress, setDetailAddress] = useState('');
@@ -69,6 +76,7 @@ const DetailMap = () => {
     });
   }, [coord]);
 
+  const setAddress = async () => {
   const setAddress = () => {
     //사용자가 주소를 저장하려는 경우
     if (isAddressName) {
@@ -78,7 +86,8 @@ const DetailMap = () => {
         if (isAddressName === 'ELSE') return '기타';
         return isAddressName;
       };
-      addressApi.register({
+      await addressApi.register({
+        here: true,
         address: {
           zipcode: '',
           street: address,
@@ -90,6 +99,8 @@ const DetailMap = () => {
         longitude: coord?.lng || 0,
         latitude: coord?.lat || 0,
       });
+
+      await fetchAddress(setMemberAddress, setThisAdd);
     }
     setCurCoord(coord);
     setCurAdd(address);
