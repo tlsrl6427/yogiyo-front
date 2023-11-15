@@ -1,0 +1,16 @@
+.detail_swiper .swiper-pagination {
+  display: block;
+  position: absolute;
+  font-size: 0.8rem;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+  color: #ccc;
+  background: rgba(33, 33, 33, 0.6);
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+
+.detail_swiper .swiper-pagination .swiper-pagination-current {
+  color: #fff;
+}

@@ -81,19 +81,5 @@ export const tokenAtom = atom({
 //현재 유저 주소 정보
 export const userAddress = atom<RegisterAddressRequest[]>({
   key: 'userAddress',
-  default: [
-    {
-      id: 0,
-      address: {
-        zipcode: '',
-        street: '',
-        detail: '',
-      },
-      here: false,
-      addressType: '',
-      nickname: '',
-      longitude: 0,
-      latitude: 0,
-    },
-  ],
+  default: []
 });
