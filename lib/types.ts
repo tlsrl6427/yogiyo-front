@@ -78,3 +78,17 @@ export interface ReqAuth {
   redirect_uri: string;
   state?: string;
 }
+
+export interface Address {
+  zipcode: string;
+  street: string;
+  detail: string;
+}
+
+export interface RegisterAddressRequest {
+  address: Address;
+  nickname: string;
+  addressType: string;
+  longitude: number;
+  latitude: number;
+}

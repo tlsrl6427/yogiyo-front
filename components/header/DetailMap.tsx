@@ -77,6 +77,7 @@ const DetailMap = () => {
   }, [coord]);
 
   const setAddress = async () => {
+  const setAddress = () => {
     //사용자가 주소를 저장하려는 경우
     if (isAddressName) {
       const selectAddressName = () => {
