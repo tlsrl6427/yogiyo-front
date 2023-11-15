@@ -49,6 +49,12 @@ export const getUserInfo = async (token: string) => {
     'Authorization' : token,
     //'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsInByb3ZpZGVyVHlwZSI6IkRFRkFVTFQiLCJleHAiOjE2OTQ5NjY4Mjh9.Ls1wnxU41I99ijXRyKfkYI2w3kd-Q_qA2QgCLgpDTKk'
   }
-  const res = await baseAxiosInstance.get('/member/mypage', {headers});
+  //const res = await baseAxiosInstance.get('/member/mypage',{headers});
+  const res = baseAxiosInstance.get('/member/mypage', {
+    headers: {
+      Authorization: token
+    }
+  })
+  console.log(res);
   return res;
 }
