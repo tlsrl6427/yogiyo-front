@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { DynamicRoute } from '@/lib/types';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { getAccessToken, getUserInfo } from '@/services/loginAPI';
+import { getAccessToken, getUserInfo, login } from '@/services/loginAPI';
 import { useRecoilState } from 'recoil';
 import { tokenAtom, userAtom } from '@/recoil/state';
 
@@ -29,7 +29,7 @@ const Loading = ({params}: DynamicRoute) => {
   }
   const asyncfunction = async () => {
     try{
-      const resLogin = await getAccessToken(reqAuth);
+      const resLogin = await login(reqAuth);
       //setToken(resLogin.accessToken);
       //setUser(resLogin.userInfo);
       router.push('/mypage')
