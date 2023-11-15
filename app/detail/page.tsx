@@ -1,11 +1,11 @@
-import HeadSlider from "@/components/detail/HeadSlider"
+import HeadSlider from '@/components/detail/HeadSlider';
 
 const Detail = () => {
   return (
     <div className="">
       <HeadSlider />
     </div>
-  )
-}
+  );
+};
 
-export default Detail
+export default Detail;

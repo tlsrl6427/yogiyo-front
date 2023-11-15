@@ -1,8 +1,5 @@
 const DetailHeader = () => {
-  return (
-    <>
-    </>
-  )
-}
+  return <></>;
+};
 
-export default DetailHeader
+export default DetailHeader;

@@ -1,7 +1,13 @@
 'use client';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
-import { headerModalState, currentCoord, currentAddress, userAddress, thisAddressId } from '@/recoil/state';
+import {
+  headerModalState,
+  currentCoord,
+  currentAddress,
+  userAddress,
+  thisAddressId,
+} from '@/recoil/state';
 import AddressModal from './AddressModal';
 import { useState, useEffect } from 'react';
 import { fetchAddress } from '@/lib/fetchAddress';
@@ -20,7 +26,7 @@ const Header = () => {
   const [memberAddress, setMemberAddress] = useRecoilState(userAddress);
 
   //로그인 확인용
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     // 현재 유저의 위치 찾기
@@ -74,7 +80,7 @@ const Header = () => {
       kakaoMapScript.removeEventListener('load', onLoadKakaoAPI);
     };
   }, [curCoord]);
-  console.log(memberAddress.length)
+  console.log(memberAddress.length);
 
   return (
     <header className="fixed gap-2 top-0 left-0 w-full h-[50px] flex justify-center items-center bg-white z-50">

@@ -121,7 +121,8 @@ const AddressModal = () => {
                   <div className="w-full h-[10px] bg-slate-200"></div>
                 </>
               )}
-              {(!isFocused && !query)&&
+              {!isFocused &&
+                !query &&
                 (memberAddress.length > 0
                   ? memberAddress.map((addressTarget, i) => (
                       <UserAddressBtn key={i} addressTarget={addressTarget} />

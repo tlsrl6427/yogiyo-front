@@ -4,10 +4,10 @@ import { addressApi } from '@/services/addressApi';
 export const fetchAddress = async (setMemberAddress: any, setThisAdd: any) => {
   try {
     const data = await addressApi.view();
-    if(data) {
+    if (data) {
       setMemberAddress(data.memberAddresses);
-      const yogiAddress = data.memberAddresses.find((value: any) => value.here)
-      setThisAdd(yogiAddress)
+      const yogiAddress = data.memberAddresses.find((value: any) => value.here);
+      setThisAdd(yogiAddress);
     }
   } catch (error) {
     console.error('주소 조회 중 오류 발생:', error);

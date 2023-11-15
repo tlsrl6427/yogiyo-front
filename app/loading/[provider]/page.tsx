@@ -6,7 +6,7 @@ import { getAccessToken, getUserInfo } from '@/services/loginAPI';
 import { useRecoilState } from 'recoil';
 import { tokenAtom, userAtom } from '@/recoil/state';
 
-const Loading = ({params}: DynamicRoute) => {
+const Loading = ({ params }: DynamicRoute) => {
   const [token, setToken] = useRecoilState(tokenAtom);
   const [user, setUser] = useRecoilState(userAtom);
   const router = useRouter();
@@ -25,20 +25,19 @@ const Loading = ({params}: DynamicRoute) => {
     email: null,
     password: null,
     authCode: code as string,
-    providerType: providerType.toUpperCase()
-  }
+    providerType: providerType.toUpperCase(),
+  };
   const asyncfunction = async () => {
-    try{
+    try {
       const resLogin = await getAccessToken(reqAuth);
       //setToken(resLogin.accessToken);
       //setUser(resLogin.userInfo);
-      router.push('/mypage')
-    }catch{
-      router.push('/error?code=001')
+      router.push('/mypage');
+    } catch {
+      router.push('/error?code=001');
     }
-  }
+  };
   const res = asyncfunction();
-
 
   return (
     <div className="w-screen h-screen bg-yopink">

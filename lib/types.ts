@@ -60,14 +60,14 @@ export interface RegisterAddressRequest {
 }
 
 export interface SocialLogin {
-  email : string | null,
-  password : string | null,
-  authCode : string;
-  providerType : string;
+  email: string | null;
+  password: string | null;
+  authCode: string;
+  providerType: string;
 }
 
 export interface DynamicRoute {
-  params : {
+  params: {
     provider: string;
   };
 }

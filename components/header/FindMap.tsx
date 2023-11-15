@@ -31,7 +31,6 @@ const FindMap = () => {
     if (!coord) return;
     const { kakao } = window;
     kakao.maps?.load(() => {
-
       let options = {
         center: new kakao.maps.LatLng(coord.lat, coord.lng),
         level: 3,

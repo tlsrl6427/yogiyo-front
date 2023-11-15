@@ -3,7 +3,7 @@ import type { RegisterAddressRequest } from '@/lib/types';
 
 //임시 엑세스토큰
 const accessToken =
-'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0MzIxQGdtYWlsLmNvbSIsInByb3ZpZGVyVHlwZSI6IkRFRkFVTFQiLCJ1c2VyVHlwZSI6Ik1lbWJlciIsImV4cCI6MTcwMDAyNDM0MX0._0nHnKLXAVP_ZOs35_e_ecATKBBUSaneVBSzcIMedhs'
+  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0MzIxQGdtYWlsLmNvbSIsInByb3ZpZGVyVHlwZSI6IkRFRkFVTFQiLCJ1c2VyVHlwZSI6Ik1lbWJlciIsImV4cCI6MTcwMDAyNDM0MX0._0nHnKLXAVP_ZOs35_e_ecATKBBUSaneVBSzcIMedhs';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -52,13 +52,16 @@ export const addressApi = {
   // '요기' 위치 설정
   async change(memberAddressId: number) {
     try {
-      const response = await api.patch(`/address/here/${memberAddressId}`, {}, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
+      const response = await api.patch(
+        `/address/here/${memberAddressId}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        },
+      );
       return response.data;
     } catch (error) {
       console.error(error);
     }
   },
-
 };

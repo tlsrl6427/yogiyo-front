@@ -8,7 +8,7 @@ import {
   currentAddress,
   currentCoord,
   userAddress,
-  thisAddressId
+  thisAddressId,
 } from '@/recoil/state';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { MdArrowBackIosNew } from 'react-icons/md';
@@ -99,7 +99,7 @@ const DetailMap = () => {
         latitude: coord?.lat || 0,
       });
 
-      await fetchAddress(setMemberAddress, setThisAdd)
+      await fetchAddress(setMemberAddress, setThisAdd);
     }
     setCurCoord(coord);
     setCurAdd(address);

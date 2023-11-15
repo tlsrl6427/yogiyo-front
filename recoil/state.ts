@@ -1,7 +1,6 @@
 import { atom } from 'recoil';
 import type { Coordinate, User, RegisterAddressRequest } from '@/lib/types';
 
-
 //헤더모달 state
 export const headerModalState = atom({
   key: 'headerModalState',
@@ -48,7 +47,7 @@ export const thisAddressId = atom<RegisterAddressRequest>({
     longitude: 0,
     latitude: 0,
   },
-})
+});
 
 //상세정보 입력창 state
 export const isDetailMapState = atom({
@@ -81,5 +80,5 @@ export const tokenAtom = atom({
 //현재 유저 주소 정보
 export const userAddress = atom<RegisterAddressRequest[]>({
   key: 'userAddress',
-  default: []
+  default: [],
 });
