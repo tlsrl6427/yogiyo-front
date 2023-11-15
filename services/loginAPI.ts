@@ -15,18 +15,30 @@ export const getKakaoAuth = async (req: ReqAuth) => {
   window.location.href=`${baseURL}?response_type=${req.code}&client_id=${req.client_id}&redirect_uri=${req.redirect_uri}`
 }
 
+export const login = async (reqbody: SocialLogin) => {
+  try{
+    const resTokenApi = await getAccessToken(reqbody);
+    const {token, userId} = resTokenApi;
+    const resUserInfo = await getUserInfo(token);
+    console.log(resUserInfo)
+  }catch(error){
+    console.error(error);
+  }
+} 
 export const getAccessToken = async (reqbody: SocialLogin) => {
   const headers = {
     'Content-Type': 'application/json',
   };
+
   const resTokenAPI = await baseAxiosInstance.post('/memberLogin', reqbody, {headers});
-  const accessToken = resTokenAPI.headers.authorization;
-  console.log(resTokenAPI);
-  console.log(accessToken);
+  const token = resTokenAPI.headers.authorization;
   const userId = resTokenAPI.data.userId;
+  console.log(resTokenAPI);
+  console.log(token);
   console.log(userId);
-  const resUserInfo = await getUserInfo(accessToken);
-  console.log(resUserInfo);
+  return {token, userId}
+  //const resUserInfo = await getUserInfo(accessToken);
+  //console.log(resUserInfo);
   //let userInfo = {...resUserInfo.data, id: userId};
   //console.log(userInfo);
   //return {accessToken, userInfo};
@@ -34,8 +46,8 @@ export const getAccessToken = async (reqbody: SocialLogin) => {
 
 export const getUserInfo = async (token: string) => {
   const headers = {
-    //'Authorization' : token,
-    'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsInByb3ZpZGVyVHlwZSI6IkRFRkFVTFQiLCJleHAiOjE2OTQ5NjY4Mjh9.Ls1wnxU41I99ijXRyKfkYI2w3kd-Q_qA2QgCLgpDTKk'
+    'Authorization' : token,
+    //'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsInByb3ZpZGVyVHlwZSI6IkRFRkFVTFQiLCJleHAiOjE2OTQ5NjY4Mjh9.Ls1wnxU41I99ijXRyKfkYI2w3kd-Q_qA2QgCLgpDTKk'
   }
   const res = await baseAxiosInstance.get('/member/mypage', {headers});
   return res;
