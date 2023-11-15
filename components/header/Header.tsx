@@ -1,10 +1,9 @@
 'use client';
 import { IoIosArrowDown } from 'react-icons/io';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { headerModalState, currentCoord, currentAddress, userAddress, thisAddressId } from '@/recoil/state';
 import AddressModal from './AddressModal';
-import { useEffect } from 'react';
-import { addressApi } from '@/services/addressApi';
+import { useState, useEffect } from 'react';
 import { fetchAddress } from '@/lib/fetchAddress';
 
 declare global {
@@ -19,6 +18,9 @@ const Header = () => {
   const [curAdd, setCurAdd] = useRecoilState(currentAddress);
   const [thisAdd, setThisAdd] = useRecoilState(thisAddressId);
   const [memberAddress, setMemberAddress] = useRecoilState(userAddress);
+
+  //로그인 확인용
+  const [isLogin, setIsLogin] = useState(false)
 
   useEffect(() => {
     // 현재 유저의 위치 찾기

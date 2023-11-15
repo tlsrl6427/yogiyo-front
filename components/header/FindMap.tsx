@@ -5,7 +5,6 @@ import {
   currentCoord,
   currentAddress,
   isDetailMapState,
-  headerModalState,
   isFindMapState,
 } from '@/recoil/state';
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
@@ -18,7 +17,6 @@ import { locationDecoder } from '@/lib/locationDecoder';
 const FindMap = () => {
   const coord = useRecoilValue(currentCoord);
   const setSearchCo = useSetRecoilState(searchCoord);
-  const setHeaderModal = useSetRecoilState(headerModalState);
   const [address, setAddress] = useRecoilState(currentAddress);
   const setIsDetail = useSetRecoilState(isDetailMapState);
   const setIsFindMap = useSetRecoilState(isFindMapState);
