@@ -1,3 +1,4 @@
+'use client'
 import Head from 'next/head';
 import './globals.css';
 import Header from '@/components/header/Header';
@@ -6,8 +7,15 @@ import MyOrderedEateries from '@/components/home/MyOrderedEateries';
 import NewEateries from '@/components/home/NewEateries';
 import SearchBarLink from '@/components/home/SearchBarLink';
 import Footer from '@/components/common/Footer';
+import { userAtom } from '@/recoil/state';
+import { useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
 
 export default function Home() {
+  const user = useRecoilValue(userAtom);
+  useEffect(()=>{
+    console.log(user)
+  })
   return (
     <div>
       <Head>

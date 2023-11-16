@@ -24,7 +24,7 @@ export const login = async (reqbody: SocialLogin) => {
     return userInfo;
   }catch(error){
     console.error(error);
-    return error;
+    return false;
   }
 } 
 export const getAccessToken = async (reqbody: SocialLogin) => {
