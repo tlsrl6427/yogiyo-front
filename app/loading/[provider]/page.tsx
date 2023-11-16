@@ -16,7 +16,8 @@ const Loading = ({params}: DynamicRoute) => {
   const state = queryString.get('state');
   const providerType = params.provider;
 
-  const reqAuth = {
+  useEffect(()=>{
+    const reqAuth = {
     email: null,
     password: null,
     authCode: code as string,
@@ -26,6 +27,7 @@ const Loading = ({params}: DynamicRoute) => {
     try{
       const resLogin = await login(reqAuth);
       if(resLogin){
+        console.log('--setuser--')
         setUser(resLogin);
         router.push('/');
       }else{
@@ -36,7 +38,7 @@ const Loading = ({params}: DynamicRoute) => {
     }
   }
   const res = asyncfunction();
-
+},[]);
 
   return (
     <div className="w-screen h-screen bg-yopink">
