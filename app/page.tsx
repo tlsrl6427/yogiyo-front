@@ -15,7 +15,7 @@ export default function Home() {
   const user = useRecoilValue(userAtom);
   useEffect(()=>{
     console.log(user)
-  })
+  },[user])
   return (
     <div>
       <Head>
