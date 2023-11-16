@@ -16,11 +16,6 @@ const Loading = ({params}: DynamicRoute) => {
   const state = queryString.get('state');
   const providerType = params.provider;
 
-  /*
-  useEffect(() => {
-  },[])
-  */
-
   const reqAuth = {
     email: null,
     password: null,
@@ -30,10 +25,13 @@ const Loading = ({params}: DynamicRoute) => {
   const asyncfunction = async () => {
     try{
       const resLogin = await login(reqAuth);
-      //setToken(resLogin.accessToken);
-      //setUser(resLogin.userInfo);
-      router.push('/mypage')
-    }catch{
+      if(resLogin){
+        //setUser(resLogin);
+        console.log(resLogin);
+      }else{
+        throw new Error('200')
+      }
+    }catch(error){
       router.push('/error?code=001')
     }
   }
