@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { DynamicRoute } from '@/lib/types';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { getAccessToken, getUserInfo, login } from '@/services/loginAPI';
@@ -16,6 +16,10 @@ const Loading = ({params}: DynamicRoute) => {
   const state = queryString.get('state');
   const providerType = params.provider;
 
+  useEffect(()=>{
+    console.log(`${user.id}가 유저의 아이디야`)
+  },[user])
+
   const reqAuth = {
     email: null,
     password: null,
@@ -26,8 +30,8 @@ const Loading = ({params}: DynamicRoute) => {
     try{
       const resLogin = await login(reqAuth);
       if(resLogin){
-        //setUser(resLogin);
-        console.log(resLogin);
+        setUser(resLogin);
+        router.push('/');
       }else{
         throw new Error('200')
       }
