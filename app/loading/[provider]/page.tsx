@@ -16,10 +16,6 @@ const Loading = ({params}: DynamicRoute) => {
   const state = queryString.get('state');
   const providerType = params.provider;
 
-  useEffect(()=>{
-    console.log(`${user.id}가 유저의 아이디야`)
-  },[user])
-
   const reqAuth = {
     email: null,
     password: null,
