@@ -19,8 +19,10 @@ export const login = async (reqbody: SocialLogin) => {
   try{
     const resTokenApi = await getAccessToken(reqbody);
     const {token, userId} = resTokenApi;
+    console.log(resTokenApi);
     const resUserInfo = await getUserInfo(token);
     const userInfo = {...resUserInfo, userId : userId}
+    console.log(userInfo);
     return userInfo;
   }catch(error){
     console.error(error);
