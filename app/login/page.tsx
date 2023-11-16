@@ -20,8 +20,6 @@ const Login = () => {
 
     const provider = e.currentTarget.id;
 
-    console.log(provider);
-
     const reqAuth = {
       naver : {
         code: 'code',
@@ -38,6 +36,7 @@ const Login = () => {
 
     if(provider === 'naver'){
       getNaverAuth(reqAuth.naver);
+      console.log('--getnaverauth--')
     }else if(provider === 'kakao'){
       getKakaoAuth(reqAuth.kakao)
     }
