@@ -3,6 +3,8 @@ import { ReqAuth, SocialLogin } from '@/lib/types';
 import { tokenAtom, userInfoAtom } from '@/recoil/state';
 import { SetRecoilState, useRecoilState } from 'recoil';
 
+const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+
 export const baseAxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
@@ -18,7 +20,7 @@ export const getKakaoAuth = async (req: ReqAuth) => {
 }
 
 export const login = async (reqbody: SocialLogin) => {
-  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+
   try{
     console.log("login api go");
     const resTokenApi = await getAccessToken(reqbody);

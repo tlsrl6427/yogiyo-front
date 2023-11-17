@@ -25,6 +25,7 @@ const Loading = ({params}: DynamicRoute) => {
   const asyncfunction = async () => {
     try{
       const resLogin = await login(reqAuth);
+      console.log("?")
       if(resLogin){
         console.log("!!userInfo from recoil")
         console.log(userInfo)
