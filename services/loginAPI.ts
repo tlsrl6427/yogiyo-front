@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { ReqAuth, SocialLogin } from '@/lib/types';
+import { tokenAtom, userInfoAtom } from '@/recoil/state';
+import { SetRecoilState, useRecoilState } from 'recoil';
 
 export const baseAxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -16,14 +18,13 @@ export const getKakaoAuth = async (req: ReqAuth) => {
 }
 
 export const login = async (reqbody: SocialLogin) => {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   try{
     const resTokenApi = await getAccessToken(reqbody);
     const {token, userId} = resTokenApi;
-    console.log(resTokenApi);
     const resUserInfo = await getUserInfo(token);
-    const userInfo = {...resUserInfo, userId : userId}
-    console.log(userInfo);
-    return userInfo;
+    setUserInfo({...resUserInfo, id : userId, accessToken: token})
+    return true;
   }catch(error){
     console.error(error);
     return false;
