@@ -7,16 +7,16 @@ import MyOrderedEateries from '@/components/home/MyOrderedEateries';
 import NewEateries from '@/components/home/NewEateries';
 import SearchBarLink from '@/components/home/SearchBarLink';
 import Footer from '@/components/common/Footer';
-import { userAtom } from '@/recoil/state';
+import { userInfoAtom } from '@/recoil/state';
 import { useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
 
 export default function Home() {
-  const user = useRecoilValue(userAtom);
+  const userInfo = useRecoilValue(userInfoAtom);
   useEffect(()=>{
     console.log("--home--")
-    console.log(user)
-  },[user])
+    console.log(userInfo)
+  },[userInfo])
 
   return (
     <div>
