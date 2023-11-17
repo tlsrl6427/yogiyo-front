@@ -20,9 +20,12 @@ export const getKakaoAuth = async (req: ReqAuth) => {
 export const login = async (reqbody: SocialLogin) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   try{
+    console.log("login api go");
     const resTokenApi = await getAccessToken(reqbody);
     const {token, userId} = resTokenApi;
+    console.log(token, userId);
     const resUserInfo = await getUserInfo(token);
+    console.log(resUserInfo);
     setUserInfo({...resUserInfo, id : userId, accessToken: token})
     return true;
   }catch(error){
