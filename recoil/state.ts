@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import type { Coordinate, User } from '@/lib/types';
+import type { Coordinate, UserInfo } from '@/lib/types';
 
 //헤더모달 state
 export const headerModalState = atom({
@@ -44,12 +44,13 @@ export const isFindMapState = atom({
 });
 
 //로그인한 유저 정보
-export const userAtom = atom<User>({
+export const userInfoAtom = atom<UserInfo>({
   key: 'user',
   default: {
     id: 'unknown',
     nickname: 'unknown',
     email: 'unknown',
+    accessToken: 'unknown',
   },
 });
 

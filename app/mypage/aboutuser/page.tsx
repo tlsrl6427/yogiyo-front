@@ -3,10 +3,10 @@ import React from 'react';
 import Link from 'next/link';
 
 import { useRecoilState } from 'recoil';
-import { userAtom } from '@/recoil/state';
+import { userInfoAtom } from '@/recoil/state';
 
 const AboutUser = () => {
-  const [user, setUser] = useRecoilState(userAtom);
+  const [user, setUser] = useRecoilState(userInfoAtom);
 
   const kakaoIcon = {
     backgroundImage: `url(/img/kakaoLogoEdge.svg)`,

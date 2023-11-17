@@ -3,12 +3,11 @@ import { use, useEffect, useState } from 'react';
 import { DynamicRoute } from '@/lib/types';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { getAccessToken, getUserInfo, login } from '@/services/loginAPI';
-import { useRecoilState } from 'recoil';
-import { tokenAtom, userAtom } from '@/recoil/state';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userInfoAtom } from '@/recoil/state';
 
 const Loading = ({params}: DynamicRoute) => {
-  const [token, setToken] = useRecoilState(tokenAtom);
-  const [user, setUser] = useRecoilState(userAtom);
+  const userInfo = useRecoilValue(userInfoAtom);
   const router = useRouter();
 
   const queryString = useSearchParams();
@@ -27,14 +26,14 @@ const Loading = ({params}: DynamicRoute) => {
     try{
       const resLogin = await login(reqAuth);
       if(resLogin){
-        console.log('--setuser--')
-        setUser(resLogin);
+        console.log("!!userInfo from recoil")
+        console.log(userInfo)
         router.push('/');
       }else{
-        throw new Error('200')
+        throw new Error('200');
       }
     }catch(error){
-      router.push('/error?code=001')
+      router.push('/error?code=001');
     }
   }
   const res = asyncfunction();
