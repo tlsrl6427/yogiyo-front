@@ -7,7 +7,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
 
 const Loading = ({params}: DynamicRoute) => {
-  const userInfo = useRecoilValue(userInfoAtom);
+  const [userInfo,setUserInfo] = useRecoilState(userInfoAtom);
   const router = useRouter();
 
   const queryString = useSearchParams();
@@ -25,10 +25,10 @@ const Loading = ({params}: DynamicRoute) => {
   const asyncfunction = async () => {
     try{
       const resLogin = await login(reqAuth);
-      console.log("?")
       if(resLogin){
-        console.log("!!userInfo from recoil")
+        console.log("!!userInfo from login api")
         console.log(userInfo)
+        setUserInfo(resLogin);
         router.push('/');
       }else{
         throw new Error('200');
