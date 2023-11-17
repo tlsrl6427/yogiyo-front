@@ -50,7 +50,7 @@ export const userInfoAtom = atom<UserInfo>({
     id: 'unknown',
     nickname: 'unknown',
     email: 'unknown',
-    accessToken: 'unknown',
+    accessToken: null,
   },
 });
 
