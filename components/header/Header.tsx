@@ -80,7 +80,6 @@ const Header = () => {
       kakaoMapScript.removeEventListener('load', onLoadKakaoAPI);
     };
   }, [curCoord]);
-  console.log(memberAddress.length);
 
   return (
     <header className="fixed gap-2 top-0 left-0 w-full h-[50px] flex justify-center items-center bg-white z-50">
