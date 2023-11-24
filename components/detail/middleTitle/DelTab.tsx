@@ -1,5 +1,9 @@
 const Deltab = () => {
-  return <></>;
-};
+  return (
+    <>
+      
+    </>
+  )
+}
 
-export default Deltab;
+export default Deltab
