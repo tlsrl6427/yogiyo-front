@@ -9,9 +9,15 @@ import { BsChevronUp } from 'react-icons/bs';
 import { MenuOption } from '@/lib/types';
 
 interface Props{
-  tabIndex: string
+  tabIndex?: string
 }
 
+/**
+ * 이미 작성한 리뷰/ 작성가능한 리뷰 리스트를 받아 표출
+ * @memberof review
+ * @prop {?tabIndex} // 'left' | 'right' 로 현재 선택된 탭을 알려줌
+ * @todo 리스트를 받아오는 부분 미구현, 이 형태가 다른곳에서도 쓰인다면 좀 수정해야 할듯
+ */
 const CardOrder = ({tabIndex} : Props) => {
 
   useEffect(()=>{
