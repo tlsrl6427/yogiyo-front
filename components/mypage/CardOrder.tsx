@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BiChevronRight } from 'react-icons/bi';
 import { TbTruckDelivery, TbChevronDownLeft } from 'react-icons/tb';
@@ -7,9 +7,17 @@ import { AiFillStar } from 'react-icons/ai';
 import { BsChevronDown } from 'react-icons/bs';
 import { BsChevronUp } from 'react-icons/bs';
 import { MenuOption } from '@/lib/types';
-import { Tab } from '@/lib/types';
 
-const CardOrder = (tab: Tab) => {
+interface Props{
+  tabIndex: string
+}
+
+const CardOrder = ({tabIndex} : Props) => {
+
+  useEffect(()=>{
+    console.log(`tabIndex: ${tabIndex}`)
+  },[tabIndex])
+
   return (
     <div className="p-4 mb-2 bg-white">
       <div className="flex">
@@ -32,7 +40,7 @@ const CardOrder = (tab: Tab) => {
         </div>
       </div>
       <div className="w-full h-[2px] bg-yogrey mt-4 mb-4"></div>
-      {tab.name === 'writeable' ? <Writeable /> : <Written />}
+      {tabIndex === 'left' ? <Writeable /> : <Written />}
     </div>
   );
 };

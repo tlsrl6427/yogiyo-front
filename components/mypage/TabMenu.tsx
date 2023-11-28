@@ -1,23 +1,27 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import '/lib/animations.css';
+import { Tab } from '@/lib/types';
 
-const TabMenu = () => {
-  const [initialLoad, setInitialLoad] = useState(true);
-  const [selectedTab, setSelectedTab] = useState('deliveryAndTogo');
+
+const TabMenu = (props: Tab) => {
+  //const [initialLoad, setInitialLoad] = useState(true);
+  //const [selectedTab, setSelectedTab] = useState(tabs[0].id);
 
   useEffect(() => {
-    console.log(selectedTab);
-  }, [selectedTab]);
+    //console.log();
+    console.log(`selectedTab: ${props.selectedTab}`);
+    console.log(`isInitialLoad: ${props.isInitialLoad}`)
+  }, [props]);
 
   const handleTabChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (initialLoad) setInitialLoad(false);
-    setSelectedTab(e.target.value);
+    const selectedTab = e.target.value;
+    props.handleGetSelected(selectedTab);
   };
 
-  const tabAnimation = initialLoad
+  const tabAnimation = props.isInitialLoad
     ? 'ml-0'
-    : selectedTab === 'deliveryAndTogo'
+    : props.selectedTab === 'left'
     ? 'underline-animation-to-left'
     : 'underline-animation-to-right';
 
@@ -27,32 +31,32 @@ const TabMenu = () => {
         <div className="w-[50%]">
           <input
             type="radio"
-            id="deliveryAndTogo"
-            value="deliveryAndTogo"
+            id={props.tabData.left.id}
+            value="left"
             style={{ display: 'none' }}
-            checked={selectedTab === 'deliveryAndTogo'}
+            checked={props.selectedTab === "left"}
             onChange={handleTabChange}
           />
-          <label htmlFor="deliveryAndTogo">
+          <label htmlFor={props.tabData.left.id}>
             <p
-              className={`text-center p-3 ${selectedTab === 'deliveryAndTogo' ? 'font-bold' : ''}`}
+              className={`text-center p-3 ${props.selectedTab === "left" ? 'font-bold' : ''}`}
             >
-              배달/포장
+              {props.tabData.left.name}
             </p>
           </label>
         </div>
         <div className="w-[50%]">
           <input
             type="radio"
-            id="yomart"
-            value="yomart"
+            id={props.tabData.right.id}
+            value="right"
             style={{ display: 'none' }}
-            checked={selectedTab === 'yomart'}
+            checked={props.selectedTab === "right"}
             onChange={handleTabChange}
           />
           <label htmlFor="yomart">
-            <p className={`text-center p-3 ${selectedTab === 'yomart' ? 'font-bold' : ''}`}>
-              요마트
+            <p className={`text-center p-3 ${props.selectedTab === "right" ? 'font-bold' : ''}`}>
+              {props.tabData.right.name}
             </p>
           </label>
         </div>

@@ -22,10 +22,18 @@ export interface MenuOption {
   content: string;
 }
 
-export interface Tab {
-  initialLoad?: boolean;
-  name: string;
-  handle?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+export interface Tab{
+  tabData: {
+    left: Tabdata,
+    right: Tabdata
+  }
+  isInitialLoad?: boolean;
+  selectedTab: string;
+  handleGetSelected: (selectedTab: string) => void;
+}
+export interface Tabdata {
+  id: string,
+  name?: string
 }
 
 export interface InputBox {
