@@ -7,6 +7,7 @@ import { Tab } from '@/lib/types';
 const TabMenu = (props: Tab) => {
   //const [initialLoad, setInitialLoad] = useState(true);
   //const [selectedTab, setSelectedTab] = useState(tabs[0].id);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
     //console.log();
@@ -17,6 +18,7 @@ const TabMenu = (props: Tab) => {
   const handleTabChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedTab = e.target.value;
     props.handleGetSelected(selectedTab);
+    setIsInitialLoad(false)
   };
 
   const tabAnimation = props.isInitialLoad

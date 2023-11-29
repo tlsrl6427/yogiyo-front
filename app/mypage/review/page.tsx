@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import TabMenu from '@/components/mypage/TabMenu';
+import TabMenu from '@/components/common/TabMenu';
 import ToggleMenu from '@/components/mypage/ToggleMenu';
 import { BsPencil } from 'react-icons/bs';
 import CardOrder from '@/components/mypage/CardOrder';
@@ -17,31 +17,31 @@ const tabData2 = {
 const Review = () => {
   const [tab1, setTab1] = useState('left');
   const [tab2, setTab2] = useState('left');
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  
 
   const handleGetTab2 = (selectedTab : string) => {
     setTab2(selectedTab);
+    //if(isInitialLoad) setIsInitialLoad(false)
+    console.log("tab2 change")
   };
 
   const handleGetTab1 = (selectedTab: string) => {
     setTab1(selectedTab);
+    //if(isInitialLoad) setIsInitialLoad(false)
+    console.log("tab1 change")
   }
-
-  useEffect(()=>{
-    setIsInitialLoad(false);
-  },[])
   
   return (
     <div className="bg-yogrey">
       <TabMenu 
-        isInitialLoad={isInitialLoad}
+        //isInitialLoad={isInitialLoad}
         tabData={tabData1}
         selectedTab={tab1}
         handleGetSelected={handleGetTab1}
         ></TabMenu>
       <div className="p-4 bg-white">
         <ToggleMenu
-          isInitialLoad={isInitialLoad}
+          //isInitialLoad={isInitialLoad}
           tabData={tabData2}
           selectedTab={tab2}
           handleGetSelected={handleGetTab2}

@@ -5,12 +5,13 @@ import '/lib/animations.css';
 import { Tab } from '@/lib/types';
 
 const ToggleMenu = (props: Tab) => {
-  //const [selectedTabId, setSelectedTabId] = useState(tab.id);
-  //const [selectedTabName, setSelectedTabName] = useState(tab.name);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   const handleTabChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedTab = e.target.value;
     props.handleGetSelected(selectedTab);
+    setIsInitialLoad(false);
+
   };
 
   //상태 잘 변하는지 테스트용

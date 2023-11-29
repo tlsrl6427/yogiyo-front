@@ -9,6 +9,7 @@ import { BsChevronUp } from 'react-icons/bs';
 import { MenuOption } from '@/lib/types';
 
 interface Props{
+  type: number,
   tabIndex?: string
 }
 
@@ -18,7 +19,7 @@ interface Props{
  * @prop {?tabIndex} // 'left' | 'right' 로 현재 선택된 탭을 알려줌
  * @todo 리스트를 받아오는 부분 미구현, 이 형태가 다른곳에서도 쓰인다면 좀 수정해야 할듯
  */
-const CardOrder = ({tabIndex} : Props) => {
+const CardOrder = ({type, tabIndex} : Props) => {
 
   useEffect(()=>{
     console.log(`tabIndex: ${tabIndex}`)
