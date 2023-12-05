@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import TabMenu from '@/components/common/TabMenu';
 import ToggleMenu from '@/components/mypage/ToggleMenu';
 import { BsPencil } from 'react-icons/bs';
-import CardOrder from '@/components/mypage/CardOrder';
+import CardOrder from '@/components/common/CardOrder';
 
 const tabData1 = {
   left: {id: 'deliveryAndTogo', name: '배달/포장'},
@@ -55,7 +55,11 @@ const Review = () => {
           포토리뷰 작성시 <span className="text-yopink">100 포인트</span>를 드려요.
         </p>
       </div>
-      <CardOrder tabIndex={tab2}></CardOrder>
+      {
+        tab2 === 'left' ?
+        <CardOrder type={0} /> :
+        <CardOrder type={1} />
+      }
     </div>
   );
 };
