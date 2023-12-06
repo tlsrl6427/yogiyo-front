@@ -71,3 +71,14 @@ export interface ReqAuth {
   redirect_uri: string;
   state?: string;
 }
+
+export interface OrderInfo {
+  name: string;
+  min_delivery: number;
+  max_delivery: number;
+  menu_name?: string;
+  order_type?: number;
+  order_time?: string;
+  order_state?: number;
+  review?: boolean;
+}
