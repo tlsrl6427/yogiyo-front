@@ -22,10 +22,18 @@ export interface MenuOption {
   content: string;
 }
 
-export interface Tab {
-  initialLoad?: boolean;
-  name: string;
-  handle?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+export interface Tab{
+  tabData: {
+    left: Tabdata,
+    right: Tabdata
+  }
+  isInitialLoad?: boolean;
+  selectedTab: string;
+  handleGetSelected: (selectedTab: string) => void;
+}
+export interface Tabdata {
+  id: string,
+  name?: string
 }
 
 export interface InputBox {
@@ -62,4 +70,15 @@ export interface ReqAuth {
   client_id: string;
   redirect_uri: string;
   state?: string;
+}
+
+export interface OrderInfo {
+  name: string;
+  min_delivery: number;
+  max_delivery: number;
+  menu_name?: string;
+  order_type?: number;
+  order_time?: string;
+  order_state?: number;
+  review?: boolean;
 }
