@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { headerModalState, isDetailMapState, isFindMapState } from '@/recoil/state';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { headerModalState, isDetailMapState, isFindMapState, userAddress } from '@/recoil/state';
 import { FiSearch } from 'react-icons/fi';
 import { AiOutlineAim } from 'react-icons/ai';
 import { MdArrowBackIosNew } from 'react-icons/md';
@@ -8,6 +8,7 @@ import SearchAddressList from './SearchAddressList';
 import axios from 'axios';
 import DetailMap from './DetailMap';
 import FindMap from './FindMap';
+import UserAddressBtn from './addressModal/UserAddressBtn';
 
 export const arrowStyle = {
   position: 'absolute',
@@ -21,8 +22,9 @@ export const arrowStyle = {
 
 const AddressModal = () => {
   const [_, setIsModal] = useRecoilState(headerModalState);
-  const [isDetailMap, setIsDetailMap] = useRecoilState(isDetailMapState);
+  const isDetailMap = useRecoilValue(isDetailMapState);
   const [isFindMap, setIsFindMap] = useRecoilState(isFindMapState);
+  const memberAddress = useRecoilValue(userAddress);
   const [height, setHeight] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -119,7 +121,14 @@ const AddressModal = () => {
                   <div className="w-full h-[10px] bg-slate-200"></div>
                 </>
               )}
-
+              {!isFocused &&
+                !query &&
+                (memberAddress.length > 0
+                  ? memberAddress.map((addressTarget, i) => (
+                      <UserAddressBtn key={i} addressTarget={addressTarget} />
+                    ))
+                  : // 나중에 집 추가 회사추가 등등 버튼 만들어야 함
+                    null)}
               {isFocused || query ? <SearchAddressList query={query} results={results} /> : null}
             </div>
           </>

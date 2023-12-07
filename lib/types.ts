@@ -52,15 +52,31 @@ export interface UserInfo {
   authAt?: string;
 }
 
+export interface Address {
+  zipcode: string;
+  street: string;
+  detail: string;
+}
+
+export interface RegisterAddressRequest {
+  id?: number;
+  here?: boolean;
+  address: Address;
+  nickname: string;
+  addressType: string;
+  longitude: number;
+  latitude: number;
+}
+
 export interface SocialLogin {
-  email : string | null,
-  password : string | null,
-  authCode : string;
-  providerType : string;
+  email: string | null;
+  password: string | null;
+  authCode: string;
+  providerType: string;
 }
 
 export interface DynamicRoute {
-  params : {
+  params: {
     provider: string;
   };
 }
@@ -81,4 +97,46 @@ export interface OrderInfo {
   order_time?: string;
   order_state?: number;
   review?: boolean;
+}
+
+export interface Address {
+  zipcode: string;
+  street: string;
+  detail: string;
+}
+
+export interface RegisterAddressRequest {
+  address: Address;
+  nickname: string;
+  addressType: string;
+  longitude: number;
+  latitude: number;
+}
+
+export interface ShopList {
+  category?: string;
+  sortOption?: string;
+  deliveryPrice?: number;
+  leastOrderPrice?: number;
+  longitude?: number;
+  latitude?: number;
+  offset?: number;
+  limit?: number;
+}
+
+export interface Shop {
+  shopId: number;
+  shopName: string;
+  totalScore: number;
+  distance: number;
+  deliveryTime: number;
+  minDeliveryPrice: number;
+  maxDeliveryPrice: number;
+  icon: string;
+}
+
+export interface ShopListResponse {
+  content: Shop[];
+  nextOffset: number;
+  hasNext: boolean;
 }

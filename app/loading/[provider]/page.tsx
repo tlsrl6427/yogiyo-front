@@ -20,8 +20,8 @@ const Loading = ({params}: DynamicRoute) => {
     email: null,
     password: null,
     authCode: code as string,
-    providerType: providerType.toUpperCase()
-  }
+    providerType: providerType.toUpperCase(),
+  };
   const asyncfunction = async () => {
     try{
       const resLogin = await login(reqAuth);
@@ -37,7 +37,7 @@ const Loading = ({params}: DynamicRoute) => {
     }catch(error){
       router.push('/error?code=001');
     }
-  }
+  };
   const res = asyncfunction();
 },[]);
 

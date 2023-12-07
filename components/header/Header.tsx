@@ -1,10 +1,16 @@
 'use client';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useRecoilState } from 'recoil';
-import { headerModalState, currentCoord } from '@/recoil/state';
+import {
+  headerModalState,
+  currentCoord,
+  currentAddress,
+  userAddress,
+  thisAddressId,
+} from '@/recoil/state';
 import AddressModal from './AddressModal';
-import { useEffect } from 'react';
-import { currentAddress } from '@/recoil/state';
+import { useState, useEffect } from 'react';
+import { fetchAddress } from '@/lib/fetchAddress';
 
 declare global {
   interface Window {
@@ -16,6 +22,11 @@ const Header = () => {
   const [isModal, setIsModal] = useRecoilState(headerModalState);
   const [curCoord, setCurCoord] = useRecoilState(currentCoord);
   const [curAdd, setCurAdd] = useRecoilState(currentAddress);
+  const [thisAdd, setThisAdd] = useRecoilState(thisAddressId);
+  const [memberAddress, setMemberAddress] = useRecoilState(userAddress);
+
+  //로그인 확인용
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     // 현재 유저의 위치 찾기
@@ -32,6 +43,8 @@ const Header = () => {
         },
       );
     }
+
+    fetchAddress(setMemberAddress, setThisAdd);
   }, []);
 
   useEffect(() => {
@@ -74,7 +87,8 @@ const Header = () => {
         onClick={() => setIsModal(true)}
         className={`text-center flex gap-2 items-center font-[800] text-[1.3rem] __className_e22756`}
       >
-        {curAdd} <IoIosArrowDown style={{ marginTop: '3px', fontSize: '1.2rem' }} />
+        {memberAddress.length > 0 ? thisAdd.nickname : curAdd}{' '}
+        <IoIosArrowDown style={{ marginTop: '3px', fontSize: '1.2rem' }} />
       </p>
       {isModal ? <AddressModal /> : null}
     </header>
