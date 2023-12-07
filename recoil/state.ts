@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import type { Coordinate, UserInfo } from '@/lib/types';
+import type { Coordinate, UserInfo, RegisterAddressRequest } from '@/lib/types';
 
 //헤더모달 state
 export const headerModalState = atom({
@@ -13,7 +13,7 @@ export const currentCoord = atom<Coordinate | null>({
   default: null,
 });
 
-//현재주소
+//현재위치 주소
 export const currentAddress = atom<string | any>({
   key: 'currentAddress',
   default: '',
@@ -29,6 +29,24 @@ export const searchCoord = atom<Coordinate | null>({
 export const searchAddress = atom({
   key: 'searchAddress',
   default: '',
+});
+
+//현재 세팅된 주소 정보
+export const thisAddressId = atom<RegisterAddressRequest>({
+  key: 'thisAddressId',
+  default: {
+    id: 0,
+    address: {
+      zipcode: '',
+      street: '',
+      detail: '',
+    },
+    here: false,
+    addressType: '',
+    nickname: '',
+    longitude: 0,
+    latitude: 0,
+  },
 });
 
 //상세정보 입력창 state
@@ -58,4 +76,22 @@ export const userInfoAtom = atom<UserInfo>({
 export const tokenAtom = atom({
   key: 'token',
   default: null,
+});
+
+//현재 유저 주소 정보
+export const userAddress = atom<RegisterAddressRequest[]>({
+  key: 'userAddress',
+  default: [],
+});
+
+//상점 조회 옵션
+export const shopListOption = atom({
+  key: 'shopListOption',
+  default: {
+    sortState: '주문 많은순',
+    delFilter: '배달요금',
+    orderAmount: '최소주문금액'
+  }
 })
+
+// 상점 리스트 조회 반환값

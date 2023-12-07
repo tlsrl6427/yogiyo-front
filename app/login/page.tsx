@@ -17,31 +17,29 @@ const Login = () => {
   };
 
   const handleAuth = (e: React.MouseEvent<HTMLDivElement>) => {
-
     const provider = e.currentTarget.id;
 
     const reqAuth = {
-      naver : {
+      naver: {
         code: 'code',
-        client_id : '0o_XScx3lU6SBOFvKmsc',
-        redirect_uri : process.env.NEXT_PUBLIC_NAVER_LOGIN_REDIRECT_URI as string,
-        state: 'abc'
+        client_id: '0o_XScx3lU6SBOFvKmsc',
+        redirect_uri: process.env.NEXT_PUBLIC_NAVER_LOGIN_REDIRECT_URI as string,
+        state: 'abc',
       },
-      kakao : {
-        code : 'code',
-        client_id : '3ee478d16825909aed28e31c171446ba',
-        redirect_uri : process.env.NEXT_PUBLIC_KAKAO_LOGIN_REDIRECT_URI as string,
-      }
-    }
+      kakao: {
+        code: 'code',
+        client_id: '3ee478d16825909aed28e31c171446ba',
+        redirect_uri: process.env.NEXT_PUBLIC_KAKAO_LOGIN_REDIRECT_URI as string,
+      },
+    };
 
-    if(provider === 'naver'){
+    if (provider === 'naver') {
       getNaverAuth(reqAuth.naver);
       console.log('--getnaverauth--')
     }else if(provider === 'kakao'){
       getKakaoAuth(reqAuth.kakao)
     }
-
-  }
+  };
 
   return view === 0 ? (
     <div className="w-full h-screen p-2 flex flex-col">

@@ -1,14 +1,13 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { currentAddress, currentCoord } from '@/recoil/state';
-import { useRecoilState } from 'recoil';
+import { useEffect } from 'react';
+import { currentCoord } from '@/recoil/state';
+import { useRecoilValue } from 'recoil';
 
 const KakaoMap = () => {
-  const [curCoord, setCurCoord] = useRecoilState(currentCoord);
-  const [curAdd, setCurAdd] = useRecoilState(currentAddress);
+  const curCoord = useRecoilValue(currentCoord);
 
   useEffect(() => {
-    if (!curCoord) return; // If center is not set, return early
+    if (!curCoord) return;
 
     const { kakao } = window;
     kakao.maps?.load(() => {
