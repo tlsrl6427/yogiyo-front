@@ -68,7 +68,7 @@ export const userInfoAtom = atom<UserInfo>({
     id: 'unknown',
     nickname: 'unknown',
     email: 'unknown',
-    accessToken: null,
+    accessToken: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0MzIxQGdtYWlsLmNvbSIsInByb3ZpZGVyVHlwZSI6IkRFRkFVTFQiLCJ1c2VyVHlwZSI6Ik1lbWJlciIsImV4cCI6MTcwMjI4MzU5OX0.NEduY2LBUd_zy3MBuna624rrqfKi5FLbIcuWb7I7RrE',
   },
 });
 

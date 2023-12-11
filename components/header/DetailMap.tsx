@@ -9,6 +9,7 @@ import {
   currentCoord,
   userAddress,
   thisAddressId,
+  userInfoAtom
 } from '@/recoil/state';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { MdArrowBackIosNew } from 'react-icons/md';
@@ -61,6 +62,9 @@ const DetailMap = () => {
   //주소 별명
   const [isAddressName, setIsAddressName] = useState('');
 
+  //로그인 유저
+  const userInfo = useRecoilValue(userInfoAtom)
+
   useEffect(() => {
     if (!coord) return;
     const { kakao } = window;
@@ -97,9 +101,9 @@ const DetailMap = () => {
           isAddressName !== 'HOME' && isAddressName !== 'COMPANY' ? 'ELSE' : isAddressName,
         longitude: coord?.lng || 0,
         latitude: coord?.lat || 0,
-      });
+      }, userInfo.accessToken);
 
-      await fetchAddress(setMemberAddress, setThisAdd);
+      await fetchAddress(setMemberAddress, setThisAdd, userInfo);
     }
     setCurCoord(coord);
     setCurAdd(address);
