@@ -140,3 +140,38 @@ export interface ShopListResponse {
   nextOffset: number;
   hasNext: boolean;
 }
+
+export interface OrderDetail{
+  orderId : number;
+  status : string; //ex 'DONE'
+  orderType : string; //ex 'DELIVERY'
+  shopName : string; //ex 'BHC 행당점'
+  shopId : number;
+  orderNumber : string; //ex '10OCT0_2312'
+  orderTime : string; //ex '2023-12-04T12:07:28.30948'
+  orderItems : [ {
+    createdAt : string | null;
+    updatedAt : string | null;
+    id : number;
+    price : number;
+    quantity : number;
+    menuName : string; //ex '후라이드치킨'
+    orderItemOptions : [ {
+      id : number | null;
+      optionName : string; //ex '양념추가'
+      price : number;
+    } ]
+  } ],
+  totalPrice : number;
+  deliveryPrice : number;
+  paymentPrice : number;
+  paymentType : string; //ex 'CARD',
+  address : {
+    zipcode : number //ex 14582 
+    street : string //ex '다산로 4길 57'
+    detail : string //ex '장미아파트 8동'
+  },
+  requestMsg : string; //ex '요청사항 없음'
+  requestDoor : boolean;
+  requestSpoon : boolean;
+}
