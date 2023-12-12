@@ -9,7 +9,7 @@ export const fetchAddress = async (setMemberAddress: any, setThisAdd: any, userI
       return;
     }
 
-    const data = await addressApi.view(userInfo.accessToken);
+    const data = await addressApi.view();
     if (data) {
       setMemberAddress(data.memberAddresses);
       const yogiAddress = data.memberAddresses.find((value: any) => value.here);

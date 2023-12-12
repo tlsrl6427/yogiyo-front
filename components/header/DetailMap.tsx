@@ -101,7 +101,7 @@ const DetailMap = () => {
           isAddressName !== 'HOME' && isAddressName !== 'COMPANY' ? 'ELSE' : isAddressName,
         longitude: coord?.lng || 0,
         latitude: coord?.lat || 0,
-      }, userInfo.accessToken);
+      });
 
       await fetchAddress(setMemberAddress, setThisAdd, userInfo);
     }

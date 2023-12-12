@@ -10,6 +10,7 @@ import Footer from '@/components/common/Footer';
 import { userInfoAtom } from '@/recoil/state';
 import { useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
+import { setAuthToken } from '@/services/apiConfig';
 
 export default function Home() {
   const userInfo = useRecoilValue(userInfoAtom);
@@ -17,6 +18,16 @@ export default function Home() {
     console.log("--home--")
     console.log(userInfo)
   },[userInfo])
+
+  useEffect(() => {
+    //세션스토리지 토큰 확인 후 설정
+    const token = sessionStorage.getItem('access_token');
+    console.log(token)
+    if (token) {
+      setAuthToken(token);
+      console.log('액세스토큰 설정')
+    }
+  }, [])
 
   return (
     <div>
