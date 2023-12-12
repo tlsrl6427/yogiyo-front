@@ -39,7 +39,7 @@ const UserAddressBtn = ({ addressTarget }: any) => {
       <div
         className="flex flex-1 gap-2 cursor-pointer"
         onClick={async () => {
-          await addressApi.change(addressTarget.id, userInfo.accessToken);
+          await addressApi.change(addressTarget.id);
           await fetchAddress(setMemberAddress, setThisAdd, userInfo);
           setHeaderModal(false);
         }}
@@ -63,7 +63,7 @@ const UserAddressBtn = ({ addressTarget }: any) => {
           onClick={async () => {
             const isConfirm = confirm(`${addressTarget.nickname} 주소를 삭제하시겠어요?`);
             if (isConfirm) {
-              await addressApi.delete(addressTarget.id, userInfo.accessToken);
+              await addressApi.delete(addressTarget.id);
               await fetchAddress(setMemberAddress, setThisAdd, userInfo);
             }
           }}

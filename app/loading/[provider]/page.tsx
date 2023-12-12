@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { getAccessToken, getUserInfo, login } from '@/services/loginAPI';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
+import { setAuthToken } from '@/services/apiConfig';
 
 const Loading = ({params}: DynamicRoute) => {
   const [userInfo,setUserInfo] = useRecoilState(userInfoAtom);
@@ -30,6 +31,7 @@ const Loading = ({params}: DynamicRoute) => {
         console.log(userInfo)
         setUserInfo(resLogin);
         sessionStorage.setItem('access_token', resLogin.accessToken)
+        setAuthToken(resLogin.accessToken)
         router.push('/');
       }else{
         throw new Error('200');
