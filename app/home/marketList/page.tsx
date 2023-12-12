@@ -8,7 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { shopListOption, thisAddressId } from '@/recoil/state';
 import { optionConvert } from '@/lib/optionConvert';
 import { useState, useEffect, useRef } from 'react';
-import type { ShopListResponse, Shop } from '@/lib/types';
+import type { Shop } from '@/lib/types';
 
 const MarketList = () => {
   const searchParams = useSearchParams();
@@ -33,6 +33,7 @@ const MarketList = () => {
 
       // 각 키에 대해 유효성 검사 후 값 추가
       if (menu) requestInfo.category = menu;
+      if (menu === '전체') requestInfo.category = '';
       if (shopListOptionState.sortState !== '정렬') requestInfo.sortOption = optionConvert(shopListOptionState.sortState) as string;
       if (shopListOptionState.delFilter !== '배달요금') requestInfo.deliveryPrice = optionConvert(shopListOptionState.delFilter) as number;
       if (shopListOptionState.orderAmount !== '최소주문금액') requestInfo.leastOrderPrice = optionConvert(shopListOptionState.orderAmount) as number;
@@ -53,6 +54,7 @@ const MarketList = () => {
       if(response.hasNext){
         setOffset(response.nextOffset)
       }
+
       return response
 
     } catch (error) {
@@ -63,18 +65,28 @@ const MarketList = () => {
   const fetchData = async () => {
     try {
       const data = await getShopList(offset);
+      console.log(data)
       if (data && data.content) {
         setShopListData(prev => [...prev, ...data.content]);
         setOffset(data.nextOffset);
+
+        // 데이터가 더 이상 없을 경우 limit 상태를 true로 설정
+        if (!data.hasNext) {
+          setLimit(true);
+        } else {
+          setLimit(false);
+        }
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  // 카테고리 변경 혹은 옵션 변경할 경우 상점리스트 초기화
+  // 카테고리 변경 혹은 옵션 변경할 경우 상점리스트 및 무한스크롤 세팅 초기화
   useEffect(() => {
     setShopListData([])
+    setOffset(0)
+    setLimit(false)
   }, [menu, shopListOptionState])
 
   useEffect(() => {
@@ -91,11 +103,11 @@ const MarketList = () => {
     //불러올 데이터가 더 이상 없을 경우 무한스크롤링 종료
     if(limit) observer.disconnect();
 
+    // 컴포넌트 언마운트 시 또는 limit 상태가 true일 때, Observer 해제
     return () => {
-      //메인 컴포넌트가 언마운트 될 경우 무한스크롤링 종료
-      if(observerTarget.current) observer.disconnect();
-    }
-  }, [offset, shopListData]);
+      observer.disconnect();
+    };
+  }, [menu, offset, shopListData, shopListOptionState, limit]);
 
   return (
     <div className="w-full">
