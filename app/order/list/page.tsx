@@ -55,49 +55,6 @@ const OrderList = () => {
     setList((p) => [...p, ...newItems]);
   };
 
-  const dummyList = [
-    {
-      name: '가나다 커피집',
-      min_delivery: 0,
-      max_delivery: 3500,
-      menu_name: '맛없는 커피',
-      order_time: '2023-12-05 21:06:34',
-      order_state: 3,
-      order_type: 0,
-      review: true,
-    },
-    {
-      name: '맛없는 돈까스집',
-      min_delivery: 0,
-      max_delivery: 4000,
-      menu_name: '의외로 맛있는 돈까스',
-      order_time: '2023-12-12 23:08:55',
-      order_state: 3,
-      order_type: 1,
-      review: true,
-    },
-    {
-      name: '처참한 쫄면집',
-      min_delivery: 0,
-      max_delivery: 4000,
-      menu_name: '졸면',
-      order_time: '2023-12-20 01:03:27',
-      order_state: 3,
-      order_type: 1,
-      review: true,
-    },
-    {
-      name: '맛있는 뷔페',
-      min_delivery: 0,
-      max_delivery: 23283839,
-      menu_name: '뷔페에 메뉴가어딨음',
-      order_time: '2023-12-25 11:22:11',
-      order_state: 1,
-      order_type: 0,
-      review: false,
-    },
-  ];
-
   return (
     <div className="bg-yogrey h-screen">
       <TabMenu
