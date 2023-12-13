@@ -30,7 +30,9 @@ const Loading = ({params}: DynamicRoute) => {
         console.log("!!userInfo from login api")
         console.log(userInfo)
         setUserInfo(resLogin);
-        sessionStorage.setItem('access_token', resLogin.accessToken)
+        if(typeof window !== 'undefined'){
+          sessionStorage.setItem('access_token', resLogin.accessToken);
+        }
         setAuthToken(resLogin.accessToken)
         router.push('/');
       }else{
