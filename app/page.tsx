@@ -28,7 +28,7 @@ export default function Home() {
     const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
     console.log(token);
     if (token) {
-      setAuthToken(token);
+      //setAuthToken(token);
       console.log('액세스토큰 설정');
     }
   }, []);
