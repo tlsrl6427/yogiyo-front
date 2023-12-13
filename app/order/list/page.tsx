@@ -1,7 +1,8 @@
 'use client'
 import TabMenu from "@/components/common/TabMenu";
-import React, {useState, useEffect} from 'react';
-import { OrderInfo} from "@/lib/types";
+import React, { useState, useEffect } from 'react';
+import { OrderInfo } from "@/lib/types";
+import { getOrderList } from "@/services/orderAPI";
 
 const tabData = {
   left: {id: 'deliveryAndTogo', name: '배달/포장'},
@@ -12,14 +13,44 @@ interface Props {
   orderList: OrderInfo[];
 }
 
+/**
+ * 
+ * @todo SlideOrderList, CardOrdered 의 map에 있는 key를 id값으로 수정하던가 해야함.. name은 유니크하지 않음.
+ */
 const OrderList = () => {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [tab, setTab] = useState(tabData.left.id);
+  const token = sessionStorage.getItem('access_token');
+  const [lastIdState, setLastIdState] = useState(null);
+  const [hasNextState, setHasNextState] = useState(true);
+  const [list, setList] = useState<any[]>([]);
+  const [isBottom, setIsBottom] = useState(false);
 
   const handleGetSelected = (selectedTab: string) =>{
-    setTab(selectedTab)
+    setTab(selectedTab);
     if(isInitialLoad) setIsInitialLoad(false)
     console.log("change")
+  }
+
+  //스크롤이 밑에 닿으면 데이터패치해서 다음 리스트 받아와서 현재 리스트에 추가해서 리렌더링해야됨
+  useEffect(()=>{
+    if(isBottom || isInitialLoad){
+      if(isInitialLoad) setIsInitialLoad(false);
+      dataFetch();
+      console.log("render-useEffect")
+      console.log(`${isInitialLoad}, ${isBottom}`)
+      console.log("=================")
+    }
+  },[isBottom]);
+
+  useEffect(()=>{
+    console.log(list)
+  },[list]);
+
+  const dataFetch = async () => {
+    const { orderHistories, lastId, hasNext } = await getOrderList(token as string, lastIdState);
+    const newItems = Array.isArray(orderHistories) ? orderHistories : [orderHistories];
+    setList((p) => [...p, ...newItems]);
   }
 
   const dummyList = [
@@ -73,8 +104,8 @@ const OrderList = () => {
         selectedTab={tab} 
         handleGetSelected={handleGetSelected}
         ></TabMenu>
-        <SlideOrderList orderList={dummyList}/>
-        <CardOrdered orderList={dummyList}/>
+        <SlideOrderList orderList={list}/>
+        <CardOrdered orderList={list}/>
     </div>
   )
 }
@@ -91,11 +122,11 @@ const SlideOrderList = ({orderList} : Props) => {
         <div className="flex w-fit" >
           {orderList.map((item)=>{
             return(
-            <div className="border rounded-2xl w-[240px] h-[80px] bg-white flex mr-2 overflow-hidden">
+            <div key={item.shopId} className="border rounded-2xl w-[240px] h-[80px] bg-white flex mr-2 overflow-hidden">
               <div className="w-[80px] p-[8px]">
                 <div className="w-full h-full rounded-[10px] bg-yogrey2"></div>
               </div>
-              <div className="pt-[8px] pb-[8px] flex-1">{item.name}</div>
+              <div className="pt-[8px] pb-[8px] flex-1">{item.shopName}</div>
             </div>
             )})
           }
@@ -107,26 +138,26 @@ const SlideOrderList = ({orderList} : Props) => {
 }
 
 const CardOrdered = ({orderList} : Props) => {
-  const orderStateMap = ['주문확인','조리중','배달중','배달완료'];
-  const orderTypeMap = ['가게배달', '포장'];
+  //const orderStateMap = ['주문확인','조리중','배달중','배달완료'];
+  //const orderTypeMap = ['가게배달', '포장'];
 
   return(
     <div className="">
       {
         orderList.map((order)=>{
           return(
-            <div className="mt-2 p-4 bg-white">
+            <div key={order.shopId} className="mt-2 p-4 bg-white">
               <div className="pb-4 flex flex-row text-center">
-                <div className="w-[80px] text-xs font-semibold p-1 rounded-lg bg-yogrey">{orderTypeMap[order.order_type as number]}</div>
-                <div className="flex-1 text-left pl-2 text-sm text-yogrey3">{order.order_time}</div>
-                <div className="w-[80px] text-yogrey4 font-semibold">{orderStateMap[order.order_state as number]}</div>
+                <div className="w-[80px] text-xs font-semibold p-1 rounded-lg bg-yogrey">{order.orderType}</div>
+                <div className="flex-1 text-left pl-2 text-sm text-yogrey3">{order.orderTime}</div>
+                <div className="w-[80px] text-yogrey4 font-semibold">{order.status}</div>
               </div>
               <div className="flex h-[76px]">
                 <div className="w-[76px] h-[76px] bg-yogrey2 rounded-xl"></div>
                 <div className="flex-1 pl-4">
                   <div className="h-1/2 pb-2">
-                    <p className="font-bold leading-5">{order.name}</p>
-                    <p className="">{order.menu_name}</p>
+                    <p className="font-bold leading-5">{order.shopName}</p>
+                    <p className="">{order.menuName}</p>
                   </div>
                   <div className="h-1/2 pt-2 flex flex-row">
                     <div className="h-full flex-1 pr-2">
