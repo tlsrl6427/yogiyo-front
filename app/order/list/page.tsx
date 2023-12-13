@@ -20,7 +20,8 @@ interface Props {
 const OrderList = () => {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [tab, setTab] = useState(tabData.left.id);
-  const token = sessionStorage.getItem('access_token');
+  const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
+
   const [lastIdState, setLastIdState] = useState(null);
   const [hasNextState, setHasNextState] = useState(true);
   const [list, setList] = useState<any[]>([]);
