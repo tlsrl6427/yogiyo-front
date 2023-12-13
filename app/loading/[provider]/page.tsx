@@ -23,25 +23,26 @@ const Loading = ({ params }: DynamicRoute) => {
       providerType: providerType.toUpperCase(),
     };
     const asyncfunction = async () => {
-      try {
+      try{
         const resLogin = await login(reqAuth);
-        if (resLogin) {
-          console.log('!!userInfo from login api');
-          console.log(userInfo);
+        if(resLogin){
+          console.log("!!userInfo from login api")
+          console.log(userInfo)
           setUserInfo(resLogin);
-          if (typeof window !== 'undefined') {
+          if(typeof window !== 'undefined'){
             sessionStorage.setItem('access_token', resLogin.accessToken);
           }
+          //setAuthToken(resLogin.accessToken)
           router.push('/');
-        } else {
+        }else{
           throw new Error('200');
         }
-      } catch (error) {
-        router.push('/error?code=001');
-      }
-    };
+      }catch{
+
+      };
+    }
     const res = asyncfunction();
-  }, []);
+  },[])
 
   return (
     <div className="w-screen h-screen bg-yopink">
