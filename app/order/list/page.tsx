@@ -45,12 +45,18 @@ const OrderList = () => {
     }
   }, [isBottom]);
 
-  useEffect(() => {
-    console.log(list);
-  }, [list]);
+  useEffect(()=>{
+    console.log(list)
+    console.log(`lastId: ${lastIdState}`)
+    console.log(`hasNext: ${hasNextState}`)
+  },[list]);
 
   const dataFetch = async () => {
     const { orderHistories, lastId, hasNext } = await getOrderList(token as string, lastIdState);
+
+    setLastIdState(lastId);
+    setHasNextState(hasNext);
+
     const newItems = Array.isArray(orderHistories) ? orderHistories : [orderHistories];
     setList((p) => [...p, ...newItems]);
   };
@@ -76,18 +82,14 @@ const SlideOrderList = ({ orderList }: Props) => {
     <div className="pl-4 pr-4 pb-4 bg-white">
       <div className="pt-3 pb-3 font-semibold">내가 주문한 맛집</div>
       <div className="overflow-x-auto scrollbar-hide">
-        <div className="flex w-fit">
-          {orderList.map((item) => {
-            return (
-              <div
-                key={item.shopId}
-                className="border rounded-2xl w-[240px] h-[80px] bg-white flex mr-2 overflow-hidden"
-              >
-                <div className="w-[80px] p-[8px]">
-                  <div className="w-full h-full rounded-[10px] bg-yogrey2"></div>
-                </div>
-                <div className="pt-[8px] pb-[8px] flex-1">{item.shopName}</div>
+        <div className="flex w-fit" >
+          {orderList.map((item, index)=>{
+            return(
+            <div key={index} className="border rounded-2xl w-[240px] h-[80px] bg-white flex mr-2 overflow-hidden">
+              <div className="w-[80px] p-[8px]">
+                <div className="w-full h-full rounded-[10px] bg-yogrey2"></div>
               </div>
+            </div>
             );
           })}
           <div className="w-[240px] h-[80px]">더 보기</div>
@@ -101,41 +103,51 @@ const CardOrdered = ({ orderList }: Props) => {
   //const orderStateMap = ['주문확인','조리중','배달중','배달완료'];
   //const orderTypeMap = ['가게배달', '포장'];
 
-  return (
+  const handleReOrder = (shopId : number) => {
+    console.log(`shop id [${shopId}] 상세페이지로 연결해야함~`)
+  }
+  const handleWriteReview = (order : OrderInfo) => {
+    console.log(`주문번호 [${order.orderId}] 상세페이지로 연결해야함~`)
+  }
+  const handleOrderDetail = (orderId : number) => {
+    console.log(`order id [${orderId}] 주문상세내역으로 연결해야함~`)
+  }
+
+  return(
     <div className="">
-      {orderList.map((order) => {
-        return (
-          <div key={order.shopId} className="mt-2 p-4 bg-white">
-            <div className="pb-4 flex flex-row text-center">
-              <div className="w-[80px] text-xs font-semibold p-1 rounded-lg bg-yogrey">
-                {order.orderType}
-              </div>
-              <div className="flex-1 text-left pl-2 text-sm text-yogrey3">{order.orderTime}</div>
-              <div className="w-[80px] text-yogrey4 font-semibold">{order.status}</div>
-            </div>
-            <div className="flex h-[76px]">
-              <div className="w-[76px] h-[76px] bg-yogrey2 rounded-xl"></div>
-              <div className="flex-1 pl-4">
-                <div className="h-1/2 pb-2">
-                  <p className="font-bold leading-5">{order.shopName}</p>
-                  <p className="">{order.menuName}</p>
+      {
+        orderList.map((order, index)=>{
+          return(
+              <div key={index} className="mt-2 p-4 bg-white">
+                <div className="pb-4 flex flex-row text-center">
+                  <div className="w-[80px] text-xs font-semibold p-1 rounded-lg bg-yogrey">{order.orderType}</div>
+                  <div className="flex-1 text-left pl-2 text-sm text-yogrey3">{order.orderTime}</div>
+                  <div className="w-[80px] text-yogrey4 font-semibold">{order.status}</div>
                 </div>
-                <div className="h-1/2 pt-2 flex flex-row">
-                  <div className="h-full flex-1 pr-2">
-                    <button className={`${buttonStyles.active}`}>재주문</button>
-                  </div>
-                  <div className="h-full flex-1 pr-2">
-                    <button className={`${buttonStyles.inactive}`}>리뷰쓰기</button>
-                  </div>
-                  <div className="h-full flex-1 pr-2">
-                    <button className={`${buttonStyles.inactive}`}>주문상태</button>
+                <div className="flex h-[76px]">
+                  <div className="w-[76px] h-[76px] bg-yogrey2 rounded-xl"></div>
+                  <div className="flex-1 pl-4">
+                    <div className="h-1/2 pb-2">
+                      <p className="font-bold leading-5">{order.shopName}</p>
+                      <p className="">{order.menuName}</p>
+                    </div>
+                    <div className="h-1/2 pt-2 flex flex-row">
+                      <div className="h-full flex-1 pr-2">
+                        <button className={`${buttonStyles.active}`} onClick={()=>handleReOrder(order.shopId)}>재주문</button>
+                      </div>
+                      <div className="h-full flex-1 pr-2">
+                        <button className={`${buttonStyles.inactive}`} onClick={()=>handleWriteReview(order)}>리뷰쓰기</button>
+                      </div>
+                      <div className="h-full flex-1 pr-2">
+                        <button className={`${buttonStyles.inactive}`} onClick={()=>handleOrderDetail(order.orderId)}>주문상세</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
+          );
+        })
+      }
       <Footer />
     </div>
   );
