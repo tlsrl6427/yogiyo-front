@@ -1,13 +1,34 @@
 import { AiFillStar } from 'react-icons/ai';
-import type { MaketInfoType } from '@/lib/types';
+import type { Shop } from '@/lib/types';
 import Link from 'next/link';
 
-const MarketInfoCard = ({ info }: MaketInfoType) => {
+interface Props {
+  shop: Shop;
+}
+
+const iconStyled = (imgUrl: string) => {
+  return {
+    backgroundImage: `url(${imgUrl})`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+  };
+};
+
+const basicStyled = {
+  backgroundImage: `url(/images/yogiyo-logo.jpg)`,
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+};
+
+const MarketInfoCard = ({ shop }: Props) => {
+  console.log(shop);
   return (
     <Link href={''} className="w-[170px] h-[300px] flex flex-col gap-1">
       <div className="img_container w-full h-[170px] flex justify-center items-center overflow-hidden rounded-xl">
-        {info.img ? (
-          <img className="w-full h-full" src={info.img} />
+        {shop.icon ? (
+          <div className="w-full h-full" style={iconStyled(shop.icon)} />
         ) : (
           <div className="w-full h-full bg-black" style={basicStyled} />
         )}
