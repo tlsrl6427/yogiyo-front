@@ -21,7 +21,7 @@ export default function Home() {
       //setAuthToken(token);
       console.log('액세스토큰 설정')
     }
-  }, [])
+  }, []);
 
   return (
     <div>

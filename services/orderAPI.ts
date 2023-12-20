@@ -10,8 +10,9 @@ export const getOrderDetail = async (token: string, id: string) => {
     Authorization: token,
     //'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaW50b2xiQG5hdmVyLmNvbSIsInByb3ZpZGVyVHlwZSI6Ik5BVkVSIiwidXNlclR5cGUiOiJNZW1iZXIiLCJleHAiOjE3MDIzNjY5MjZ9.vgShPvQHmksxsdu-asCCCO8rEARbb6HBwg0rSoIpBPE',
   };
-  //console.log(res);
-  //return res.data;
+  const res = await baseAxiosInstance.get(`/order/details?orderId=${id}`, { headers });
+  console.log(res);
+  return res.data;
 };
 
 export const postOrder = async (token: string, bill: any) => {
