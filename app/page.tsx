@@ -27,7 +27,7 @@ export default function Home() {
     //세션스토리지 토큰 확인 후 설정
     const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
     console.log(token);
-    if(token) {
+    if (token) {
       setAuthToken(token);
       console.log('액세스토큰 설정');
     }
