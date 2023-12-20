@@ -11,7 +11,7 @@ const UserAddressBtn = ({ addressTarget }: any) => {
   const setHeaderModal = useSetRecoilState(headerModalState);
   const setThisAdd = useSetRecoilState(thisAddressId);
 
-  const userInfo = useRecoilValue(userInfoAtom)
+  const userInfo = useRecoilValue(userInfoAtom);
 
   const fullAddress = addressTarget.address.street + ' ' + addressTarget.address.detail;
 
