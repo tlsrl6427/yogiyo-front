@@ -7,7 +7,7 @@ import {
   currentAddress,
   userAddress,
   thisAddressId,
-  userInfoAtom
+  userInfoAtom,
 } from '@/recoil/state';
 import AddressModal from './AddressModal';
 import { useState, useEffect } from 'react';
@@ -25,7 +25,7 @@ const Header = () => {
   const [curAdd, setCurAdd] = useRecoilState(currentAddress);
   const [thisAdd, setThisAdd] = useRecoilState(thisAddressId);
   const [memberAddress, setMemberAddress] = useRecoilState(userAddress);
-  const userInfo = useRecoilValue(userInfoAtom)
+  const userInfo = useRecoilValue(userInfoAtom);
 
   //로그인 확인용
   const [isLogin, setIsLogin] = useState(false);

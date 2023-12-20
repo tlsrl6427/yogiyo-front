@@ -1,10 +1,10 @@
-'use client'
-import PrevPageX from "@/components/common/PrevPageX";
-import { getOrderDetail } from "@/services/orderAPI";
-import React, {useEffect, useState} from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useRecoilValue } from "recoil";
-import { userInfoAtom } from "@/recoil/state";
+'use client';
+import PrevPageX from '@/components/common/PrevPageX';
+import { getOrderDetail } from '@/services/orderAPI';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { useRecoilValue } from 'recoil';
+import { userInfoAtom } from '@/recoil/state';
 
 const OrderDetail = () => {
   //const orderStateMap = ['주문확인','조리중','배달중','배달완료'];
@@ -16,23 +16,23 @@ const OrderDetail = () => {
   const queryString = useSearchParams();
   const id = queryString.get('id');
 
-  if(!id || !token){
+  if (!id || !token) {
     const router = useRouter();
-    router.push(`/error?code=002`)
+    router.push(`/error?code=002`);
   }
 
-  useEffect(()=>{
-    console.log(token)
-    console.log(id)
+  useEffect(() => {
+    console.log(token);
+    console.log(id);
     getOrderDetail(token as string, id as string);
-  })
+  });
 
-  return(
+  return (
     <>
       <PrevPageX />
       <div className="w-[80px] text-yogrey4 font-semibold">배달완료</div>
     </>
-  )
-}
+  );
+};
 
 export default OrderDetail;
