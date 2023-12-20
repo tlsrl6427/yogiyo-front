@@ -1,23 +1,14 @@
-import axios from 'axios';
 import type { RegisterAddressRequest } from '@/lib/types';
-
-//임시 엑세스토큰
-const accessToken =
-  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0MzIxQGdtYWlsLmNvbSIsInByb3ZpZGVyVHlwZSI6IkRFRkFVTFQiLCJ1c2VyVHlwZSI6Ik1lbWJlciIsImV4cCI6MTcwMDYzMTgyMn0.kzk6cbqLRmANDS2LhtSqerEr4_LeUebaTRIt-Yz6FeU'
-
-const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+import { baseAxiosInstance } from './apiConfig';
 
 export const addressApi = {
   // 멤버 주소 등록
   async register(data: RegisterAddressRequest) {
     try {
-      const response = await api.post('/address/register', data, {
-        headers: { Authorization: `Bearer ${accessToken}` },
+      const response = await baseAxiosInstance.post('/address/register', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
       return response.data;
     } catch (error) {
@@ -28,9 +19,11 @@ export const addressApi = {
   // 멤버 주소 조회
   async view() {
     try {
-      const response = await api.get('/address/view', {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
+      const response = await baseAxiosInstance.get('/address/view', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });  
       return response.data;
     } catch (error) {
       console.error(error);
@@ -40,8 +33,10 @@ export const addressApi = {
   // 멤버 주소 삭제
   async delete(memberAddressId: number) {
     try {
-      const response = await api.delete(`/address/${memberAddressId}`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
+      const response = await baseAxiosInstance.delete(`/address/${memberAddressId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
       return response.data;
     } catch (error) {
@@ -52,11 +47,13 @@ export const addressApi = {
   // '요기' 위치 설정
   async change(memberAddressId: number) {
     try {
-      const response = await api.patch(
+      const response = await baseAxiosInstance.patch(
         `/address/here/${memberAddressId}`,
         {},
         {
-          headers: { Authorization: `Bearer ${accessToken}` },
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
       );
       return response.data;

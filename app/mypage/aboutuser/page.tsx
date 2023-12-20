@@ -3,10 +3,12 @@ import React from 'react';
 import Link from 'next/link';
 
 import { useRecoilState } from 'recoil';
-import { userAtom } from '@/recoil/state';
+import { userInfoAtom } from '@/recoil/state';
+import { useRouter } from 'next/navigation';
 
 const AboutUser = () => {
-  const [user, setUser] = useRecoilState(userAtom);
+  const router = useRouter();
+  const [user, setUser] = useRecoilState(userInfoAtom);
 
   const kakaoIcon = {
     backgroundImage: `url(/img/kakaoLogoEdge.svg)`,
@@ -14,6 +16,15 @@ const AboutUser = () => {
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
   };
+
+  const doLogout = () => {
+    const userData = {id : 'unknown', nickname: 'unknown', email: 'unknown', accessToken: null}
+    setUser(userData)
+    if(typeof window !== 'undefined'){
+      sessionStorage.removeItem('access_token');
+    }
+    router.push('/');
+  }
 
   return (
     <div className="">
@@ -66,8 +77,10 @@ const AboutUser = () => {
           </div>
         </div>
       </div>
-      <div className="p-5 flex justify-end">
-        <p>로그아웃 | 회원탈퇴</p>
+      <div className="p-4 flex justify-end text-yogrey4">
+        <span onClick={doLogout}>로그아웃</span>
+        <span className='pr-2 pl-2 text-sm'>|</span>
+        <span>회원탈퇴</span>
       </div>
     </div>
   );

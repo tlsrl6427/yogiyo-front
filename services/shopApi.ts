@@ -1,21 +1,19 @@
-import axios from 'axios';
-import type { ShopListRequest, ShopListResponse } from '@/lib/types';
+import type { ShopList } from '@/lib/types';
+import { baseAxiosInstance } from './apiConfig';
 
-const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-//상점 리스트 조회
 export const shopApi = {
-  async list (params: ShopListRequest) {
+  // 상점 리스트 조회
+  async fetchShopList(params: ShopList) {
     try {
-      const response = await api.get<ShopListResponse>('shop/list', {params})
+      const response = await baseAxiosInstance.get('/shop/list', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        params,
+      });
       return response.data;
     } catch (error) {
       console.error(error);
     }
-  }
+  },
 }
