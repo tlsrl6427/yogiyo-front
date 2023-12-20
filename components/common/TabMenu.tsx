@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import '/lib/animations.css';
 import { Tab } from '@/lib/types';
 
-
 const TabMenu = (props: Tab) => {
   //const [initialLoad, setInitialLoad] = useState(true);
   //const [selectedTab, setSelectedTab] = useState(tabs[0].id);
@@ -12,13 +11,13 @@ const TabMenu = (props: Tab) => {
   useEffect(() => {
     //console.log();
     console.log(`selectedTab: ${props.selectedTab}`);
-    console.log(`isInitialLoad: ${props.isInitialLoad}`)
+    console.log(`isInitialLoad: ${props.isInitialLoad}`);
   }, [props]);
 
   const handleTabChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedTab = e.target.value;
     props.handleGetSelected(selectedTab);
-    setIsInitialLoad(false)
+    setIsInitialLoad(false);
   };
 
   const tabAnimation = props.isInitialLoad
@@ -36,13 +35,11 @@ const TabMenu = (props: Tab) => {
             id={props.tabData.left.id}
             value="left"
             style={{ display: 'none' }}
-            checked={props.selectedTab === "left"}
+            checked={props.selectedTab === 'left'}
             onChange={handleTabChange}
           />
           <label htmlFor={props.tabData.left.id}>
-            <p
-              className={`text-center p-3 ${props.selectedTab === "left" ? 'font-bold' : ''}`}
-            >
+            <p className={`text-center p-3 ${props.selectedTab === 'left' ? 'font-bold' : ''}`}>
               {props.tabData.left.name}
             </p>
           </label>
@@ -53,11 +50,11 @@ const TabMenu = (props: Tab) => {
             id={props.tabData.right.id}
             value="right"
             style={{ display: 'none' }}
-            checked={props.selectedTab === "right"}
+            checked={props.selectedTab === 'right'}
             onChange={handleTabChange}
           />
           <label htmlFor="yomart">
-            <p className={`text-center p-3 ${props.selectedTab === "right" ? 'font-bold' : ''}`}>
+            <p className={`text-center p-3 ${props.selectedTab === 'right' ? 'font-bold' : ''}`}>
               {props.tabData.right.name}
             </p>
           </label>

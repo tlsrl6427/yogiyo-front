@@ -3,17 +3,34 @@ import type { Shop } from '@/lib/types';
 import Link from 'next/link';
 
 interface Props {
-  shop: Shop
+  shop: Shop;
 }
 
+const iconStyled = (imgUrl: string) => {
+  return {
+    backgroundImage: `url(${imgUrl})`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+  };
+};
+
+const basicStyled = {
+  backgroundImage: `url(/images/yogiyo-logo.jpg)`,
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+};
+
 const MarketInfoCard = ({ shop }: Props) => {
+  console.log(shop);
   return (
     <Link href={''} className="w-[170px] h-[300px] flex flex-col gap-1">
       <div className="img_container w-full h-[170px] flex justify-center items-center overflow-hidden rounded-xl">
         {shop.icon ? (
-          <img className="w-full h-full" src={shop.icon} />
+          <div className="w-full h-full" style={iconStyled(shop.icon)} />
         ) : (
-          <div className="w-full h-full bg-black" />
+          <div className="w-full h-full bg-black" style={basicStyled} />
         )}
       </div>
       <div className="title_container flex justify-start gap-1.5 rounded-md">

@@ -23,7 +23,7 @@ export const addressApi = {
         headers: {
           'Content-Type': 'application/json',
         },
-      });  
+      });
       return response.data;
     } catch (error) {
       console.error(error);

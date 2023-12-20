@@ -11,12 +11,11 @@ const ToggleMenu = (props: Tab) => {
     const selectedTab = e.target.value;
     props.handleGetSelected(selectedTab);
     setIsInitialLoad(false);
-
   };
 
   //상태 잘 변하는지 테스트용
   useEffect(() => {
-    console.log("tab2 change!")
+    console.log('tab2 change!');
   }, [props]);
 
   const tabAnimation = props.isInitialLoad
@@ -44,7 +43,7 @@ const ToggleMenu = (props: Tab) => {
           id={props.tabData.right.id}
           value="right"
           style={{ display: 'none' }}
-          checked={props.selectedTab === "right"}
+          checked={props.selectedTab === 'right'}
           onChange={handleTabChange}
         />
         <label htmlFor="written" className="w-1/2 z-10 h-full relative">

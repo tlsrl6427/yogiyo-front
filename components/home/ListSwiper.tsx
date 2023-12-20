@@ -6,7 +6,7 @@ import MarketInfoCard from '../common/MaketInfoCard';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import type { Shop, RegisterAddressRequest } from '@/lib/types';
-import { shopApi } from '@/services/shopApi'
+import { shopApi } from '@/services/shopApi';
 
 interface ListSwiperProps {
   thisAddress: RegisterAddressRequest;
@@ -28,11 +28,10 @@ const lastArrowStyle = {
 };
 
 const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperProps) => {
-
   const [loading, setLoading] = useState(false);
 
   //무한스크롤 offset
-  const [ offset, setOffset ]  = useState(0);
+  const [offset, setOffset] = useState(0);
 
   //감시 타겟 ref
   const observerTarget = useRef<HTMLDivElement>(null);
@@ -52,33 +51,31 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
         // latitude: thisAddress.latitude ? thisAddress.latitude : 37.560023342132,
         latitude: 37.560023342132,
         offset: offset,
-        limit: 10
-      }
-
+        limit: 5,
+      };
 
       const response = await shopApi.fetchShopList(requestInfo);
-      console.log(requestInfo)
+      console.log(requestInfo);
 
       //다음 오프셋이 있을 경우
-      if(response.hasNext){
-        setOffset(response.nextOffset)
+      if (response.hasNext) {
+        setOffset(response.nextOffset);
       }
 
-      return response
-
+      return response;
     } catch (error) {
       console.error('Error fetching shop list:', error);
     }
-  }
+  };
 
   const fetchData = async () => {
     if (loading || limit) return; // 로딩 중이거나 limit 상태일 경우 함수 실행 방지
     setLoading(true);
     try {
       const data = await getShopList(offset);
-      console.log(data)
+      console.log(data);
       if (data && data.content) {
-        setShopListData(prev => [...prev, ...data.content]);
+        setShopListData((prev) => [...prev, ...data.content]);
         setOffset(data.nextOffset);
 
         // 데이터가 더 이상 없을 경우 limit 상태를 true로 설정
@@ -95,21 +92,22 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
     }
   };
 
-  useEffect(() => {fetchData()}, [])
-
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-         //타겟이 뷰포트와 교차할 경우 api 호출
-         if(entry.isIntersecting && !limit && !loading) fetchData();
-      });
-    }, {threshold: 0.1});//타겟이 0.1만큼 뷰포트에 들어올 경우 실행
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          //타겟이 뷰포트와 교차할 경우 api 호출
+          if (entry.isIntersecting && !limit && !loading) fetchData();
+        });
+      },
+      { threshold: 0.1 },
+    ); //타겟이 0.1만큼 뷰포트에 들어올 경우 실행
 
     //타겟 감시 시작
-    if(observerTarget.current) observer.observe(observerTarget.current);
+    if (observerTarget.current) observer.observe(observerTarget.current);
 
     //불러올 데이터가 더 이상 없을 경우 무한스크롤링 종료
-    if(limit) observer.disconnect();
+    if (limit) observer.disconnect();
 
     // 컴포넌트 언마운트 시 또는 limit 상태가 true일 때, Observer 해제
     return () => {
@@ -128,13 +126,11 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
           );
         })}
 
-        {
-          shopListData && (
-            <SwiperSlide>
-              <div ref={observerTarget}></div>
-            </SwiperSlide>
-          )
-        }
+        {shopListData && (
+          <SwiperSlide>
+            <div ref={observerTarget}></div>
+          </SwiperSlide>
+        )}
         {/* {shopListData?.length > 20 && (
           <SwiperSlide style={slideStyle}>
             <Link
