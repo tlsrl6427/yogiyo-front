@@ -2,6 +2,7 @@
 import TabMenu from "@/components/common/TabMenu";
 import React, {useState, useEffect} from 'react';
 import { OrderInfo} from "@/lib/types";
+import Footer from "@/components/common/Footer";
 
 const tabData = {
   left: {id: 'deliveryAndTogo', name: '배달/포장'},
@@ -145,6 +146,7 @@ const CardOrdered = ({orderList} : Props) => {
           )
         })
       }
+      <Footer />
     </div>
   )
 }

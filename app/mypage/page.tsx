@@ -4,6 +4,7 @@ import LoggedOut from '../../components/mypage/LoggedOut';
 import LoggedIn from '../../components/mypage/LoggedIn';
 import { userInfoAtom } from '@/recoil/state';
 import { useRecoilValue } from 'recoil';
+import Footer from '@/components/common/Footer';
 
 const Mypage = () => {
   const userInfo = useRecoilValue(userInfoAtom);
@@ -27,6 +28,7 @@ const Mypage = () => {
         <Menu text="요기요 안내"></Menu>
         <Menu text="서비스 약관"></Menu>
       </div>
+      <Footer />
     </div>
   );
 };
