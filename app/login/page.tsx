@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import 'lib/styles.css';
-import { GoX } from 'react-icons/go';
+import PrevPageX from '@/components/common/PrevPageX';
 import EmailJoin from '@/components/login/emailJoin';
 import EmailLogin from '@/components/login/emailLogin';
 import { getNaverAuth, getKakaoAuth } from '@/services/loginAPI';
@@ -43,7 +43,7 @@ const Login = () => {
 
   return view === 0 ? (
     <div className="w-full h-screen p-2 flex flex-col">
-      <GoX className="text-[2rem]" />
+      <PrevPageX />
       <div className="w-full h-[50px] mt-10" style={yogiyoLogo} />
       <p className="pt-3 text-center">로그인하고 다양한 혜택을 받아보세요!</p>
       <div className="w-full p-4 mt-10 rounded-xl bg-kakao" onClick={handleAuth} id="kakao">

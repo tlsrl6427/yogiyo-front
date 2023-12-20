@@ -18,7 +18,11 @@ const AboutUser = () => {
   };
 
   const doLogout = () => {
-    sessionStorage.removeItem('access_token');
+    const userData = {id : 'unknown', nickname: 'unknown', email: 'unknown', accessToken: null}
+    setUser(userData)
+    if(typeof window !== 'undefined'){
+      sessionStorage.removeItem('access_token');
+    }
     router.push('/');
   }
 
