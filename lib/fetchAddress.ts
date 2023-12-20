@@ -19,4 +19,3 @@ export const fetchAddress = async (setMemberAddress: any, setThisAdd: any, userI
     console.error('주소 조회 중 오류 발생:', error);
   }
 };
- 
