@@ -16,4 +16,4 @@ export const shopApi = {
       console.error(error);
     }
   },
-}
+};

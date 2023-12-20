@@ -9,7 +9,7 @@ const MarketInfoCard = ({ info }: MaketInfoType) => {
         {info.img ? (
           <img className="w-full h-full" src={info.img} />
         ) : (
-          <div className="w-full h-full bg-black" />
+          <div className="w-full h-full bg-black" style={basicStyled} />
         )}
       </div>
       <div className="title_container flex justify-start gap-1.5 rounded-md">

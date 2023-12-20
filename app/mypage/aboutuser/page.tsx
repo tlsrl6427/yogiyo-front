@@ -18,13 +18,13 @@ const AboutUser = () => {
   };
 
   const doLogout = () => {
-    const userData = {id : 'unknown', nickname: 'unknown', email: 'unknown', accessToken: null}
-    setUser(userData)
-    if(typeof window !== 'undefined'){
+    const userData = { id: 'unknown', nickname: 'unknown', email: 'unknown', accessToken: null };
+    setUser(userData);
+    if (typeof window !== 'undefined') {
       sessionStorage.removeItem('access_token');
     }
     router.push('/');
-  }
+  };
 
   return (
     <div className="">
@@ -79,7 +79,7 @@ const AboutUser = () => {
       </div>
       <div className="p-4 flex justify-end text-yogrey4">
         <span onClick={doLogout}>로그아웃</span>
-        <span className='pr-2 pl-2 text-sm'>|</span>
+        <span className="pr-2 pl-2 text-sm">|</span>
         <span>회원탈퇴</span>
       </div>
     </div>
