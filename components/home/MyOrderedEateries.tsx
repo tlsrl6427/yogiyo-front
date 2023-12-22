@@ -7,7 +7,7 @@ const MyOrderedEateries = () => {
       <h2 className={`text-xl font-black py-4 tracking-wide ${nanum_Gothic.className}`}>
         내가 주문한 맛집
       </h2>
-      <ListSwiper />
+      {/* <ListSwiper /> */}
     </div>
   );
 };
