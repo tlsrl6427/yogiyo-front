@@ -7,14 +7,14 @@ const TestLogin = () => {
     "password" : "12341234",
     "authCode" : null,
     "providerType" : "DEFAULT",
-    withCredentials: true
   }
   const login = async () => {
     try {
       const response = await baseAxiosInstance.post('/memberLogin', param, {
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
+        withCredentials: true
       })
       console.log(response)
       return response
