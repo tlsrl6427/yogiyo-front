@@ -1,3 +1,4 @@
+import TestLogin from '@/components/common/TestLogin';
 import GridIconMenu from '@/components/home/GridIconMenu';
 import MyOrderedEateries from '@/components/home/MyOrderedEateries';
 import NewEateries from '@/components/home/NewEateries';
@@ -12,6 +13,7 @@ const Home = () => {
       <MyOrderedEateries />
       <div className="p-1.5 bg-slate-100" />
       <NewEateries />
+      <TestLogin />
     </div>
   );
 };
