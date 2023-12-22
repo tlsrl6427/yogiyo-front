@@ -9,7 +9,7 @@ import {
   currentCoord,
   userAddress,
   thisAddressId,
-  userInfoAtom
+  userInfoAtom,
 } from '@/recoil/state';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { MdArrowBackIosNew } from 'react-icons/md';
@@ -63,7 +63,7 @@ const DetailMap = () => {
   const [isAddressName, setIsAddressName] = useState('');
 
   //로그인 유저
-  const userInfo = useRecoilValue(userInfoAtom)
+  const userInfo = useRecoilValue(userInfoAtom);
 
   useEffect(() => {
     if (!coord) return;

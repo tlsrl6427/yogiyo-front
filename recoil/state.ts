@@ -90,8 +90,8 @@ export const shopListOption = atom({
   default: {
     sortState: '주문 많은순',
     delFilter: '배달요금',
-    orderAmount: '최소주문금액'
-  }
-})
+    orderAmount: '최소주문금액',
+  },
+});
 
 // 상점 리스트 조회 반환값

@@ -4,10 +4,11 @@ import LoggedOut from '../../components/mypage/LoggedOut';
 import LoggedIn from '../../components/mypage/LoggedIn';
 import { userInfoAtom } from '@/recoil/state';
 import { useRecoilValue } from 'recoil';
+import Footer from '@/components/common/Footer';
 
 const Mypage = () => {
   const userInfo = useRecoilValue(userInfoAtom);
-  console.log(`userInfoAtom.accessToken : ${userInfo.accessToken}`)
+  console.log(`userInfoAtom.accessToken : ${userInfo.accessToken}`);
 
   //요기요 매거진~ 서비스 약관 부분은 하나하나의 버튼 ui가 딱히 다른곳에서 쓰이는것 같지 않아서 여기 직접 넣는걸로
   return (
@@ -27,6 +28,7 @@ const Mypage = () => {
         <Menu text="요기요 안내"></Menu>
         <Menu text="서비스 약관"></Menu>
       </div>
+      <Footer />
     </div>
   );
 };

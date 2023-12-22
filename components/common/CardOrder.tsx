@@ -8,9 +8,9 @@ import { BsChevronDown } from 'react-icons/bs';
 import { BsChevronUp } from 'react-icons/bs';
 import { MenuOption } from '@/lib/types';
 
-interface Props{
-  type: number,
-  tabIndex?: string
+interface Props {
+  type: number;
+  tabIndex?: string;
 }
 
 // 타입만 받고, 탭인덱스는 현재 어떤 탭을 설정하냐에 따라 이 컴포넌트 안에서 다른 카드를 보여주기 위함인데
@@ -21,47 +21,36 @@ interface Props{
  * @prop {?tabIndex} // 'left' | 'right' 로 현재 선택된 탭을 알려줌
  * @todo 리스트를 받아오는 부분 미구현, 이 형태가 다른곳에서도 쓰인다면 좀 수정해야 할듯
  */
-const CardOrder = ({type} : Props) => {
+const CardOrder = ({ type }: Props) => {
+  useEffect(() => {
+    console.log(`type: ${type}`);
+  }, [type]);
 
-  useEffect(()=>{
-    console.log(`type: ${type}`)
-  },[type])
-
-  return (
-    <>
-      {
-        type === 0 ?
-        (<WritableReviews />) :
-        type === 1 ?
-        (<WrittenReviews />) :
-        (<div>응?</div>)
-      }
-    </>
-  );
+  return <>{type === 0 ? <WritableReviews /> : type === 1 ? <WrittenReviews /> : <div>응?</div>}</>;
 };
 
 export default CardOrder;
 
 const WritableReviews = () => {
-  return(
+  return (
     <div className="p-4 mb-2 bg-white">
       <CommonReviews />
       <Writable />
     </div>
-  )
-}
+  );
+};
 
 const WrittenReviews = () => {
-  return(
-    <div className='p-4 mb-2 bg-white'>
+  return (
+    <div className="p-4 mb-2 bg-white">
       <CommonReviews />
       <Written />
     </div>
-  )
-}
+  );
+};
 
-const CommonReviews = () =>{
-  return(
+const CommonReviews = () => {
+  return (
     <div>
       <div className="flex">
         <div className="w-1/2">
@@ -84,8 +73,8 @@ const CommonReviews = () =>{
       </div>
       <div className="w-full h-[2px] bg-yogrey mt-4 mb-4"></div>
     </div>
-  )
-}
+  );
+};
 const Writable = () => {
   const imagebox = 'w-[70px] h-[70px] bg-yogrey rounded-md overflow-hidden';
   const whiteButton = 'text-sm pt-2 pb-2 pr-4 pl-4 border border-yogrey2 rounded-md';
