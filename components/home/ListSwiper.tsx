@@ -8,12 +8,10 @@ import { useState, useEffect, useRef } from 'react';
 import type { Shop, RegisterAddressRequest } from '@/lib/types';
 import { shopApi } from '@/services/shopApi';
 
-//사용할 타입
-import type { MaketInfoType } from '@/lib/types';
-
-//넘겨받는 props의 type지정
 interface ListSwiperProps {
-  dataList?: MaketInfoType[];
+  thisAddress: RegisterAddressRequest;
+  shopListData: Shop[];
+  setShopListData: React.Dispatch<React.SetStateAction<Shop[]>>;
 }
 
 const slideStyle = {
@@ -120,10 +118,10 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
   return (
     <>
       <Swiper spaceBetween={10} slidesPerView={'auto'}>
-        {dummy?.map((_, i) => {
+        {shopListData?.map((shop, i) => {
           return (
             <SwiperSlide style={slideStyle} key={i}>
-              <MarketInfoCard info={{}} />
+              <MarketInfoCard shop={shop} />
             </SwiperSlide>
           );
         })}
@@ -143,7 +141,7 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
               <span>더보기</span>
             </Link>
           </SwiperSlide>
-        )}
+        )} */}
       </Swiper>
     </>
   );

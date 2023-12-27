@@ -36,18 +36,18 @@ const MarketInfoCard = ({ shop }: Props) => {
       <div className="title_container flex justify-start gap-1.5 rounded-md">
         {/* 나중에 요기요 아이콘 찾으면 여기다 넣기 */}
         <i>{/*yogiyo_icon*/}</i>
-        <p className="text-xl font-bold">{info.name || '가게 이름'}</p>
+        <p className="text-xl font-bold">{shop.shopName || '가게 이름'}</p>
       </div>
       <div className="flex justify-start items-center gap-1">
         <AiFillStar fill="#FDC912" className="text-2xl" />
-        <p className="text-base font-bold">{info.rate || '5.0'}</p>
+        <p className="text-base font-bold">{shop.totalScore.toFixed(1) || '5.0'}</p>
       </div>
       <div className="text-sm">
-        <p>{info.delay || '30~35분'}</p>
+        <p>{shop.deliveryTime}분</p>
       </div>
       <div className="text-sm flex items-center gap-2">
         <span>배달요금</span>
-        <p className="font-bold">{info.delFee || '3,000원'}</p>
+        <p className="font-bold">{shop.maxDeliveryPrice || '3,000원'}</p>
       </div>
     </Link>
   );
