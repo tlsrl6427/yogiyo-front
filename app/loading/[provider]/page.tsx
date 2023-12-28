@@ -27,7 +27,7 @@ const Loading = ({ params }: DynamicRoute) => {
         const resLogin = await getCookie(reqAuth);
         if(resLogin){
           console.log("!!userInfo from login api(cookie ver)")
-          console.log(userInfo)
+          console.log(resLogin)
           //setUserInfo(resLogin);
           //if(typeof window !== 'undefined'){
           //  sessionStorage.setItem('access_token', resLogin.accessToken);
