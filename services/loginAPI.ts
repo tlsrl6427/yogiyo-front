@@ -31,7 +31,7 @@ export const getCookie = async (reqbody: SocialLogin) => {
     'Content-Type': 'application/json',
   };
   const config = {headers, withCredentials: true}
-  const resTokenAPI = await baseAxiosInstance.post('/memberLogin', reqbody, config);
+  const resTokenAPI = await baseAxiosInstance.post('/memberLogin', reqbody, { withCredentials: true });
   const userId = resTokenAPI.data.userId;
   const email = resTokenAPI.data.email;
   const nickname = null;
