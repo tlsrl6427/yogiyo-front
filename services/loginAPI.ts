@@ -33,8 +33,9 @@ export const getCookie = async (reqbody: SocialLogin) => {
   const resTokenAPI = await baseAxiosInstance.post('/memberLogin', reqbody, { headers });
   const userId = resTokenAPI.data.userId;
   const email = resTokenAPI.data.email;
-  
-  return { userId, email };
+  const nickname = null;
+
+  return { userId, email, nickname };
 };
 
 export const getUserInfo = async (token: string) => {
