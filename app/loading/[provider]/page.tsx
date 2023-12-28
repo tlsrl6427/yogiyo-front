@@ -2,7 +2,7 @@
 import { use, useEffect, useState } from 'react';
 import { DynamicRoute } from '@/lib/types';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { getAccessToken, getUserInfo, login } from '@/services/loginAPI';
+import { getCookie } from '@/services/loginAPI';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
 
