@@ -17,6 +17,7 @@ const AboutUser = () => {
     backgroundPosition: 'center',
   };
 
+  /*
   const doLogout = () => {
     const userData = { id: 'unknown', nickname: 'unknown', email: 'unknown', accessToken: null };
     setUser(userData);
@@ -25,6 +26,11 @@ const AboutUser = () => {
     }
     router.push('/');
   };
+  */
+
+  //const doLogout = () => {
+  //  const 
+  //}
 
   return (
     <div className="">

@@ -24,15 +24,14 @@ const Loading = ({ params }: DynamicRoute) => {
     };
     const asyncfunction = async () => {
       try{
-        const resLogin = await login(reqAuth);
+        const resLogin = await getCookie(reqAuth);
         if(resLogin){
-          console.log("!!userInfo from login api")
+          console.log("!!userInfo from login api(cookie ver)")
           console.log(userInfo)
-          setUserInfo(resLogin);
-          if(typeof window !== 'undefined'){
-            sessionStorage.setItem('access_token', resLogin.accessToken);
-          }
-          //setAuthToken(resLogin.accessToken)
+          //setUserInfo(resLogin);
+          //if(typeof window !== 'undefined'){
+          //  sessionStorage.setItem('access_token', resLogin.accessToken);
+          //}
           router.push('/');
         }else{
           throw new Error('200');
