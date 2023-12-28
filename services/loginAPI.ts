@@ -30,11 +30,13 @@ export const getCookie = async (reqbody: SocialLogin) => {
   const headers = {
     'Content-Type': 'application/json',
   };
-  const resTokenAPI = await baseAxiosInstance.post('/memberLogin', reqbody, { headers });
+  const config = {headers, withCredentials: true}
+  const resTokenAPI = await baseAxiosInstance.post('/memberLogin', reqbody, config);
   const userId = resTokenAPI.data.userId;
   const email = resTokenAPI.data.email;
-  
-  return { userId, email };
+  const nickname = null;
+
+  return { userId, email, nickname };
 };
 
 export const getUserInfo = async (token: string) => {
@@ -51,3 +53,14 @@ export const getUserInfo = async (token: string) => {
   console.log(res);
   return res.data;
 };
+
+/*
+export const logout = async (userId: number) => {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  const config = {headers, withCredentials: true}
+
+  const resLogout = await baseAxiosInstance.post(`/memberLogout/${userId}`,"",config)
+}
+*/

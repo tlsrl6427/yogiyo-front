@@ -44,7 +44,7 @@ export interface InputBox {
 }
 
 export interface UserInfo {
-  id: string;
+  userId: string;
   nickname: string | null; //서버에서 nickname null로 보내고 있어서 임시로!
   email: string;
   phone?: string;

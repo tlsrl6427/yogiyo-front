@@ -65,7 +65,7 @@ export const isFindMapState = atom({
 export const userInfoAtom = atom<UserInfo>({
   key: 'user',
   default: {
-    id: 'unknown',
+    userId: 'unknown',
     nickname: 'unknown',
     email: 'unknown',
   },
