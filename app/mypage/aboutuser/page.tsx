@@ -17,6 +17,7 @@ const AboutUser = () => {
     backgroundPosition: 'center',
   };
 
+  /*
   const doLogout = () => {
     const userData = { id: 'unknown', nickname: 'unknown', email: 'unknown', accessToken: null };
     setUser(userData);
@@ -25,6 +26,11 @@ const AboutUser = () => {
     }
     router.push('/');
   };
+  */
+
+  //const doLogout = () => {
+  //  const 
+  //}
 
   return (
     <div className="">
@@ -78,7 +84,7 @@ const AboutUser = () => {
         </div>
       </div>
       <div className="p-4 flex justify-end text-yogrey4">
-        <span onClick={doLogout}>로그아웃</span>
+        {/*<span onClick={doLogout}>로그아웃</span>*/}
         <span className="pr-2 pl-2 text-sm">|</span>
         <span>회원탈퇴</span>
       </div>
