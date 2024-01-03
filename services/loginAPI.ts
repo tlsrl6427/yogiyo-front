@@ -39,11 +39,11 @@ export const getCookie = async (reqbody: SocialLogin) => {
   return { userId, email, nickname };
 };
 
-export const getUserInfo = async (token: string) => {
-  const headers = {
-    Authorization: token,
-  };
-  const res = await baseAxiosInstance.get('/member/mypage', { headers });
+export const getUserInfo = async () => {
+  //const headers = {
+  //  Authorization: token,
+  //};
+  const res = await baseAxiosInstance.get('/member/mypage', { withCredentials: true });
   /*const res = await baseAxiosInstance.get('/member/mypage', {
     headers: {
       Authorization: token
