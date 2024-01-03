@@ -58,7 +58,7 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
       console.log(requestInfo);
 
       //다음 오프셋이 있을 경우
-      if (response.hasNext) {
+      if (response?.hasNext) {
         setOffset(response.nextOffset);
       }
 
@@ -84,6 +84,9 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
         } else {
           setLimit(false);
         }
+      } else {
+        // data가 없을 경우
+        setLimit(true)
       }
     } catch (error) {
       console.error(error);
