@@ -66,4 +66,5 @@ export const logout = async (userId: number) => {
   const config = {headers, withCredentials: true}
 
   const resLogout = await baseAxiosInstance.post(`/memberLogout/${userId}`,"",config)
+  console.log(resLogout)
 }
