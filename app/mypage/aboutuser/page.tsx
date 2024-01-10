@@ -33,6 +33,8 @@ const AboutUser = () => {
   const doLogout = async () => {
     const res = await logout(user.userId);
     console.log(res);
+
+    setUser(res);
     router.push('/');
   }
 
