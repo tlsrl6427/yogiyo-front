@@ -5,7 +5,7 @@ import 'swiper/css';
 import MarketInfoCard from '../common/MaketInfoCard';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import type { Shop, RegisterAddressRequest } from '@/lib/types';
+import type { Shop, RegisterAddressRequest } from '@/types/types';
 import { shopApi } from '@/services/shopApi';
 
 interface ListSwiperProps {

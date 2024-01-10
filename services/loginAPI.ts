@@ -1,4 +1,4 @@
-import { ReqAuth, SocialLogin } from '@/lib/types';
+import { ReqAuth, SocialLogin } from '@/types/types';
 import { baseAxiosInstance } from './apiConfig';
 
 export const getNaverAuth = (req: ReqAuth) => {
