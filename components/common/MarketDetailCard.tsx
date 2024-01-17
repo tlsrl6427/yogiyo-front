@@ -25,7 +25,12 @@ const basicStyled = {
 const MaketDetailCard = ({ shop }: Props) => {
   return (
     <Link
-      href=""
+      href={{
+        pathname: 'detail',
+        query: {
+          id: shop.shopId,
+        },
+      }}
       className="mt-[20px] ml-[20px] mr-[20px] pb-[20px] border-b border-slate-200 flex gap-4"
     >
       <div className="w-[90px] h-[90px] rounded-xl bg-slate-300">
