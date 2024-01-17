@@ -1,6 +1,6 @@
 import { AiFillStar } from 'react-icons/ai';
 import Link from 'next/link';
-import type { Shop } from '@/lib/types';
+import type { Shop } from '@/types/types';
 
 interface Props {
   shop: Shop;
