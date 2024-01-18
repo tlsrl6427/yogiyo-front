@@ -81,8 +81,11 @@ export default OrderList;
 const SlideOrderList = ({ orderList }: Props) => {
   const router = useRouter();
 
-  const handleClickMore = () => {
+  const handleClickOrder= () => {
     router.push('/order')
+  }
+  const handleClickLinkOrderList = () => {
+    router.push('/')
   }
   return (
     <div className="pl-4 pr-4 pb-4 bg-white">
@@ -98,7 +101,9 @@ const SlideOrderList = ({ orderList }: Props) => {
             </div>
             );
           })}
-          <div className="w-[240px] h-[80px]" onClick={handleClickMore}>더 보기(지금은 주문 테스트)</div>
+          <div className="w-[240px] h-[80px]">더 보기</div>
+          <div className="w-[240px] h-[80px]" onClick={handleClickOrder}>(임시:주문하기)</div>
+          <div className="w-[240px] h-[80px]" onClick={handleClickLinkOrderList}>(임시:홈으로)</div>
         </div>
       </div>
     </div>
