@@ -31,8 +31,11 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
   console.log(thisAddress)
   const [loading, setLoading] = useState(false);
 
-  //무한스크롤 offset
-  const [offset, setOffset] = useState(0);
+  //무한스크롤 cursor (collumn값)
+  const [cursor, setCursor] = useState(1);
+
+  //무한스크롤 subCursor (음식점id)
+  const [subCursor, setSubCursor] = useState(0)
 
   //감시 타겟 ref
   const observerTarget = useRef<HTMLDivElement>(null);
@@ -51,8 +54,8 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
         // longitude: 127.021577848223,
         latitude: thisAddress?.latitude ? thisAddress.latitude : 37.560023342132,
         // latitude: 37.560023342132,
-        offset: offset,
-        limit: 5,
+        cursor: cursor,
+        size: 5,
       };
 
       const response = await shopApi.fetchShopList(requestInfo);

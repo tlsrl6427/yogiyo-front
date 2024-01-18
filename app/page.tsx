@@ -10,6 +10,7 @@ import Footer from '@/components/common/Footer';
 import { userInfoAtom } from '@/recoil/state';
 import { useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
+import Homes from './home/page';
 
 export default function Home() {
   const userInfo = useRecoilValue(userInfoAtom);
@@ -41,12 +42,13 @@ export default function Home() {
       </Head>
       <main className="flex flex-col w-full pt-[50px] pb-[70px]">
         <Header />
-        <SearchBarLink />
+        <Homes />
+        {/* <SearchBarLink />
         <GridIconMenu />
         <div className="p-1.5 bg-slate-100" />
         <MyOrderedEateries />
         <div className="p-1.5 bg-slate-100" />
-        <NewEateries />
+        <NewEateries /> */}
         <Footer />
       </main>
     </div>
