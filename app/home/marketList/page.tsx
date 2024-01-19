@@ -5,7 +5,7 @@ import OptionList from '@/components/home/marketList/OptionList';
 import { useSearchParams } from 'next/navigation';
 import { shopApi } from '@/services/shopApi';
 import { useRecoilValue } from 'recoil';
-import { currentCoord, shopListOption, thisAddressId } from '@/recoil/state';
+import { currentCoord, currentRegionCode, shopListOption, thisAddressId } from '@/recoil/state';
 import { optionConvert } from '@/lib/optionConvert';
 import { useState, useEffect, useRef } from 'react';
 import type { Shop } from '@/types/types';
@@ -17,6 +17,9 @@ const MarketList = () => {
 
   //로그인 유저 주소정보
   const thisAddress = useRecoilValue(thisAddressId);
+
+  //현재위치기준 법정동코드
+  const regionCode = useRecoilValue(currentRegionCode)
 
   //비로그인 포함 gps기준 좌표정보
   const curCoord = useRecoilValue(currentCoord)
@@ -49,13 +52,9 @@ const MarketList = () => {
       if (shopListOptionState.orderAmount !== '최소주문금액')
         requestInfo.leastOrderPrice = optionConvert(shopListOptionState.orderAmount) as number;
 
-      //로그인 시
-      // requestInfo.longitude = thisAddress.longitude;
-      // requestInfo.latitude = thisAddress.latitude;
-
-      //비로그인 시
-      requestInfo.longitude = curCoord?.lng;
-      requestInfo.latitude = curCoord?.lat;
+      //로그인 시 & 비로그인 시 
+      requestInfo.longitude = thisAddress?.longitude || curCoord?.lng;
+      requestInfo.latitude = thisAddress?.latitude || curCoord?.lat;
 
       // 테스트용 좌표
       // requestInfo.longitude = 127.021577848223;
@@ -64,6 +63,7 @@ const MarketList = () => {
       requestInfo.cursor = cursor;
       requestInfo.subCursor = subCursor;
       requestInfo.size = 10;
+      requestInfo.code = thisAddress?.code || regionCode
 
       const response = await shopApi.fetchShopList(requestInfo);
       console.log(requestInfo);
