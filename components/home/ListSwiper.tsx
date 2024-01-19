@@ -1,12 +1,16 @@
 'use client';
 import { IoIosArrowForward } from 'react-icons/io';
+import Link from 'next/link';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import MarketInfoCard from '../common/MaketInfoCard';
-import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import type { Shop, RegisterAddressRequest } from '@/types/types';
 import { shopApi } from '@/services/shopApi';
+import { useRecoilValue } from 'recoil';
+import { currentCoord, currentRegionCode } from '@/recoil/state';
+import type { requestInfoType } from '@/types/types';
 
 interface ListSwiperProps {
   thisAddress: RegisterAddressRequest;
@@ -28,10 +32,17 @@ const lastArrowStyle = {
 };
 
 const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperProps) => {
+  console.log(thisAddress)
   const [loading, setLoading] = useState(false);
 
-  //무한스크롤 offset
-  const [offset, setOffset] = useState(0);
+  const regionCode = useRecoilValue(currentRegionCode)
+  const curCoord = useRecoilValue(currentCoord)
+
+  //무한스크롤 cursor (collumn값)
+  const [cursor, setCursor] = useState(0);
+
+  //무한스크롤 subCursor (음식점id)
+  const [subCursor, setSubCursor] = useState(0)
 
   //감시 타겟 ref
   const observerTarget = useRef<HTMLDivElement>(null);
@@ -39,27 +50,36 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
   //무한스크롤 종료 state
   const [limit, setLimit] = useState(false);
 
-  const getShopList = async (offset: number) => {
+  const getShopList = async (cursor: number, subCursor: number) => {
     try {
-      const requestInfo = {
+      const requestInfo: requestInfoType = {
         category: '신규맛집',
         sortOption: 'ORDER',
         deliveryPrice: 3000,
-        orderAmount: 15000,
-        // longitude: thisAddress.longitude ? thisAddress.longitude : 127.021577848223,
-        longitude: 127.021577848223,
-        // latitude: thisAddress.latitude ? thisAddress.latitude : 37.560023342132,
-        latitude: 37.560023342132,
-        offset: offset,
-        limit: 5,
+        leastOrderPrice: 15000,
+        longitude: thisAddress?.longitude || curCoord?.lng,
+        latitude: thisAddress?.latitude || curCoord?.lat,
+        // longitude: 127.021577848223,
+        // latitude: 37.560023342132,
+        size: 5,
+        code: thisAddress?.code || regionCode
+        // code: 1171010200
       };
+      if(cursor){
+        requestInfo.cursor = cursor
+      }
+
+      if(subCursor){
+        requestInfo.subCursor = subCursor
+      }
 
       const response = await shopApi.fetchShopList(requestInfo);
       console.log(requestInfo);
 
       //다음 오프셋이 있을 경우
       if (response?.hasNext) {
-        setOffset(response.nextOffset);
+        setCursor(response.nextCursor);
+        setSubCursor(response.nextSubCursor);
       }
 
       return response;
@@ -72,20 +92,21 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
     if (loading || limit) return; // 로딩 중이거나 limit 상태일 경우 함수 실행 방지
     setLoading(true);
     try {
-      const data = await getShopList(offset);
+      const data = await getShopList(cursor, subCursor);
       console.log(data);
       if (data && data.content) {
         setShopListData((prev) => [...prev, ...data.content]);
-        setOffset(data.nextOffset);
+        setCursor(data.nextCursor);
+        setSubCursor(data.nextSubCursor);
 
         // 데이터가 더 이상 없을 경우 limit 상태를 true로 설정
         if (!data.hasNext) {
           setLimit(true);
-        } else {
+        } else { 
           setLimit(false);
         }
-      } else {
-        // data가 없을 경우
+      } else if(!thisAddress && (!regionCode && !curCoord)) {
+        // 비로그인 시 데이터가 없을 경우
         setLimit(true)
       }
     } catch (error) {
@@ -94,8 +115,12 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
       setLoading(false);
     }
   };
+  console.log(regionCode)
 
   useEffect(() => {
+    // if (!regionCode) {
+    //   return; 
+    // }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -116,7 +141,7 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
     return () => {
       observer.disconnect();
     };
-  }, [offset, limit, loading]);
+  }, [cursor, subCursor, limit, curCoord, currentRegionCode, loading]);
 
   return (
     <>

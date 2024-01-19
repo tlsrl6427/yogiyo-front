@@ -1,17 +1,3 @@
-/*
-  순서대로
-  가게이름, 별점, 가게이미지, 배달시간, 배달요금
-*/
-export interface MaketInfoType {
-  info: {
-    name?: string;
-    rate?: string;
-    img?: string;
-    delay?: string;
-    delFee?: string;
-  };
-}
-
 export interface Coordinate {
   lat: number;
   lng: number;
@@ -65,6 +51,7 @@ export interface RegisterAddressRequest {
   addressType: string;
   longitude: number;
   latitude: number;
+  code: number;
 }
 
 export interface SocialLogin {
@@ -226,4 +213,17 @@ export interface Order {
   totalPrice: number; //ex 20000,
   deliveryPrice: number; //ex 1000,
   totalPaymentPrice: number; //ex 21000
+}
+
+export interface requestInfoType {
+  category: string,
+  sortOption: string,
+  deliveryPrice: number,
+  leastOrderPrice: number,
+  longitude: number | undefined,
+  latitude: number | undefined,
+  size: number,
+  code: number | null,
+  cursor?: number,
+  subCursor?: number
 }
