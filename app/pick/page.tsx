@@ -12,7 +12,7 @@ const Pick = () => {
       try {
         const result = await likeApi.getLikeList(0, 0);
         console.log(result)
-        setPickList(result);
+        setPickList(result.content);
       } catch (error) {
         console.error('컴포넌트 내부 에러', error);
       }

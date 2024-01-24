@@ -15,13 +15,12 @@ export const likeApi = {
   //찜하기 목록 조회
   async getLikeList(offset: number, limit: number) {
     try {
+      const params = (offset !== 0 && limit !== 0) ? { offset, limit } : {};
       const response = await baseAxiosInstance.get(`/like/scroll`, {
-        params: () => {
-          return (offset !== 0 && limit !== 0) ? {offset, limit} : {}
-        },
         headers: {
           'Content-Type': 'application/json',
         },
+        params,
       });
       console.log('찜하기api' + response)
       return response.data;
