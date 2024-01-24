@@ -8,8 +8,16 @@ import Footer from '@/components/common/Footer';
 const Pick = () => {
   const [pickList, setPickList] = useState([{},{}])
   useEffect(() => {
-    const result = likeApi.getLikeList(0, 0)
-    setPickList(result)
+    const fetchData = async () => {
+      try {
+        const result = await likeApi.getLikeList(0, 0);
+        setPickList(result);
+      } catch (error) {
+        console.error('찜하기 목록 에러', error);
+      }
+    };
+  
+    fetchData();
   },[])
 
   return (
