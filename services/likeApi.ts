@@ -17,9 +17,7 @@ export const likeApi = {
     try {
       const response = await baseAxiosInstance.get(`/like/scroll`, {
         params: () => {
-          if(offset !== 0 && limit !== 0){
-            return {offset, limit}
-          }
+          return (offset !== 0 && limit !== 0) ? {offset, limit} : {}
         },
         headers: {
           'Content-Type': 'application/json',
