@@ -11,9 +11,10 @@ const Pick = () => {
     const fetchData = async () => {
       try {
         const result = await likeApi.getLikeList(0, 0);
+        console.log(result)
         setPickList(result);
       } catch (error) {
-        console.error('찜하기 목록 에러', error);
+        console.error('컴포넌트 내부 에러', error);
       }
     };
   
