@@ -28,11 +28,11 @@ const OrderList = () => {
   const [isBottom, setIsBottom] = useState(false);
 
   const userInfo = useRecoilValue(userInfoAtom);
-  const router = useRouter();
+  //const router = useRouter();
 
   if(!userInfo.isLogin){
     console.log("로그인 상태가 아닙니다.")
-    router.push('/mypage');
+    //router.push('/mypage');
   }else{
     console.log(`${userInfo.nickname} 의 주문내역`);
   }
