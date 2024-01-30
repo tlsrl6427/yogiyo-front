@@ -89,14 +89,15 @@ const OrderList = () => {
 
 export default OrderList;
 
+
 const SlideOrderList = ({ orderList }: Props) => {
-  const router = useRouter();
+  const router2 = useRouter();
 
   const handleClickOrder= () => {
-    router.push('/order')
+    router2.push('/order')
   }
   const handleClickLinkOrderList = () => {
-    router.push('/')
+    router2.push('/')
   }
   return (
     <div className="pl-4 pr-4 pb-4 bg-white">
@@ -120,6 +121,7 @@ const SlideOrderList = ({ orderList }: Props) => {
     </div>
   );
 };
+
 
 const CardOrdered = ({ orderList }: Props) => {
   //const orderStateMap = ['주문확인','조리중','배달중','배달완료'];
@@ -174,6 +176,7 @@ const CardOrdered = ({ orderList }: Props) => {
     </div>
   );
 };
+
 
 const buttonStyles = {
   active:
