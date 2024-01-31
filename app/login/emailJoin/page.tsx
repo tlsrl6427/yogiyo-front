@@ -23,6 +23,7 @@ const EmailJoin = () => {
 
   const handleEmailJoin = () => {
     emailJoin(email, password, nickname)
+    console.log(`${email}, ${password}, ${nickname}`)
   }
 
   return (
