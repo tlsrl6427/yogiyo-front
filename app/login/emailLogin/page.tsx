@@ -21,7 +21,6 @@ const EmailLogin = () => {
     emailLogin(email, password);
   }
 
-  const [value, setValue] = useState('');
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     if(e.target.id="email"){
       setEmail(e.target.value);
@@ -36,8 +35,8 @@ const EmailLogin = () => {
         <PrevPageX />
       </div>
       <div className="p-4">
-        <InputBox id="email" placeholder="이메일 주소 입력" type="text" style="pb-4" value={value} onChange={handleChange}/>
-        <InputBox id="pw" placeholder="비밀번호 입력" type="password" value={value} onChange={handleChange}/>
+        <InputBox id="email" placeholder="이메일 주소 입력" type="text" style="pb-4" value={email} onChange={handleChange}/>
+        <InputBox id="pw" placeholder="비밀번호 입력" type="password" value={password} onChange={handleChange}/>
 
         <div className="w-full mt-8 p-3.5 rounded-xl bg-yogrey2">
           <p className="font-semibold w-full text-center text-white" onClick={handleEmailLogin}>로그인</p>
