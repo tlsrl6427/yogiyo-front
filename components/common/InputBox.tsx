@@ -2,7 +2,6 @@ import { InputBox } from '@/types/types';
 import { useState } from 'react';
 
 const InputBox = (props: InputBox) => {
-
   return (
     <div className={props.style}>
       {props.title ? <p className="pb-2">{props.title}</p> : ''}

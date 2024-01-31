@@ -12,15 +12,11 @@ const EmailJoin = () => {
   const [nickname, setNickname] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.id)
     if(e.target.id=='email'){
-      //console.log("email--->")
       setEmail(e.target.value);
-    }else if(e.target.id='password'){
-      //console.log("password--->")
+    }else if(e.target.id=='password'){
       setPassword(e.target.value);
-    }else if(e.target.id='nickname'){
-      //console.log("nickname--->")
+    }else if(e.target.id=='nickname'){
       setNickname(e.target.value);
     }
   }
@@ -63,7 +59,8 @@ const EmailJoin = () => {
           id="nickname"
           title="닉네임" 
           placeholder="닉네임" 
-          type="text" style="pb-6" 
+          type="text" 
+          style="pb-6" 
           value={nickname} 
           onChange={handleChange}
         />
