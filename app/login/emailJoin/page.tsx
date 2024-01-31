@@ -16,7 +16,7 @@ const EmailJoin = () => {
     if(e.target.id=='email'){
       //console.log("email--->")
       setEmail(e.target.value);
-    }else if(e.target.id='pw'){
+    }else if(e.target.id='password'){
       //console.log("password--->")
       setPassword(e.target.value);
     }else if(e.target.id='nickname'){
