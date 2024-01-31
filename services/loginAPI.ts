@@ -80,14 +80,14 @@ export const logout = async (userId: number) => {
 }
 
 
-export const login = async (email: string, password: string, nickname: string) => {
+export const emailLogin = async (email: string, password: string) => {
   const userData = {
-    nickname: nickname,
-    email: email,
-    password: password,
-    providerType: 'DEFAULT',
+    "email" : email,
+    "password" : password,
+    "authCode" : null,
+    "providerType" : "DEFAULT"
   }
 
-  const resJoin = await baseAxiosInstance.post(`/member/join`, userData, { withCredentials: true })
+  const resJoin = await baseAxiosInstance.post(`/memberLogin`, userData, { withCredentials: true })
   console.log(resJoin)
 }

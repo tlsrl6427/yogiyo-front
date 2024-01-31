@@ -4,25 +4,43 @@ import 'lib/styles.css';
 import { GoX } from 'react-icons/go';
 import InputBox from '../../../components/common/InputBox';
 import { useRouter } from 'next/navigation';
+import PrevPageX from '@/components/common/PrevPageX';
+import { emailLogin } from '@/services/loginAPI';
+import { useState } from 'react';
 
 const EmailLogin = () => {
   const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('')
 
   const handleEmailJoin = () => {
     router.push('/login/emailJoin')
+  }
+  const handleEmailLogin = () => {
+    console.log("===emailLogin===")
+    emailLogin(email, password);
+  }
+
+  const [value, setValue] = useState('');
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.id="email"){
+      setEmail(e.target.value);
+    }else if(e.target.id="pw"){
+      setPassword(e.target.value);
+    }
   }
 
   return (
     <div>
       <div className="flex p-2">
-        <GoX className="text-[2rem]" />
+        <PrevPageX />
       </div>
       <div className="p-4">
-        <InputBox placeholder="이메일 주소 입력" type="text" style="pb-4" />
-        <InputBox placeholder="비밀번호 입력" type="password" />
+        <InputBox id="email" placeholder="이메일 주소 입력" type="text" style="pb-4" value={value} onChange={handleChange}/>
+        <InputBox id="pw" placeholder="비밀번호 입력" type="password" value={value} onChange={handleChange}/>
 
         <div className="w-full mt-8 p-3.5 rounded-xl bg-yogrey2">
-          <p className="font-semibold w-full text-center text-white">로그인</p>
+          <p className="font-semibold w-full text-center text-white" onClick={handleEmailLogin}>로그인</p>
         </div>
 
         <div className="pt-5 text-center text-sm text-yogrey5">
