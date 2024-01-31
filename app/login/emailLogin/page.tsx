@@ -4,6 +4,7 @@ import 'lib/styles.css';
 import { GoX } from 'react-icons/go';
 import InputBox from '../../../components/common/InputBox';
 import { useRouter } from 'next/navigation';
+import PrevPageX from '@/components/common/PrevPageX';
 
 const EmailLogin = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const EmailLogin = () => {
   return (
     <div>
       <div className="flex p-2">
-        <GoX className="text-[2rem]" />
+        <PrevPageX />
       </div>
       <div className="p-4">
         <InputBox placeholder="이메일 주소 입력" type="text" style="pb-4" />
