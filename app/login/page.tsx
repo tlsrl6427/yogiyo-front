@@ -2,11 +2,12 @@
 import React, { useState } from 'react';
 import 'lib/styles.css';
 import PrevPageX from '@/components/common/PrevPageX';
-import EmailJoin from '@/components/login/emailJoin';
-import EmailLogin from '@/components/login/emailLogin';
+import EmailLogin from '@/app/login/emailLogin/page';
 import { getNaverAuth, getKakaoAuth } from '@/services/loginAPI';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
+  const router = useRouter();
   const [view, setView] = useState(0);
 
   const yogiyoLogo = {
@@ -42,7 +43,16 @@ const Login = () => {
     }
   };
 
-  return view === 0 ? (
+  const handleEmailJoin = () => {
+    router.push('/login/emailJoin');
+    console.log("goto emailJoin")
+  }
+  const handleEmailLogin = () => {
+    router.push('/login/emailLogin');
+    console.log("goto emailLogin")
+  }
+
+  return(
     <div className="w-full h-screen p-2 flex flex-col">
       <PrevPageX />
       <div className="w-full h-[50px] mt-10" style={yogiyoLogo} />
@@ -53,18 +63,14 @@ const Login = () => {
       <div className="w-full p-4 mt-3 rounded-xl bg-naver" onClick={handleAuth} id="naver">
         <p className="font-semibold text-white text-center">네이버로 로그인</p>
       </div>
-      <div className="w-full p-4 mt-3 rounded-xl bg-slate-200">
+      <div className="w-full p-4 mt-3 rounded-xl bg-slate-200" onClick={handleEmailLogin}>
         <p className="font-semibold text-center">이메일로 로그인</p>
       </div>
-      <div className="w-full p-4 rounded-xl border border-slate-300 mt-auto">
+      <div className="w-full p-4 rounded-xl border border-slate-300 mt-auto" onClick={handleEmailJoin}>
         <p className="font-semibold text-center">이메일로 회원가입</p>
       </div>
     </div>
-  ) : view === 1 ? (
-    <EmailJoin />
-  ) : (
-    <EmailLogin />
-  );
+  )
 };
 
 export default Login;
