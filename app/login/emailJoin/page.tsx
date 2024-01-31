@@ -4,6 +4,7 @@ import 'lib/styles.css';
 import { GoX } from 'react-icons/go';
 import InputBox from '../../../components/common/InputBox';
 import { useState } from 'react';
+import { emailJoin } from '@/services/loginAPI';
 
 const EmailJoin = () => {
   const [email, setEmail] = useState('')
@@ -20,12 +21,16 @@ const EmailJoin = () => {
     }
   }
 
+  const handleEmailJoin = () => {
+    emailJoin(email, password, nickname)
+  }
+
   return (
     <div>
       <div className="flex p-2 border-b border-yogrey2">
         <GoX className="text-[2.5rem]" />
         <div className="relative flex-1">
-          <p className="absolute transform-center font-semibold">회원가입</p>
+          <p className="absolute transform-center font-semibold" onClick={handleEmailJoin}>회원가입</p>
         </div>
         <div className="w-[2.5rem] h-[2.5rem]"></div>
       </div>
