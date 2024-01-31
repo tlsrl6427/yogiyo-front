@@ -14,13 +14,13 @@ const EmailJoin = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.id)
     if(e.target.id=='email'){
-      console.log("email--->")
+      //console.log("email--->")
       setEmail(e.target.value);
     }else if(e.target.id='pw'){
-      console.log("password--->")
+      //console.log("password--->")
       setPassword(e.target.value);
     }else if(e.target.id='nickname'){
-      console.log("nickname--->")
+      //console.log("nickname--->")
       setNickname(e.target.value);
     }
   }
