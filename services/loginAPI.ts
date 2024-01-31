@@ -88,7 +88,7 @@ export const emailLogin = async (email: string, password: string) => {
     "providerType" : "DEFAULT"
   }
 
-  const resLogin = await baseAxiosInstance.post(`/memberLogin`, userData, { withCredentials: true })
+  const resLogin = await baseAxiosInstance.post(`/memberLogin`, userData)
   console.log(resLogin)
 }
 
@@ -99,6 +99,6 @@ export const emailJoin = async (email: string, password: string, nickname: strin
     "password" : password,
     "providerType" : "DEFAULT"
   }
-  const resJoin = await baseAxiosInstance.post(`/member/join`, userData, { withCredentials: true })
+  const resJoin = await baseAxiosInstance.post(`/member/join`, userData)
   console.log(resJoin)
 }
