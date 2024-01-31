@@ -11,6 +11,8 @@ const InputBox = (props: InputBox) => {
         type={props.type}
         placeholder={props.placeholder}
         onChange={props.onChange}
+        id={props.id}
+        value={props.value}
       />
     </div>
   );
