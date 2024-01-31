@@ -12,11 +12,15 @@ const EmailJoin = () => {
   const [nickname, setNickname] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.id)
     if(e.target.id=='email'){
+      console.log("email--->")
       setEmail(e.target.value);
     }else if(e.target.id='pw'){
+      console.log("password--->")
       setPassword(e.target.value);
     }else if(e.target.id='nickname'){
+      console.log("nickname--->")
       setNickname(e.target.value);
     }
   }
@@ -47,7 +51,7 @@ const EmailJoin = () => {
           onChange={handleChange}  
         />
         <InputBox
-          id="pw"
+          id="password"
           title="비밀번호"
           placeholder="영문,숫자,특수문자 포함 8자리 이상"
           type="password"
