@@ -30,7 +30,7 @@ const EmailJoin = () => {
       <div className="flex p-2 border-b border-yogrey2">
         <GoX className="text-[2.5rem]" />
         <div className="relative flex-1">
-          <p className="absolute transform-center font-semibold" onClick={handleEmailJoin}>회원가입</p>
+          <p className="absolute transform-center font-semibold">회원가입</p>
         </div>
         <div className="w-[2.5rem] h-[2.5rem]"></div>
       </div>
@@ -63,7 +63,7 @@ const EmailJoin = () => {
           onChange={handleChange}
         />
         <div className="w-full mt-5 p-3.5 rounded-xl bg-yogrey2">
-          <p className="font-semibold w-full text-center text-white">다음</p>
+          <p className="font-semibold w-full text-center text-white" onClick={handleEmailJoin}>다음</p>
         </div>
       </div>
     </div>
