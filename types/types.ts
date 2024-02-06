@@ -23,10 +23,13 @@ export interface Tabdata {
 }
 
 export interface InputBox {
+  id: string;
   title?: string;
   placeholder: string;
   type: string;
   style?: string;
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export interface UserInfo {

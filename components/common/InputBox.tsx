@@ -1,4 +1,5 @@
 import { InputBox } from '@/types/types';
+import { useState } from 'react';
 
 const InputBox = (props: InputBox) => {
   return (
@@ -8,6 +9,9 @@ const InputBox = (props: InputBox) => {
         className="w-full p-3.5 text-md border border-yogrey2 rounded-xl focus:outline-none focus:border-yogrey4"
         type={props.type}
         placeholder={props.placeholder}
+        onChange={props.onChange}
+        id={props.id}
+        value={props.value}
       />
     </div>
   );
