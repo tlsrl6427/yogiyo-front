@@ -1,5 +1,6 @@
 import type { ShopList } from '@/types/types';
 import { baseAxiosInstance } from './apiConfig';
+import type { shopInfoType } from '@/types/types';
 
 export const shopApi = {
   // 상점 리스트 조회
@@ -18,12 +19,27 @@ export const shopApi = {
   },
 
   //가게 정보 조회
-  async getShopInfo(shopId: string | null) {
+  // async getShopInfo(shopId: string | null) {
+  //   try {
+  //     const response = await baseAxiosInstance.get(`/owner/shop/${shopId}/info`, {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       }
+  //     });
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // },
+
+  //가게 상세 정보 조회(member)
+  async getShopInfo(params: shopInfoType) {
     try {
-      const response = await baseAxiosInstance.get(`/owner/shop/${shopId}/info`, {
+      const response = await baseAxiosInstance.get(`/member/shop/details`, {
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
+        params,
       });
       return response.data;
     } catch (error) {

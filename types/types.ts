@@ -228,10 +228,25 @@ export interface requestInfoType {
   subCursor?: number
 }
 
+// export interface shopInfoType {
+//   id: number,
+//   name: string,
+//   callNumber: string,
+//   address: string,
+//   categories: string[]
+// }
+
 export interface shopInfoType {
   id: number,
   name: string,
-  callNumber: string,
-  address: string,
-  categories: string[]
+  reviewNum: number,
+  likeNum: number,
+  totalScore: number,
+  banner: string,
+  noticeTitle: string,
+  distance: number,
+  minOrderPrice: number, 
+  minDeliveryPrice: number,
+  isLike: boolean
 }
+
