@@ -2,8 +2,14 @@
 import { useRouter } from 'next/navigation';
 import { SlArrowLeft, SlMagnifier } from 'react-icons/sl';
 import { useState, useEffect } from 'react';
+import type { shopInfoType } from '@/types/types';
 
-const DetailHeader = () => {
+interface Props {
+  shopInfo?: shopInfoType
+}
+
+
+const DetailHeader = ({shopInfo} : Props) => {
   const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -34,7 +40,7 @@ const DetailHeader = () => {
           }
         />
       </i>
-      {isScrolled && <p className="font-bold text-[1.2rem]">가게이름</p>}
+      {isScrolled && <p className="font-bold text-[1.2rem]">{shopInfo?.name}</p>}
       <i className="p-[16px] cursor-pointer">
         <SlMagnifier
           style={

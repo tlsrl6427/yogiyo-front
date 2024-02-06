@@ -10,12 +10,12 @@ import { useRecoilValue } from 'recoil';
 import { currentCoord, currentRegionCode, thisAddressId, userInfoAtom } from '@/recoil/state';
 import { useState, useEffect } from 'react';
 import { shopApi } from '@/services/shopApi';
-import type { shopInfoType } from '@/types/types';
+import type { ShopInfoType } from '@/types/types';
 
 const Detail = () => {
   const searchParams = useSearchParams();
   const shopId = searchParams.get('id');
-  const [shopInfo, setShopInfo] = useState<shopInfoType>()
+  const [shopInfo, setShopInfo] = useState<ShopInfoType>()
 
   // 로그인 유무
   const userInfo = useRecoilValue(userInfoAtom);
@@ -29,9 +29,27 @@ const Detail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await shopApi.getShopInfo(shopId);
-        console.log(result)
-        setShopInfo(result)
+        if(shopId){
+          const param = {
+            shopId: shopId,
+            code: 0,
+            latitude: 0,
+            longitude: 0
+          }
+          // 로그인했을 경우
+          if(userInfo.isLogin){
+            param.code = thisAddId.code
+            param.latitude = thisAddId.latitude
+            param.longitude = thisAddId.longitude
+          // 비로그인일 경우
+          }else{
+            param.code = curRegionCode || 0
+            param.latitude = curCoord?.lat || 0
+            param.longitude = curCoord?.lng || 0
+          }
+          const result = await shopApi.getShopInfo(param);
+          setShopInfo(result)
+        }
       } catch (error) {
         console.error('컴포넌트 내부 에러', error);
       }
@@ -40,14 +58,19 @@ const Detail = () => {
     fetchData();
   }, [])
 
+  const bannerStyle = {
+    background: `url(${shopInfo?.banner})`
+  }
+
 
   return (
     <div className="">
-      <DetailHeader />
-      <HeadSlider />
-      <MiddleTitle />
+      <DetailHeader shopInfo={shopInfo} />
+      {/* <HeadSlider /> */}
+      <div className={`w-full h-[200px]`} style={bannerStyle}/>
+      <MiddleTitle shopInfo={shopInfo} />
       <div className='border-y-[4px] border-slate-200 ' />
-      <DetailTabMenu />
+      <DetailTabMenu shopInfo={shopInfo} />
       <SignatureMenuTab />
       <DetailMenuList />
     </div>

@@ -218,7 +218,7 @@ export interface Order {
   totalPaymentPrice: number; //ex 21000
 }
 
-export interface requestInfoType {
+export interface RequestInfoType {
   category: string,
   sortOption: string,
   deliveryPrice: number,
@@ -239,7 +239,7 @@ export interface requestInfoType {
 //   categories: string[]
 // }
 
-export interface shopInfoType {
+export interface ShopInfoType {
   id: number,
   name: string,
   reviewNum: number,
@@ -252,4 +252,6 @@ export interface shopInfoType {
   minDeliveryPrice: number,
   isLike: boolean
 }
+
+// export interface shop
 
