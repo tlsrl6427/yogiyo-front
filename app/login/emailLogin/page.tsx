@@ -17,14 +17,14 @@ const EmailLogin = () => {
     router.push('/login/emailJoin')
   }
   const handleEmailLogin = () => {
-    console.log("===emailLogin===")
-    emailLogin(email, password);
+    const emailLoginRes = emailLogin(email, password);
+    console.log(emailLoginRes)
   }
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    if(e.target.id="email"){
+    if(e.target.id=="email"){
       setEmail(e.target.value);
-    }else if(e.target.id="password"){
+    }else if(e.target.id=="password"){
       setPassword(e.target.value);
     }
   }
