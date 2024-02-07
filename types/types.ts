@@ -253,5 +253,17 @@ export interface ShopInfoType {
   isLike: boolean
 }
 
-// export interface shop
+export interface MenuGroupType {
+  id: number,
+  name: string,
+  content: string,
+  menus: {
+    id: number,
+    name: string,
+    content: string,
+    price: number,
+    reviewNum: number,
+    picture: string
+  }[]
+}
 

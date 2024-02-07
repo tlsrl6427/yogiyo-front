@@ -1,15 +1,15 @@
 'use client'
 import { shopApi } from '@/services/shopApi';
 import { useState, useRef, useEffect } from 'react';
-import type { shopInfoType } from '@/types/types';
+import type { ShopInfoType, MenuGroupType } from '@/types/types';
 
 interface Props {
-  shopInfo?: shopInfoType
+  shopInfo?: ShopInfoType
 }
 
 const DetailTabMenu = ({shopInfo}: Props) => {
   const dummyMenu = new Array(10).fill('').map((_, i) => i+'번 메뉴')
-  const [menuGroups, setMenuGroups] = useState([]);
+  const [menuGroups, setMenuGroups] = useState<MenuGroupType[]>([]);
   
   const parentRef = useRef<HTMLDivElement | null>(null);
   const childRef = useRef<HTMLDivElement | null>(null);
