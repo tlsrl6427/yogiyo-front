@@ -31,7 +31,7 @@ export const getCookie = async (reqbody: SocialLogin) => {
     'Content-Type': 'application/json',
   };
   const config = {headers, withCredentials: true}
-  const resTokenAPI = await baseAxiosInstance.post('/memberLogin', reqbody, { withCredentials: true });
+  const resTokenAPI = await baseAxiosInstance.post('/member/login', reqbody, { withCredentials: true });
   
   const isLogin = true;
   const userId = resTokenAPI.data.userId;
@@ -65,7 +65,7 @@ export const logout = async (userId: number) => {
   };
   const config = {headers, withCredentials: true}
 
-  const resLogout = await baseAxiosInstance.post(`/memberLogout/${userId}`,"",config)
+  const resLogout = await baseAxiosInstance.post(`/member/logout/${userId}`,"",config)
   console.log(resLogout)
 
   const defaultUserInfo = {
@@ -88,7 +88,7 @@ export const emailLogin = async (email: string, password: string) => {
     "providerType" : "DEFAULT"
   }
 
-  const resLogin = await baseAxiosInstance.post(`/memberLogin`, userData)
+  const resLogin = await baseAxiosInstance.post(`/member/login`, userData)
   console.log(resLogin)
 }
 
