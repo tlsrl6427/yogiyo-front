@@ -10,7 +10,7 @@ import type { Shop, RegisterAddressRequest } from '@/types/types';
 import { shopApi } from '@/services/shopApi';
 import { useRecoilValue } from 'recoil';
 import { currentCoord, currentRegionCode } from '@/recoil/state';
-import type { requestInfoType } from '@/types/types';
+import type { RequestInfoType } from '@/types/types';
 
 interface ListSwiperProps {
   thisAddress: RegisterAddressRequest;
@@ -52,7 +52,7 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
 
   const getShopList = async (cursor: number, subCursor: number) => {
     try {
-      const requestInfo: requestInfoType = {
+      const requestInfo: RequestInfoType = {
         category: '신규맛집',
         sortOption: 'ORDER',
         deliveryPrice: 3000,
