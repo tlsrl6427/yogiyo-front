@@ -7,10 +7,10 @@ import Link from 'next/link';
 import { shopApi } from '@/services/shopApi';
 import { likeApi } from '@/services/likeApi';
 import { useSearchParams } from 'next/navigation';
-import type { shopInfoType } from '@/types/types';
+import type { ShopInfoType } from '@/types/types';
 
 interface Props {
-  shopInfo?: shopInfoType
+  shopInfo?: ShopInfoType
 }
 
 
