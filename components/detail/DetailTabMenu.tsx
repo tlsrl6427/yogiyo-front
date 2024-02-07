@@ -1,8 +1,15 @@
 'use client'
+import { shopApi } from '@/services/shopApi';
 import { useState, useRef, useEffect } from 'react';
+import type { ShopInfoType, MenuGroupType } from '@/types/types';
 
-const DetailTabMenu = () => {
+interface Props {
+  shopInfo?: ShopInfoType
+}
+
+const DetailTabMenu = ({shopInfo}: Props) => {
   const dummyMenu = new Array(10).fill('').map((_, i) => i+'번 메뉴')
+  const [menuGroups, setMenuGroups] = useState<MenuGroupType[]>([]);
   
   const parentRef = useRef<HTMLDivElement | null>(null);
   const childRef = useRef<HTMLDivElement | null>(null);
@@ -12,8 +19,20 @@ const DetailTabMenu = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   const observer = useRef<IntersectionObserver | null>(null);
+  
 
   useEffect(() => {
+    //데이터 fetch
+    const fetchData = async () => {
+      try {
+        const result = await shopApi.getShopMenuGroup(shopInfo?.id)
+        setMenuGroups(result)
+      } catch (error) {
+        console.error('컴포넌트 에러', error);
+      }
+    };
+    fetchData();
+
     // IntersectionObserver 인스턴스 생성
     observer.current = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -98,18 +117,18 @@ const DetailTabMenu = () => {
           ref={childRef}
           className="no-scroll top-0 left-0 overflow-x-auto h-[30px] flex px-[20px] items-center gap-4 text-sm absoulte bg-white"
         >
-          {dummyMenu.map((menu, i) => (
+          {menuGroups?.map((menuGroup, i) => (
             <p
               className={`flex text-[1rem] items-center whitespace-nowrap cursor-pointer font-bold ${
-                activeMenu === menu ? 'bg-black' : ''
+                activeMenu === menuGroup?.name ? 'bg-black' : ''
               }`}
               onClick={(e) => {
-                handleGrandchild(e, menu)
-                console.log(menu)
+                handleGrandchild(e, menuGroup?.name)
+                console.log(menuGroup?.name)
               }}
               key={i}
             >
-              {menu}
+              {menuGroup?.name}
             </p>
           ))}
         </div>
@@ -138,11 +157,11 @@ const DetailTabMenu = () => {
                 }} 
               /> */}
               <p 
-                             ref={el => {
-                              if (el) {
-                                sectionRefs.current[menu] = el;
-                              }
-                            }} 
+                ref={el => {
+                  if (el) {
+                    sectionRefs.current[menu] = el;
+                  }
+                }} 
                 className='h-[500px]'
               >{menu}</p>
             </div>

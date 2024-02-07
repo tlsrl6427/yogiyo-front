@@ -28,10 +28,9 @@ const Header = () => {
   const [curAdd, setCurAdd] = useRecoilState(currentAddress);
   const [thisAdd, setThisAdd] = useRecoilState(thisAddressId);
   const [memberAddress, setMemberAddress] = useRecoilState(userAddress);
-  const userInfo = useRecoilValue(userInfoAtom);
 
   //로그인 확인용
-  const [isLogin, setIsLogin] = useState(false);
+  const userInfo = useRecoilValue(userInfoAtom);
 
   useEffect(() => {
     // 현재 유저의 위치 찾기
@@ -49,7 +48,7 @@ const Header = () => {
       );
     }
 
-    fetchAddress(setMemberAddress, setThisAdd, userInfo);
+    fetchAddress(setMemberAddress, setThisAdd);
   }, []);
 
   useEffect(() => {
@@ -78,9 +77,6 @@ const Header = () => {
         });
         const callback = (result: any, status: any) => {
           if (status === kakao.maps.services.Status.OK) {
-      
-            console.log('지역 명칭 : ' + result[0].address_name);
-            console.log('행정구역 코드 : ' + result[0].code);
             setRegionCode(result[0].code)
           }
         };

@@ -119,7 +119,7 @@ const DetailMap = () => {
         code: regionCode
       });
 
-      await fetchAddress(setMemberAddress, setThisAdd, userInfo);
+      await fetchAddress(setMemberAddress, setThisAdd);
     }
     setCurCoord(coord);
     setCurAdd(address);

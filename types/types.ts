@@ -218,7 +218,7 @@ export interface Order {
   totalPaymentPrice: number; //ex 21000
 }
 
-export interface requestInfoType {
+export interface RequestInfoType {
   category: string,
   sortOption: string,
   deliveryPrice: number,
@@ -231,10 +231,39 @@ export interface requestInfoType {
   subCursor?: number
 }
 
-export interface shopInfoType {
+// export interface shopInfoType {
+//   id: number,
+//   name: string,
+//   callNumber: string,
+//   address: string,
+//   categories: string[]
+// }
+
+export interface ShopInfoType {
   id: number,
   name: string,
-  callNumber: string,
-  address: string,
-  categories: string[]
+  reviewNum: number,
+  likeNum: number,
+  totalScore: number,
+  banner: string,
+  noticeTitle: string,
+  distance: number,
+  minOrderPrice: number, 
+  minDeliveryPrice: number,
+  isLike: boolean
 }
+
+export interface MenuGroupType {
+  id: number,
+  name: string,
+  content: string,
+  menus: {
+    id: number,
+    name: string,
+    content: string,
+    price: number,
+    reviewNum: number,
+    picture: string
+  }[]
+}
+
