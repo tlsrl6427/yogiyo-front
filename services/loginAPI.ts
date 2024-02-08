@@ -87,9 +87,13 @@ export const emailLogin = async (email: string, password: string) => {
     "authCode" : null,
     "providerType" : "DEFAULT"
   }
-
   const resLogin = await baseAxiosInstance.post(`/member/login`, userData)
-  console.log(resLogin)
+  if (resLogin.status >= 200 && resLogin.status < 300) {
+    window.location.href = '/';
+    console.log(`유저 ${resLogin.data.userId} 로그인 성공`)
+  }else{
+    console.error('emailLogin api 호출 중 에러 발생')
+  }
 }
 
 export const emailJoin = async (email: string, password: string, nickname: string) => {
@@ -100,5 +104,10 @@ export const emailJoin = async (email: string, password: string, nickname: strin
     "providerType" : "DEFAULT"
   }
   const resJoin = await baseAxiosInstance.post(`/member/join`, userData)
-  console.log(resJoin)
+  if (resJoin.status >= 200 && resJoin.status < 300) {
+    console.log(`유저 ${resJoin.data.id} 로그인 성공`)
+    window.location.href = '/';
+  }else{
+    console.error('emailJoin api 호출 중 에러 발생')
+  }
 }
