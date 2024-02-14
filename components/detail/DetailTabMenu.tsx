@@ -200,14 +200,14 @@ const DetailTabMenu = ({shopInfo}: Props) => {
       
       {/* 풀 메뉴 영역 */}
       {isFullMenu && <div className='fixed top-[50px] left-0 z-20 w-full' style={{height: '100vh'}}>
-        <p className='bg-yogrey6 flex justify-between w-full font-bold text-[1.2rem] p-[10px]'>
+        <p className='bg-grey9 flex justify-between w-full font-bold text-[1.2rem] p-[10px]'>
           카테고리 전체보기
           <IoMdClose 
             style={{fontSize: '1.5rem'}}
             onClick={() => setIsFullMenu(!isFullMenu)}
           />
         </p>
-        <div className='flex flex-wrap gap-3 bg-yogrey6 p-[10px] pb-[20px]'>
+        <div className='flex flex-wrap gap-3 bg-grey9 p-[10px] pb-[20px]'>
         {dummyMenu?.map((menuGroup, i) => (
           <span 
             key={i}
@@ -236,7 +236,7 @@ const DetailTabMenu = ({shopInfo}: Props) => {
               <div 
                 key={i}
                 ref={el => {if(el) sectionRefs.current[menuGroup?.name] = el;}} 
-                className='bg-yogrey6 h-[300px] p-4 relative'
+                className='bg-grey9 h-[300px] p-4 relative'
               >
                 <div
                   className='absolute top-[0%] left-[50%]'
