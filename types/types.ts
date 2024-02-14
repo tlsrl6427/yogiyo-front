@@ -242,7 +242,8 @@ export interface ShopInfoType {
   distance: number,
   minOrderPrice: number, 
   minDeliveryPrice: number,
-  isLike: boolean
+  isLike: boolean,
+  deliveryTime: number
 }
 
 export interface MenuGroupType {

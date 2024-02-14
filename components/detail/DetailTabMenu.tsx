@@ -1,6 +1,6 @@
 'use client'
 import { shopApi } from '@/services/shopApi';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, createRef } from 'react';
 import type { ShopInfoType, MenuGroupType } from '@/types/types';
 import MenuSlider from './MenuSlider';
 
@@ -27,6 +27,7 @@ const menuImgStyle = (url: string) => {
 }
 
 const DetailTabMenu = ({shopInfo}: Props) => {
+
   // 테스트용 메뉴그룹 더미데이터
   const dummyMenu = new Array(10).fill('').map((_, i) => {
     return {
@@ -57,7 +58,33 @@ const DetailTabMenu = ({shopInfo}: Props) => {
 
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
-  const observer = useRef<IntersectionObserver | null>(null);
+
+  const handleGrandchildScroll = (menu: string) => {
+    if (parentRef.current && childRef.current) {
+      let grandchildRect: any;
+      let parentRect: any;
+
+      // 스크롤로 메뉴 이동할 경우
+      grandchildRect = grandChildRef.current[menu].getBoundingClientRect();
+      parentRect = parentRef.current.getBoundingClientRect();
+      
+      const childCurrentScroll = childRef.current.scrollLeft;
+
+      //메뉴를 화면 좌측으로 옮기기 위한 계산
+      const scrollAmount = childCurrentScroll + grandchildRect.left - parentRect.left - 10;
+
+      childRef.current.scrollTo({
+        left: scrollAmount,
+      });
+    }
+  };
+
+  const handleGrandchildClick = (menu: string) => {
+      const tabHeader = sectionRefs.current[menu].offsetTop - 85
+      window.scrollTo({
+        top: tabHeader,
+      })
+  };
   
   useEffect(() => {
     //데이터 fetch
@@ -75,75 +102,49 @@ const DetailTabMenu = ({shopInfo}: Props) => {
     fetchData();
   }, [shopInfo])
 
+  const [positions, setPositions] = useState<number[]>([]);
+
   useEffect(() => {
-    // IntersectionObserver 인스턴스 생성
-    observer.current = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const foundMenu = Object.keys(sectionRefs.current)
-          .find(menu => sectionRefs.current[menu] === entry.target);
-          console.log(foundMenu)
-          if (foundMenu) {
-            setActiveMenu(foundMenu);
-            handleGrandchildScroll(foundMenu);
-          }
-        }
-      });
-    }, { threshold: 0.9});
-
-    // 섹션을 observer에 등록
-    Object.values(sectionRefs.current).forEach(section => {
-      if (section && observer.current) {
-        observer.current.observe(section);
-      }
-    });
-
-    // 컴포넌트 언마운트 시 observer 해제
-    return () => {
-      if (observer.current) {
-        Object.values(sectionRefs.current).forEach(section => {
-          if (section && observer.current) {
-            observer.current.unobserve(section);
-          }
-        });
-      }
-    };
+    //메뉴그룹 순회한 후 각 Ref의 위치값 저장
+    let positions: number[] = []
+    dummyMenu.forEach((menuGroup) => {
+      const name = menuGroup.name
+      const sectionScroll = sectionRefs.current[name].getBoundingClientRect().top;
+      positions.push(sectionScroll);
+    })
+    setPositions(positions);
   }, [])
 
-  const handleGrandchildScroll = (menu: string) => {
-    if (parentRef.current && childRef.current) {
-      let grandchildRect: any;
-      let parentRect: any;
+  useEffect(() => {
+    // 쓰로틀링 구현
+    let timeoutId : NodeJS.Timeout | null = (null);
 
-      // 스크롤로 메뉴 이동할 경우
-      grandchildRect = grandChildRef.current[menu].getBoundingClientRect();
-      parentRect = parentRef.current.getBoundingClientRect();
-      
-      const childCurrentScroll = childRef.current.scrollLeft;
+    // 스크롤 이동 시 메뉴탭 이동 및 hover효과
+    const handleScroll = () => {
+      if(timeoutId === null){
+        timeoutId = setTimeout(() => {
+          const currentScrollPosition = window.scrollY + 150;
+          positions.forEach((_, i) => {
+            if(currentScrollPosition >= positions[i] && currentScrollPosition <= positions[i+1]){
+              setActiveMenu(dummyMenu[i].name);
+              handleGrandchildScroll(dummyMenu[i].name)
+            }else if(positions.length - 1 === i && currentScrollPosition >= positions[i]){
+              // 마지막 요소일 떄
+              setActiveMenu(dummyMenu[i].name);
+              handleGrandchildScroll(dummyMenu[i].name)
+            }
+          })
+          clearTimeout(timeoutId as NodeJS.Timeout);
+          timeoutId = null;
+        }, 100);
+      }
+    };
+    window.addEventListener('scroll', handleScroll)
 
-      const tabHeader = sectionRefs.current[menu].offsetTop - 100
-
-      //메뉴를 화면 좌측으로 옮기기 위한 계산
-      const scrollAmount = childCurrentScroll + grandchildRect.left - parentRect.left - 10;
-
-      childRef.current.scrollTo({
-        left: scrollAmount,
-      });
-
-      window.scrollTo({
-        top: tabHeader,
-      })
-
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
     }
-  };
-
-  const handleGrandchildClick = (menu: string) => {
-      const tabHeader = sectionRefs.current[menu].offsetTop - 85
-      window.scrollTo({
-        top: tabHeader,
-      })
-  };
-
+  }, [positions])
 
   return (
     // 탭메뉴 영역
@@ -180,8 +181,11 @@ const DetailTabMenu = ({shopInfo}: Props) => {
               <div 
                 key={i}
                 ref={el => {if(el) sectionRefs.current[menuGroup?.name] = el;}} 
-                className='bg-yogrey6 h-[300px] p-4'
+                className='bg-yogrey6 h-[300px] p-4 relative'
               >
+                <div
+                  className='absolute top-[0%] left-[50%]'
+                />
                 <p className='text-[1.3rem] font-bold py-2'>대표메뉴</p>
                 <MenuSlider menus={menuGroup.menus}/>
               </div>
@@ -192,8 +196,11 @@ const DetailTabMenu = ({shopInfo}: Props) => {
               <div 
                 key={i}
                 ref={el => {if(el) sectionRefs.current[menuGroup?.name] = el;}} 
-                className='px-4 py-6'
+                className='px-4 py-6 relative'
               >
+                <div
+                  className='absolute top-[0%] left-[50%]'
+                />
                 <p className='text-[1.3rem] font-bold pt-2 pb-6'>{menuGroup?.name}</p>
                 {menuGroup.menus?.map((menu, i) => (
                   <div 
