@@ -3,6 +3,8 @@ import { shopApi } from '@/services/shopApi';
 import { useState, useRef, useEffect, createRef } from 'react';
 import type { ShopInfoType, MenuGroupType } from '@/types/types';
 import MenuSlider from './MenuSlider';
+import { RiArrowDownSLine } from "react-icons/ri";
+import { IoMdClose } from "react-icons/io";
 
 interface Props {
   shopInfo?: ShopInfoType
@@ -146,10 +148,15 @@ const DetailTabMenu = ({shopInfo}: Props) => {
     }
   }, [positions])
 
+  const [isFullMenu, setIsFullMenu] = useState(false);
+  const handleFullMenu = () => {
+
+  }
+
   return (
-    // 탭메뉴 영역
-    <div className=''>
-      <div ref={parentRef} className="w-full sticky top-[50px] left-0 overflow-hidden z-10 border-y-[1px] py-[8px] bg-white">
+    <div className='relative'>
+      {/* 탭메뉴 영역 */}
+      <div ref={parentRef} className="w-full sticky top-[50px] left-0 overflow-hidden z-10 border-y-[1px] py-[8px] pr-[50px] bg-white">
         <div
           ref={childRef}
           className="no-scroll top-0 left-0 overflow-x-auto h-[30px] flex px-[20px] items-center gap-4 text-sm absoulte bg-white"
@@ -169,8 +176,42 @@ const DetailTabMenu = ({shopInfo}: Props) => {
               {menuGroup?.name}
             </p>
           ))}
+          {/* 전체메뉴 누르는 버튼 */}
+          <div
+            className='absolute right-0 top-0 w-[50px] h-full bg-white flex justify-center items-center'
+            onClick={() => setIsFullMenu(!isFullMenu)}
+          >
+            <div className='absolute w-[1px] h-[60%] top-[10px] left-[2px] bg-slate-200 cursor-pointer'/>
+            <RiArrowDownSLine style={{fontSize: '2rem'}}/>
+          </div>
         </div>
       </div>
+      
+      {/* 풀 메뉴 영역 */}
+      {isFullMenu && <div className='absolute top-0 left-0 z-50 w-full h-full'>
+        <p className='bg-yogrey6 flex justify-between w-full font-bold text-[1.2rem] p-[10px]'>
+          카테고리 전체보기
+          <IoMdClose 
+            style={{fontSize: '1.5rem'}}
+            onClick={() => setIsFullMenu(!isFullMenu)}
+          />
+        </p>
+        <div className='flex flex-wrap gap-3 py-[10px] bg-yogrey6 p-[10px]'>
+        {dummyMenu?.map((menuGroup, i) => (
+          <span 
+            key={i}
+            className={`p-[7px] rounded-3xl 
+              ${activeMenu === menuGroup?.name ? 'bg-black text-white font-bold' : 'bg-white text-black'} 
+            `}
+            onClick={()=>{}}
+          >{menuGroup.name}</span>
+        ))}
+        </div>
+        <div 
+          onClick={() => setIsFullMenu(!isFullMenu)}
+          className='p-[10px] h-full boder-b bg-black opacity-60' 
+        />
+      </div>}
 
       {/* 메뉴 리스트 영역 */}
       <div>
