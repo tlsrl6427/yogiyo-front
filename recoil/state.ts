@@ -102,4 +102,8 @@ export const shopListOption = atom({
   },
 });
 
-// 상점 리스트 조회 반환값
+//스크롤 막기 상태값
+export const scrollHidden = atom({
+  key: 'scrollHidden',
+  default: false
+})

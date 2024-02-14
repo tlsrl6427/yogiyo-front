@@ -78,7 +78,9 @@ const MiddleTitle = ({shopInfo}: Props) => {
             <li className='flex gap-4'>
               <p className={listStyled}>배달정보</p>
               <div className='p-4 rounded-2xl bg-red-50 flex-1'>
-                <p className='text-red-500 text-[1.2rem] font-black'>40~45분 <span className='text-[1rem]'>가게배달</span></p>
+                <p className='text-red-500 text-[1.2rem] font-black'>
+                  {(shopInfo?.deliveryTime) as number - 5}~{(shopInfo?.deliveryTime) as number + 5}분 <span className='text-[1rem]'>가게배달</span>
+                </p>
                 <p>{((shopInfo?.minDeliveryPrice || 1000).toLocaleString() || 0) + '원'}</p>
                 <p>요기패스는 배달비 무료</p>
               </div>
@@ -93,7 +95,7 @@ const MiddleTitle = ({shopInfo}: Props) => {
             </li>
             <li className='flex gap-4'>
               <p className={listStyled}>가게위치</p>
-              <p>{Math.floor((shopInfo?.distance || 1)/10000)/10 + 'km'}</p>
+              <p>{Math.floor((shopInfo?.distance || 1)/10000) + 'km'}</p>
             </li>
           </ul>
         </div>
