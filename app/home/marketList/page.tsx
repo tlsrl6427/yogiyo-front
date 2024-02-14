@@ -2,6 +2,7 @@
 import MarketDetailList from '@/components/common/MarketDetailList';
 import MenuList from '@/components/home/marketList/MenuList';
 import OptionList from '@/components/home/marketList/OptionList';
+import ScrollToTop from '@/components/common/ScrollToTop';
 import { useSearchParams } from 'next/navigation';
 import { shopApi } from '@/services/shopApi';
 import { useRecoilValue } from 'recoil';
@@ -143,6 +144,7 @@ const MarketList = () => {
       <OptionList />
       <div className="h-[50px]" />
       <MarketDetailList shopListData={shopListData} />
+      <ScrollToTop bottom={100}/>
       <div ref={observerTarget}></div>
     </div>
   );

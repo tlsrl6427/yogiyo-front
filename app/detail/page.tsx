@@ -1,6 +1,5 @@
 'use client'
 import DetailHeader from '@/components/detail/DetailHeader';
-import HeadSlider from '@/components/detail/MenuSlider';
 import MiddleTitle from '@/components/detail/MiddleTitle';
 import SignatureMenuTab from '@/components/detail/SignatureMenuTab';
 import DetailMenuList from '@/components/detail/DetailMenuList';
@@ -11,6 +10,7 @@ import { currentCoord, currentRegionCode, thisAddressId, userInfoAtom } from '@/
 import { useState, useEffect } from 'react';
 import { shopApi } from '@/services/shopApi';
 import type { ShopInfoType } from '@/types/types';
+import ScrollToTop from '@/components/common/ScrollToTop';
 
 const Detail = () => {
   const searchParams = useSearchParams();
@@ -69,13 +69,13 @@ const Detail = () => {
   return (
     <div className="">
       <DetailHeader shopInfo={shopInfo} />
-      {/* <HeadSlider /> */}
       <div className={`w-full h-[200px]`} style={bannerStyle}/>
       <MiddleTitle shopInfo={shopInfo} />
       <div className='border-y-[4px] border-grey1' />
       <DetailTabMenu shopInfo={shopInfo} />
       <SignatureMenuTab />
       <DetailMenuList />
+      <ScrollToTop bottom={20}/>
     </div>
   );
 };
