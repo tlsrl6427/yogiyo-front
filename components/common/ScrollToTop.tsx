@@ -31,7 +31,8 @@ const ScrollToTop = ({bottom}: Props) => {
 
   return isVisible ? ( 
     <div 
-      className={`w-[40px] h-[40px] fixed bottom-[${bottom}px] right-[20px] cursor-pointer z-50 bg-white rounded-full border-2 flex justify-center items-center`}
+      className={`w-[40px] h-[40px] fixed right-[20px] cursor-pointer z-50 bg-white rounded-full border-2 flex justify-center items-center`}
+      style={{bottom: bottom+'px'}}
       onClick={handleScroll}
     >
       <VscArrowUp style={{fontSize: '20px'}}/>
