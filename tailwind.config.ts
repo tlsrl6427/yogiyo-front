@@ -20,6 +20,7 @@ const config: Config = {
         grey6: '#333333',
         grey7: '#eef3f6',
         grey8: '#dfe4e8',
+        grey9: '#EFEFEF',
         kakao: '#F6E24B',
         naver: '#77C261',
         
