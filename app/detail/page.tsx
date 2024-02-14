@@ -71,7 +71,7 @@ const Detail = () => {
       <DetailHeader shopInfo={shopInfo} />
       <div className={`w-full h-[200px]`} style={bannerStyle}/>
       <MiddleTitle shopInfo={shopInfo} />
-      <div className='border-y-[4px] border-grey1' />
+      <div className='border-y-[4px] border-grey9' />
       <DetailTabMenu shopInfo={shopInfo} />
       <SignatureMenuTab />
       <DetailMenuList />

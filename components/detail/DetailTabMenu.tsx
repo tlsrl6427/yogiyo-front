@@ -13,15 +13,17 @@ interface Props {
 const menuImgStyle = (url: string) => {
   if(!url){
     return {
-      width: '27%',
-      background: '#d82020',
-      border: '1px solid #333',
-      borderRadius: '20px'
+    //   width: '27%',
+    //   background: '#eccece',
+    //   border: '1px solid #333',
+    //   borderRadius: '20px'
+      width: '0',
+      height: '0'
     }
   }
   return {
     width: '27%',
-    height: '80%',
+    // height: '80%',
     background: `url(${url}) no-repeat center center/cover`,
     border: '1px solid #333',
     borderRadius: '20px'
@@ -43,7 +45,7 @@ const DetailTabMenu = ({shopInfo}: Props) => {
           content: '메뉴 테스트',
           price: 1000,
           reviewNum: 100,
-          picture: ''
+          picture: '/images/yogiyo-logo.jpg'
         }
       })
     }
@@ -83,7 +85,7 @@ const DetailTabMenu = ({shopInfo}: Props) => {
   };
 
   const handleGrandchildClick = (menu: string) => {
-      const tabHeader = sectionRefs.current[menu].offsetTop
+      const tabHeader = sectionRefs.current[menu].offsetTop - 85
       window.scrollTo({
         top: tabHeader,
       })
@@ -272,7 +274,7 @@ const DetailTabMenu = ({shopInfo}: Props) => {
                   </div>
                 ))}
               </div>
-              <div className='bg-grey5 h-2' />
+              <div className='bg-grey9 h-2' />
             </>
           )
         })}
