@@ -52,6 +52,7 @@ const DetailTabMenu = ({shopInfo}: Props) => {
   //실제 api로 받아올 메뉴그룹데이터
   const [menuGroups, setMenuGroups] = useState<MenuGroupType[]>([]);
   
+  const totalRef = useRef<HTMLDivElement | null>(null);
   const parentRef = useRef<HTMLDivElement | null>(null);
   const childRef = useRef<HTMLDivElement | null>(null);
   const grandChildRef = useRef<{ [key: string]: HTMLDivElement }>({});
@@ -82,7 +83,7 @@ const DetailTabMenu = ({shopInfo}: Props) => {
   };
 
   const handleGrandchildClick = (menu: string) => {
-      const tabHeader = sectionRefs.current[menu].offsetTop - 85
+      const tabHeader = sectionRefs.current[menu].offsetTop
       window.scrollTo({
         top: tabHeader,
       })
@@ -150,13 +151,22 @@ const DetailTabMenu = ({shopInfo}: Props) => {
 
   const [isFullMenu, setIsFullMenu] = useState(false);
   const handleFullMenu = () => {
+    const offsetTop = totalRef.current?.offsetTop as number - 60
+    if(window.scrollY < offsetTop){
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      })
+    }
 
+    console.log(offsetTop)
+    setIsFullMenu(!isFullMenu)
   }
 
   return (
-    <div className='relative'>
+    <div className='' ref={totalRef}>
       {/* 탭메뉴 영역 */}
-      <div ref={parentRef} className="w-full sticky top-[50px] left-0 overflow-hidden z-10 border-y-[1px] py-[8px] pr-[50px] bg-white">
+      {!isFullMenu && <div ref={parentRef} className="w-full sticky top-[50px] left-0 overflow-hidden z-10 border-y-[1px] py-[8px] pr-[50px] bg-white">
         <div
           ref={childRef}
           className="no-scroll top-0 left-0 overflow-x-auto h-[30px] flex px-[20px] items-center gap-4 text-sm absoulte bg-white"
@@ -179,16 +189,17 @@ const DetailTabMenu = ({shopInfo}: Props) => {
           {/* 전체메뉴 누르는 버튼 */}
           <div
             className='absolute right-0 top-0 w-[50px] h-full bg-white flex justify-center items-center'
-            onClick={() => setIsFullMenu(!isFullMenu)}
+            // onClick={() => setIsFullMenu(!isFullMenu)}
+            onClick={() => handleFullMenu()}
           >
             <div className='absolute w-[1px] h-[60%] top-[10px] left-[2px] bg-slate-200 cursor-pointer'/>
             <RiArrowDownSLine style={{fontSize: '2rem'}}/>
           </div>
         </div>
-      </div>
+      </div>}
       
       {/* 풀 메뉴 영역 */}
-      {isFullMenu && <div className='absolute top-0 left-0 z-50 w-full h-full'>
+      {isFullMenu && <div className='fixed top-[50px] left-0 z-20 w-full' style={{height: '100vh'}}>
         <p className='bg-yogrey6 flex justify-between w-full font-bold text-[1.2rem] p-[10px]'>
           카테고리 전체보기
           <IoMdClose 
@@ -196,14 +207,17 @@ const DetailTabMenu = ({shopInfo}: Props) => {
             onClick={() => setIsFullMenu(!isFullMenu)}
           />
         </p>
-        <div className='flex flex-wrap gap-3 py-[10px] bg-yogrey6 p-[10px]'>
+        <div className='flex flex-wrap gap-3 bg-yogrey6 p-[10px] pb-[20px]'>
         {dummyMenu?.map((menuGroup, i) => (
           <span 
             key={i}
             className={`p-[7px] rounded-3xl 
               ${activeMenu === menuGroup?.name ? 'bg-black text-white font-bold' : 'bg-white text-black'} 
             `}
-            onClick={()=>{}}
+            onClick={() => {
+              handleGrandchildClick(menuGroup?.name)
+              setIsFullMenu(!isFullMenu)
+            }}
           >{menuGroup.name}</span>
         ))}
         </div>

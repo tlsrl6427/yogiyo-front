@@ -27,7 +27,7 @@ const DetailHeader = ({shopInfo} : Props) => {
 
   return (
     <div
-      className={`fixed top-0 z-10 w-full flex justify-between items-center ${
+      className={`fixed top-0 z-50 w-full flex justify-between items-center ${
         isScrolled && 'bg-white'
       }`}
     >
