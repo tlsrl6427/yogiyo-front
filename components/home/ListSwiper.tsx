@@ -32,7 +32,6 @@ const lastArrowStyle = {
 };
 
 const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperProps) => {
-  console.log(thisAddress)
   const [loading, setLoading] = useState(false);
 
   const regionCode = useRecoilValue(currentRegionCode)
@@ -100,14 +99,13 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
         setSubCursor(data.nextSubCursor);
 
         // 데이터가 더 이상 없을 경우 limit 상태를 true로 설정
-        if (!data.hasNext || !data) {
+        if (!data.hasNext) {
           setLimit(true);
-        } else { 
+        } else {
           setLimit(false);
         }
-      } else if(!thisAddress && (!regionCode && !curCoord)) {
-        // 비로그인 시 데이터가 없을 경우
-        setLimit(true)
+      } else {
+        setLimit(true);
       }
     } catch (error) {
       console.error(error);
