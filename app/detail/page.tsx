@@ -39,7 +39,7 @@ const Detail = () => {
           // 로그인했을 경우
           if(userInfo.isLogin){
             console.log(userInfo)
-            param.code = thisAddId.code
+            param.code = thisAddId.code || (curRegionCode || 0)
             param.latitude = thisAddId.latitude
             param.longitude = thisAddId.longitude
           // 비로그인일 경우
