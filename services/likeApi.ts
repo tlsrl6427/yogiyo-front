@@ -16,7 +16,7 @@ export const likeApi = {
   async getLikeList(offset: number, limit: number) {
     try {
       const params = (offset !== 0 && limit !== 0) ? { offset, limit } : {};
-      const response = await baseAxiosInstance.get(`/member/like/scroll`, {
+      const response = await baseAxiosInstance.get(`/member/like/list`, {
         headers: {
           'Content-Type': 'application/json',
         },
