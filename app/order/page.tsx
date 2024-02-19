@@ -101,49 +101,7 @@ const Order = () => {
           </span>
         </div>
       </div>
-      <div className="rounded-lg border">
-        <div className="flex p-4">
-          <div className="flex-1 font-bold">후라이드참못하는집</div>
-          <div className="ml-auto text-sm text-grey4">전체삭제</div>
-        </div>
-        <div>
-          {/** 주문한 메뉴 map*/}
-          <div className="flex p-4">
-            <div className="w-20 h-20 bg-grey2"></div>
-            <div className="flex-1 pl-2 pr-2">
-              <p className="font-bold pb-2">양념치킨</p>
-              <p className="text-sm">핫간장치킨반마리</p>
-              <p className="text-sm">24,500원</p>
-            </div>
-            <LuX
-              style={{
-                marginTop: '0.5rem',
-                marginBottom: 'auto',
-                fontSize: '1.3rem',
-                color: 'grey',
-              }}
-            />
-          </div>
-          <div className="flex">
-            <div className="flex-1"></div>
-            <div className="flex rounded-md border text-center pt-[10px] pb-[10px] mr-4">
-              <div className="grid pl-4">
-                <LuMinus style={{ margin: 'auto' }} />
-              </div>
-              <div className="pr-4 pl-4">{/* 이 메뉴의 갯수 */ 1}</div>
-              <div className="grid pr-4">
-                <LuPlus style={{ margin: 'auto' }} />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="flex text-blue1 font-semibold justify-center p-4">
-          <div className="mt-[3px]">
-            <FiPlus />
-          </div>
-          <div>메뉴추가하기</div>
-        </div>
-      </div>
+      <Cart />
       <div className="rounded-lg border p-4 mt-4">
         <p className="font-bold">주문요청사항</p>
         <div className="flex pt-4 pb-4 border-b">
@@ -190,3 +148,52 @@ const Order = () => {
 };
 
 export default Order;
+
+
+const Cart = () => {
+  return(
+    <div className="rounded-lg border">
+        <div className="flex p-4">
+          <div className="flex-1 font-bold">후라이드참못하는집</div>
+          <div className="ml-auto text-sm text-grey4">전체삭제</div>
+        </div>
+        <div>
+          {/** 주문한 메뉴 map*/}
+          <div className="flex p-4">
+            <div className="w-20 h-20 bg-grey2"></div>
+            <div className="flex-1 pl-2 pr-2">
+              <p className="font-bold pb-2">양념치킨</p>
+              <p className="text-sm">핫간장치킨반마리</p>
+              <p className="text-sm">24,500원</p>
+            </div>
+            <LuX
+              style={{
+                marginTop: '0.5rem',
+                marginBottom: 'auto',
+                fontSize: '1.3rem',
+                color: 'grey',
+              }}
+            />
+          </div>
+          <div className="flex">
+            <div className="flex-1"></div>
+            <div className="flex rounded-md border text-center pt-[10px] pb-[10px] mr-4">
+              <div className="grid pl-4">
+                <LuMinus style={{ margin: 'auto' }} />
+              </div>
+              <div className="pr-4 pl-4">{/* 이 메뉴의 갯수 */ 1}</div>
+              <div className="grid pr-4">
+                <LuPlus style={{ margin: 'auto' }} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex text-blue1 font-semibold justify-center p-4">
+          <div className="mt-[3px]">
+            <FiPlus />
+          </div>
+          <div>메뉴추가하기</div>
+        </div>
+      </div>
+  )
+}
