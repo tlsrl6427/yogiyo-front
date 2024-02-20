@@ -12,6 +12,9 @@ import { LuMinus } from 'react-icons/lu';
 import { LuX } from 'react-icons/lu';
 
 const Order = () => {
+  const [door, setDoor] = useState(false);
+  const [spoon, setSpoon] = useState(false);
+
   //const user = useRecoilValue(userInfoAtom);
   //const token = user.accessToken;
   //const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
@@ -55,11 +58,8 @@ const Order = () => {
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const [door, setDoor] = useState(false);
-    const [spoon, setSpoon] = useState(false);
-
     const checkboxID = e.target.id;
-    
+
     switch (checkboxID) {
       case 'checkDoor':
         setDoor(!door);
@@ -157,7 +157,7 @@ const Cart = () => {
   )
 }
 
-const OrderNotes = () => {
+const OrderNotes = (door: boolean, spoon: boolean, handleCheckboxChange: React.ChangeEventHandler<HTMLInputElement>) => {
   return(
     <div className="rounded-lg border p-4 mt-4">
         <p className="font-bold">주문요청사항</p>
