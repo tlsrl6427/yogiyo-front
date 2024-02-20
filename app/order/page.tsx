@@ -12,16 +12,11 @@ import { LuMinus } from 'react-icons/lu';
 import { LuX } from 'react-icons/lu';
 import { orderAtom } from '@/recoil/order';
 import { useRecoilState } from 'recoil';
+import { Order, Handler } from '@/types/types';
 
-interface CartProps {
-  door: boolean;
-  spoon: boolean;
-  handler: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-const Order = () => {
-  const [door, setDoor] = useState(false);
-  const [spoon, setSpoon] = useState(false);
+const OrderPage = () => {
+  //const [door, setDoor] = useState(false);
+  //const [spoon, setSpoon] = useState(false);
   const [bill, setBill] = useRecoilState(orderAtom);
 
   //const user = useRecoilValue(userInfoAtom);
@@ -62,7 +57,9 @@ const Order = () => {
     totalPaymentPrice: 21000,
   };
 
-  console.log(bill);
+  useEffect(() => {
+    console.log(bill);
+  }, [bill]);
 
   const handleGetOrder = () => {
     postOrder(bill);
@@ -72,10 +69,16 @@ const Order = () => {
     const checkboxID = e.target.id;
     switch (checkboxID) {
       case 'checkDoor':
-        setDoor(!door);
+        setBill((prev) => ({
+          ...prev,
+          requestDoor: !prev.requestDoor,
+        }));
         break;
       case 'checkSpoon':
-        setSpoon(!spoon);
+        setBill((prev) => ({
+          ...prev,
+          requestSpoon: !prev.requestSpoon,
+        }));
         break;
       default:
         console.log('해당하는 요소 없음');
@@ -102,7 +105,11 @@ const Order = () => {
 
       <Address />
       <Cart />
-      <OrderNotes door={door} spoon={spoon} handler={handleCheckboxChange} />
+      <OrderNotes
+        door={bill.requestDoor}
+        spoon={bill.requestSpoon}
+        changeInput={handleCheckboxChange}
+      />
       <Prices />
 
       <div className="p-6 text-sm bg-grey8 text-grey5 mt-2">
@@ -114,7 +121,7 @@ const Order = () => {
   );
 };
 
-export default Order;
+export default OrderPage;
 
 const Cart = () => {
   return (
@@ -164,18 +171,23 @@ const Cart = () => {
   );
 };
 
-const OrderNotes = ({ door, spoon, handler }: CartProps) => {
+interface OrderNotes extends Handler {
+  door: boolean;
+  spoon: boolean;
+}
+
+const OrderNotes = ({ door, spoon, changeInput }: OrderNotes) => {
   return (
     <div className="rounded-lg border p-4 mt-4">
       <p className="font-bold">주문요청사항</p>
       <div className="flex pt-4 pb-4 border-b">
-        <input type="checkbox" id="checkDoor" checked={door} onChange={handler} />
+        <input type="checkbox" id="checkDoor" checked={door} onChange={changeInput} />
         <div className="pl-2">
           <label htmlFor="checkDoor">문 앞에 놓고, 문자주세요.</label>
         </div>
       </div>
       <div className="flex pt-4 pb-4 border-b">
-        <input type="checkbox" id="checkSpoon" checked={spoon} onChange={handler} />
+        <input type="checkbox" id="checkSpoon" checked={spoon} onChange={changeInput} />
         <div className="pl-2">
           <label htmlFor="checkSpoon">일회용 수저, 포크가 필요해요.</label>
           <p className="text-green-600 text-sm">

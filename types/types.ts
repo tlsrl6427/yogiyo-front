@@ -180,6 +180,9 @@ export interface OrderInfo {
   totalMenuCount: number;
 }
 
+export interface Handler {
+  changeInput?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
 export interface Order {
   shopId: number;
   address: {
