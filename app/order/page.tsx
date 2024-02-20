@@ -15,8 +15,6 @@ const Order = () => {
   //const user = useRecoilValue(userInfoAtom);
   //const token = user.accessToken;
   //const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
-  const [door, setDoor] = useState(false);
-  const [spoon, setSpoon] = useState(false);
 
   const bill = {
     shopId: 1,
@@ -57,7 +55,11 @@ const Order = () => {
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const [door, setDoor] = useState(false);
+    const [spoon, setSpoon] = useState(false);
+
     const checkboxID = e.target.id;
+    
     switch (checkboxID) {
       case 'checkDoor':
         setDoor(!door);
@@ -83,7 +85,7 @@ const Order = () => {
 
   return (
     <div className="p-4">
-      
+
       <div className="flex flex-row text-sm pt-2 pb-2 border-b-2 border-grey1">
         <span className="pr-1 font-semibold">가게배달</span>
         <span>{`${mintime}~${maxtime}분 후 도착`}</span>
