@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { Order} from '@/types/types';
+import { Order } from '@/types/types';
 
 export const orderAtom = atom<Order>({
   key: 'orderAtom',
@@ -7,7 +7,7 @@ export const orderAtom = atom<Order>({
     shopId: 1,
     address: {
       zipcode: '31111',
-      street: 'test길', 
+      street: 'test길',
       detail: 'test동',
     },
     orderItems: [
@@ -17,12 +17,27 @@ export const orderAtom = atom<Order>({
         id: null,
         price: 29999,
         quantity: 22,
-        menuName: 'test메뉴',
+        menuName: 'test메뉴1',
         orderItemOptions: [
           {
             id: null,
-            optionName: 'test추가',
+            optionName: 'test추가1',
             price: 500,
+          },
+        ],
+      },
+      {
+        createdAt: null,
+        updatedAt: null,
+        id: null,
+        price: 10101,
+        quantity: 38,
+        menuName: 'test메뉴2',
+        orderItemOptions: [
+          {
+            id: null,
+            optionName: 'test추가2',
+            price: 2500,
           },
         ],
       },
@@ -35,5 +50,5 @@ export const orderAtom = atom<Order>({
     totalPrice: 320000,
     deliveryPrice: 1000,
     totalPaymentPrice: 321000,
-  }
-})
+  },
+});
