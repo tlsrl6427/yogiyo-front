@@ -7,8 +7,8 @@ export const orderAtom = atom<Order>({
     shopId: 1,
     address: {
       zipcode: '31111',
-      street: 'test길',
-      detail: 'test동',
+      street: '아주 다니기 어려운 길',
+      detail: '오른쪽 집',
     },
     orderItems: [
       {

@@ -103,8 +103,8 @@ const OrderPage = () => {
         <span>{`${mintime}~${maxtime}분 후 도착`}</span>
       </div>
 
-      <Address />
-      <Cart />
+      <Address street={bill.address.street} detail={bill.address.detail} />
+      <Cart items={bill.orderItems} />
       <OrderNotes
         door={bill.requestDoor}
         spoon={bill.requestSpoon}
@@ -123,43 +123,66 @@ const OrderPage = () => {
 
 export default OrderPage;
 
-const Cart = () => {
+interface Item {
+  createdAt?: string | null;
+  updatedAt?: string | null;
+  id?: number | null;
+  price: number;
+  quantity: number;
+  menuName: string;
+  orderItemOptions: {
+    id?: number | null;
+    optionName: string;
+    price: number;
+  }[];
+}
+interface Cart {
+  items: Item[];
+}
+const Cart = ({ items }: Cart) => {
   return (
     <div className="rounded-lg border">
       <div className="flex p-4">
         <div className="flex-1 font-bold">후라이드참못하는집</div>
+        {/**전체 삭제 가능해야함 */}
         <div className="ml-auto text-sm text-grey4">전체삭제</div>
       </div>
       <div>
-        {/** 주문한 메뉴 map*/}
-        <div className="flex p-4">
-          <div className="w-20 h-20 bg-grey2"></div>
-          <div className="flex-1 pl-2 pr-2">
-            <p className="font-bold pb-2">양념치킨</p>
-            <p className="text-sm">핫간장치킨반마리</p>
-            <p className="text-sm">24,500원</p>
-          </div>
-          <LuX
-            style={{
-              marginTop: '0.5rem',
-              marginBottom: 'auto',
-              fontSize: '1.3rem',
-              color: 'grey',
-            }}
-          />
-        </div>
-        <div className="flex">
-          <div className="flex-1"></div>
-          <div className="flex rounded-md border text-center pt-[10px] pb-[10px] mr-4">
-            <div className="grid pl-4">
-              <LuMinus style={{ margin: 'auto' }} />
+        {items.map((item: Item, index: number) => (
+          <div>
+            <div className="flex p-4">
+              <div className="w-20 h-20 bg-grey2"></div>
+              <div className="flex-1 pl-2 pr-2">
+                <p className="font-bold pb-2">{item.menuName}</p>
+                <p className="text-sm">{item.orderItemOptions[0].optionName}</p>{' '}
+                {/**일단 첫번째 옵션만 뜨게, 옵션가는 가격에 합치지 않고 표시함 */}
+                <p className="text-sm">{`${item.price}원`}</p>
+              </div>
+              {/**메뉴 삭제 가능해야함 */}
+              <LuX
+                style={{
+                  marginTop: '0.5rem',
+                  marginBottom: 'auto',
+                  fontSize: '1.3rem',
+                  color: 'grey',
+                }}
+              />
             </div>
-            <div className="pr-4 pl-4">{/* 이 메뉴의 갯수 */ 1}</div>
-            <div className="grid pr-4">
-              <LuPlus style={{ margin: 'auto' }} />
+            <div className="flex">
+              <div className="flex-1"></div>
+              <div className="flex rounded-md border text-center pt-[10px] pb-[10px] mr-4">
+                {/*-, + 클릭시 수량 변경되어야 함*/}
+                <div className="grid pl-4">
+                  <LuMinus style={{ margin: 'auto' }} />
+                </div>
+                <div className="pr-4 pl-4">{item.quantity}</div>
+                <div className="grid pr-4">
+                  <LuPlus style={{ margin: 'auto' }} />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
       <div className="flex text-blue1 font-semibold justify-center p-4">
         <div className="mt-[3px]">
@@ -175,7 +198,6 @@ interface OrderNotes extends Handler {
   door: boolean;
   spoon: boolean;
 }
-
 const OrderNotes = ({ door, spoon, changeInput }: OrderNotes) => {
   return (
     <div className="rounded-lg border p-4 mt-4">
@@ -203,7 +225,11 @@ const OrderNotes = ({ door, spoon, changeInput }: OrderNotes) => {
   );
 };
 
-const Address = () => {
+interface Address {
+  street: string;
+  detail: string;
+}
+const Address = ({ street, detail }: Address) => {
   return (
     <div className="pt-2 pb-2 min-h-[75px]">
       <div className="flex">
@@ -212,7 +238,8 @@ const Address = () => {
         </span>
         <div className="flex flex-col pr-2 pl-2">
           <p>집(으)로 배달</p>
-          <p className="text-sm">집주소</p>
+          <p className="text-sm">{street}</p>
+          <p className="text-sm">{detail}</p>
         </div>
         <span className="mt-[3px]">
           <HiOutlineChevronRight />
