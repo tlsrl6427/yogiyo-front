@@ -11,6 +11,12 @@ import { LuPlus } from 'react-icons/lu';
 import { LuMinus } from 'react-icons/lu';
 import { LuX } from 'react-icons/lu';
 
+interface CartProps {
+  door: boolean;
+  spoon: boolean;
+  handler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
 const Order = () => {
   const [door, setDoor] = useState(false);
   const [spoon, setSpoon] = useState(false);
@@ -59,7 +65,6 @@ const Order = () => {
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checkboxID = e.target.id;
-
     switch (checkboxID) {
       case 'checkDoor':
         setDoor(!door);
@@ -93,7 +98,7 @@ const Order = () => {
 
       <Address />
       <Cart />
-      <OrderNotes />
+      <OrderNotes door={door} spoon={spoon} handler={handleCheckboxChange}/>
       <Prices />
       
       <div className="p-6 text-sm bg-grey8 text-grey5 mt-2">
@@ -157,18 +162,18 @@ const Cart = () => {
   )
 }
 
-const OrderNotes = (door: boolean, spoon: boolean, handleCheckboxChange: React.ChangeEventHandler<HTMLInputElement>) => {
+const OrderNotes = ({door, spoon, handler}: CartProps) => {
   return(
     <div className="rounded-lg border p-4 mt-4">
         <p className="font-bold">주문요청사항</p>
         <div className="flex pt-4 pb-4 border-b">
-          <input type="checkbox" id="checkDoor" checked={door} onChange={handleCheckboxChange} />
+          <input type="checkbox" id="checkDoor" checked={door} onChange={handler} />
           <div className="pl-2">
             <label htmlFor="checkDoor">문 앞에 놓고, 문자주세요.</label>
           </div>
         </div>
         <div className="flex pt-4 pb-4 border-b">
-          <input type="checkbox" id="checkSpoon" checked={spoon} onChange={handleCheckboxChange} />
+          <input type="checkbox" id="checkSpoon" checked={spoon} onChange={handler} />
           <div className="pl-2">
             <label htmlFor="checkSpoon">일회용 수저, 포크가 필요해요.</label>
             <p className="text-green-600 text-sm">
