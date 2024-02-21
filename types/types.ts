@@ -251,3 +251,40 @@ export interface MenuGroupType {
     picture: string;
   }[];
 }
+
+//주문 생성 type
+interface OrderRequest {
+  shopId: number;
+  address: AddressData;
+  orderItems: OrderItem[];
+  requestMsg: string;
+  requestDoor: boolean;
+  requestSpoon: boolean;
+  orderType: string;
+  paymentType: string;
+  totalPrice: number;
+  deliveryPrice: number;
+  totalPaymentPrice: number;
+}
+
+interface AddressData {
+  street: string;
+  detail: string;
+}
+
+interface OrderItem {
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  id: null | number;
+  price: number;
+  quantity: number;
+  menuName: string;
+  menuId: number;
+  orderItemOptions: OrderItemOption[];
+}
+
+interface OrderItemOption {
+  id: null | number;
+  optionName: string;
+  price: number;
+}
