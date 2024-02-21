@@ -18,20 +18,6 @@ export const shopApi = {
     }
   },
 
-  //가게 정보 조회
-  // async getShopInfo(shopId: string | null) {
-  //   try {
-  //     const response = await baseAxiosInstance.get(`/owner/shop/${shopId}/info`, {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       }
-  //     });
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // },
-
   //가게 상세 정보 조회(member)
   async getShopInfo(params: any) {
     try {
@@ -55,5 +41,15 @@ export const shopApi = {
     } catch (error) {
       console.error(error);
     }
-  }
+  },
+
+  //옵션그룹 전체조회
+  async getShopOptionGroup(shopId: number | undefined) {
+    try {
+      const response = await baseAxiosInstance.get(`/owner/menu-option-group/shop/${shopId}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
