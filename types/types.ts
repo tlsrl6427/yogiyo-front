@@ -191,14 +191,10 @@ export interface Order {
     detail: string; //ex "장미아파트 8동"
   };
   orderItems: {
-    createdAt: string | null;
-    updatedAt: string | null;
-    id: number | null;
     price: number;
     quantity: number;
     menuName: string;
     orderItemOptions: {
-      id: number | null;
       optionName: string; //ex "양념추가",
       price: number; //ex 500
     }[];
@@ -211,6 +207,7 @@ export interface Order {
   totalPrice: number; //ex 20000,
   deliveryPrice: number; //ex 1000,
   totalPaymentPrice: number; //ex 21000
+  code: string; //ex "1171010200"
 }
 
 export interface RequestInfoType {
