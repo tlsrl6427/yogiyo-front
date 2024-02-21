@@ -84,6 +84,7 @@ const OrderPage = () => {
         console.log('해당하는 요소 없음');
     }
   };
+
   /**
   return (
     <>
@@ -102,16 +103,18 @@ const OrderPage = () => {
         <span className="pr-1 font-semibold">가게배달</span>
         <span>{`${mintime}~${maxtime}분 후 도착`}</span>
       </div>
-
-      <Address street={bill.address.street} detail={bill.address.detail} />
-      <Cart items={bill.orderItems} />
-      <OrderNotes
-        door={bill.requestDoor}
-        spoon={bill.requestSpoon}
-        changeInput={handleCheckboxChange}
-      />
-      <Prices />
-
+      {bill && (
+        <div>
+          <Address street={bill.address.street} detail={bill.address.detail} />
+          <Cart items={bill.orderItems} />
+          <OrderNotes
+            door={bill.requestDoor}
+            spoon={bill.requestSpoon}
+            changeInput={handleCheckboxChange}
+          />
+          <Prices />
+        </div>
+      )}
       <div className="p-6 text-sm bg-grey8 text-grey5 mt-2">
         <p>개인정보 제3자 제공 내용 및 결제에 동의합니다.</p>
         <p>최소주문금액은 배달요금/일회용컵 보증금을 제외한 금액입니다.</p>
@@ -140,12 +143,19 @@ interface Cart {
   items: Item[];
 }
 const Cart = ({ items }: Cart) => {
+  const [bill, setBill] = useRecoilState(orderAtom);
+  const handleAllDelete = () => {
+    setBill(null);
+  };
+
   return (
     <div className="rounded-lg border">
       <div className="flex p-4">
         <div className="flex-1 font-bold">후라이드참못하는집</div>
         {/**전체 삭제 가능해야함 */}
-        <div className="ml-auto text-sm text-grey4">전체삭제</div>
+        <div className="ml-auto text-sm text-grey4" onClick={handleAllDelete}>
+          전체삭제
+        </div>
       </div>
       <div>
         {items.map((item: Item, index: number) => (
