@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 import { Order } from '@/types/types';
 
-export const orderAtom = atom<Order | null>({
+export const orderAtom = atom<Order>({
   key: 'orderAtom',
   default: {
     shopId: 1,

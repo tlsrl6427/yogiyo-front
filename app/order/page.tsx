@@ -145,7 +145,7 @@ interface Cart {
 const Cart = ({ items }: Cart) => {
   const [bill, setBill] = useRecoilState(orderAtom);
   const handleAllDelete = () => {
-    setBill(null);
+    setBill({ ...bill, orderItems: [] });
   };
 
   return (
