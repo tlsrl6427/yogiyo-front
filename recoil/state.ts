@@ -107,3 +107,9 @@ export const scrollHidden = atom({
   key: 'scrollHidden',
   default: false
 })
+
+//담긴 음식
+export const cartItemsState = atom({
+  key: 'cartItemsState',
+  default: []
+})

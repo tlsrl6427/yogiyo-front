@@ -34,7 +34,7 @@ export interface InputBox {
 
 export interface UserInfo {
   userId: number;
-  nickname: string; 
+  nickname: string;
   email: string;
   phone?: string;
   isLogin?: boolean;
@@ -140,23 +140,19 @@ export interface OrderDetail {
   shopId: number;
   orderNumber: string; //ex '10OCT0_2312'
   orderTime: string; //ex '2023-12-04T12:07:28.30948'
-  orderItems: [
-    {
-      createdAt: string | null;
-      updatedAt: string | null;
-      id: number;
+  orderItems: {
+    createdAt: string | null;
+    updatedAt: string | null;
+    id: number;
+    price: number;
+    quantity: number;
+    menuName: string; //ex '후라이드치킨'
+    orderItemOptions: {
+      id: number | null;
+      optionName: string; //ex '양념추가'
       price: number;
-      quantity: number;
-      menuName: string; //ex '후라이드치킨'
-      orderItemOptions: [
-        {
-          id: number | null;
-          optionName: string; //ex '양념추가'
-          price: number;
-        },
-      ];
-    },
-  ];
+    }[];
+  }[];
   totalPrice: number;
   deliveryPrice: number;
   paymentPrice: number;
@@ -184,6 +180,9 @@ export interface OrderInfo {
   totalMenuCount: number;
 }
 
+export interface Handler {
+  changeInput?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
 export interface Order {
   shopId: number;
   address: {
@@ -191,23 +190,19 @@ export interface Order {
     street: string; //ex "다산로 4길 57",
     detail: string; //ex "장미아파트 8동"
   };
-  orderItems: [
-    {
-      createdAt: string | null;
-      updatedAt: string | null;
+  orderItems: {
+    createdAt: string | null;
+    updatedAt: string | null;
+    id: number | null;
+    price: number;
+    quantity: number;
+    menuName: string;
+    orderItemOptions: {
       id: number | null;
-      price: number;
-      quantity: number;
-      menuName: string;
-      orderItemOptions: [
-        {
-          id: number | null;
-          optionName: string; //ex "양념추가",
-          price: number; //ex 500
-        },
-      ];
-    },
-  ];
+      optionName: string; //ex "양념추가",
+      price: number; //ex 500
+    }[];
+  }[];
   requestMsg: string; //ex "요청사항 없음",
   requestDoor: boolean; //ex true,
   requestSpoon: boolean; //ex false,
@@ -219,44 +214,80 @@ export interface Order {
 }
 
 export interface RequestInfoType {
-  category: string,
-  sortOption: string,
-  deliveryPrice: number,
-  leastOrderPrice: number,
-  longitude: number | undefined,
-  latitude: number | undefined,
-  size: number,
-  code: number | null,
-  cursor?: number,
-  subCursor?: number
+  category: string;
+  sortOption: string;
+  deliveryPrice: number;
+  leastOrderPrice: number;
+  longitude: number | undefined;
+  latitude: number | undefined;
+  size: number;
+  code: number | null;
+  cursor?: number;
+  subCursor?: number;
 }
 
 export interface ShopInfoType {
-  id: number,
-  name: string,
-  reviewNum: number,
-  likeNum: number,
-  totalScore: number,
-  banner: string,
-  noticeTitle: string,
-  distance: number,
-  minOrderPrice: number, 
-  minDeliveryPrice: number,
-  isLike: boolean,
-  deliveryTime: number
+  id: number;
+  name: string;
+  reviewNum: number;
+  likeNum: number;
+  totalScore: number;
+  banner: string;
+  noticeTitle: string;
+  distance: number;
+  minOrderPrice: number;
+  minDeliveryPrice: number;
+  isLike: boolean;
+  deliveryTime: number;
 }
 
 export interface MenuGroupType {
-  id: number,
-  name: string,
-  content: string,
+  id: number;
+  name: string;
+  content: string;
   menus: {
-    id: number,
-    name: string,
-    content: string,
-    price: number,
-    reviewNum: number,
-    picture: string
-  }[]
+    id: number;
+    name: string;
+    content: string;
+    price: number;
+    reviewNum: number;
+    picture: string;
+  }[];
 }
 
+//주문 생성 type
+interface OrderRequest {
+  shopId: number;
+  address: AddressData;
+  orderItems: OrderItem[];
+  requestMsg: string;
+  requestDoor: boolean;
+  requestSpoon: boolean;
+  orderType: string;
+  paymentType: string;
+  totalPrice: number;
+  deliveryPrice: number;
+  totalPaymentPrice: number;
+}
+
+interface AddressData {
+  street: string;
+  detail: string;
+}
+
+interface OrderItem {
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  id: null | number;
+  price: number;
+  quantity: number;
+  menuName: string;
+  menuId: number;
+  orderItemOptions: OrderItemOption[];
+}
+
+interface OrderItemOption {
+  id: null | number;
+  optionName: string;
+  price: number;
+}
