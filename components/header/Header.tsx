@@ -2,12 +2,13 @@
 import { IoIosArrowDown } from 'react-icons/io';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
-  headerModalState,
   currentAddress,
   userAddress,
   thisAddressId,
-  userInfoAtom,
-} from '@/recoil/state';
+} from '@/recoil/address';
+import {
+  headerModalState,
+} from '@/recoil/modal';
 import AddressModal from './AddressModal';
 
 declare global {
