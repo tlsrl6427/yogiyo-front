@@ -1,3 +1,7 @@
+export interface Handler {
+  changeInput?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  Click?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
 export interface Coordinate {
   lat: number;
   lng: number;
@@ -178,10 +182,6 @@ export interface OrderInfo {
   menuName: string; //ex "후라이드 치킨",
   menuCount: number;
   totalMenuCount: number;
-}
-
-export interface Handler {
-  changeInput?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 export interface Order {
   shopId: number;
