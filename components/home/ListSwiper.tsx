@@ -9,7 +9,7 @@ import { useState, useEffect, useRef } from 'react';
 import type { Shop, RegisterAddressRequest } from '@/types/types';
 import { shopApi } from '@/services/shopApi';
 import { useRecoilValue } from 'recoil';
-import { currentCoord, currentRegionCode } from '@/recoil/state';
+import { currentCoord, currentRegionCode } from '@/recoil/address';
 import type { RequestInfoType } from '@/types/types';
 
 interface ListSwiperProps {
