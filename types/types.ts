@@ -255,39 +255,72 @@ export interface MenuGroupType {
   }[];
 }
 
+
+
+
+interface MenuOptionGroupResponse {
+  menuOptionGroups: MenuOptionGroup[];
+}
+
+interface MenuOptionGroup {
+  id: number;
+  name: string;
+  position: number;
+  count: number;
+  optionType: OptionType;
+  visible: Visibility;
+  menuOptions: MenuOption[];
+  menus: string[];
+  isPossibleCount: boolean;
+}
+
+interface MenuOption {
+  id: number;
+  content: string;
+  price: number;
+  position: number;
+  visible: Visibility;
+}
+
+// 옵션 유형 코드 ('REQUIRED' 또는 'OPTIONAL' 등으로 가정)
+type OptionType = 'REQUIRED' | 'OPTIONAL';
+
+// 노출 유형 코드 ('SHOW' 또는 'HIDE' 등으로 가정)
+type Visibility = 'SHOW' | 'HIDE';
+
 //주문 생성 type
-interface OrderRequest {
-  shopId: number;
-  address: AddressData;
-  orderItems: OrderItem[];
-  requestMsg: string;
-  requestDoor: boolean;
-  requestSpoon: boolean;
-  orderType: string;
-  paymentType: string;
-  totalPrice: number;
-  deliveryPrice: number;
-  totalPaymentPrice: number;
-}
+// interface OrderRequest {
+//   shopId: number;
+//   address: AddressData;
+//   orderItems: OrderItem[];
+//   requestMsg: string;
+//   requestDoor: boolean;
+//   requestSpoon: boolean;
+//   orderType: string;
+//   paymentType: string;
+//   totalPrice: number;
+//   deliveryPrice: number;
+//   totalPaymentPrice: number;
+// }
 
-interface AddressData {
-  street: string;
-  detail: string;
-}
+// interface AddressData {
+//   street: string;
+//   detail: string;
+// }
 
-interface OrderItem {
-  createdAt: Date | null;
-  updatedAt: Date | null;
-  id: null | number;
-  price: number;
-  quantity: number;
-  menuName: string;
-  menuId: number;
-  orderItemOptions: OrderItemOption[];
-}
+// interface OrderItem {
+//   createdAt: Date | null;
+//   updatedAt: Date | null;
+//   id: null | number;
+//   price: number;
+//   quantity: number;
+//   menuName: string;
+//   menuId: number;
+//   orderItemOptions: OrderItemOption[];
+// }
 
-interface OrderItemOption {
-  id: null | number;
-  optionName: string;
-  price: number;
-}
+// interface OrderItemOption {
+//   id: null | number;
+//   optionName: string;
+//   price: number;
+// }

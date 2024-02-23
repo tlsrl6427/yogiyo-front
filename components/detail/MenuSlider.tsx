@@ -3,6 +3,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import './slideStyles.css';
+import { useRecoilState } from 'recoil';
+import { foodModalState } from '@/recoil/modal';
+import FoodDetail from './foodDetail/FoodDetail';
 
 const slideStyle = {
   width: '170px',
@@ -20,7 +23,8 @@ interface Props {
     price: number,
     reviewNum: number,
     picture: string
-  }[];
+  }[],
+  shopId: number | undefined
 }
 
 const bgStyle = (url: string) => {
@@ -34,7 +38,9 @@ const bgStyle = (url: string) => {
   }
 }
 
-const MenuSlider = ({menus}: Props) => {
+const MenuSlider = ({menus, shopId}: Props) => {
+
+  const [isModal, setIsModal] = useRecoilState(foodModalState);
 
   return (
     <div className="relative">
@@ -45,7 +51,13 @@ const MenuSlider = ({menus}: Props) => {
       >
         {menus?.map((menu, i) => {
           return (
-            <SwiperSlide style={slideStyle} key={i}>
+            <SwiperSlide 
+              style={slideStyle} 
+              key={i}
+              onClick={() => setIsModal(isModal!)}
+            >
+              {/* 음식상세페이지 모달*/}
+              {isModal && <FoodDetail shopId={shopId} menu={menu}/>}
               <div className="w-full h-[70%]" style={bgStyle(menu.picture)} />
               <div className='h-[30%] flex flex-col justify-center px-4'>
                 <p className='font-bold'>{menu.name}</p> 

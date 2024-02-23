@@ -23,3 +23,9 @@ export const scrollHidden = atom({
   key: 'scrollHidden',
   default: false
 })
+
+//음식 상세정보 모달 state
+export const foodModalState = atom({
+  key: 'foodModalState',
+  default: false
+})
