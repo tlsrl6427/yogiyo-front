@@ -154,7 +154,7 @@ const Cart = ({ items }: Cart) => {
     const newItems = bill.orderItems.filter((item, index)=>{
       console.log(index)
     })
-  };
+      };
 
   return (
     <div className="rounded-lg border">
