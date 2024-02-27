@@ -51,6 +51,8 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
 
   const getShopList = async (cursor: number, subCursor: number) => {
     try {
+      console.log('세팅주소:' + thisAddress?.id)
+      console.log('현재좌표:' + regionCode)
       const requestInfo: RequestInfoType = {
         category: '신규맛집',
         sortOption: 'ORDER',

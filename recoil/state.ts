@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import type { UserInfo } from '@/types/types';
+import type { Menus, UserInfo } from '@/types/types';
 
 //로그인한 유저 정보
 export const userInfoAtom = atom<UserInfo>({
@@ -29,14 +29,21 @@ export const shopListOption = atom({
   },
 });
 
-//담긴 음식
-export const cartItemsState = atom({
-  key: 'cartItemsState',
-  default: []
-})
-
 //로딩 상태값
 export const loadingState = atom({
   key: 'loadingState',
   default: true
+})
+
+//상세 메뉴
+export const addMenu = atom<Menus>({
+  key: 'addMenu',
+  default: {
+    id: 0,
+    name: '',
+    content: '',
+    price: 0,
+    reviewNum: 0,
+    picture: ''
+  }
 })
