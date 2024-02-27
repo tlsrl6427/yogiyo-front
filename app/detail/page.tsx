@@ -5,7 +5,7 @@ import SignatureMenuTab from '@/components/detail/SignatureMenuTab';
 import DetailMenuList from '@/components/detail/DetailMenuList';
 import DetailTabMenu from '@/components/detail/DetailTabMenu';
 import { useSearchParams } from 'next/navigation';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { currentCoord, currentRegionCode, thisAddressId } from '@/recoil/address';
 import { foodModalState } from '@/recoil/modal';
 import { userInfoAtom } from '@/recoil/state';
@@ -35,7 +35,7 @@ const Detail = () => {
   const curCoord = useRecoilValue(currentCoord);
 
   // 주문 
-  const order = useRecoilValue(orderAtom);
+  const [order, setOrder] = useRecoilState(orderAtom);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,6 +79,14 @@ const Detail = () => {
 
   console.log(order)
 
+  const submitOrder = () => {
+    setOrder({
+      ...order,
+      address: thisAddId.address,
+      // code: thisAddId.code
+    })
+  }
+
   return (
     <div className="">
       <DetailHeader shopInfo={shopInfo} />
@@ -100,6 +108,7 @@ const Detail = () => {
         className='fixed z-50 bottom-0 left-0 w-full h-[80px] flex justify-center items-center bg-white border-t rounded-t-xl'
         onClick={() => {
           router.push('/order')
+          submitOrder()
         }}
       >
         <p className='w-full flex justify-center gap-[5px] py-[10px] mx-[10px] rounded-xl bg-pink1 font-bold text-white'>

@@ -77,6 +77,12 @@ const FoodDetail = ({shopId}: any) => {
       option.menus.some(possibleMenu => possibleMenu === menu.name)
     );
     setFilOptions(filteredOptions)
+
+    // 초기 가격 세팅
+    setOrder({
+      ...order,
+      totalPrice: menu.price
+    })
     
     // 컴포넌트가 언마운트될 때 클래스를 제거.
     return () => {
@@ -110,6 +116,11 @@ const FoodDetail = ({shopId}: any) => {
           price: select.price
         }
       ]);
+
+      setOrder({
+        ...order,
+        totalPrice: order.totalPrice + select.price
+      })
     }else{
     // 옵션 제외됐을 때
       const filterOptions = addOrderOptions.filter((option: any) => 
@@ -117,6 +128,10 @@ const FoodDetail = ({shopId}: any) => {
         option.optionName !== select.content
       )
       setAddOrderOptions(filterOptions)
+      setOrder({
+        ...order,
+        totalPrice: order.totalPrice - select.price
+      })
     }
   };
 
@@ -187,14 +202,36 @@ const FoodDetail = ({shopId}: any) => {
         </div>
       ))}
       </div>
-      <div className="flex px-[20px] justify-between border-b pb-[20px]">
+      <div className="flex px-[20px] justify-between pb-[20px]">
         <span className="font-bold text-[1.1rem]">수량</span>
+        <div
+          className=""
+          onClick={() => {
+            setQuantity((prev) => {
+              if((prev - 1) < 1){
+                return 1
+              }else{
+                return prev - 1
+              }
+            })
+          }}
+        >
+          빼기
+        </div>
         <span className="font-bold text-[1.1rem]">{quantity}</span>
+        <div
+          className=""
+          onClick={() => {
+            setQuantity((prev) => prev + 1)
+          }}
+        >
+          더하기
+        </div>
       </div>
-      <div className="bg-slate-400 mb-[100px]">
-        <span>총 주문금액</span>
-        <span>{}원</span>
-        <p>배달 최소주문금액 {}</p>
+      <div className="flex justify-between flex-wrap bg-grey7 p-[20px] mb-[100px]">
+        <span className="font-bold text-[1.1rem]">총 주문금액</span>
+        <span className="font-black text-[1.3rem] text-red-600">{order.totalPrice}원</span>
+        <p className="w-full text-end text-[0.9rem] text-slate-700">(배달 최소주문금액 {}원)</p>
       </div>
       <div 
         className="fixed bottom-0 left-0 w-full h-[100px] bg-white"
