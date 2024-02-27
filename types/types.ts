@@ -268,12 +268,12 @@ export interface MenuOptionGroup {
   count: number;
   optionType: OptionType;
   visible: Visibility;
-  menuOptions: MenuOption[];
+  menuOptions: MenuSelectOption[];
   menus: string[];
   isPossibleCount: boolean;
 }
 
-export interface MenuOption {
+export interface MenuSelectOption {
   id: number;
   content: string;
   price: number;
