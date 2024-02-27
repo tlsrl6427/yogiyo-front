@@ -191,14 +191,15 @@ export interface Order {
     detail: string; //ex "장미아파트 8동"
   };
   orderItems: {
-    createdAt: string | null;
-    updatedAt: string | null;
-    id: number | null;
+    // createdAt: string | null;
+    // updatedAt: string | null;
+    // id: number | null;
+    menuId: number;
     price: number;
     quantity: number;
     menuName: string;
     orderItemOptions: {
-      id: number | null;
+      // id: number | null;
       optionName: string; //ex "양념추가",
       price: number; //ex 500
     }[];
@@ -245,49 +246,48 @@ export interface MenuGroupType {
   id: number;
   name: string;
   content: string;
-  menus: {
-    id: number;
-    name: string;
-    content: string;
-    price: number;
-    reviewNum: number;
-    picture: string;
-  }[];
+  menus: Menus[];
 }
 
-//주문 생성 type
-interface OrderRequest {
-  shopId: number;
-  address: AddressData;
-  orderItems: OrderItem[];
-  requestMsg: string;
-  requestDoor: boolean;
-  requestSpoon: boolean;
-  orderType: string;
-  paymentType: string;
-  totalPrice: number;
-  deliveryPrice: number;
-  totalPaymentPrice: number;
-}
-
-interface AddressData {
-  street: string;
-  detail: string;
-}
-
-interface OrderItem {
-  createdAt: Date | null;
-  updatedAt: Date | null;
-  id: null | number;
+export interface Menus {
+  id: number;
+  name: string;
+  content: string;
   price: number;
-  quantity: number;
-  menuName: string;
-  menuId: number;
-  orderItemOptions: OrderItemOption[];
+  reviewNum: number;
+  picture: string;
 }
 
-interface OrderItemOption {
-  id: null | number;
-  optionName: string;
-  price: number;
+
+
+
+export interface MenuOptionGroupResponse {
+  menuOptionGroups: MenuOptionGroup[];
 }
+
+export interface MenuOptionGroup {
+  id: number;
+  name: string;
+  position: number;
+  count: number;
+  optionType: OptionType;
+  visible: Visibility;
+  menuOptions: MenuOption[];
+  menus: string[];
+  isPossibleCount: boolean;
+}
+
+export interface MenuOption {
+  id: number;
+  content: string;
+  price: number;
+  position: number;
+  visible: Visibility;
+}
+
+// 옵션 유형 코드 
+type OptionType = 'REQUIRED' | 'OPTIONAL';
+
+// 노출 유형 코드
+type Visibility = 'SHOW' | 'HIDE' | 'SOLD_OUT';
+

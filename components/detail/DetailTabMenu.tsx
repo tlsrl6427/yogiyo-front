@@ -1,10 +1,13 @@
 'use client'
 import { shopApi } from '@/services/shopApi';
-import { useState, useRef, useEffect, createRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { ShopInfoType, MenuGroupType } from '@/types/types';
 import MenuSlider from './MenuSlider';
 import { RiArrowDownSLine } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { foodModalState } from '@/recoil/modal';
+import { addMenu } from '@/recoil/state';
 
 interface Props {
   shopInfo?: ShopInfoType
@@ -33,7 +36,7 @@ const menuImgStyle = (url: string) => {
 const DetailTabMenu = ({shopInfo}: Props) => {
 
   // 테스트용 메뉴그룹 더미데이터
-  const dummyMenu = new Array(10).fill('').map((_, i) => {
+  const dummyData = new Array(10).fill('').map((_, i) => {
     return {
       id: i+1,
       name: i === 0 ? `대표메뉴` : `${i}번 메뉴그룹`,
@@ -50,6 +53,12 @@ const DetailTabMenu = ({shopInfo}: Props) => {
       })
     }
   });
+
+  //음식 상세페이지 모달 state
+  const [isModal, setIsModal] = useRecoilState(foodModalState);
+
+  //모달에 전달할 메뉴
+  const setAddMenu = useSetRecoilState(addMenu);
 
   //실제 api로 받아올 메뉴그룹데이터
   const [menuGroups, setMenuGroups] = useState<MenuGroupType[]>([]);
@@ -97,7 +106,7 @@ const DetailTabMenu = ({shopInfo}: Props) => {
       if(shopInfo){
         try {
           const result = await shopApi.getShopMenuGroup(shopInfo?.id)
-          setMenuGroups(result.menuGroups)
+          setMenuGroups(result.dummyData)
           console.log(result)
         } catch (error) {
           console.error('컴포넌트 에러', error);
@@ -112,7 +121,7 @@ const DetailTabMenu = ({shopInfo}: Props) => {
   useEffect(() => {
     //메뉴그룹 순회한 후 각 Ref의 위치값 저장
     let positions: number[] = []
-    dummyMenu.forEach((menuGroup) => {
+    dummyData.forEach((menuGroup) => {
       const name = menuGroup.name
       const sectionScroll = sectionRefs.current[name].getBoundingClientRect().top;
       positions.push(sectionScroll);
@@ -131,12 +140,12 @@ const DetailTabMenu = ({shopInfo}: Props) => {
           const currentScrollPosition = window.scrollY + 150;
           positions.forEach((_, i) => {
             if(currentScrollPosition >= positions[i] && currentScrollPosition <= positions[i+1]){
-              setActiveMenu(dummyMenu[i].name);
-              handleGrandchildScroll(dummyMenu[i].name)
+              setActiveMenu(dummyData[i].name);
+              handleGrandchildScroll(dummyData[i].name)
             }else if(positions.length - 1 === i && currentScrollPosition >= positions[i]){
               // 마지막 요소일 떄
-              setActiveMenu(dummyMenu[i].name);
-              handleGrandchildScroll(dummyMenu[i].name)
+              setActiveMenu(dummyData[i].name);
+              handleGrandchildScroll(dummyData[i].name)
             }
           })
           clearTimeout(timeoutId as NodeJS.Timeout);
@@ -173,7 +182,7 @@ const DetailTabMenu = ({shopInfo}: Props) => {
           ref={childRef}
           className="no-scroll top-0 left-0 overflow-x-auto h-[30px] flex px-[20px] items-center gap-4 text-sm absoulte bg-white"
         >
-          {dummyMenu?.map((menuGroup, i) => (
+          {dummyData?.map((menuGroup, i) => (
             <p
               ref={el => {if(el) grandChildRef.current[menuGroup?.name] = el;}} 
               className={`flex text-[1rem] items-center whitespace-nowrap cursor-pointer p-[5px] ${
@@ -210,7 +219,7 @@ const DetailTabMenu = ({shopInfo}: Props) => {
           />
         </p>
         <div className='flex flex-wrap gap-3 bg-grey9 p-[10px] pb-[20px]'>
-        {dummyMenu?.map((menuGroup, i) => (
+        {dummyData?.map((menuGroup, i) => (
           <span 
             key={i}
             className={`p-[7px] rounded-3xl 
@@ -231,7 +240,7 @@ const DetailTabMenu = ({shopInfo}: Props) => {
 
       {/* 메뉴 리스트 영역 */}
       <div>
-        {dummyMenu.map((menuGroup, i) => {
+        {dummyData.map((menuGroup, i) => {
           // 대표메뉴일 경우
           if(i === 0){
             return (
@@ -244,7 +253,7 @@ const DetailTabMenu = ({shopInfo}: Props) => {
                   className='absolute top-[0%] left-[50%]'
                 />
                 <p className='text-[1.3rem] font-bold py-2'>대표메뉴</p>
-                <MenuSlider menus={menuGroup.menus}/>
+                <MenuSlider menus={menuGroup.menus} shopId={shopInfo?.id}/>
               </div>
             )
           }
@@ -263,6 +272,10 @@ const DetailTabMenu = ({shopInfo}: Props) => {
                   <div 
                     key={i}
                     className='flex gap-4 py-[20px] border-b'
+                    onClick={() => {
+                      setIsModal(true);
+                      setAddMenu(menu);
+                    }}
                   >
                     <div className='flex-1 flex flex-col gap-2'>
                       <p className='font-bold'>{menu.name}</p>

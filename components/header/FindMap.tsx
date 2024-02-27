@@ -1,12 +1,14 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import {
+  isDetailMapState,
+  isFindMapState,
+} from '@/recoil/modal';
+import {
   searchCoord,
   currentCoord,
   currentAddress,
-  isDetailMapState,
-  isFindMapState,
-} from '@/recoil/state';
+} from '@/recoil/address';
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { GrUserManager } from 'react-icons/gr';

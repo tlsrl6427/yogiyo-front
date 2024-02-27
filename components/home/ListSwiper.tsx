@@ -9,7 +9,7 @@ import { useState, useEffect, useRef } from 'react';
 import type { Shop, RegisterAddressRequest } from '@/types/types';
 import { shopApi } from '@/services/shopApi';
 import { useRecoilValue } from 'recoil';
-import { currentCoord, currentRegionCode } from '@/recoil/state';
+import { currentCoord, currentRegionCode } from '@/recoil/address';
 import type { RequestInfoType } from '@/types/types';
 
 interface ListSwiperProps {
@@ -51,6 +51,8 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
 
   const getShopList = async (cursor: number, subCursor: number) => {
     try {
+      console.log('세팅주소:' + thisAddress?.id)
+      console.log('현재좌표:' + regionCode)
       const requestInfo: RequestInfoType = {
         category: '신규맛집',
         sortOption: 'ORDER',
