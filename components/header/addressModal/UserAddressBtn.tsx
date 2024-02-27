@@ -1,7 +1,8 @@
 import { BiHomeAlt } from 'react-icons/bi';
 import { BsBagDash } from 'react-icons/bs';
 import { useSetRecoilState } from 'recoil';
-import { userAddress, headerModalState, thisAddressId } from '@/recoil/state';
+import { userAddress, thisAddressId } from '@/recoil/address';
+import { headerModalState } from '@/recoil/modal';
 import { addressApi } from '@/services/addressApi';
 import { fetchAddress } from '@/lib/fetchAddress';
 import { FiMapPin } from 'react-icons/fi';

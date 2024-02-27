@@ -191,14 +191,15 @@ export interface Order {
     detail: string; //ex "장미아파트 8동"
   };
   orderItems: {
-    createdAt: string | null;
-    updatedAt: string | null;
-    id: number | null;
+    // createdAt: string | null;
+    // updatedAt: string | null;
+    // id: number | null;
+    menuId: number;
     price: number;
     quantity: number;
     menuName: string;
     orderItemOptions: {
-      id: number | null;
+      // id: number | null;
       optionName: string; //ex "양념추가",
       price: number; //ex 500
     }[];
@@ -245,24 +246,26 @@ export interface MenuGroupType {
   id: number;
   name: string;
   content: string;
-  menus: {
-    id: number;
-    name: string;
-    content: string;
-    price: number;
-    reviewNum: number;
-    picture: string;
-  }[];
+  menus: Menus[];
+}
+
+export interface Menus {
+  id: number;
+  name: string;
+  content: string;
+  price: number;
+  reviewNum: number;
+  picture: string;
 }
 
 
 
 
-interface MenuOptionGroupResponse {
+export interface MenuOptionGroupResponse {
   menuOptionGroups: MenuOptionGroup[];
 }
 
-interface MenuOptionGroup {
+export interface MenuOptionGroup {
   id: number;
   name: string;
   position: number;
@@ -274,7 +277,7 @@ interface MenuOptionGroup {
   isPossibleCount: boolean;
 }
 
-interface MenuOption {
+export interface MenuOption {
   id: number;
   content: string;
   price: number;
@@ -282,45 +285,9 @@ interface MenuOption {
   visible: Visibility;
 }
 
-// 옵션 유형 코드 ('REQUIRED' 또는 'OPTIONAL' 등으로 가정)
+// 옵션 유형 코드 
 type OptionType = 'REQUIRED' | 'OPTIONAL';
 
-// 노출 유형 코드 ('SHOW' 또는 'HIDE' 등으로 가정)
-type Visibility = 'SHOW' | 'HIDE';
+// 노출 유형 코드
+type Visibility = 'SHOW' | 'HIDE' | 'SOLD_OUT';
 
-//주문 생성 type
-// interface OrderRequest {
-//   shopId: number;
-//   address: AddressData;
-//   orderItems: OrderItem[];
-//   requestMsg: string;
-//   requestDoor: boolean;
-//   requestSpoon: boolean;
-//   orderType: string;
-//   paymentType: string;
-//   totalPrice: number;
-//   deliveryPrice: number;
-//   totalPaymentPrice: number;
-// }
-
-// interface AddressData {
-//   street: string;
-//   detail: string;
-// }
-
-// interface OrderItem {
-//   createdAt: Date | null;
-//   updatedAt: Date | null;
-//   id: null | number;
-//   price: number;
-//   quantity: number;
-//   menuName: string;
-//   menuId: number;
-//   orderItemOptions: OrderItemOption[];
-// }
-
-// interface OrderItemOption {
-//   id: null | number;
-//   optionName: string;
-//   price: number;
-// }

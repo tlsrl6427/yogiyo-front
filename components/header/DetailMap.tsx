@@ -3,12 +3,16 @@ import { useState, useEffect } from 'react';
 import {
   searchAddress,
   searchCoord,
-  isDetailMapState,
-  headerModalState,
   currentAddress,
   currentCoord,
   userAddress,
   thisAddressId,
+} from '@/recoil/address';
+import {
+  isDetailMapState,
+  headerModalState,
+} from '@/recoil/modal';
+import {
   userInfoAtom,
 } from '@/recoil/state';
 import { useRecoilValue, useSetRecoilState } from 'recoil';

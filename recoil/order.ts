@@ -11,36 +11,36 @@ export const orderAtom = atom<Order>({
       detail: '오른쪽 집',
     },
     orderItems: [
-      {
-        createdAt: null,
-        updatedAt: null,
-        id: null,
-        price: 29999,
-        quantity: 22,
-        menuName: 'test메뉴1',
-        orderItemOptions: [
-          {
-            id: null,
-            optionName: 'test추가1',
-            price: 500,
-          },
-        ],
-      },
-      {
-        createdAt: null,
-        updatedAt: null,
-        id: null,
-        price: 10101,
-        quantity: 38,
-        menuName: 'test메뉴2',
-        orderItemOptions: [
-          {
-            id: null,
-            optionName: 'test추가2',
-            price: 2500,
-          },
-        ],
-      },
+    //   {
+    //     createdAt: null,
+    //     updatedAt: null,
+    //     id: null,
+    //     price: 29999,
+    //     quantity: 22,
+    //     menuName: 'test메뉴1',
+    //     orderItemOptions: [
+    //       {
+    //         id: null,
+    //         optionName: 'test추가1',
+    //         price: 500,
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     createdAt: null,
+    //     updatedAt: null,
+    //     id: null,
+    //     price: 10101,
+    //     quantity: 38,
+    //     menuName: 'test메뉴2',
+    //     orderItemOptions: [
+    //       {
+    //         id: null,
+    //         optionName: 'test추가2',
+    //         price: 2500,
+    //       },
+    //     ],
+    //   },
     ],
     requestMsg: '없음',
     requestDoor: true,

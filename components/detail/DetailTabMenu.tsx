@@ -5,9 +5,9 @@ import type { ShopInfoType, MenuGroupType } from '@/types/types';
 import MenuSlider from './MenuSlider';
 import { RiArrowDownSLine } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { foodModalState } from '@/recoil/modal';
-import FoodDetail from './foodDetail/FoodDetail';
+import { addMenu } from '@/recoil/state';
 
 interface Props {
   shopInfo?: ShopInfoType
@@ -55,9 +55,10 @@ const DetailTabMenu = ({shopInfo}: Props) => {
   });
 
   //음식 상세페이지 모달 state
-  // const [isSigModal, setIsSigModal] = useState(false);
-  // const [isFoodModal, setIsFoodModal] = useState(false);
   const [isModal, setIsModal] = useRecoilState(foodModalState);
+
+  //모달에 전달할 메뉴
+  const setAddMenu = useSetRecoilState(addMenu);
 
   //실제 api로 받아올 메뉴그룹데이터
   const [menuGroups, setMenuGroups] = useState<MenuGroupType[]>([]);
@@ -271,10 +272,11 @@ const DetailTabMenu = ({shopInfo}: Props) => {
                   <div 
                     key={i}
                     className='flex gap-4 py-[20px] border-b'
-                    onClick={() => setIsModal(!isModal)}
+                    onClick={() => {
+                      setIsModal(true);
+                      setAddMenu(menu);
+                    }}
                   >
-                    {/* 음식 상세페이지 */}
-                    {isModal && <FoodDetail menu={menu} shopId={shopInfo?.id} />}
                     <div className='flex-1 flex flex-col gap-2'>
                       <p className='font-bold'>{menu.name}</p>
                       <p className='text-[0.8rem] text-slate-400'>{menu.content}</p>
