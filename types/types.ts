@@ -1,6 +1,6 @@
 export interface Handler {
   changeInput?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  Click?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  click?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 export interface Coordinate {
   lat: number;

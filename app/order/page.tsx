@@ -154,7 +154,13 @@ const Cart = ({ items }: Cart) => {
     const newItems = bill.orderItems.filter((item, index)=>{
       console.log(index)
     })
-      };
+  };
+  const handleClickMinus = () => {
+
+  }
+  const handleClickPlus = () => {
+    
+  }
 
   return (
     <div className="rounded-lg border">
@@ -191,11 +197,11 @@ const Cart = ({ items }: Cart) => {
               <div className="flex-1"></div>
               <div className="flex rounded-md border text-center pt-[10px] pb-[10px] mr-4">
                 {/*-, + 클릭시 수량 변경되어야 함*/}
-                <div className="grid pl-4">
+                <div className="grid pl-4" onClick={handleClickMinus}>
                   <LuMinus style={{ margin: 'auto' }} />
                 </div>
                 <div className="pr-4 pl-4">{item.quantity}</div>
-                <div className="grid pr-4">
+                <div className="grid pr-4" onClick={handleClickPlus}>
                   <LuPlus style={{ margin: 'auto' }} />
                 </div>
               </div>
