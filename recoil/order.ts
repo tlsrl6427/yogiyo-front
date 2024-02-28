@@ -41,7 +41,7 @@ export const orderAtom = atom<Order>({
     requestSpoon: false,
     orderType: 'DELIVERAY',
     paymentType: 'CARD',
-    totalPrice: 320000,
+    totalPrice: 0,
     deliveryPrice: 1000,
     totalPaymentPrice: 321000,
     code: '1171010200',
