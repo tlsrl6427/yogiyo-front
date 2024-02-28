@@ -156,7 +156,7 @@ const Cart = ({ items }: Cart) => {
     })
   };
   const handleClickMinus = () => {
-
+    console.log("test")
   }
   const handleClickPlus = () => {
     
