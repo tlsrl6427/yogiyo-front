@@ -155,11 +155,19 @@ const Cart = ({ items }: Cart) => {
     })
     setBill({ ...bill, orderItems: newItems });
   };
-  const handleClickMinus = () => {
-    console.log("test")
+  const handleClickPlus = (event: React.MouseEvent<HTMLDivElement>) => {
+    const index = Number(event.currentTarget.id);
+    const newBill = {...bill};
+    newBill.orderItems = [...newBill.orderItems];
+    newBill.orderItems[index] = {...newBill.orderItems[index], quantity: newBill.orderItems[index].quantity + 1}
+    setBill(newBill)
   }
-  const handleClickPlus = () => {
-    
+  const handleClickMinus = (event: React.MouseEvent<HTMLDivElement>) => {
+    const index = Number(event.currentTarget.id);
+    const newBill = {...bill};
+    newBill.orderItems = [...newBill.orderItems];
+    newBill.orderItems[index] = {...newBill.orderItems[index], quantity: newBill.orderItems[index].quantity - 1}
+    setBill(newBill)
   }
 
   return (
@@ -181,7 +189,6 @@ const Cart = ({ items }: Cart) => {
                 {/**일단 첫번째 옵션만 뜨게, 옵션가는 가격에 합치지 않고 표시함 */}
                 <p className="text-sm">{`${item.price}원`}</p>
               </div>
-              {/**메뉴 삭제 가능해야함 */}
               <LuX
                 onClick={handleOneDelete}
                 id={index}
@@ -197,11 +204,11 @@ const Cart = ({ items }: Cart) => {
               <div className="flex-1"></div>
               <div className="flex rounded-md border text-center pt-[10px] pb-[10px] mr-4">
                 {/*-, + 클릭시 수량 변경되어야 함*/}
-                <div className="grid pl-4" onClick={handleClickMinus}>
+                <div className="grid pl-4" id={index.toString()} onClick={handleClickMinus}>
                   <LuMinus style={{ margin: 'auto' }} />
                 </div>
                 <div className="pr-4 pl-4">{item.quantity}</div>
-                <div className="grid pr-4" onClick={handleClickPlus}>
+                <div className="grid pr-4" id={index.toString()} onClick={handleClickPlus}>
                   <LuPlus style={{ margin: 'auto' }} />
                 </div>
               </div>
