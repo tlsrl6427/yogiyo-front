@@ -85,16 +85,6 @@ const OrderPage = () => {
     }
   };
 
-  /**
-  return (
-    <>
-      <div>
-        <button onClick={handleGetOrder}>냅다 주문하기</button>
-      </div>
-    </>
-  );
-  */
-
   const [mintime, maxtime] = [0, 10];
 
   return (

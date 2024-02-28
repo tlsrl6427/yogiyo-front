@@ -89,7 +89,7 @@ export const emailLogin = async (email: string, password: string) => {
   }
   const resLogin = await baseAxiosInstance.post(`/member/login`, userData)
   if (resLogin.status >= 200 && resLogin.status < 300) {
-    window.location.href = '/';
+    window.location.href = '/home';
     console.log(`유저 ${resLogin.data.userId} 로그인 성공`)
   }else{
     console.error('emailLogin api 호출 중 에러 발생')
