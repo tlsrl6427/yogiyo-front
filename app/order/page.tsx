@@ -143,16 +143,29 @@ interface Cart {
   items: Item[];
 }
 const Cart = ({ items }: Cart) => {
+
   const [bill, setBill] = useRecoilState(orderAtom);
+
   const handleAllDelete = () => {
     setBill({ ...bill, orderItems: [] });
   };
+  const handleOneDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const oldItmes = bill.orderItems;
+    const newItems = bill.orderItems.filter((item, index)=>{
+      console.log(index)
+    })
+  };
+  const handleClickMinus = () => {
+    console.log("test")
+  }
+  const handleClickPlus = () => {
+    
+  }
 
   return (
     <div className="rounded-lg border">
       <div className="flex p-4">
         <div className="flex-1 font-bold">후라이드참못하는집</div>
-        {/**전체 삭제 가능해야함 */}
         <div className="ml-auto text-sm text-grey4" onClick={handleAllDelete}>
           전체삭제
         </div>
@@ -170,6 +183,8 @@ const Cart = ({ items }: Cart) => {
               </div>
               {/**메뉴 삭제 가능해야함 */}
               <LuX
+                onClick={handleOneDelete}
+                id={index}
                 style={{
                   marginTop: '0.5rem',
                   marginBottom: 'auto',
@@ -182,11 +197,11 @@ const Cart = ({ items }: Cart) => {
               <div className="flex-1"></div>
               <div className="flex rounded-md border text-center pt-[10px] pb-[10px] mr-4">
                 {/*-, + 클릭시 수량 변경되어야 함*/}
-                <div className="grid pl-4">
+                <div className="grid pl-4" onClick={handleClickMinus}>
                   <LuMinus style={{ margin: 'auto' }} />
                 </div>
                 <div className="pr-4 pl-4">{item.quantity}</div>
-                <div className="grid pr-4">
+                <div className="grid pr-4" onClick={handleClickPlus}>
                   <LuPlus style={{ margin: 'auto' }} />
                 </div>
               </div>
