@@ -12,6 +12,7 @@ export const orderAtom = atom<Order>({
     },
     orderItems: [
       {
+        menuId: 2,
         price: 29999,
         quantity: 22,
         menuName: 'test메뉴1',
@@ -23,6 +24,7 @@ export const orderAtom = atom<Order>({
         ],
       },
       {
+        menuId: 3,
         price: 10101,
         quantity: 38,
         menuName: 'test메뉴2',
