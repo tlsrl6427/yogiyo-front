@@ -21,6 +21,26 @@ export const orderAtom = atom<Order>({
             optionName: 'test추가1',
             price: 500,
           },
+          {
+            optionName: 'test추가2',
+            price: 500,
+          },
+          {
+            optionName: 'test추가3',
+            price: 500,
+          },
+          {
+            optionName: 'test추가4',
+            price: 500,
+          },
+          {
+            optionName: 'test추가5',
+            price: 500,
+          },
+          {
+            optionName: 'test추가6',
+            price: 500,
+          },
         ],
       },
       {
@@ -30,7 +50,7 @@ export const orderAtom = atom<Order>({
         menuName: 'test메뉴2',
         orderItemOptions: [
           {
-            optionName: 'test추가2',
+            optionName: 'test추가3',
             price: 2500,
           },
         ],
