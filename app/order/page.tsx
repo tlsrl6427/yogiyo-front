@@ -150,10 +150,10 @@ const Cart = ({ items }: Cart) => {
     setBill({ ...bill, orderItems: [] });
   };
   const handleOneDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const oldItmes = bill.orderItems;
     const newItems = bill.orderItems.filter((item, index)=>{
-      console.log(index)
+      return index !== Number(event.currentTarget.id);
     })
+    setBill({ ...bill, orderItems: newItems });
   };
   const handleClickMinus = () => {
     console.log("test")
