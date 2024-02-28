@@ -191,6 +191,7 @@ export interface Order {
     detail: string; //ex "장미아파트 8동"
   };
   orderItems: {
+    menuId: number;
     price: number;
     quantity: number;
     menuName: string;
