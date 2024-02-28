@@ -150,16 +150,24 @@ const Cart = ({ items }: Cart) => {
     setBill({ ...bill, orderItems: [] });
   };
   const handleOneDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const oldItmes = bill.orderItems;
     const newItems = bill.orderItems.filter((item, index)=>{
-      console.log(index)
+      return index !== Number(event.currentTarget.id);
     })
+    setBill({ ...bill, orderItems: newItems });
   };
-  const handleClickMinus = () => {
-    console.log("test")
+  const handleClickPlus = (event: React.MouseEvent<HTMLDivElement>) => {
+    const index = Number(event.currentTarget.id);
+    const newBill = {...bill};
+    newBill.orderItems = [...newBill.orderItems];
+    newBill.orderItems[index] = {...newBill.orderItems[index], quantity: newBill.orderItems[index].quantity + 1}
+    setBill(newBill)
   }
-  const handleClickPlus = () => {
-    
+  const handleClickMinus = (event: React.MouseEvent<HTMLDivElement>) => {
+    const index = Number(event.currentTarget.id);
+    const newBill = {...bill};
+    newBill.orderItems = [...newBill.orderItems];
+    newBill.orderItems[index] = {...newBill.orderItems[index], quantity: newBill.orderItems[index].quantity - 1}
+    setBill(newBill)
   }
 
   return (
@@ -176,12 +184,19 @@ const Cart = ({ items }: Cart) => {
             <div className="flex p-4">
               <div className="w-20 h-20 bg-grey2"></div>
               <div className="flex-1 pl-2 pr-2">
-                <p className="font-bold pb-2">{item.menuName}</p>
-                <p className="text-sm">{item.orderItemOptions[0].optionName}</p>{' '}
+                <p className="pb-2">{item.menuName}</p>
+                {/*<p className="text-sm">{item.orderItemOptions[0].optionName}</p>*/}
                 {/**일단 첫번째 옵션만 뜨게, 옵션가는 가격에 합치지 않고 표시함 */}
-                <p className="text-sm">{`${item.price}원`}</p>
+                <p className="text-sm">
+                  {item.orderItemOptions.reduce((acc, cur, index)=>{
+                    if (index === 0) {
+                      return cur.optionName;
+                    }
+                    return `${acc}, ${cur.optionName}`;
+                  }, "")}
+                </p>
+                <p className="font-bold mt-2">{`${item.price}원`}</p>
               </div>
-              {/**메뉴 삭제 가능해야함 */}
               <LuX
                 onClick={handleOneDelete}
                 id={index}
@@ -196,12 +211,11 @@ const Cart = ({ items }: Cart) => {
             <div className="flex">
               <div className="flex-1"></div>
               <div className="flex rounded-md border text-center pt-[10px] pb-[10px] mr-4">
-                {/*-, + 클릭시 수량 변경되어야 함*/}
-                <div className="grid pl-4" onClick={handleClickMinus}>
+                <div className="grid pl-4" id={index.toString()} onClick={handleClickMinus}>
                   <LuMinus style={{ margin: 'auto' }} />
                 </div>
-                <div className="pr-4 pl-4">{item.quantity}</div>
-                <div className="grid pr-4" onClick={handleClickPlus}>
+                <div className="mr-4 ml-4 w-4">{item.quantity}</div>
+                <div className="grid pr-4" id={index.toString()} onClick={handleClickPlus}>
                   <LuPlus style={{ margin: 'auto' }} />
                 </div>
               </div>
