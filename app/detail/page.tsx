@@ -100,10 +100,10 @@ const Detail = () => {
         order.orderItems.length >= 1 ? 100 : 40
       }/>
       {/* 음식 상세페이지 모달 */}
-      {isModal && <FoodDetail shopId={shopInfo?.id}/>}
+      {isModal && <FoodDetail shop={shopInfo}/>}
 
       {/* 주문하기 component */}
-      {(order.orderItems.length >= 1 && !isModal) && 
+      {(order.orderItems.length >= 1 && !isModal && shopInfo?.id === order.shopId) && 
       <div 
         className='fixed z-50 bottom-0 left-0 w-full h-[80px] flex justify-center items-center bg-white border-t rounded-t-xl'
         onClick={() => {
@@ -112,7 +112,7 @@ const Detail = () => {
         }}
       >
         <p className='w-full flex justify-center gap-[5px] py-[10px] mx-[10px] rounded-xl bg-pink1 font-bold text-white'>
-          {order.totalPrice.toLocaleString()}원 배달 주문하기
+          {(order.totalPrice).toLocaleString()}원 배달 주문하기
           <div className='w-[20px] h-[20px] flex justify-center items-center rounded-full bg-white'><span className='text-[0.8rem] text-pink1'>{order.orderItems.length}</span></div>
         </p>
       </div>}

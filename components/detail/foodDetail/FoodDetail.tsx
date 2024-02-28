@@ -7,8 +7,12 @@ import { foodModalState } from "@/recoil/modal";
 import { SlArrowLeft } from "react-icons/sl";
 import CustomCheckbox from "@/components/common/CustomCheckBox";
 import { orderAtom } from "@/recoil/order";
+import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
+import Swal from "sweetalert2";
 
-const FoodDetail = ({shopId}: any) => {
+
+const FoodDetail = ({shop}: any) => {
+  console.log(shop)
 
   // 주문 상태값
   const [order, setOrder] = useRecoilState(orderAtom);
@@ -52,8 +56,8 @@ const FoodDetail = ({shopId}: any) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if(shopId){
-          const result = await shopApi.getShopOptionGroup(shopId);
+        if(shop.id){
+          const result = await shopApi.getShopOptionGroup(shop.id);
           setOptions(result.menuOptionGroups);
         }
       } catch (error){
@@ -61,7 +65,7 @@ const FoodDetail = ({shopId}: any) => {
       }
     }
     fetchData()
-  }, [shopId])
+  }, [shop])
 
   useEffect(() => {
     //모달이 오픈될 때 전체 스크롤 막기(모달만 스크롤 될 수 있도록)
@@ -136,19 +140,56 @@ const FoodDetail = ({shopId}: any) => {
   };
 
   const handleAddOrder = () => {
-    setOrder({
-      ...order,
-      orderItems: [
-        ...order.orderItems, {
-          menuId: menu.id,
-          menuName: menu.name,
-          price: menu.price,
-          orderItemOptions: addOrderOptions,
-          quantity: quantity
+    const addOrder = () => {
+      setOrder({
+        ...order,
+        shopId: shop.id,
+        orderItems: [
+          ...order.orderItems, {
+            menuId: menu.id,
+            menuName: menu.name,
+            price: menu.price,
+            orderItemOptions: addOrderOptions,
+            quantity: quantity
+          }
+        ],
+        totalPrice: order.totalPrice + (menu.price * quantity)
+      })
+      setIsModal(false)
+    }
+
+    // 담긴 메뉴가 존재하고, 현재 가게와 다른 가게일 때
+    if(order.orderItems && order.shopId !== shop.id){
+      Swal.fire({
+        title: "요기요",
+        html: '장바구니에 담긴 메뉴를 취소하고 새로운 가게에서 주문하시겠어요?',
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니요",
+        confirmButtonColor: '#000'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // 주문 초기화 후 재주문
+          setOrder({
+            ...order,
+            shopId: shop.id,
+            orderItems: [
+              {
+                menuId: menu.id,
+                menuName: menu.name,
+                price: menu.price,
+                orderItemOptions: addOrderOptions,
+                quantity: quantity
+              }
+            ],
+            totalPrice: order.totalPrice + (menu.price * quantity)
+          })
+          setIsModal(false)
         }
-      ]
-    })
-    setIsModal(false)
+      });
+    }else{
+      addOrder()
+    }
   }
 
   return (
@@ -202,10 +243,10 @@ const FoodDetail = ({shopId}: any) => {
         </div>
       ))}
       </div>
-      <div className="flex px-[20px] justify-between pb-[20px]">
-        <span className="font-bold text-[1.1rem]">수량</span>
+      <div className="flex px-[20px] gap-[20px] justify-between pb-[20px]">
+        <span className="font-bold text-[1.1rem] mr-[auto]">수량</span>
         <div
-          className=""
+          className="text-[2rem] text-slate-300"
           onClick={() => {
             setQuantity((prev) => {
               if((prev - 1) < 1){
@@ -216,28 +257,37 @@ const FoodDetail = ({shopId}: any) => {
             })
           }}
         >
-          빼기
+          <CiCircleMinus />
         </div>
         <span className="font-bold text-[1.1rem]">{quantity}</span>
         <div
-          className=""
+          className="text-[2rem]"
           onClick={() => {
             setQuantity((prev) => prev + 1)
           }}
         >
-          더하기
+          <CiCirclePlus />
         </div>
       </div>
       <div className="flex justify-between flex-wrap bg-grey7 p-[20px] mb-[100px]">
         <span className="font-bold text-[1.1rem]">총 주문금액</span>
-        <span className="font-black text-[1.3rem] text-red-600">{order.totalPrice}원</span>
-        <p className="w-full text-end text-[0.9rem] text-slate-700">(배달 최소주문금액 {}원)</p>
+        <span className="font-black text-[1.3rem] text-red-600">{(order.totalPrice * quantity).toLocaleString()}원</span>
+        <p className="w-full text-end text-[0.9rem] text-slate-700">(배달 최소주문금액 {shop.minOrderPrice.toLocaleString()}원)</p>
       </div>
-      <div 
+      {/* <div 
         className="fixed bottom-0 left-0 w-full h-[100px] bg-white"
         onClick={handleAddOrder}
       >
         담기
+      </div> */}
+      <div 
+        className='fixed z-50 bottom-0 left-0 w-full px-[20px] h-[100px] flex flex-col gap-[10px] justify-center items-center bg-white border-t rounded-t-xl'
+        onClick={handleAddOrder}
+      >
+        <p className="font-semibold text-red-600">{shop.minOrderPrice.toLocaleString()}원부터 배달 가능해요</p>
+        <p className='w-full flex justify-center gap-[5px] py-[10px] mx-[10px] rounded-xl bg-pink1 font-bold text-white'>
+          {(order.totalPrice * quantity).toLocaleString()}원 담기
+        </p>
       </div>
     </div>
   )

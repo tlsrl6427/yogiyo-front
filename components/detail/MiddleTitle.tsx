@@ -34,9 +34,11 @@ const MiddleTitle = ({shopInfo}: Props) => {
 
 
   const [heart, setHeart] = useState(shopInfo?.isLike);
+  const [likeNum, setLikeNum] = useState(shopInfo?.likeNum);
 
   useEffect(() => {
-    setHeart(shopInfo?.isLike)
+    setHeart(shopInfo?.isLike);
+    setLikeNum(shopInfo?.likeNum);
   }, [shopInfo])
 
   const listStyled = `
@@ -46,19 +48,26 @@ const MiddleTitle = ({shopInfo}: Props) => {
   return (
     <div className="">
       <div className="px-4 pt-4 relative">
-        <p className="text-[1.8rem] font-bold">{shopInfo?.name || '가게 이름 오류'}</p>
+        <p className="text-[1.8rem] font-bold">{shopInfo?.name || 'Shop Name'}</p>
         <div 
           className='absolute top-4 right-4'
           onClick={() => {
             setHeart(!heart)
-            if(shopInfo?.id) likeApi.toggleLike(shopInfo?.id)
+            if(shopInfo?.id) {
+              likeApi.toggleLike(shopInfo?.id)
+              if(heart){
+                setLikeNum(prev => prev as number - 1)
+              }else{
+                setLikeNum(prev => prev as number + 1)
+              }
+            }
           }}
         >
           <FaHeart style={{
             fontSize: '1.8rem'
           }}
           color={heart ? '#f00' : '#ccc'} />
-          <p className='text-[1.1rem] text-red-800 font-bold text-center'>{shopInfo?.likeNum}</p>
+          <p className='text-[1.1rem] text-red-800 font-bold text-center'>{likeNum}</p>
         </div>
       </div>
       <div className="flex items-center gap-2 px-4 border-b pb-2">
