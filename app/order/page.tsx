@@ -23,40 +23,6 @@ const OrderPage = () => {
   //const token = user.accessToken;
   //const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
 
-  const bill2 = {
-    shopId: 1,
-    address: {
-      zipcode: '39201',
-      street: '도봉로5길 21',
-      detail: '도량그린빌..',
-    },
-    orderItems: [
-      {
-        createdAt: null,
-        updatedAt: null,
-        id: null,
-        price: 2000,
-        quantity: 1,
-        menuName: 'choco맛커피',
-        orderItemOptions: [
-          {
-            id: null,
-            optionName: '아무것도',
-            price: 500,
-          },
-        ],
-      },
-    ],
-    requestMsg: '요청사항 없음',
-    requestDoor: true,
-    requestSpoon: false,
-    orderType: 'DELIVERY',
-    paymentType: 'CARD',
-    totalPrice: 20000,
-    deliveryPrice: 1000,
-    totalPaymentPrice: 21000,
-  };
-
   useEffect(() => {
     console.log(bill);
   }, [bill]);
