@@ -1,28 +1,51 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { postOrder } from '@/services/orderAPI';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
 
 import { HiOutlineHome } from 'react-icons/hi';
 import { HiOutlineChevronRight } from 'react-icons/hi2';
 import { FiPlus } from 'react-icons/fi';
-import { LuPlus } from 'react-icons/lu';
-import { LuMinus } from 'react-icons/lu';
-import { LuX } from 'react-icons/lu';
-import { orderAtom } from '@/recoil/order';
-import { useRecoilState } from 'recoil';
+import { LuPlus, LuMinus, LuX } from 'react-icons/lu';
+
 import { Order, Handler } from '@/types/types';
+import { shopApi } from '@/services/shopApi';
+import { useRouter } from 'next/navigation';
+
+import { orderAtom } from '@/recoil/order';
+import { currentRegionCode } from '@/recoil/address';
+import { thisAddressId } from '@/recoil/address';
+import { currentCoord } from '@/recoil/address';
 
 const OrderPage = () => {
-  //const [door, setDoor] = useState(false);
-  //const [spoon, setSpoon] = useState(false);
+  const curRegionCode = useRecoilValue(currentRegionCode);
+  const thisAddId = useRecoilValue(thisAddressId);
+
+  const router = useRouter();
+  const userInfo = useRecoilValue(userInfoAtom);
   const [bill, setBill] = useRecoilState(orderAtom);
 
-  //const user = useRecoilValue(userInfoAtom);
-  //const token = user.accessToken;
-  //const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
+  const param = {
+    shopId: bill.shopId,
+    code: 0,
+    latitude: 0,
+    longitude: 0
+  }
+  if(userInfo.isLogin){
+    param.code = thisAddId.code
+    param.latitude = thisAddId.latitude
+    param.longitude = thisAddId.longitude
+  }else{
+    router.push('/')
+  }
 
+  const getShopInfoAsync = async () => {
+    const result = await shopApi.getShopInfo(param);
+    setBill({...bill, shopName: result.name, deliveryTime: result.deliveryTime});
+  }
+  getShopInfoAsync();
+  
   useEffect(() => {
     console.log(bill);
   }, [bill]);

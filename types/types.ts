@@ -185,6 +185,7 @@ export interface OrderInfo {
 }
 export interface Order {
   shopId: number;
+  shopName?: string;
   address: {
     zipcode: string; //ex "14582",
     street: string; //ex "다산로 4길 57",
