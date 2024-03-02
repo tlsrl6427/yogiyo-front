@@ -18,9 +18,9 @@ const Homes = () => {
       const loginUser = {
         email: res.email,
         nickname: res.nickname,
-        userId: 0,
+        userId: res.userId,
         isLogin: true,
-        phone: '00000000000'
+        phone: '',
       }
       console.log(loginUser)
       setUser(loginUser);
@@ -41,7 +41,6 @@ const Homes = () => {
       <div className="p-1.5 bg-slate-100" />
       <MyOrderedEateries />
       <div className="p-1.5 bg-slate-100" />
-      <div>{user.email}</div>
       <NewEateries />
     </div>
   );
