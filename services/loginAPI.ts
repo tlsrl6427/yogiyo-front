@@ -72,7 +72,7 @@ export const logout = async (userId: number) => {
     userId: 999999,
     nickname: 'unknown',
     email: 'unknown',
-    phone: '01000000000',
+    phone: '',
     isLogin: false,
   }
 
