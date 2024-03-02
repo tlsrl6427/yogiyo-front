@@ -196,7 +196,7 @@ export interface Order {
   paymentType: string; //ex "CARD",
   totalPrice: number; //ex 20000,
   deliveryPrice: number; //ex 1000,
-  totalPaymentPrice: number; //ex 21000
+  totalPaymentPrice?: number; //ex 21000
   code: string; //ex "1171010200"
 }
 
