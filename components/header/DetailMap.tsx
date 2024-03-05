@@ -43,7 +43,11 @@ const buttonIconStyle = {
   fontSize: '1.5rem',
 };
 
-const DetailMap = () => {
+interface Props {
+  directAdd: string;
+}
+
+const DetailMap = ({directAdd} : Props) => {
   //검색 좌표 및 주소
   const coord = useRecoilValue(searchCoord);
   const address = useRecoilValue(searchAddress);
