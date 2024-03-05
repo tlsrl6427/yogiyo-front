@@ -38,7 +38,7 @@ const OrderPage = () => {
     param.latitude = thisAddId.latitude
     param.longitude = thisAddId.longitude
   }else{
-    router.push('/')
+    //router.push('/')
   }
 
   const getShopInfoAsync = async () => {
@@ -50,7 +50,7 @@ const OrderPage = () => {
   useEffect(() => {
     getShopInfoAsync();
   }, []);
-  
+
   const handleGetOrder = () => {
     postOrder(bill);
   };
