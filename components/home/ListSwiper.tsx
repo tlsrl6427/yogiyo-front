@@ -31,11 +31,13 @@ const lastArrowStyle = {
   color: 'red',
 };
 
-const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperProps) => {
+const ListSwiper = ({ thisAddress }: ListSwiperProps) => {
   const [loading, setLoading] = useState(false);
 
   const regionCode = useRecoilValue(currentRegionCode)
   const curCoord = useRecoilValue(currentCoord)
+
+  const [shopListData, setShopListData] = useState<Shop[]>([]);
 
   //무한스크롤 cursor (collumn값)
   const [cursor, setCursor] = useState(0);
@@ -51,8 +53,8 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
 
   const getShopList = async (cursor: number, subCursor: number) => {
     try {
-      console.log('세팅주소:' + thisAddress?.id)
-      console.log('현재좌표:' + regionCode)
+      // console.log('세팅주소:' + thisAddress?.id)
+      // console.log('현재좌표:' + regionCode)
       const requestInfo: RequestInfoType = {
         category: '신규맛집',
         sortOption: 'ORDER',
@@ -75,7 +77,6 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
       }
 
       const response = await shopApi.fetchShopList(requestInfo);
-      console.log(requestInfo);
 
       //다음 오프셋이 있을 경우
       if (response?.hasNext) {
@@ -94,7 +95,6 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
     setLoading(true);
     try {
       const data = await getShopList(cursor, subCursor);
-      console.log(data);
       if (data && data.content) {
         setShopListData((prev) => [...prev, ...data.content]);
         setCursor(data.nextCursor);
@@ -115,33 +115,40 @@ const ListSwiper = ({ thisAddress, shopListData, setShopListData }: ListSwiperPr
       setLoading(false);
     }
   };
-  console.log(regionCode)
 
   useEffect(() => {
-    // if (!regionCode) {
-    //   return; 
-    // }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          //타겟이 뷰포트와 교차할 경우 api 호출
-          if (entry.isIntersecting && !limit && !loading) fetchData();
-        });
-      },
-      { threshold: 0.1 },
-    ); //타겟이 0.1만큼 뷰포트에 들어올 경우 실행
+    // 초기 데이터 로드 또는 thisAddress 변경 시 데이터 재로드
+    setShopListData([]);
+    setCursor(0);
+    setSubCursor(0);
+    fetchData(); // 이 함수 내부에서 getShopList 호출 포함
+  }, [thisAddress]); 
 
-    //타겟 감시 시작
-    if (observerTarget.current) observer.observe(observerTarget.current);
+  // useEffect(() => {
+  //   // if (!regionCode) {
+  //   //   return; 
+  //   // }
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         //타겟이 뷰포트와 교차할 경우 api 호출
+  //         if (entry.isIntersecting && !limit && !loading) fetchData();
+  //       });
+  //     },
+  //     { threshold: 0.1 },
+  //   ); //타겟이 0.1만큼 뷰포트에 들어올 경우 실행
 
-    //불러올 데이터가 더 이상 없을 경우 무한스크롤링 종료
-    if (limit) observer.disconnect();
+  //   //타겟 감시 시작
+  //   if (observerTarget.current) observer.observe(observerTarget.current);
 
-    // 컴포넌트 언마운트 시 또는 limit 상태가 true일 때, Observer 해제
-    return () => {
-      observer.disconnect();
-    };
-  }, [cursor, subCursor, limit, curCoord, currentRegionCode, loading]);
+  //   //불러올 데이터가 더 이상 없을 경우 무한스크롤링 종료
+  //   if (limit) observer.disconnect();
+
+  //   // 컴포넌트 언마운트 시 또는 limit 상태가 true일 때, Observer 해제
+  //   return () => {
+  //     observer.disconnect();
+  //   };
+  // }, [cursor, subCursor, limit, loading]);
 
   return (
     <>
