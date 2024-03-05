@@ -27,28 +27,24 @@ const OrderPage = () => {
   const userInfo = useRecoilValue(userInfoAtom);
   const [bill, setBill] = useRecoilState(orderAtom);
 
-  const param = {
-    shopId: bill.shopId,
-    code: 0,
-    latitude: 0,
-    longitude: 0
-  }
-  if(userInfo.isLogin){
-    param.code = thisAddId.code
-    param.latitude = thisAddId.latitude
-    param.longitude = thisAddId.longitude
-  }else{
-    //router.push('/')
-  }
-
-  const getShopInfoAsync = async () => {
+  const getShopInfoAsync = async (param: {shopId: number, code: number, latitude: number, longitude: number}) => {
     const result = await shopApi.getShopInfo(param);
     setBill({...bill, shopName: result.name, deliveryTime: result.deliveryTime});
-    console.log("어디가 이렇게 호출되냐")
   }
 
   useEffect(() => {
-    getShopInfoAsync();
+    if(userInfo.isLogin){
+      const param = {
+        shopId: bill.shopId,
+        code: thisAddId.code,
+        latitude: thisAddId.latitude,
+        longitude: thisAddId.longitude
+      }
+      getShopInfoAsync(param);
+    }else{
+      console.log('로그아웃 상태입니다.')
+      router.push('/')
+    }
   }, []);
 
   const handleGetOrder = () => {
