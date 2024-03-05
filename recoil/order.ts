@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 import { Order } from '@/types/types';
 
 export const orderAtom = atom<Order>({
@@ -65,5 +65,15 @@ export const orderAtom = atom<Order>({
     deliveryPrice: 1000,
     totalPaymentPrice: 321000,
     code: '1171010200',
+  },
+});
+
+
+export const totalPriceState = selector({
+  key: 'totalPriceState',
+  get: ({ get }) => {
+    const food = get(orderAtom).totalPrice;
+    const delivery = get(orderAtom).deliveryPrice;
+    return food + delivery;
   },
 });

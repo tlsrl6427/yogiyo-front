@@ -81,19 +81,6 @@ export interface ReqAuth {
   state?: string;
 }
 
-/* 임시로 쓰던거(우리API문서랑 다름)
-export interface OrderInfo {
-  name: string;
-  min_delivery: number;
-  max_delivery: number;
-  menu_name?: string;
-  order_type?: number;
-  order_time?: string;
-  order_state?: number;
-  review?: boolean;
-}
-*/
-
 export interface Address {
   zipcode: string;
   street: string;
@@ -185,6 +172,8 @@ export interface OrderInfo {
 }
 export interface Order {
   shopId: number;
+  shopName?: string;
+  deliveryTime?: number;
   address: {
     zipcode: string; //ex "14582",
     street: string; //ex "다산로 4길 57",
@@ -207,7 +196,7 @@ export interface Order {
   paymentType: string; //ex "CARD",
   totalPrice: number; //ex 20000,
   deliveryPrice: number; //ex 1000,
-  totalPaymentPrice: number; //ex 21000
+  totalPaymentPrice?: number; //ex 21000
   code: string; //ex "1171010200"
 }
 

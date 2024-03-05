@@ -1,31 +1,51 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { postOrder } from '@/services/orderAPI';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
 
 import { HiOutlineHome } from 'react-icons/hi';
 import { HiOutlineChevronRight } from 'react-icons/hi2';
 import { FiPlus } from 'react-icons/fi';
-import { LuPlus } from 'react-icons/lu';
-import { LuMinus } from 'react-icons/lu';
-import { LuX } from 'react-icons/lu';
-import { orderAtom } from '@/recoil/order';
-import { useRecoilState } from 'recoil';
+import { LuPlus, LuMinus, LuX } from 'react-icons/lu';
+
 import { Order, Handler } from '@/types/types';
+import { shopApi } from '@/services/shopApi';
+import { useRouter } from 'next/navigation';
+
+import { orderAtom, totalPriceState } from '@/recoil/order';
+import { currentRegionCode } from '@/recoil/address';
+import { thisAddressId } from '@/recoil/address';
+import { currentCoord } from '@/recoil/address';
 
 const OrderPage = () => {
-  //const [door, setDoor] = useState(false);
-  //const [spoon, setSpoon] = useState(false);
+  const curRegionCode = useRecoilValue(currentRegionCode);
+  const thisAddId = useRecoilValue(thisAddressId);
+  const totalPrice = useRecoilValue(totalPriceState);
+
+  const router = useRouter();
+  const userInfo = useRecoilValue(userInfoAtom);
   const [bill, setBill] = useRecoilState(orderAtom);
 
-  //const user = useRecoilValue(userInfoAtom);
-  //const token = user.accessToken;
-  //const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
+  const getShopInfoAsync = async (param: {shopId: number, code: number, latitude: number, longitude: number}) => {
+    const result = await shopApi.getShopInfo(param);
+    setBill({...bill, shopName: result.name, deliveryTime: result.deliveryTime});
+  }
 
   useEffect(() => {
-    console.log(bill);
-  }, [bill]);
+    if(userInfo.isLogin){
+      const param = {
+        shopId: bill.shopId,
+        code: thisAddId.code,
+        latitude: thisAddId.latitude,
+        longitude: thisAddId.longitude
+      }
+      getShopInfoAsync(param);
+    }else{
+      console.log('로그아웃 상태입니다.')
+      router.push('/')
+    }
+  }, []);
 
   const handleGetOrder = () => {
     postOrder(bill);
@@ -68,7 +88,7 @@ const OrderPage = () => {
             spoon={bill.requestSpoon}
             changeInput={handleCheckboxChange}
           />
-          <Prices />
+          <Prices food={bill.totalPrice} delivery={bill.deliveryPrice} total={totalPrice}/>
         </div>
       )}
       <div className="p-6 text-sm bg-grey8 text-grey5 mt-2">
@@ -129,20 +149,18 @@ const Cart = ({ items }: Cart) => {
   return (
     <div className="rounded-lg border">
       <div className="flex p-4">
-        <div className="flex-1 font-bold">후라이드참못하는집</div>
+        <div className="flex-1 font-bold">{bill.shopName}</div>
         <div className="ml-auto text-sm text-grey4" onClick={handleAllDelete}>
           전체삭제
         </div>
       </div>
       <div>
         {items.map((item: Item, index: number) => (
-          <div>
+          <div key={index}>
             <div className="flex p-4">
               <div className="w-20 h-20 bg-grey2"></div>
               <div className="flex-1 pl-2 pr-2">
                 <p className="pb-2">{item.menuName}</p>
-                {/*<p className="text-sm">{item.orderItemOptions[0].optionName}</p>*/}
-                {/**일단 첫번째 옵션만 뜨게, 옵션가는 가격에 합치지 않고 표시함 */}
                 <p className="text-sm">
                   {item.orderItemOptions.reduce((acc, cur, index)=>{
                     if (index === 0) {
@@ -244,20 +262,25 @@ const Address = ({ street, detail }: Address) => {
   );
 };
 
-const Prices = () => {
+interface Prices {
+  food: number;
+  delivery: number;
+  total: number;
+}
+const Prices = ({food, delivery, total}: Prices) => {
   return (
     <div className="mt-4">
       <div className="flex pt-[6px]">
         <div>상품금액</div>
-        <div className="ml-auto">원</div>
+        <div className="ml-auto">{`${food} 원`}</div>
       </div>
       <div className="flex pt-2 pb-[6px]">
         <div>배달금액</div>
-        <div className="ml-auto">원</div>
+        <div className="ml-auto">{`${delivery} 원`}</div>
       </div>
       <div className="flex pt-4 pb-4 font-bold border-t border-t-grey2">
         <div>총 결제금액</div>
-        <div className="ml-auto">원</div>
+        <div className="ml-auto">{`${total} 원`}</div>
       </div>
     </div>
   );
