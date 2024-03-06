@@ -119,7 +119,7 @@ interface Cart {
   items: Item[];
 }
 const Cart = ({ items }: Cart) => {
-
+  const router = useRouter();
   const [bill, setBill] = useRecoilState(orderAtom);
 
   const handleAllDelete = () => {
@@ -144,6 +144,9 @@ const Cart = ({ items }: Cart) => {
     newBill.orderItems = [...newBill.orderItems];
     newBill.orderItems[index] = {...newBill.orderItems[index], quantity: newBill.orderItems[index].quantity - 1}
     setBill(newBill)
+  }
+  const handleGoShopDetail = () => {
+    router.push(`/detail?id=${bill.shopId}`)
   }
 
   return (
@@ -197,7 +200,7 @@ const Cart = ({ items }: Cart) => {
           </div>
         ))}
       </div>
-      <div className="flex text-blue1 font-semibold justify-center p-4">
+      <div className="flex text-blue1 font-semibold justify-center p-4" onClick={handleGoShopDetail}>
         <div className="mt-[3px]">
           <FiPlus />
         </div>
