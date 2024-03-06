@@ -9,17 +9,22 @@ import CustomCheckbox from "@/components/common/CustomCheckBox";
 import { orderAtom } from "@/recoil/order";
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
 import Swal from "sweetalert2";
+import { moneyCalc } from "@/lib/moneyCalc";
 
 
 const FoodDetail = ({shop}: any) => {
-  console.log(shop)
 
+  // 메뉴
+  const menu = useRecoilValue(addMenu);
   // 주문 상태값
   const [order, setOrder] = useRecoilState(orderAtom);
   // 수량
   const [quantity, setQuantity] = useState(1);
+  // 중간가격
+  const [middlePrice, setMiddlePrice] = useState(menu.price);
+  // 옵션총합
+  const [optionPrice, setOptionPrice] = useState(0);
 
-  const menu = useRecoilValue(addMenu);
   const [isModal, setIsModal] = useRecoilState(foodModalState);
 
   const [options, setOptions] = useState();
@@ -81,13 +86,7 @@ const FoodDetail = ({shop}: any) => {
       option.menus.some(possibleMenu => possibleMenu === menu.name)
     );
     setFilOptions(filteredOptions)
-
-    // 초기 가격 세팅
-    setOrder({
-      ...order,
-      totalPrice: menu.price
-    })
-    
+  
     // 컴포넌트가 언마운트될 때 클래스를 제거.
     return () => {
       body.classList.remove('no-scroll');
@@ -121,10 +120,7 @@ const FoodDetail = ({shop}: any) => {
         }
       ]);
 
-      setOrder({
-        ...order,
-        totalPrice: order.totalPrice + select.price
-      })
+      setOptionPrice(prev => prev + select.price);
     }else{
     // 옵션 제외됐을 때
       const filterOptions = addOrderOptions.filter((option: any) => 
@@ -132,11 +128,10 @@ const FoodDetail = ({shop}: any) => {
         option.optionName !== select.content
       )
       setAddOrderOptions(filterOptions)
-      setOrder({
-        ...order,
-        totalPrice: order.totalPrice - select.price
-      })
+      setOptionPrice(prev => prev - select.price);
     }
+
+    setMiddlePrice(moneyCalc(menu.price, optionPrice, quantity))
   };
 
   const handleAddOrder = () => {
@@ -182,7 +177,8 @@ const FoodDetail = ({shop}: any) => {
                 quantity: quantity
               }
             ],
-            totalPrice: order.totalPrice + (menu.price * quantity)
+            // totalPrice: order.totalPrice + (menu.price * quantity)
+            totalPrice: moneyCalc(order.totalPrice, ad)
           })
           setIsModal(false)
         }
@@ -255,6 +251,10 @@ const FoodDetail = ({shop}: any) => {
                 return prev - 1
               }
             })
+            setOrder({
+              ...order,
+              totalPrice: order.totalPrice * quantity
+            })
           }}
         >
           <CiCircleMinus />
@@ -264,6 +264,10 @@ const FoodDetail = ({shop}: any) => {
           className="text-[2rem]"
           onClick={() => {
             setQuantity((prev) => prev + 1)
+            setOrder({
+              ...order,
+              totalPrice: order.totalPrice * quantity
+            })
           }}
         >
           <CiCirclePlus />
@@ -271,22 +275,17 @@ const FoodDetail = ({shop}: any) => {
       </div>
       <div className="flex justify-between flex-wrap bg-grey7 p-[20px] mb-[100px]">
         <span className="font-bold text-[1.1rem]">총 주문금액</span>
-        <span className="font-black text-[1.3rem] text-red-600">{(order.totalPrice * quantity).toLocaleString()}원</span>
+        <span className="font-black text-[1.3rem] text-red-600">{(order.totalPrice).toLocaleString()}원</span>
         <p className="w-full text-end text-[0.9rem] text-slate-700">(배달 최소주문금액 {shop.minOrderPrice.toLocaleString()}원)</p>
       </div>
-      {/* <div 
-        className="fixed bottom-0 left-0 w-full h-[100px] bg-white"
-        onClick={handleAddOrder}
-      >
-        담기
-      </div> */}
+
       <div 
         className='fixed z-50 bottom-0 left-0 w-full px-[20px] h-[100px] flex flex-col gap-[10px] justify-center items-center bg-white border-t rounded-t-xl'
         onClick={handleAddOrder}
       >
         <p className="font-semibold text-red-600">{shop.minOrderPrice.toLocaleString()}원부터 배달 가능해요</p>
         <p className='w-full flex justify-center gap-[5px] py-[10px] mx-[10px] rounded-xl bg-pink1 font-bold text-white'>
-          {(order.totalPrice * quantity).toLocaleString()}원 담기
+          {(order.totalPrice).toLocaleString()}원 담기
         </p>
       </div>
     </div>
