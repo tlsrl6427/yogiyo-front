@@ -27,10 +27,16 @@ const OrderPage = () => {
   const userInfo = useRecoilValue(userInfoAtom);
   const [bill, setBill] = useRecoilState(orderAtom);
 
+<<<<<<< HEAD
   const getShopInfoAsync = async (param: {shopId: number, code: number, latitude: number, longitude: number}) => {
     const result = await shopApi.getShopInfo(param);
     setBill({...bill, shopName: result.name, deliveryTime: result.deliveryTime});
   }
+=======
+  //const user = useRecoilValue(userInfoAtom);
+  //const token = user.accessToken;
+  //const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
+>>>>>>> hj
 
   useEffect(() => {
     if(userInfo.isLogin){

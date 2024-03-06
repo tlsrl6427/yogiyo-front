@@ -17,8 +17,8 @@ import LoginPage from '@/components/common/LoginPage';
 export default function Home() {
 
   const [curCoord, setCurCoord] = useRecoilState(currentCoord);
-  const setRegionCode = useSetRecoilState(currentRegionCode);
-  const setCurAdd = useSetRecoilState(currentAddress);
+  const [regionCode, setRegionCode] = useRecoilState(currentRegionCode);
+  const [curAdd, setCurAdd] = useRecoilState(currentAddress);
   const setThisAdd = useSetRecoilState(thisAddressId);
   const setMemberAddress = useSetRecoilState(userAddress);
   const userInfo = useRecoilValue(userInfoAtom);
@@ -48,8 +48,6 @@ export default function Home() {
     }else{
       setLocationLoaded(true);
     }
-
-    fetchAddress(setMemberAddress, setThisAdd);
   }, []);
 
   useEffect(() => {
@@ -88,6 +86,24 @@ export default function Home() {
     kakaoMapScript.addEventListener('load', onLoadKakaoAPI);
     //주소값 세팅되면 로딩완료
 
+    // '요기'세팅된 주소가 없을 경우 현재 주소값 적용
+    const optional = {
+      id: 0,
+      address: {
+        zipcode: '',
+        street: curAdd,
+        detail: '',
+      },
+      here: true,
+      code: regionCode,
+      addressType: '',
+      nickname: curAdd,
+      longitude: curCoord?.lng,
+      latitude: curCoord?.lat,
+    }
+    
+    fetchAddress(setMemberAddress, setThisAdd, optional);
+
     // Cleanup
     return () => {
       kakaoMapScript.removeEventListener('load', onLoadKakaoAPI);
@@ -101,14 +117,6 @@ export default function Home() {
     }
   }, [locationLoaded, regionCodeLoaded])
 
-  // useEffect(() => {
-  //   console.log(userInfo)
-  //   if(!userInfo.isLogin){
-  //     console.log(userInfo)
-  //     router.push('/login');
-  //   }
-  // }, [userInfo.isLogin, router])
-
   return (
     <div>
       <Head>
@@ -120,14 +128,14 @@ export default function Home() {
         <SplashPage /> :
 
         // 로그인 유무 확인 - 비로그인 시 로그인 페이지 오픈
-        userInfo.isLogin ? 
+        // userInfo.isLogin ? 
         <main className="flex flex-col w-full pt-[50px] pb-[70px]">
           <Header />
           <Homes />
           <Footer />
         </main> 
-        :
-        <LoginPage />
+        // :
+        // <LoginPage />
       }
 
     </div>

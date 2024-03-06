@@ -27,6 +27,7 @@ export const shopApi = {
         },
         params,
       });
+      console.log('요청보냄')
       return response.data;
     } catch (error) {
       console.error(error);
