@@ -37,6 +37,9 @@ const Detail = () => {
   // 주문 
   const [order, setOrder] = useRecoilState(orderAtom);
 
+  // 담긴 금액
+  const [total, setTotal] = useState(0);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -83,7 +86,6 @@ const Detail = () => {
     setOrder({
       ...order,
       address: thisAddId.address,
-      // code: thisAddId.code
     })
   }
 

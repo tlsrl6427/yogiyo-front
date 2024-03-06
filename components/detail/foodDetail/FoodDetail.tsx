@@ -85,7 +85,10 @@ const FoodDetail = ({shop}: any) => {
     const filteredOptions = dummyOption.filter(option =>
       option.menus.some(possibleMenu => possibleMenu === menu.name)
     );
-    setFilOptions(filteredOptions)
+    setFilOptions(filteredOptions);
+    
+    // 옵션 초기화
+    setAddOrderOptions([]);
   
     // 컴포넌트가 언마운트될 때 클래스를 제거.
     return () => {
@@ -133,23 +136,37 @@ const FoodDetail = ({shop}: any) => {
 
     setMiddlePrice(moneyCalc(menu.price, optionPrice, quantity))
   };
+  
+  //총 금액 계산
+  const totalPriceCalc = (orderItems: any) => {
+    console.log(orderItems)
+    return orderItems.reduce((acc:number, item: any) => {
+      const totalOptionPrice = item.orderItemOptions?.reduce((accOption: number, option: any) => {
+        return accOption + option.price
+      }, 0) || 0
+      console.log('중간옵션토탈:' + totalOptionPrice)
+
+      return acc + (item.price + totalOptionPrice) * item.quantity
+    }, 0) as number
+  }
 
   const handleAddOrder = () => {
     const addOrder = () => {
+      const newOrderItem = {
+        menuId: menu.id,
+        menuName: menu.name,
+        price: menu.price,
+        orderItemOptions: addOrderOptions,
+        quantity: quantity,
+      };
+      const newTotalPrice = totalPriceCalc([...order.orderItems, newOrderItem]);
+  
       setOrder({
         ...order,
         shopId: shop.id,
-        orderItems: [
-          ...order.orderItems, {
-            menuId: menu.id,
-            menuName: menu.name,
-            price: menu.price,
-            orderItemOptions: addOrderOptions,
-            quantity: quantity
-          }
-        ],
-        totalPrice: order.totalPrice + (menu.price * quantity)
-      })
+        orderItems: [...order.orderItems, newOrderItem],
+        totalPrice: newTotalPrice,
+      });
       setIsModal(false)
     }
 
@@ -165,21 +182,38 @@ const FoodDetail = ({shop}: any) => {
       }).then((result) => {
         if (result.isConfirmed) {
           // 주문 초기화 후 재주문
+          // setOrder({
+          //   ...order,
+          //   shopId: shop.id,
+          //   orderItems: [
+          //     {
+          //       menuId: menu.id,
+          //       menuName: menu.name,
+          //       price: menu.price,
+          //       orderItemOptions: addOrderOptions,
+          //       quantity: quantity
+          //     }
+          //   ],
+          //   // totalPrice: order.totalPrice + (menu.price * quantity)
+          //   totalPrice: totalPriceCalc(order.orderItems)
+          // })
+
+          const newOrderItem = {
+            menuId: menu.id,
+            menuName: menu.name,
+            price: menu.price,
+            orderItemOptions: addOrderOptions,
+            quantity: quantity,
+          };
+          const newTotalPrice = totalPriceCalc([newOrderItem]);
+
           setOrder({
             ...order,
             shopId: shop.id,
-            orderItems: [
-              {
-                menuId: menu.id,
-                menuName: menu.name,
-                price: menu.price,
-                orderItemOptions: addOrderOptions,
-                quantity: quantity
-              }
-            ],
-            // totalPrice: order.totalPrice + (menu.price * quantity)
-            totalPrice: moneyCalc(order.totalPrice, ad)
-          })
+            orderItems: [newOrderItem],
+            totalPrice: newTotalPrice,
+          });
+
           setIsModal(false)
         }
       });
@@ -275,7 +309,7 @@ const FoodDetail = ({shop}: any) => {
       </div>
       <div className="flex justify-between flex-wrap bg-grey7 p-[20px] mb-[100px]">
         <span className="font-bold text-[1.1rem]">총 주문금액</span>
-        <span className="font-black text-[1.3rem] text-red-600">{(order.totalPrice).toLocaleString()}원</span>
+        <span className="font-black text-[1.3rem] text-red-600">{(moneyCalc(menu.price, optionPrice, quantity)).toLocaleString()}원</span>
         <p className="w-full text-end text-[0.9rem] text-slate-700">(배달 최소주문금액 {shop.minOrderPrice.toLocaleString()}원)</p>
       </div>
 
@@ -285,7 +319,7 @@ const FoodDetail = ({shop}: any) => {
       >
         <p className="font-semibold text-red-600">{shop.minOrderPrice.toLocaleString()}원부터 배달 가능해요</p>
         <p className='w-full flex justify-center gap-[5px] py-[10px] mx-[10px] rounded-xl bg-pink1 font-bold text-white'>
-          {(order.totalPrice).toLocaleString()}원 담기
+          {(moneyCalc(menu.price, optionPrice, quantity)).toLocaleString()}원 담기
         </p>
       </div>
     </div>
