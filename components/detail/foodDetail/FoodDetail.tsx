@@ -10,6 +10,7 @@ import { orderAtom } from "@/recoil/order";
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
 import Swal from "sweetalert2";
 import { moneyCalc } from "@/lib/moneyCalc";
+import { totalPriceCalc } from "@/lib/totalPriceCalc";
 
 
 const FoodDetail = ({shop}: any) => {
@@ -137,18 +138,7 @@ const FoodDetail = ({shop}: any) => {
     setMiddlePrice(moneyCalc(menu.price, optionPrice, quantity))
   };
   
-  //총 금액 계산
-  const totalPriceCalc = (orderItems: any) => {
-    console.log(orderItems)
-    return orderItems.reduce((acc:number, item: any) => {
-      const totalOptionPrice = item.orderItemOptions?.reduce((accOption: number, option: any) => {
-        return accOption + option.price
-      }, 0) || 0
-      console.log('중간옵션토탈:' + totalOptionPrice)
 
-      return acc + (item.price + totalOptionPrice) * item.quantity
-    }, 0) as number
-  }
 
   const handleAddOrder = () => {
     const addOrder = () => {
@@ -181,23 +171,6 @@ const FoodDetail = ({shop}: any) => {
         confirmButtonColor: '#000'
       }).then((result) => {
         if (result.isConfirmed) {
-          // 주문 초기화 후 재주문
-          // setOrder({
-          //   ...order,
-          //   shopId: shop.id,
-          //   orderItems: [
-          //     {
-          //       menuId: menu.id,
-          //       menuName: menu.name,
-          //       price: menu.price,
-          //       orderItemOptions: addOrderOptions,
-          //       quantity: quantity
-          //     }
-          //   ],
-          //   // totalPrice: order.totalPrice + (menu.price * quantity)
-          //   totalPrice: totalPriceCalc(order.orderItems)
-          // })
-
           const newOrderItem = {
             menuId: menu.id,
             menuName: menu.name,
