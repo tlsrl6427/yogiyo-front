@@ -72,7 +72,7 @@ const DetailMap = ({directAdd} : Props) => {
   const [detailAddress, setDetailAddress] = useState('');
 
   //주소 별명
-  const [isAddressName, setIsAddressName] = useState('');
+  const [isAddressName, setIsAddressName] = useState(directAdd);
 
   //로그인 유저
   const userInfo = useRecoilValue(userInfoAtom);

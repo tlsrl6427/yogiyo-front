@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userAddress } from '@/recoil/address';
 import { headerModalState, isDetailMapState, isFindMapState } from '@/recoil/modal';
@@ -36,6 +36,9 @@ const AddressModal = () => {
 
   // 집 추가 & 회사 추가 로 이동할 경우 상태값
   const [directAdd, setDirectAdd] = useState('');
+
+  // 집 추가 & 회사 추가 상태값 초기화
+  useEffect(() => setDirectAdd('') , [])
 
   const searchIconStyle = {
     position: 'absolute',
@@ -154,7 +157,7 @@ const AddressModal = () => {
                 !memberAddress.find(addressTarget => addressTarget.addressType === "HOME") &&
                 <div 
                   className="flex p-[20px]"
-                  onClick={() => addressAddDirect('home')}
+                  onClick={() => addressAddDirect('HOME')}
                 >
                   <div className='flex flex-1 gap-2 cursor-pointer'><BiHomeAlt style={{ fontSize: '1.5rem' }}/><span className="flex items-center gap-2 text-[1rem] font-bold">집 추가</span></div>
                 </div>
@@ -165,7 +168,7 @@ const AddressModal = () => {
                 !memberAddress.find(addressTarget => addressTarget.addressType === "COMPANY") &&
                 <div 
                   className="flex p-[20px]"
-                  onClick={() => addressAddDirect('company')}
+                  onClick={() => addressAddDirect('COMPANY')}
                 >
                   <div className='flex flex-1 gap-2 cursor-pointer'><BsBagDash style={{ fontSize: '1.5rem' }}/><span className="flex items-center gap-2 text-[1rem] font-bold">회사 추가</span></div>
                 </div>
