@@ -47,11 +47,9 @@ const OrderPage = () => {
       getShopInfoAsync(param);
     } else {
       console.log('로그아웃 상태입니다.');
-      console.log(orderItemsWithPrice);
-      console.log(prices);
-      //router.push('/');
+      router.push('/');
     }
-  }, [bill]);
+  }, []);
 
   const handleGetOrder = () => {
     postOrder(bill);
