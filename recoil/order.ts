@@ -14,7 +14,7 @@ export const orderAtom = atom<Order>({
       {
         menuId: 2,
         price: 29999,
-        quantity: 22,
+        quantity: 92,
         menuName: 'test메뉴1',
         orderItemOptions: [
           {

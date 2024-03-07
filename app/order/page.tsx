@@ -142,23 +142,31 @@ const Cart = ({ items }: Cart) => {
   };
   const handleClickPlus = (event: React.MouseEvent<HTMLDivElement>) => {
     const index = Number(event.currentTarget.id);
-    const newBill = { ...bill };
-    newBill.orderItems = [...newBill.orderItems];
-    newBill.orderItems[index] = {
-      ...newBill.orderItems[index],
-      quantity: newBill.orderItems[index].quantity + 1,
-    };
-    setBill(newBill);
+    if (bill.orderItems[index].quantity < 99) {
+      const newBill = { ...bill };
+      newBill.orderItems = [...newBill.orderItems];
+      newBill.orderItems[index] = {
+        ...newBill.orderItems[index],
+        quantity: newBill.orderItems[index].quantity + 1,
+      };
+      setBill(newBill);
+    } else {
+      console.log('수량을 99 이상으로 늘일 수 없음');
+    }
   };
   const handleClickMinus = (event: React.MouseEvent<HTMLDivElement>) => {
     const index = Number(event.currentTarget.id);
-    const newBill = { ...bill };
-    newBill.orderItems = [...newBill.orderItems];
-    newBill.orderItems[index] = {
-      ...newBill.orderItems[index],
-      quantity: newBill.orderItems[index].quantity - 1,
-    };
-    setBill(newBill);
+    if (bill.orderItems[index].quantity > 1) {
+      const newBill = { ...bill };
+      newBill.orderItems = [...newBill.orderItems];
+      newBill.orderItems[index] = {
+        ...newBill.orderItems[index],
+        quantity: newBill.orderItems[index].quantity - 1,
+      };
+      setBill(newBill);
+    } else {
+      console.log('수량을 1 이하로 줄일 수 없음');
+    }
   };
   const handleGoShopDetail = () => {
     router.push(`/detail?id=${bill.shopId}`);
