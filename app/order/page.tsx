@@ -193,7 +193,7 @@ const Cart = ({ items }: Cart) => {
                     return `${acc}, ${cur.optionName}`;
                   }, '')}
                 </p>
-                <p className="font-bold mt-2">{`${item.priceWithOption}원`}</p>
+                <p className="font-bold mt-2">{`${item.priceTotal}원`}</p>
               </div>
               <LuX
                 onClick={handleOneDelete}
