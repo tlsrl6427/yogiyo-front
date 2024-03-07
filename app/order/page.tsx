@@ -13,39 +13,45 @@ import { Order, Handler } from '@/types/types';
 import { shopApi } from '@/services/shopApi';
 import { useRouter } from 'next/navigation';
 
-import { orderAtom, totalPriceState } from '@/recoil/order';
-import { currentRegionCode } from '@/recoil/address';
+import { orderAtom, orderItemsWithPriceSelector, pricesSelector } from '@/recoil/order';
+
 import { thisAddressId } from '@/recoil/address';
-import { currentCoord } from '@/recoil/address';
 
 const OrderPage = () => {
-  const curRegionCode = useRecoilValue(currentRegionCode);
   const thisAddId = useRecoilValue(thisAddressId);
-  const totalPrice = useRecoilValue(totalPriceState);
+  const orderItemsWithPrice = useRecoilValue(orderItemsWithPriceSelector);
+  const prices = useRecoilValue(pricesSelector);
 
   const router = useRouter();
   const userInfo = useRecoilValue(userInfoAtom);
   const [bill, setBill] = useRecoilState(orderAtom);
 
-  const getShopInfoAsync = async (param: {shopId: number, code: number, latitude: number, longitude: number}) => {
+  const getShopInfoAsync = async (param: {
+    shopId: number;
+    code: number;
+    latitude: number;
+    longitude: number;
+  }) => {
     const result = await shopApi.getShopInfo(param);
-    setBill({...bill, shopName: result.name, deliveryTime: result.deliveryTime});
-  }
+    setBill({ ...bill, shopName: result.name, deliveryTime: result.deliveryTime });
+  };
 
   useEffect(() => {
-    if(userInfo.isLogin){
+    if (userInfo.isLogin) {
       const param = {
         shopId: bill.shopId,
         code: thisAddId.code,
         latitude: thisAddId.latitude,
-        longitude: thisAddId.longitude
-      }
+        longitude: thisAddId.longitude,
+      };
       getShopInfoAsync(param);
-    }else{
-      console.log('로그아웃 상태입니다.')
-      router.push('/')
+    } else {
+      console.log('로그아웃 상태입니다.');
+      console.log(orderItemsWithPrice);
+      console.log(prices);
+      //router.push('/');
     }
-  }, []);
+  }, [bill]);
 
   const handleGetOrder = () => {
     postOrder(bill);
@@ -82,13 +88,17 @@ const OrderPage = () => {
       {bill && (
         <div>
           <Address street={bill.address.street} detail={bill.address.detail} />
-          <Cart items={bill.orderItems} />
+          <Cart items={orderItemsWithPrice} />
           <OrderNotes
             door={bill.requestDoor}
             spoon={bill.requestSpoon}
             changeInput={handleCheckboxChange}
           />
-          <Prices food={bill.totalPrice} delivery={bill.deliveryPrice} total={totalPrice}/>
+          <Prices
+            food={prices.priceFoodTotal}
+            delivery={prices.priceDelivery}
+            total={prices.priceFoodAndDelivery}
+          />
         </div>
       )}
       <div className="p-6 text-sm bg-grey8 text-grey5 mt-2">
@@ -103,14 +113,13 @@ const OrderPage = () => {
 export default OrderPage;
 
 interface Item {
-  createdAt?: string | null;
-  updatedAt?: string | null;
-  id?: number | null;
-  price: number;
-  quantity: number;
+  menuId: number;
   menuName: string;
+  price: number;
+  priceTotal: number;
+  priceWithOption: number;
+  quantity: number;
   orderItemOptions: {
-    id?: number | null;
     optionName: string;
     price: number;
   }[];
@@ -126,28 +135,34 @@ const Cart = ({ items }: Cart) => {
     setBill({ ...bill, orderItems: [] });
   };
   const handleOneDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const newItems = bill.orderItems.filter((item, index)=>{
+    const newItems = bill.orderItems.filter((item, index) => {
       return index !== Number(event.currentTarget.id);
-    })
+    });
     setBill({ ...bill, orderItems: newItems });
   };
   const handleClickPlus = (event: React.MouseEvent<HTMLDivElement>) => {
     const index = Number(event.currentTarget.id);
-    const newBill = {...bill};
+    const newBill = { ...bill };
     newBill.orderItems = [...newBill.orderItems];
-    newBill.orderItems[index] = {...newBill.orderItems[index], quantity: newBill.orderItems[index].quantity + 1}
-    setBill(newBill)
-  }
+    newBill.orderItems[index] = {
+      ...newBill.orderItems[index],
+      quantity: newBill.orderItems[index].quantity + 1,
+    };
+    setBill(newBill);
+  };
   const handleClickMinus = (event: React.MouseEvent<HTMLDivElement>) => {
     const index = Number(event.currentTarget.id);
-    const newBill = {...bill};
+    const newBill = { ...bill };
     newBill.orderItems = [...newBill.orderItems];
-    newBill.orderItems[index] = {...newBill.orderItems[index], quantity: newBill.orderItems[index].quantity - 1}
-    setBill(newBill)
-  }
+    newBill.orderItems[index] = {
+      ...newBill.orderItems[index],
+      quantity: newBill.orderItems[index].quantity - 1,
+    };
+    setBill(newBill);
+  };
   const handleGoShopDetail = () => {
-    router.push(`/detail?id=${bill.shopId}`)
-  }
+    router.push(`/detail?id=${bill.shopId}`);
+  };
 
   return (
     <div className="rounded-lg border">
@@ -165,14 +180,14 @@ const Cart = ({ items }: Cart) => {
               <div className="flex-1 pl-2 pr-2">
                 <p className="pb-2">{item.menuName}</p>
                 <p className="text-sm">
-                  {item.orderItemOptions.reduce((acc, cur, index)=>{
+                  {item.orderItemOptions.reduce((acc, cur, index) => {
                     if (index === 0) {
                       return cur.optionName;
                     }
                     return `${acc}, ${cur.optionName}`;
-                  }, "")}
+                  }, '')}
                 </p>
-                <p className="font-bold mt-2">{`${item.price}원`}</p>
+                <p className="font-bold mt-2">{`${item.priceWithOption}원`}</p>
               </div>
               <LuX
                 onClick={handleOneDelete}
@@ -200,7 +215,10 @@ const Cart = ({ items }: Cart) => {
           </div>
         ))}
       </div>
-      <div className="flex text-blue1 font-semibold justify-center p-4" onClick={handleGoShopDetail}>
+      <div
+        className="flex text-blue1 font-semibold justify-center p-4"
+        onClick={handleGoShopDetail}
+      >
         <div className="mt-[3px]">
           <FiPlus />
         </div>
@@ -270,7 +288,7 @@ interface Prices {
   delivery: number;
   total: number;
 }
-const Prices = ({food, delivery, total}: Prices) => {
+const Prices = ({ food, delivery, total }: Prices) => {
   return (
     <div className="mt-4">
       <div className="flex pt-[6px]">
