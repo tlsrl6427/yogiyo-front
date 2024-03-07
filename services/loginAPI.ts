@@ -12,13 +12,16 @@ export const getKakaoAuth = async (req: ReqAuth) => {
 };
 
 export const getCookie = async (reqbody: SocialLogin) => {
-  const resTokenAPI = await baseAxiosInstance.post('/member/login', reqbody, { withCredentials: true });
-  
+  const resTokenAPI = await baseAxiosInstance.post('/member/login', reqbody, {
+    withCredentials: true,
+  });
+
+  console.log(resTokenAPI);
   const isLogin = true;
   const userId = resTokenAPI.data.userId;
   const email = resTokenAPI.data.email;
 
-  const resUserInfoAPI = await getUserInfo()
+  const resUserInfoAPI = await getUserInfo();
   const nickname = resUserInfoAPI.nickname;
 
   return { userId, email, nickname, isLogin };
@@ -31,15 +34,14 @@ export const getUserInfo = async () => {
   return res.data;
 };
 
-
 export const logout = async (userId: number) => {
   const headers = {
     'Content-Type': 'application/json',
   };
-  const config = {headers, withCredentials: true}
+  const config = { headers, withCredentials: true };
 
-  const resLogout = await baseAxiosInstance.post(`/member/logout/${userId}`,"",config)
-  console.log(resLogout)
+  const resLogout = await baseAxiosInstance.post(`/member/logout/${userId}`, '', config);
+  console.log(resLogout);
 
   const defaultUserInfo = {
     userId: 999999,
@@ -47,40 +49,39 @@ export const logout = async (userId: number) => {
     email: 'unknown',
     phone: '',
     isLogin: false,
-  }
+  };
 
   return defaultUserInfo;
-}
-
+};
 
 export const emailLogin = async (email: string, password: string) => {
   const userData = {
-    "email" : email,
-    "password" : password,
-    "authCode" : null,
-    "providerType" : "DEFAULT"
-  }
-  const resLogin = await baseAxiosInstance.post(`/member/login`, userData)
+    email: email,
+    password: password,
+    authCode: null,
+    providerType: 'DEFAULT',
+  };
+  const resLogin = await baseAxiosInstance.post(`/member/login`, userData);
   if (resLogin.status >= 200 && resLogin.status < 300) {
     window.location.href = '/home';
-    console.log(`유저 ${resLogin.data.userId} 로그인 성공`)
-  }else{
-    console.error('emailLogin api 호출 중 에러 발생')
+    console.log(`유저 ${resLogin.data.userId} 로그인 성공`);
+  } else {
+    console.error('emailLogin api 호출 중 에러 발생');
   }
-}
+};
 
 export const emailJoin = async (email: string, password: string, nickname: string) => {
   const userData = {
-    "nickname" : nickname,
-    "email" : email,
-    "password" : password,
-    "providerType" : "DEFAULT"
-  }
-  const resJoin = await baseAxiosInstance.post(`/member/join`, userData)
+    nickname: nickname,
+    email: email,
+    password: password,
+    providerType: 'DEFAULT',
+  };
+  const resJoin = await baseAxiosInstance.post(`/member/join`, userData);
   if (resJoin.status >= 200 && resJoin.status < 300) {
-    console.log(`유저 ${resJoin.data.id} 로그인 성공`)
+    console.log(`유저 ${resJoin.data.id} 로그인 성공`);
     window.location.href = '/';
-  }else{
-    console.error('emailJoin api 호출 중 에러 발생')
+  } else {
+    console.error('emailJoin api 호출 중 에러 발생');
   }
-}
+};
