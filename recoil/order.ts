@@ -14,7 +14,7 @@ export const orderAtom = atom<Order>({
       {
         menuId: 2,
         price: 29999,
-        quantity: 22,
+        quantity: 92,
         menuName: 'test메뉴1',
         orderItemOptions: [
           {
@@ -23,22 +23,6 @@ export const orderAtom = atom<Order>({
           },
           {
             optionName: 'test추가2',
-            price: 500,
-          },
-          {
-            optionName: 'test추가3',
-            price: 500,
-          },
-          {
-            optionName: 'test추가4',
-            price: 500,
-          },
-          {
-            optionName: 'test추가5',
-            price: 500,
-          },
-          {
-            optionName: 'test추가6',
             price: 500,
           },
         ],
@@ -62,18 +46,38 @@ export const orderAtom = atom<Order>({
     orderType: 'DELIVERAY',
     paymentType: 'CARD',
     totalPrice: 0,
+    deliveryTime: 10,
     deliveryPrice: 1000,
     totalPaymentPrice: 321000,
     code: '1171010200',
   },
 });
 
+export const orderItemsWithPriceSelector = selector({
+  key: 'orderItemsWithPriceSelector',
+  get: (prop) => {
+    const itemList = prop.get(orderAtom).orderItems;
+    const newItemList = itemList.map((item) => {
+      const priceOptions = item.orderItemOptions.reduce((acc, cur) => {
+        return acc + cur.price;
+      }, 0);
+      const priceWithOption = item.price + priceOptions;
+      const priceTotal = priceWithOption * item.quantity;
+      return { ...item, priceWithOption, priceTotal };
+    });
+    return newItemList;
+  },
+});
 
-export const totalPriceState = selector({
-  key: 'totalPriceState',
+export const pricesSelector = selector({
+  key: 'pricesSelector',
   get: ({ get }) => {
-    const food = get(orderAtom).totalPrice;
-    const delivery = get(orderAtom).deliveryPrice;
-    return food + delivery;
+    const foodList = get(orderItemsWithPriceSelector);
+    const priceFoodTotal = foodList.reduce((acc, cur) => {
+      return acc + cur.priceTotal;
+    }, 0);
+    const priceDelivery = get(orderAtom).deliveryPrice;
+    const priceFoodAndDelivery = priceFoodTotal + priceDelivery;
+    return { priceFoodTotal, priceDelivery, priceFoodAndDelivery };
   },
 });

@@ -173,7 +173,6 @@ export interface OrderInfo {
 export interface Order {
   shopId: number;
   shopName?: string;
-  deliveryTime?: number;
   address: {
     zipcode: string; //ex "14582",
     street: string; //ex "다산로 4길 57",
@@ -196,6 +195,7 @@ export interface Order {
   paymentType: string; //ex "CARD",
   totalPrice: number; //ex 20000,
   deliveryPrice: number; //ex 1000,
+  deliveryTime?: number;
   totalPaymentPrice?: number; //ex 21000
   code: string; //ex "1171010200"
 }

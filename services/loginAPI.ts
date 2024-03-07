@@ -11,26 +11,7 @@ export const getKakaoAuth = async (req: ReqAuth) => {
   window.location.href = `${baseURL}?response_type=${req.code}&client_id=${req.client_id}&redirect_uri=${req.redirect_uri}`;
 };
 
-/* cookie 방식이 아닐 때 사용했던
-export const login = async (reqbody: SocialLogin) => {
-  try {
-    const resTokenApi = await getAccessToken(reqbody);
-    const { token, userId } = resTokenApi;
-    const resUserInfo = await getUserInfo(token);
-  /return { ...resUserInfo, id: userId, accessToken: token };
-    return 
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
-};
-*/
-
 export const getCookie = async (reqbody: SocialLogin) => {
-  const headers = {
-    'Content-Type': 'application/json',
-  };
-  const config = {headers, withCredentials: true}
   const resTokenAPI = await baseAxiosInstance.post('/member/login', reqbody, { withCredentials: true });
   
   const isLogin = true;
@@ -44,16 +25,8 @@ export const getCookie = async (reqbody: SocialLogin) => {
 };
 
 export const getUserInfo = async () => {
-  //const headers = {
-  //  Authorization: token,
-  //};
   const res = await baseAxiosInstance.get('/member/mypage', { withCredentials: true });
-  /*const res = await baseAxiosInstance.get('/member/mypage', {
-    headers: {
-      Authorization: token
-    }
-  })
-  */
+
   console.log(res);
   return res.data;
 };
