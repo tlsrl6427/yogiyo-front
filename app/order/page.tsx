@@ -133,6 +133,10 @@ const Cart = ({ items }: Cart) => {
     setBill({ ...bill, orderItems: [] });
   };
   const handleOneDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (bill.orderItems.length < 2) {
+      console.log('최소 1개 이상의 아이템을 가져야 합니다.');
+      return 0;
+    }
     const newItems = bill.orderItems.filter((item, index) => {
       return index !== Number(event.currentTarget.id);
     });
