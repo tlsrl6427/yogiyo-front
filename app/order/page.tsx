@@ -47,13 +47,13 @@ const OrderPage = () => {
       getShopInfoAsync(param);
     } else {
       console.log('로그아웃 상태입니다.');
-      //router.push('/');
+      router.push('/');
     }
   }, []);
 
   const handleGetOrder = () => {
     console.log(bill);
-    //postOrder(bill);
+    postOrder(bill);
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
