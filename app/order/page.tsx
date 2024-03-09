@@ -52,7 +52,8 @@ const OrderPage = () => {
   }, []);
 
   const handleGetOrder = () => {
-    postOrder(bill);
+    console.log(bill);
+    //postOrder(bill);
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,36 +79,42 @@ const OrderPage = () => {
   const [mintime, maxtime] = [0, 10];
 
   return (
-    <div className="p-4">
-      <div className="flex flex-row text-sm pt-2 pb-2 border-b-2 border-grey1">
-        <span className="pr-1 font-semibold">가게배달</span>
-        <span>{`${mintime}~${maxtime}분 후 도착`}</span>
-      </div>
-      {bill && (
-        <div>
-          <Address street={bill.address.street} detail={bill.address.detail} />
-          <Cart items={orderItemsWithPrice} />
-          <OrderNotes
-            door={bill.requestDoor}
-            spoon={bill.requestSpoon}
-            changeInput={handleCheckboxChange}
-          />
-          <Prices
-            food={prices.priceFoodTotal}
-            delivery={prices.priceDelivery}
-            total={prices.priceFoodAndDelivery}
-          />
+    <>
+      <div className="p-4">
+        <div className="flex flex-row text-sm pt-2 pb-2 border-b-2 border-grey1">
+          <span className="pr-1 font-semibold">가게배달</span>
+          <span>{`${mintime}~${maxtime}분 후 도착`}</span>
         </div>
-      )}
-      <div className="p-6 text-sm bg-grey8 text-grey5 mt-2">
-        <p>개인정보 제3자 제공 내용 및 결제에 동의합니다.</p>
-        <p>최소주문금액은 배달요금/일회용컵 보증금을 제외한 금액입니다.</p>
-        <p>배달요금에는 할인수단이 적용되지 않습니다? (단, 배달요금 관련 할인/선물은 적용)</p>
+        {bill && (
+          <div>
+            <Address street={bill.address.street} detail={bill.address.detail} />
+            <Cart items={orderItemsWithPrice} />
+            <OrderNotes
+              door={bill.requestDoor}
+              spoon={bill.requestSpoon}
+              changeInput={handleCheckboxChange}
+            />
+            <Prices
+              food={prices.priceFoodTotal}
+              delivery={prices.priceDelivery}
+              total={prices.priceFoodAndDelivery}
+            />
+          </div>
+        )}
       </div>
-      <div className='p-4 bg-white rounded-md shadow-xl'>
-        <div className='p-4 bg-pink1 text-white font-bold text-center'>{`${prices.priceFoodAndDelivery}원 배달 결제하기`}</div>
+      <div className=' bg-grey8'>
+        <div className="p-6 text-sm bg-grey8 text-grey5 mt-2">
+          <p>개인정보 제3자 제공 내용 및 결제에 동의합니다.</p>
+          <p>최소주문금액은 배달요금/일회용컵 보증금을 제외한 금액입니다.</p>
+          <p>배달요금에는 할인수단이 적용되지 않습니다? (단, 배달요금 관련 할인/선물은 적용)</p>
+        </div>
+        <div className='p-4 bg-white rounded-t-xl shadow-xl'>
+          <div className='p-4 bg-pink1 text-white font-bold text-center' onClick={handleGetOrder}>
+            {`${prices.priceFoodAndDelivery}원 배달 결제하기`}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
