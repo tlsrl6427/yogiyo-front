@@ -6,7 +6,6 @@ export const orderAtom = atom<Order>({
   default: {
     shopId: 1,
     address: {
-      zipcode: '31111',
       street: '아주 다니기 어려운 길',
       detail: '오른쪽 집',
     },
@@ -46,7 +45,6 @@ export const orderAtom = atom<Order>({
     orderType: 'DELIVERAY',
     paymentType: 'CARD',
     totalPrice: 0,
-    deliveryTime: 10,
     deliveryPrice: 1000,
     totalPaymentPrice: 321000,
     code: '1171010200',
