@@ -47,7 +47,7 @@ const OrderPage = () => {
       getShopInfoAsync(param);
     } else {
       console.log('로그아웃 상태입니다.');
-      router.push('/');
+      //router.push('/');
     }
   }, []);
 
@@ -103,6 +103,9 @@ const OrderPage = () => {
         <p>개인정보 제3자 제공 내용 및 결제에 동의합니다.</p>
         <p>최소주문금액은 배달요금/일회용컵 보증금을 제외한 금액입니다.</p>
         <p>배달요금에는 할인수단이 적용되지 않습니다? (단, 배달요금 관련 할인/선물은 적용)</p>
+      </div>
+      <div className='p-4 bg-white rounded-md shadow-xl'>
+        <div className='p-4 bg-pink1 text-white font-bold text-center'>{`${prices.priceFoodAndDelivery}원 배달 결제하기`}</div>
       </div>
     </div>
   );
