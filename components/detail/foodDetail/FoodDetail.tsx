@@ -13,7 +13,7 @@ import { moneyCalc } from "@/lib/moneyCalc";
 import { totalPriceCalc } from "@/lib/totalPriceCalc";
 
 
-const FoodDetail = ({shop}: any) => {
+const FoodDetail = ({shop, thisMenu}: any) => {
 
   // 메뉴
   const menu = useRecoilValue(addMenu);
@@ -28,7 +28,8 @@ const FoodDetail = ({shop}: any) => {
 
   const [isModal, setIsModal] = useRecoilState(foodModalState);
 
-  const [options, setOptions] = useState();
+  // 음식 상세 정보
+  const [menuInfo, setMenuInfo] = useState();
   const [filOptions, setFilOptions] = useState<any>();
 
   const imgStyled = {
@@ -62,15 +63,16 @@ const FoodDetail = ({shop}: any) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if(shop.id){
-          const result = await shopApi.getShopOptionGroup(shop.id);
-          setOptions(result.menuOptionGroups);
+        if(thisMenu){
+          const result = await shopApi.getMenuInfo(thisMenu);
+          setMenuInfo(result);
         }
       } catch (error){
         console.error(error);
       }
     }
     fetchData()
+    console.log(options)
   }, [shop])
 
   useEffect(() => {
@@ -83,10 +85,10 @@ const FoodDetail = ({shop}: any) => {
     }
 
     // 가게의 옵션 중 메뉴와 해당되는 옵션 찾기
-    const filteredOptions = dummyOption.filter(option =>
-      option.menus.some(possibleMenu => possibleMenu === menu.name)
-    );
-    setFilOptions(filteredOptions);
+    // const filteredOptions = dummyOption.filter(option =>
+    //   option.menus.some(possibleMenu => possibleMenu === menu.name)
+    // );
+    // setFilOptions(filteredOptions);
     
     // 옵션 초기화
     setAddOrderOptions([]);
@@ -223,7 +225,7 @@ const FoodDetail = ({shop}: any) => {
 
 
       <div className="px-[20px]">
-      {dummyOption?.map((option, i) => (
+      {menuInfo.optionGroups?.map((option, i) => (
         <div className="w-full mb-[20px] border-b pb-[10px]" key={i}>
           <div className="flex justify-between py-[10px]">
             <span className="font-bold text-[1.1rem]">{option.name}</span>

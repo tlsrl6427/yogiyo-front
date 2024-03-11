@@ -25,7 +25,8 @@ interface Props {
     reviewNum: number,
     picture: string
   }[],
-  shopId: number | undefined
+  shopId: number | undefined,
+  handleThisMenu: (param: number) => void;
 }
 
 const bgStyle = (url: string) => {
@@ -39,7 +40,7 @@ const bgStyle = (url: string) => {
   }
 }
 
-const MenuSlider = ({menus, shopId}: Props) => {
+const MenuSlider = ({menus, shopId, handleThisMenu}: Props) => {
 
   const [isModal, setIsModal] = useRecoilState(foodModalState);
   const setAddMenu = useSetRecoilState(addMenu);
@@ -59,6 +60,7 @@ const MenuSlider = ({menus, shopId}: Props) => {
               onClick={() => {
                 setIsModal(true);
                 setAddMenu(menu);
+                handleThisMenu(menu.id);
               }}
             >
               {/* 음식상세페이지 모달*/}

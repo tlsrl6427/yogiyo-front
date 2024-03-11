@@ -243,9 +243,6 @@ export interface Menus {
   picture: string;
 }
 
-
-
-
 export interface MenuOptionGroupResponse {
   menuOptionGroups: MenuOptionGroup[];
 }
