@@ -52,8 +52,9 @@ const OrderPage = () => {
   }, []);
 
   const handleGetOrder = () => {
-    console.log(bill);
-    postOrder(bill);
+    const { deliveryTime, shopName, ...newbill} = bill;
+    console.log(newbill)
+    postOrder(newbill);
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
