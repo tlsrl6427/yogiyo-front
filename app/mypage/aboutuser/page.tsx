@@ -21,11 +21,11 @@ const AboutUser = () => {
 
   const doLogout = async () => {
     console.log(user.userId)
-    const res = await logout(user.userId);
-    console.log(res);
-
-    setUser(res);
-    router.push('/');
+    //const res = await logout(user.userId);
+    //console.log(res);
+    console.log("test")
+    //setUser(res);
+    //router.push('/');
   }
 
   return (
