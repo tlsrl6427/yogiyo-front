@@ -7,8 +7,10 @@ import { useRecoilState } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
 import { getUserInfo } from '@/services/loginAPI';
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Homes = () => {
+  const router = useRouter();
   const [user, setUser] = useRecoilState(userInfoAtom);
   
   const handleGetUserInfo = async () => {
@@ -32,7 +34,11 @@ const Homes = () => {
 
   useEffect(()=>{
     console.log(user)
-    //handleGetUserInfo();
+    if(user.isLogin){
+      handleGetUserInfo();
+    }else{
+      router.push('/login');
+    }
   },[])
   
   return (
