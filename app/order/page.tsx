@@ -81,7 +81,7 @@ const OrderPage = () => {
       "totalPaymentPrice" : 21000,
       "code" : "1171010200"
     }
-    postOrder(testbill);
+    postOrder(newbill);
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
