@@ -152,6 +152,19 @@ export interface Order {
   code: string; //ex "1171010200"
 }
 
+export interface OrderInfo {
+  orderId: number;
+  orderTime: string; //ex "2023-12-04T12:07:28.333953",
+  orderType: string; //ex "DELIVERY",
+  status: string; //ex "DONE",
+  shopId: number;
+  shopName: string; //ex "BHC 행당점",
+  shopImg: string; //ex "img.jpg",
+  menuName: string; //ex "후라이드 치킨",
+  menuCount: number;
+  totalMenuCount: number;
+}
+
 export interface RequestInfoType {
   category: string;
   sortOption: string;
