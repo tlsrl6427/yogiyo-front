@@ -115,6 +115,7 @@ export default function Home() {
     if(locationLoaded && regionCodeLoaded){
       setIsLoading(false);
     }
+    console.log(userInfo)
   }, [locationLoaded, regionCodeLoaded])
 
   return (
