@@ -27,7 +27,6 @@ export const shopApi = {
         },
         params,
       });
-      console.log('요청보냄')
       return response.data;
     } catch (error) {
       console.error(error);
@@ -37,7 +36,21 @@ export const shopApi = {
   //가게 메뉴 그룹 전체 조회
   async getShopMenuGroup(shopId: number | undefined) {
     try {
-      const response = await baseAxiosInstance.get(`/member/menu-group/shop/${shopId}`);
+      const response = await baseAxiosInstance.get(`/member/menu-group/shop/${shopId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  // 메뉴 상세 정보 조회
+  async getMenuInfo(menuId: number) {
+    try{
+      const response = await baseAxiosInstance.get(`/member/menu/${menuId}`);
       return response.data;
     } catch (error) {
       console.error(error);

@@ -128,14 +128,14 @@ export default function Home() {
         <SplashPage /> :
 
         // 로그인 유무 확인 - 비로그인 시 로그인 페이지 오픈
-        userInfo.isLogin ? 
+        // userInfo.isLogin ? 
         <main className="flex flex-col w-full pt-[50px] pb-[70px]">
           <Header />
           <Homes />
           <Footer />
         </main> 
-        :
-        <LoginPage />
+        // :
+        // <LoginPage />
       }
 
     </div>

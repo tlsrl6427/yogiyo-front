@@ -34,6 +34,13 @@ const Detail = () => {
   // 현재 접속된 좌표값
   const curCoord = useRecoilValue(currentCoord);
 
+  //열린 메뉴
+  const [thisMenu, setThisMenu] = useState(0);
+
+  const handleThisMenu = (param: number) => {
+    setThisMenu(param)
+  }
+
   // 주문 
   const [order, setOrder] = useRecoilState(orderAtom);
 
@@ -95,14 +102,14 @@ const Detail = () => {
       <div className={`w-full h-[200px]`} style={bannerStyle}/>
       <MiddleTitle shopInfo={shopInfo} />
       <div className='border-y-[4px] border-grey9' />
-      <DetailTabMenu shopInfo={shopInfo} />
+      <DetailTabMenu shopInfo={shopInfo} handleThisMenu={handleThisMenu}/>
       <SignatureMenuTab />
       <DetailMenuList />
       <ScrollToTop bottom={
         order.orderItems.length >= 1 ? 100 : 40
       }/>
       {/* 음식 상세페이지 모달 */}
-      {isModal && <FoodDetail shop={shopInfo}/>}
+      {isModal && <FoodDetail shop={shopInfo} thisMenu={thisMenu}/>}
 
       {/* 주문하기 component */}
       {(order.orderItems.length >= 1 && !isModal && shopInfo?.id === order.shopId) && 

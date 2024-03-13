@@ -34,16 +34,3 @@ export const loadingState = atom({
   key: 'loadingState',
   default: true
 })
-
-//상세 메뉴
-export const addMenu = atom<Menus>({
-  key: 'addMenu',
-  default: {
-    id: 0,
-    name: '',
-    content: '',
-    price: 0,
-    reviewNum: 0,
-    picture: ''
-  }
-})
