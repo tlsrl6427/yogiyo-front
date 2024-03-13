@@ -20,7 +20,7 @@ const AboutUser = () => {
   };
 
   const doLogout = async () => {
-    console.log(user.userId)
+    console.log(user)
     //const res = await logout(user.userId);
     //console.log(res);
     console.log("test")
