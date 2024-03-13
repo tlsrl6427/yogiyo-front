@@ -41,7 +41,7 @@ export interface UserInfo {
   nickname: string;
   email: string;
   phone?: string;
-  isLogin?: boolean;
+  isLogin: boolean;
 }
 
 export interface Address {
