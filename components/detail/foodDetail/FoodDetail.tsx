@@ -1,8 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import { shopApi } from "@/services/shopApi";
-import { useRecoilValue, useRecoilState } from "recoil";
-import { addMenu } from "@/recoil/state";
+import { useRecoilState } from "recoil";
 import { foodModalState } from "@/recoil/modal";
 import { SlArrowLeft } from "react-icons/sl";
 import CustomCheckbox from "@/components/common/CustomCheckBox";
@@ -11,29 +10,48 @@ import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
 import Swal from "sweetalert2";
 import { moneyCalc } from "@/lib/moneyCalc";
 import { totalPriceCalc } from "@/lib/totalPriceCalc";
-
+import type { DetailMenuType } from "@/types/types";
 
 const FoodDetail = ({shop, thisMenu}: any) => {
 
+  // 메뉴 상세 정보
+  const [menuInfo, setMenuInfo] = useState<DetailMenuType>({
+    id: 1,
+    name: '',
+    content: '',
+    picture: '',
+    price: 0,
+    reviewNum: 0,
+    optionGroups: [{
+      id: 1,
+      name: '',
+      count: 0,
+      optionType: '',
+      options: [{
+        id: 1,
+        content: '',
+        price: 0
+      }],
+      possibleCount: false
+    }],
+  });
   // 메뉴
-  const menu = useRecoilValue(addMenu);
+  // const menu = useRecoilValue(addMenu);
   // 주문 상태값
   const [order, setOrder] = useRecoilState(orderAtom);
   // 수량
   const [quantity, setQuantity] = useState(1);
   // 중간가격
-  const [middlePrice, setMiddlePrice] = useState(menu.price);
+  const [middlePrice, setMiddlePrice] = useState(menuInfo?.price || 0);
   // 옵션총합
   const [optionPrice, setOptionPrice] = useState(0);
 
   const [isModal, setIsModal] = useRecoilState(foodModalState);
 
-  // 음식 상세 정보
-  const [menuInfo, setMenuInfo] = useState();
   const [filOptions, setFilOptions] = useState<any>();
 
   const imgStyled = {
-    background: `url(${menu?.picture}) center center/cover no-repeat`,
+    background: `url(${menuInfo?.picture}) center center/cover no-repeat`,
   }
 
   // 더미옵션
@@ -72,7 +90,6 @@ const FoodDetail = ({shop, thisMenu}: any) => {
       }
     }
     fetchData()
-    console.log(options)
   }, [shop])
 
   useEffect(() => {
@@ -137,7 +154,7 @@ const FoodDetail = ({shop, thisMenu}: any) => {
       setOptionPrice(prev => prev - select.price);
     }
 
-    setMiddlePrice(moneyCalc(menu.price, optionPrice, quantity))
+    setMiddlePrice(moneyCalc(menuInfo?.price || 0, optionPrice, quantity))
   };
   
 
@@ -145,9 +162,9 @@ const FoodDetail = ({shop, thisMenu}: any) => {
   const handleAddOrder = () => {
     const addOrder = () => {
       const newOrderItem = {
-        menuId: menu.id,
-        menuName: menu.name,
-        price: menu.price,
+        menuId: menuInfo?.id,
+        menuName: menuInfo?.name,
+        price: menuInfo?.price,
         orderItemOptions: addOrderOptions,
         quantity: quantity,
       };
@@ -174,9 +191,9 @@ const FoodDetail = ({shop, thisMenu}: any) => {
       }).then((result) => {
         if (result.isConfirmed) {
           const newOrderItem = {
-            menuId: menu.id,
-            menuName: menu.name,
-            price: menu.price,
+            menuId: menuInfo?.id,
+            menuName: menuInfo?.name,
+            price: menuInfo?.price,
             orderItemOptions: addOrderOptions,
             quantity: quantity,
           };
@@ -211,27 +228,27 @@ const FoodDetail = ({shop, thisMenu}: any) => {
       </div>
       {/* 리뷰 및 메뉴이름&메뉴설명 */}
       <div className="flex flex-col gap-[3px] px-[20px] py-[20px] border-b-2">
-        <p className="font-black text-[1.4rem] text-slate-700">{menu.name}</p>
-        <p className="text-slate-400">{menu.content}</p>
+        <p className="font-black text-[1.4rem] text-slate-700">{menuInfo?.name}</p>
+        <p className="text-slate-400">{menuInfo?.content}</p>
       </div>
 
 
       <div className="flex px-[20px] justify-between border-b p-[10px]">
         <span className="font-bold text-[1.1rem]">가격</span>
-        <span className="font-bold text-[1.1rem]">{menu.price.toLocaleString()}원</span>
+        <span className="font-bold text-[1.1rem]">{menuInfo?.price.toLocaleString()}원</span>
       </div>
 
       <div className="w-full h-[1px] bg-slate-200" />
 
 
       <div className="px-[20px]">
-      {menuInfo.optionGroups?.map((option, i) => (
+      {menuInfo && menuInfo.optionGroups?.map((option, i) => (
         <div className="w-full mb-[20px] border-b pb-[10px]" key={i}>
           <div className="flex justify-between py-[10px]">
             <span className="font-bold text-[1.1rem]">{option.name}</span>
-            {option.isPossibleCount && <span className="text-[0.8rem]">최대 {option.count}개 선택 가능</span>}
+            {option.possibleCount && <span className="text-[0.8rem]">최대 {option.count}개 선택 가능</span>}
           </div>
-          {option?.menuOptions.map((select, i) => (
+          {option?.options.map((select, i) => (
             <label 
               htmlFor={select.id.toString()} 
               key={i}
@@ -284,7 +301,7 @@ const FoodDetail = ({shop, thisMenu}: any) => {
       </div>
       <div className="flex justify-between flex-wrap bg-grey7 p-[20px] mb-[100px]">
         <span className="font-bold text-[1.1rem]">총 주문금액</span>
-        <span className="font-black text-[1.3rem] text-red-600">{(moneyCalc(menu.price, optionPrice, quantity)).toLocaleString()}원</span>
+        <span className="font-black text-[1.3rem] text-red-600">{(moneyCalc(menuInfo?.price || 0, optionPrice, quantity)).toLocaleString()}원</span>
         <p className="w-full text-end text-[0.9rem] text-slate-700">(배달 최소주문금액 {shop.minOrderPrice.toLocaleString()}원)</p>
       </div>
 
@@ -294,7 +311,7 @@ const FoodDetail = ({shop, thisMenu}: any) => {
       >
         <p className="font-semibold text-red-600">{shop.minOrderPrice.toLocaleString()}원부터 배달 가능해요</p>
         <p className='w-full flex justify-center gap-[5px] py-[10px] mx-[10px] rounded-xl bg-pink1 font-bold text-white'>
-          {(moneyCalc(menu.price, optionPrice, quantity)).toLocaleString()}원 담기
+          {(moneyCalc(menuInfo?.price || 0, optionPrice, quantity)).toLocaleString()}원 담기
         </p>
       </div>
     </div>
