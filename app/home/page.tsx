@@ -31,7 +31,8 @@ const Homes = () => {
   } 
 
   useEffect(()=>{
-    handleGetUserInfo();
+    console.log(user)
+    //handleGetUserInfo();
   },[])
   
   return (
