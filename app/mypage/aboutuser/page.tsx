@@ -19,18 +19,8 @@ const AboutUser = () => {
     backgroundPosition: 'center',
   };
 
-  /*
-  const doLogout = () => {
-    const userData = { id: 'unknown', nickname: 'unknown', email: 'unknown', accessToken: null };
-    setUser(userData);
-    if (typeof window !== 'undefined') {
-      sessionStorage.removeItem('access_token');
-    }
-    router.push('/');
-  };
-  */
-
   const doLogout = async () => {
+    console.log(user.userId)
     const res = await logout(user.userId);
     console.log(res);
 
