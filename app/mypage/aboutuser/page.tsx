@@ -20,12 +20,20 @@ const AboutUser = () => {
   };
 
   const doLogout = async () => {
-    console.log(user)
-    //const res = await logout(user.userId);
-    //console.log(res);
-    console.log("test")
-    //setUser(res);
-    //router.push('/');
+    const res = await logout(user.userId);
+    if(res.status >= 200 && res.status < 300){
+      const defaultUser = {
+        userId: 999999,
+        nickname: 'unknown',
+        email: 'unknown',
+        phone: '01000000000',
+        isLogin: false,
+      }
+      setUser(defaultUser);
+      router.push('/')
+    }else{
+      console.log(`${user.nickname}(${user.userId}) 로그아웃 실패`);
+    }
   }
 
   return (
