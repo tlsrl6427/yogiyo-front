@@ -20,8 +20,8 @@ export const postOrder = async (bill: any) => {
   console.log(res);
 };
 
-export const getOrderList = async (lastId?: string) => {
-  const queryString = lastId ? `lastId=${lastId}` : '';
-  const res = await baseAxiosInstance.get(`/order/scroll?${queryString}`, { withCredentials: true });
+export const getOrderList = async (lastId: number) => {
+  const queryString = lastId > 0 ? `?lastId=${lastId}` : '';
+  const res = await baseAxiosInstance.get(`member/order/scroll${queryString}`, { withCredentials: true });
   return res.data;
 };

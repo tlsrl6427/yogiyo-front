@@ -16,16 +16,14 @@ const Homes = () => {
   const handleGetUserInfo = async () => {
     try{
       const res = await getUserInfo();
-      console.log(res)
       const loginUser = {
         email: res.email,
         nickname: res.nickname,
-        userId: res.userId,
         isLogin: true,
         phone: '',
       }
       console.log(loginUser)
-      setUser(loginUser);
+      setUser({...user, ...loginUser});
       console.log(user)
     }catch(e){
       console.error(e)

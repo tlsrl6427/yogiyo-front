@@ -20,19 +20,16 @@ interface Props {
 const OrderList = () => {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [tab, setTab] = useState(tabData.left.id);
-  //const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
 
-  const [lastIdState, setLastIdState] = useState('');
+  const [lastIdState, setLastIdState] = useState(0);
   const [hasNextState, setHasNextState] = useState(true);
   const [list, setList] = useState<any[]>([]);
   const [isBottom, setIsBottom] = useState(false);
 
   const userInfo = useRecoilValue(userInfoAtom);
-  //const router = useRouter();
 
   if(!userInfo.isLogin){
     console.log("로그인 상태가 아닙니다.")
-    //router.push('/mypage');
   }else{
     console.log(`${userInfo.nickname} 의 주문내역`);
   }
