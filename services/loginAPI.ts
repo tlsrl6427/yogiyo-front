@@ -41,17 +41,8 @@ export const logout = async (userId: number) => {
   const config = { headers, withCredentials: true };
 
   const resLogout = await baseAxiosInstance.post(`/member/logout/${userId}`, '', config);
-  console.log(resLogout);
 
-  const defaultUserInfo = {
-    userId: 999999,
-    nickname: 'unknown',
-    email: 'unknown',
-    phone: '',
-    isLogin: false,
-  };
-
-  return defaultUserInfo;
+  return resLogout;
 };
 
 export const emailLogin = async (email: string, password: string) => {
