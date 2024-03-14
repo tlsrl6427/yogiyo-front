@@ -43,7 +43,6 @@ const OrderList = () => {
     console.log('change');
   };
 
-  //스크롤이 밑에 닿으면 데이터패치해서 다음 리스트 받아와서 현재 리스트에 추가해서 리렌더링해야됨
   useEffect(() => {
     if (isBottom || isInitialLoad) {
       if (isInitialLoad) setIsInitialLoad(false);
