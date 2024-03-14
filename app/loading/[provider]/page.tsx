@@ -26,9 +26,7 @@ const Loading = ({ params }: DynamicRoute) => {
       try{
         const resLogin = await getCookie(reqAuth);
         if(resLogin){
-          console.log("!!userInfo from login api(getCookie)")
-          console.log(resLogin);
-          setUserInfo(resLogin);
+          setUserInfo({...userInfo, userId: resLogin.userId});
           router.push('/home');
         }else{
           throw new Error('200');
