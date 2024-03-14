@@ -34,11 +34,7 @@ const Homes = () => {
 
   useEffect(()=>{
     console.log(user)
-    if(user.isLogin){
-      handleGetUserInfo();
-    }else{
-      router.push('/login');
-    }
+    handleGetUserInfo();
   },[])
   
   return (
