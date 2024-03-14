@@ -22,7 +22,7 @@ const OrderList = () => {
   const [tab, setTab] = useState(tabData.left.id);
   //const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
 
-  const [lastIdState, setLastIdState] = useState('9999999');
+  const [lastIdState, setLastIdState] = useState('');
   const [hasNextState, setHasNextState] = useState(true);
   const [list, setList] = useState<any[]>([]);
   const [isBottom, setIsBottom] = useState(false);
@@ -43,7 +43,6 @@ const OrderList = () => {
     console.log('change');
   };
 
-  //스크롤이 밑에 닿으면 데이터패치해서 다음 리스트 받아와서 현재 리스트에 추가해서 리렌더링해야됨
   useEffect(() => {
     if (isBottom || isInitialLoad) {
       if (isInitialLoad) setIsInitialLoad(false);
@@ -61,9 +60,6 @@ const OrderList = () => {
   },[list]);
 
   const dataFetch = async () => {
-    if(!lastIdState){
-      setLastIdState('9999999');
-    }
     const { orderHistories, lastId, hasNext } = await getOrderList(lastIdState);
 
     setLastIdState(lastId);
