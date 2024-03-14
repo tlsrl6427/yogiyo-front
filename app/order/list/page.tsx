@@ -22,7 +22,7 @@ const OrderList = () => {
   const [tab, setTab] = useState(tabData.left.id);
   //const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
 
-  const [lastIdState, setLastIdState] = useState('9999999');
+  const [lastIdState, setLastIdState] = useState('');
   const [hasNextState, setHasNextState] = useState(true);
   const [list, setList] = useState<any[]>([]);
   const [isBottom, setIsBottom] = useState(false);
@@ -60,9 +60,6 @@ const OrderList = () => {
   },[list]);
 
   const dataFetch = async () => {
-    if(!lastIdState){
-      setLastIdState('9999999');
-    }
     const { orderHistories, lastId, hasNext } = await getOrderList(lastIdState);
 
     setLastIdState(lastId);
