@@ -51,37 +51,15 @@ const OrderPage = () => {
     }
   }, []);
 
-  const handleGetOrder = () => {
+  const handleGetOrder = async () => {
     const { deliveryTime, shopName, ...newbill} = bill;
-    console.log(newbill)
-    const testbill = 
-    {
-      "shopId" : 1,
-      "address" : {
-        "street" : "다산로 4길 57",
-        "detail" : "장미아파트 8동"
-      },
-      "orderItems" : [ {
-        "price" : 12000,
-        "quantity" : 1,
-        "menuName" : "후라이드치킨",
-        "menuId" : 2,
-        "orderItemOptions" : [ {
-          "optionName" : "양념추가",
-          "price" : 500
-        } ]
-      } ],
-      "requestMsg" : "요청사항 없음",
-      "requestDoor" : true,
-      "requestSpoon" : false,
-      "orderType" : "DELIVERY",
-      "paymentType" : "CARD",
-      "totalPrice" : 20000,
-      "deliveryPrice" : 1000,
-      "totalPaymentPrice" : 21000,
-      "code" : "1171010200"
-    }
-    postOrder(newbill);
+    const res = await postOrder(newbill);
+    //if(res.status >= 200 && res.status < 300){
+      //router.push(`/order/detail?id=${res.orderId}`)
+    //}else{
+    //  console.log('주문 오류!')
+    //}
+    console.log(res)
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
