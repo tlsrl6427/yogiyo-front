@@ -54,11 +54,12 @@ const OrderPage = () => {
   const handleGetOrder = async () => {
     const { deliveryTime, shopName, ...newbill} = bill;
     const res = await postOrder(newbill);
-    if(res.status >= 200 && res.status < 300){
+    //if(res.status >= 200 && res.status < 300){
       //router.push(`/order/detail?id=${res.orderId}`)
-    }else{
-      console.log('주문 오류!')
-    }
+    //}else{
+    //  console.log('주문 오류!')
+    //}
+    console.log(res)
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
