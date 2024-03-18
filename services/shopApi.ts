@@ -6,12 +6,15 @@ export const shopApi = {
   // 상점 리스트 조회
   async fetchShopList(params: ShopList) {
     try {
+      /*
       const response = await baseAxiosInstance.get('/member/shop/list', {
         headers: {
           'Content-Type': 'application/json',
         },
         params,
       });
+      **/
+      const response = await baseAxiosInstance.get('/member/shop/list?category=%EC%B9%98%ED%82%A8&sortOption=ORDER&deliveryPrice=3000&leastOrderPrice=10000&longitude=127.0215778&latitude=37.5600233&code=1111011500&cursor=500&subCursor=100000&size=2')
       return response.data;
     } catch (error) {
       console.error(error);
