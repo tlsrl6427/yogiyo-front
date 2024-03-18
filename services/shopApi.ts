@@ -5,12 +5,14 @@ import type { ShopInfoType } from '@/types/types';
 export const shopApi = {
   // 상점 리스트 조회
   async fetchShopList(params: ShopList) {
+    const testparams = {...params, longitude: 127.0215778, latitude: 37.5600233, code: 1111011500}
+    console.log(testparams)
     try {
       const response = await baseAxiosInstance.get('/member/shop/list', {
         headers: {
           'Content-Type': 'application/json',
         },
-        params,
+        params: testparams,
       });
       return response.data;
     } catch (error) {
