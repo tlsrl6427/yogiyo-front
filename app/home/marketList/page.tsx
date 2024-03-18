@@ -72,7 +72,11 @@ const MarketList = () => {
       requestInfo.size = 10;
       requestInfo.code = thisAddress?.code || regionCode
 
-      const response = await shopApi.fetchShopList(requestInfo);
+      const testInfo = {...requestInfo, latitude: 37.5600233, longitude: 127.0215778, code: 1111011500}
+      const response = await shopApi.fetchShopList(testInfo);
+      //const response = await shopApi.fetchShopList(requestInfo);
+
+      console.log("! ! !")
       console.log(requestInfo);
 
       //다음 데이터가 있을 경우
