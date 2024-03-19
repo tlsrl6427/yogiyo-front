@@ -22,7 +22,7 @@ const Detail = () => {
   const shopId = searchParams.get('id');
   const [shopInfo, setShopInfo] = useState<ShopInfoType>()
   const router = useRouter()
-
+  
   // 모달 state
   const isModal = useRecoilValue(foodModalState);
   // 로그인 유무
