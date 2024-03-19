@@ -22,9 +22,11 @@ const OrderDetail = () => {
   }
 
   useEffect(() => {
-    console.log(id);
-    getOrderDetail(id as string);
-  });
+    console.log(`orderId: ${id}`);
+    if(id){
+      getOrderDetail(id);
+    }
+  },[]);
 
   return (
     <>
