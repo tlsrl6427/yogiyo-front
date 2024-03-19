@@ -1,7 +1,7 @@
 import { baseAxiosInstance } from './apiConfig';
 
 export const getOrderDetail = async (id: string) => {
-  const res = await baseAxiosInstance.get(`/order/details?orderId=${id}`);
+  const res = await baseAxiosInstance.get(`member/order/details?orderId=${id}`);
   console.log(res);
   return res.data;
 };
