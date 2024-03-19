@@ -51,6 +51,11 @@ export const orderAtom = atom<Order>({
   },
 });
 
+export const orderDetailCursor = atom<string | null>({
+  key: 'orderDetailCursor',
+  default : null,
+})
+
 export const orderItemsWithPriceSelector = selector({
   key: 'orderItemsWithPriceSelector',
   get: (prop) => {
@@ -79,3 +84,4 @@ export const pricesSelector = selector({
     return { priceFoodTotal, priceDelivery, priceFoodAndDelivery };
   },
 });
+
