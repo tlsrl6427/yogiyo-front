@@ -3,15 +3,19 @@ import GridIconMenu from '@/components/home/GridIconMenu';
 import MyOrderedEateries from '@/components/home/MyOrderedEateries';
 import NewEateries from '@/components/home/NewEateries';
 import SearchBarLink from '@/components/home/SearchBarLink';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
 import { getUserInfo } from '@/services/loginAPI';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { currentCoord, currentRegionCode, thisAddressId } from '@/recoil/address';
 
 const Homes = () => {
   const router = useRouter();
   const [user, setUser] = useRecoilState(userInfoAtom);
+  const regiCode = useRecoilValue(currentRegionCode);
+  const coord = useRecoilValue(currentCoord);
+  const addressid = useRecoilValue(thisAddressId);
   
   const handleGetUserInfo = async () => {
     try{
@@ -31,7 +35,12 @@ const Homes = () => {
   } 
 
   useEffect(()=>{
+    console.log("====home====")
     console.log(user)
+    console.log(regiCode)
+    console.log(coord)
+    console.log(addressid)
+    console.log("============")
     handleGetUserInfo();
   },[])
   
