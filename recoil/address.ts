@@ -4,7 +4,10 @@ import type { Coordinate, RegisterAddressRequest } from '@/types/types';
 // 현재위치
 export const currentCoord = atom<Coordinate | null>({
   key: 'currentCoord',
-  default: null,
+  default: {
+    lat: 37.5600233,
+    lng: 127.0215778,
+  },
 });
 
 //현재위치 주소
@@ -16,7 +19,7 @@ export const currentAddress = atom<string | any>({
 //현재위치 법정동 코드
 export const currentRegionCode = atom<number | null>({
   key: 'currentRegionCode',
-  default: null,
+  default: 1111011500
 })
 
 //검색위치
