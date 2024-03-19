@@ -16,6 +16,7 @@ const OrderDetail = () => {
   //const order = '' // api 결과로 가져온 데이터
   //const user = useRecoilValue(userInfoAtom);
   const [cursor, setCursor] = useRecoilState(orderDetailCursor);
+  const [shopId, setShopId] = useState('')
 
   useEffect(() => {
     console.log(cursor);
@@ -30,14 +31,15 @@ const OrderDetail = () => {
   },[]);
 
   const handleGetOrderDetail = async (id: string) => {
-    const res = getOrderDetail(id);
-
+    const res = await getOrderDetail(id);
+    console.log(res.shopId)
+    setShopId(`${res.shopId}`)
   }
 
   return (
     <div className='w-screen min-h-screen bg-grey7'>
       <DeliState />
-      <ShopInfo />
+      <ShopInfo shopId={shopId}/>
       <Receipt />
     </div>
   );
