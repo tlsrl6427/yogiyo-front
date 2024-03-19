@@ -13,7 +13,7 @@ import { Order, Handler } from '@/types/types';
 import { shopApi } from '@/services/shopApi';
 import { useRouter } from 'next/navigation';
 
-import { orderAtom, orderItemsWithPriceSelector, pricesSelector } from '@/recoil/order';
+import { orderAtom, orderDetailCursor, orderItemsWithPriceSelector, pricesSelector } from '@/recoil/order';
 
 import { thisAddressId } from '@/recoil/address';
 
@@ -25,6 +25,7 @@ const OrderPage = () => {
   const router = useRouter();
   const userInfo = useRecoilValue(userInfoAtom);
   const [bill, setBill] = useRecoilState(orderAtom);
+  const [cursor, setCursor] = useRecoilState(orderDetailCursor);
 
   const getShopInfoAsync = async (param: {
     shopId: number;
@@ -55,7 +56,8 @@ const OrderPage = () => {
     const { deliveryTime, shopName, ...newbill} = bill;
     const res = await postOrder(newbill);
     if(res.status >= 200 && res.status < 300){
-      router.push(`/order/detail?id=${res.data.orderId}`)
+      setCursor(res.data.orderId)
+      router.push(`/order/detail`)
     }else{
      console.log('주문 오류!')
     }
