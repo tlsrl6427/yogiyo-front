@@ -1,8 +1,6 @@
 'use client'
 import DetailHeader from '@/components/detail/DetailHeader';
 import MiddleTitle from '@/components/detail/MiddleTitle';
-import SignatureMenuTab from '@/components/detail/SignatureMenuTab';
-import DetailMenuList from '@/components/detail/DetailMenuList';
 import DetailTabMenu from '@/components/detail/DetailTabMenu';
 import { useSearchParams } from 'next/navigation';
 import { useRecoilValue, useRecoilState } from 'recoil';
@@ -44,9 +42,6 @@ const Detail = () => {
   // 주문 
   const [order, setOrder] = useRecoilState(orderAtom);
 
-  // 담긴 금액
-  const [total, setTotal] = useState(0);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,9 +52,8 @@ const Detail = () => {
             latitude: 0,
             longitude: 0
           }
-          // 로그인했을 경우
+          // 로그인했을 경우                            
           if(userInfo.isLogin){
-            console.log(userInfo)
             param.code = thisAddId.code || (curRegionCode || 0)
             param.latitude = thisAddId.latitude
             param.longitude = thisAddId.longitude
@@ -78,16 +72,14 @@ const Detail = () => {
     };
   
     fetchData();
-  }, [])
+  }, [shopId])
 
   const bannerStyle = {
-    backgroundImage: `url(${shopInfo?.banner})`,
+    backgroundImage: `url(${shopInfo?.banner || '/images/banner.jpg'})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center'
   }
-
-  console.log(order)
 
   const submitOrder = () => {
     setOrder({
@@ -103,8 +95,6 @@ const Detail = () => {
       <MiddleTitle shopInfo={shopInfo} />
       <div className='border-y-[4px] border-grey9' />
       <DetailTabMenu shopInfo={shopInfo} handleThisMenu={handleThisMenu}/>
-      <SignatureMenuTab />
-      <DetailMenuList />
       <ScrollToTop bottom={
         order.orderItems.length >= 1 ? 100 : 40
       }/>

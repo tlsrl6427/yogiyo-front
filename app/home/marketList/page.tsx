@@ -46,7 +46,6 @@ const MarketList = () => {
 
       // 각 키에 대해 유효성 검사 후 값 추가
       if (menu) requestInfo.category = menu;
-      if (menu === '전체') requestInfo.category = '';
       if (shopListOptionState.sortState !== '정렬')
         requestInfo.sortOption = optionConvert(shopListOptionState.sortState) as string;
       if (shopListOptionState.delFilter !== '배달요금')

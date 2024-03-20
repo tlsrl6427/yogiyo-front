@@ -12,9 +12,11 @@ import { fetchAddress } from '@/lib/fetchAddress';
 import SplashPage from '@/components/common/SplashPage';
 import { useRouter } from 'next/navigation';
 import LoginPage from '@/components/common/LoginPage';
+import ServerLoginCheck from '@/components/common/ServerLoginCheck';
+import exp from 'constants';
 
 
-export default function Home() {
+const Home = () => {
 
   const [curCoord, setCurCoord] = useRecoilState(currentCoord);
   const [regionCode, setRegionCode] = useRecoilState(currentRegionCode);
@@ -48,6 +50,18 @@ export default function Home() {
     }else{
       setLocationLoaded(true);
     }
+
+  }, []);
+
+  const [cookies, setCookies] = useState(null);
+  useEffect(() => {
+    const fetchCookies = async () => {
+      const res = await fetch('/api/getCookies');
+      const data = await res.json();
+      setCookies(data);
+    };
+    fetchCookies();
+    console.log(cookies)
   }, []);
 
   useEffect(() => {
@@ -141,3 +155,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

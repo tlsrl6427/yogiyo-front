@@ -109,12 +109,12 @@ export interface ShopList {
 export interface Shop {
   shopId: number;
   shopName: string;
-  totalScore: number;
-  distance: number;
-  deliveryTime: number;
-  minDeliveryPrice: number;
-  maxDeliveryPrice: number;
-  icon: string;
+  totalScore?: number;
+  distance?: number;
+  deliveryTime?: number;
+  minDeliveryPrice?: number;
+  maxDeliveryPrice?: number;
+  icon?: string;
 }
 
 export interface ShopListResponse {
@@ -232,4 +232,18 @@ export interface Menus {
   price: number;
   reviewNum: number;
   picture: string;
+}
+
+// 주문내역 조회 타입
+export interface OrderHistoriesType {
+  orderId : number,
+  orderTime : string,
+  orderType : string,
+  status : string,
+  shopId : number,
+  shopName : string,
+  shopImg : string,
+  menuName : string,
+  menuCount : number,
+  totalMenuCount : number
 }
