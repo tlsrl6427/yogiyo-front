@@ -242,7 +242,7 @@ const DetailTabMenu = ({shopInfo, handleThisMenu}: Props) => {
           if(i === 0){
             return (
               <div 
-                key={menuGroup.id}
+                key={i}
                 ref={el => {if(el) sectionRefs.current[menuGroup?.name] = el;}} 
                 className='bg-grey9 h-[300px] p-4 relative'
               >
@@ -257,7 +257,7 @@ const DetailTabMenu = ({shopInfo, handleThisMenu}: Props) => {
           return (
             <>
               <div 
-                key={menuGroup.id}
+                key={i}
                 ref={el => {if(el) sectionRefs.current[menuGroup?.name] = el;}} 
                 className='px-4 py-6 relative'
               >
