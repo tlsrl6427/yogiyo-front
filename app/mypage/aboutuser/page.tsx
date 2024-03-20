@@ -19,23 +19,21 @@ const AboutUser = () => {
     backgroundPosition: 'center',
   };
 
-  /*
-  const doLogout = () => {
-    const userData = { id: 'unknown', nickname: 'unknown', email: 'unknown', accessToken: null };
-    setUser(userData);
-    if (typeof window !== 'undefined') {
-      sessionStorage.removeItem('access_token');
-    }
-    router.push('/');
-  };
-  */
-
   const doLogout = async () => {
     const res = await logout(user.userId);
-    console.log(res);
-
-    setUser(res);
-    router.push('/');
+    if(res.status >= 200 && res.status < 300){
+      const defaultUser = {
+        userId: 999999,
+        nickname: 'unknown',
+        email: 'unknown',
+        phone: '01000000000',
+        isLogin: false,
+      }
+      setUser(defaultUser);
+      router.push('/')
+    }else{
+      console.log(`${user.nickname}(${user.userId}) 로그아웃 실패`);
+    }
   }
 
   return (

@@ -46,7 +46,6 @@ const MarketList = () => {
 
       // 각 키에 대해 유효성 검사 후 값 추가
       if (menu) requestInfo.category = menu;
-      if (menu === '전체') requestInfo.category = '';
       if (shopListOptionState.sortState !== '정렬')
         requestInfo.sortOption = optionConvert(shopListOptionState.sortState) as string;
       if (shopListOptionState.delFilter !== '배달요금')
@@ -72,7 +71,11 @@ const MarketList = () => {
       requestInfo.size = 10;
       requestInfo.code = thisAddress?.code || regionCode
 
-      const response = await shopApi.fetchShopList(requestInfo);
+      const testInfo = {...requestInfo, latitude: 37.5600233, longitude: 127.0215778, code: 1111011500}
+      const response = await shopApi.fetchShopList(testInfo);
+      //const response = await shopApi.fetchShopList(requestInfo);
+
+      console.log("! ! !")
       console.log(requestInfo);
 
       //다음 데이터가 있을 경우

@@ -3,7 +3,7 @@ import type { Menus, UserInfo } from '@/types/types';
 
 //로그인한 유저 정보
 export const userInfoAtom = atom<UserInfo>({
-  key: 'user',
+  key: 'userInfoAtom',
   default: {
     userId: 999999,
     nickname: 'unknown',

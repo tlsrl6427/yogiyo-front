@@ -1,7 +1,6 @@
 'use client';
 import { IoIosArrowForward } from 'react-icons/io';
 import Link from 'next/link';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import MarketInfoCard from '../common/MaketInfoCard';
@@ -10,12 +9,14 @@ import type { Shop, RegisterAddressRequest } from '@/types/types';
 import { shopApi } from '@/services/shopApi';
 import { useRecoilValue } from 'recoil';
 import { currentCoord, currentRegionCode } from '@/recoil/address';
-import type { RequestInfoType } from '@/types/types';
+import type { RequestInfoType, OrderHistoriesType } from '@/types/types';
+import { getOrderList } from '@/services/orderAPI';
 
 interface ListSwiperProps {
   thisAddress: RegisterAddressRequest;
-  shopListData: Shop[];
-  setShopListData: React.Dispatch<React.SetStateAction<Shop[]>>;
+  kind: string;
+  // shopListData: Shop[];
+  // setShopListData: React.Dispatch<React.SetStateAction<Shop[]>>;
 }
 
 const slideStyle = {
@@ -31,7 +32,7 @@ const lastArrowStyle = {
   color: 'red',
 };
 
-const ListSwiper = ({ thisAddress }: ListSwiperProps) => {
+const ListSwiper = ({ thisAddress, kind }: ListSwiperProps) => {
   const [loading, setLoading] = useState(false);
 
   const regionCode = useRecoilValue(currentRegionCode)
@@ -39,17 +40,27 @@ const ListSwiper = ({ thisAddress }: ListSwiperProps) => {
 
   const [shopListData, setShopListData] = useState<Shop[]>([]);
 
+  const [orderListData, setOrderListData] = useState<any[]>()
+
   //무한스크롤 cursor (collumn값)
   const [cursor, setCursor] = useState(0);
 
   //무한스크롤 subCursor (음식점id)
   const [subCursor, setSubCursor] = useState(0)
 
-  //감시 타겟 ref
-  const observerTarget = useRef<HTMLDivElement>(null);
-
   //무한스크롤 종료 state
   const [limit, setLimit] = useState(false);
+
+  const getOrderShopList = async (cursor: number, subCursor: number) => {
+    const response = await getOrderList(0)
+    if(response?.orderHistories){
+      let idList = response?.orderHistories.map((order: OrderHistoriesType) => {
+        return {shopId: order.shopId, shopName: order.shopName}
+      })
+      const collectList = [...new Set(idList)]
+      setOrderListData(collectList)
+    }
+  }
 
   const getShopList = async (cursor: number, subCursor: number) => {
     try {
@@ -94,7 +105,7 @@ const ListSwiper = ({ thisAddress }: ListSwiperProps) => {
     if (loading || limit) return; // 로딩 중이거나 limit 상태일 경우 함수 실행 방지
     setLoading(true);
     try {
-      const data = await getShopList(cursor, subCursor);
+      const data = await (kind === 'myOrder' ? getOrderShopList : getShopList)(cursor, subCursor);
       if (data && data.content) {
         setShopListData((prev) => [...prev, ...data.content]);
         setCursor(data.nextCursor);
@@ -119,41 +130,21 @@ const ListSwiper = ({ thisAddress }: ListSwiperProps) => {
   useEffect(() => {
     // 초기 데이터 로드 또는 thisAddress 변경 시 데이터 재로드
     setShopListData([]);
+    // setOrderListData([]);
     setCursor(0);
     setSubCursor(0);
     fetchData(); // 이 함수 내부에서 getShopList 호출 포함
   }, [thisAddress]); 
 
-  // useEffect(() => {
-  //   // if (!regionCode) {
-  //   //   return; 
-  //   // }
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       entries.forEach((entry) => {
-  //         //타겟이 뷰포트와 교차할 경우 api 호출
-  //         if (entry.isIntersecting && !limit && !loading) fetchData();
-  //       });
-  //     },
-  //     { threshold: 0.1 },
-  //   ); //타겟이 0.1만큼 뷰포트에 들어올 경우 실행
-
-  //   //타겟 감시 시작
-  //   if (observerTarget.current) observer.observe(observerTarget.current);
-
-  //   //불러올 데이터가 더 이상 없을 경우 무한스크롤링 종료
-  //   if (limit) observer.disconnect();
-
-  //   // 컴포넌트 언마운트 시 또는 limit 상태가 true일 때, Observer 해제
-  //   return () => {
-  //     observer.disconnect();
-  //   };
-  // }, [cursor, subCursor, limit, loading]);
-
   return (
     <>
-      <Swiper spaceBetween={10} slidesPerView={'auto'}>
-        {shopListData?.map((shop, i) => {
+      <Swiper 
+        spaceBetween={10} 
+        slidesPerView={'auto'}
+        loop={false}
+        slidesPerGroup={1}
+      >
+        {(kind === 'myOrder' ? orderListData : shopListData)?.map((shop, i) => {
           return (
             <SwiperSlide style={slideStyle} key={i}>
               <MarketInfoCard shop={shop} />
@@ -161,22 +152,18 @@ const ListSwiper = ({ thisAddress }: ListSwiperProps) => {
           );
         })}
 
-        {shopListData && (
-          <SwiperSlide>
-            <div ref={observerTarget}></div>
-          </SwiperSlide>
-        )}
-        {/* {shopListData?.length > 20 && (
-          <SwiperSlide style={slideStyle}>
-            <Link
-              href={''}
-              className="w-[90px] h-[170px] flex justify-center items-center flex-col gap-2 cursor-pointer"
-            >
-              <IoIosArrowForward style={lastArrowStyle} />
-              <span>더보기</span>
-            </Link>
-          </SwiperSlide>
-        )} */}
+        {kind === 'newEateries' && <SwiperSlide style={slideStyle}>
+          <Link
+            href={{
+              pathname: '/home/marketList',
+              query: {menu: '신규맛집'}
+            }}
+            className="w-[90px] h-[170px] flex justify-center items-center flex-col gap-2 cursor-pointer"
+          >
+            <IoIosArrowForward style={lastArrowStyle} />
+            <span>더보기</span>
+          </Link>
+        </SwiperSlide>}
       </Swiper>
     </>
   );

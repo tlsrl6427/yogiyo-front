@@ -20,19 +20,16 @@ interface Props {
 const OrderList = () => {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [tab, setTab] = useState(tabData.left.id);
-  //const token = typeof window !== 'undefined' ? sessionStorage.getItem('access_token') : null;
 
-  const [lastIdState, setLastIdState] = useState('9999999');
+  const [lastIdState, setLastIdState] = useState(0);
   const [hasNextState, setHasNextState] = useState(true);
   const [list, setList] = useState<any[]>([]);
   const [isBottom, setIsBottom] = useState(false);
 
   const userInfo = useRecoilValue(userInfoAtom);
-  //const router = useRouter();
 
   if(!userInfo.isLogin){
     console.log("로그인 상태가 아닙니다.")
-    //router.push('/mypage');
   }else{
     console.log(`${userInfo.nickname} 의 주문내역`);
   }
@@ -43,7 +40,6 @@ const OrderList = () => {
     console.log('change');
   };
 
-  //스크롤이 밑에 닿으면 데이터패치해서 다음 리스트 받아와서 현재 리스트에 추가해서 리렌더링해야됨
   useEffect(() => {
     if (isBottom || isInitialLoad) {
       if (isInitialLoad) setIsInitialLoad(false);
@@ -61,9 +57,6 @@ const OrderList = () => {
   },[list]);
 
   const dataFetch = async () => {
-    if(!lastIdState){
-      setLastIdState('9999999');
-    }
     const { orderHistories, lastId, hasNext } = await getOrderList(lastIdState);
 
     setLastIdState(lastId);

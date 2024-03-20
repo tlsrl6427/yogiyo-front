@@ -10,7 +10,7 @@ export const shopApi = {
         headers: {
           'Content-Type': 'application/json',
         },
-        params,
+        params
       });
       return response.data;
     } catch (error) {

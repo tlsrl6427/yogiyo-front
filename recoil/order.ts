@@ -13,7 +13,7 @@ export const orderAtom = atom<Order>({
       {
         menuId: 2,
         price: 29999,
-        quantity: 92,
+        quantity: 2,
         menuName: 'test메뉴1',
         orderItemOptions: [
           {
@@ -42,7 +42,7 @@ export const orderAtom = atom<Order>({
     requestMsg: '없음',
     requestDoor: true,
     requestSpoon: false,
-    orderType: 'DELIVERAY',
+    orderType: 'DELIVERY',
     paymentType: 'CARD',
     totalPrice: 0,
     deliveryPrice: 1000,
@@ -50,6 +50,11 @@ export const orderAtom = atom<Order>({
     code: '1171010200',
   },
 });
+
+export const orderDetailCursor = atom<string | null>({
+  key: 'orderDetailCursor',
+  default : null,
+})
 
 export const orderItemsWithPriceSelector = selector({
   key: 'orderItemsWithPriceSelector',
@@ -79,3 +84,4 @@ export const pricesSelector = selector({
     return { priceFoodTotal, priceDelivery, priceFoodAndDelivery };
   },
 });
+
