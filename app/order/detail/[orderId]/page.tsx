@@ -1,5 +1,5 @@
 'use client'
-import { DynamicRoute, Ordered } from "@/types/types"
+import { Ordered } from "@/types/types"
 import { useEffect, useState } from "react";
 
 import DeliState from "@/components/order/detail/deliState";
@@ -7,8 +7,14 @@ import ShopInfo from "@/components/order/detail/shopInfo";
 import Receipt from "@/components/order/detail/receipt";
 import { getOrderDetail } from "@/services/orderAPI";
 
-const OrderDetailDynamic = ({ params }: DynamicRoute) => {
-  const orderId = params.param;
+interface Props {
+  params: {
+    orderId: string
+  }
+}
+
+const OrderDetailDynamic = ({ params }: Props) => {
+  const orderId = params.orderId;
   const [orderInfo, setOrderInfo] = useState<Ordered | null>(null);
   
   useEffect(()=>{

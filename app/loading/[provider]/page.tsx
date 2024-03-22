@@ -1,12 +1,17 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { DynamicRoute } from '@/types/types';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { getCookie } from '@/services/loginAPI';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
 
-const Loading = ({ params }: DynamicRoute) => {
+interface Props {
+  params: {
+    provider: string
+  }
+}
+
+const Loading = ({ params }: Props) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const router = useRouter();
 
@@ -22,7 +27,7 @@ const Loading = ({ params }: DynamicRoute) => {
     email: null,
     password: null,
     authCode: code as string,
-    providerType: params.param.toUpperCase(),
+    providerType: params.provider.toUpperCase(),
   };
 
   const asyncfunction = async () => {
@@ -41,7 +46,7 @@ const Loading = ({ params }: DynamicRoute) => {
 
   return (
     <div className="w-screen h-screen bg-pink1">
-      <div>{`${params.param} auth loading...`}</div>
+      <div>{`${params.provider} auth loading...`}</div>
     </div>
   );
 };
