@@ -6,8 +6,8 @@ import ShopInfo from "@/components/order/detail/shopInfo";
 import Receipt from "@/components/order/detail/receipt";
 import { getOrderDetail } from "@/services/orderAPI";
 
-const OrderDetailDynamic = ({param}: DynamicRoute) => {
-  const orderId = param;
+const OrderDetailDynamic = ({ params }: DynamicRoute) => {
+  const orderId = params.param;
   const [orderInfo, setOrderInfo] = useState<Ordered | null>(null);
   
   useEffect(()=>{

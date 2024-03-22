@@ -6,11 +6,7 @@ import { getCookie } from '@/services/loginAPI';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
 
-interface Props {
-  provider: string
-}
-
-const Loading = ({ provider }: Props) => {
+const Loading = ({ params }: DynamicRoute) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const router = useRouter();
 
@@ -19,31 +15,33 @@ const Loading = ({ provider }: Props) => {
   //const state = queryString.get('state');
 
   useEffect(() => {
-    const reqAuth = {
-      email: null,
-      password: null,
-      authCode: code as string,
-      providerType: provider.toUpperCase(),
-    };
-    const asyncfunction = async () => {
-      try{
-        const resLogin = await getCookie(reqAuth);
-        if(resLogin){
-          setUserInfo({...userInfo, userId: resLogin.userId});
-          router.push('/home');
-        }else{
-          throw new Error('200');
-        }
-      }catch{
-
-      };
-    }
-    const res = asyncfunction();
+    asyncfunction();
   },[])
+
+  const reqAuth = {
+    email: null,
+    password: null,
+    authCode: code as string,
+    providerType: params.param.toUpperCase(),
+  };
+
+  const asyncfunction = async () => {
+    try{
+      const resLogin = await getCookie(reqAuth);
+      if(resLogin){
+        setUserInfo({...userInfo, userId: resLogin.userId});
+        router.push('/home');
+      }else{
+        throw new Error('200');
+      }
+    }catch{
+      console.error('error')
+    };
+  }
 
   return (
     <div className="w-screen h-screen bg-pink1">
-      <div>{`${provider} auth loading...`}</div>
+      <div>{`${params.param} auth loading...`}</div>
     </div>
   );
 };
