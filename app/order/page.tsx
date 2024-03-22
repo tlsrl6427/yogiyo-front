@@ -57,7 +57,7 @@ const OrderPage = () => {
     const res = await postOrder(newbill);
     if(res.status >= 200 && res.status < 300){
       setCursor(`${res.data.orderId}`)
-      router.push(`/order/detail`)
+      router.push(`/order/detail?id=${res.data.orderId}`)
     }else{
      console.log('주문 오류!')
     }

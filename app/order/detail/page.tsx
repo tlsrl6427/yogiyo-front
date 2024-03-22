@@ -18,23 +18,26 @@ const OrderDetail = () => {
   //const orderStateMap = ['주문확인','조리중','배달중','배달완료'];
   //const order = '' // api 결과로 가져온 데이터
   //const user = useRecoilValue(userInfoAtom);
-  const [cursor, setCursor] = useRecoilState(orderDetailCursor);
-  const [shopId, setShopId] = useState('')
-  const [shopName, setShopName] = useState('')
+  //const [cursor, setCursor] = useRecoilState(orderDetailCursor);
+  //const [shopId, setShopId] = useState('')
+  //const [shopName, setShopName] = useState('')
   const user = useRecoilValue(userInfoAtom);
   const address = useRecoilValue(currentAddress);
 
+  //const queryString = useSearchParams();
+  //const orderId = queryString.get('id');
+
   useEffect(() => {
-    console.log(cursor);
-    if(cursor){
-      handleGetOrderDetail(cursor);
-    }else{
-      //router.push(`/error?code=002`);
-      handleTest()
-    }
-    return () => {
-      setCursor(null);
-    }
+    //console.log(cursor);
+    //if(cursor){
+    //  handleGetOrderDetail(cursor);
+    //}else{
+    //  //router.push(`/error?code=002`);
+    //  handleTest()
+    //}
+    //return () => {
+    //  setCursor(null);
+    //}
   },[]);
 
   const defaultRes = {
@@ -76,11 +79,11 @@ const OrderDetail = () => {
     requestSpoon: true,
 }
 
-  const handleGetOrderDetail = async (id: string) => {
-    const res = await getOrderDetail(id);
+  const handleGetOrderDetail = async (orderId: string) => {
+    const res = await getOrderDetail(orderId);
     console.log(res.shopId)
-    setShopId(`${res.shopId}`)
-    setShopName(res.shopName)
+    //setShopId(`${res.shopId}`)
+    //setShopName(res.shopName)
   }
   const handleTest = () => {
     const needData = {

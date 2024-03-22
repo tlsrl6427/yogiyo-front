@@ -1,19 +1,19 @@
 'use client';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DynamicRoute } from '@/types/types';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { getCookie } from '@/services/loginAPI';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
 
-const Loading = ({ params }: DynamicRoute) => {
+const Loading = ({ param }: DynamicRoute) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const router = useRouter();
 
   const queryString = useSearchParams();
   const code = queryString.get('code');
   const state = queryString.get('state');
-  const providerType = params.provider;
+  const providerType = param;
 
   useEffect(() => {
     const reqAuth = {
@@ -40,7 +40,7 @@ const Loading = ({ params }: DynamicRoute) => {
 
   return (
     <div className="w-screen h-screen bg-pink1">
-      <div>{`${params.provider} auth loading...`}</div>
+      <div>{`${param} auth loading...`}</div>
     </div>
   );
 };

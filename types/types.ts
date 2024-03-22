@@ -69,9 +69,7 @@ export interface SocialLogin {
 }
 
 export interface DynamicRoute {
-  params: {
-    provider: string;
-  };
+  param: string;
 }
 
 export interface ReqAuth {
