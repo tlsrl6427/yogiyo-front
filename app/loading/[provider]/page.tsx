@@ -6,21 +6,24 @@ import { getCookie } from '@/services/loginAPI';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
 
-const Loading = ({ param }: DynamicRoute) => {
+interface Props {
+  provider: string
+}
+
+const Loading = ({ provider }: Props) => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const router = useRouter();
 
   const queryString = useSearchParams();
   const code = queryString.get('code');
-  const state = queryString.get('state');
-  const providerType = param;
+  //const state = queryString.get('state');
 
   useEffect(() => {
     const reqAuth = {
       email: null,
       password: null,
       authCode: code as string,
-      providerType: providerType.toUpperCase(),
+      providerType: provider.toUpperCase(),
     };
     const asyncfunction = async () => {
       try{
@@ -40,7 +43,7 @@ const Loading = ({ param }: DynamicRoute) => {
 
   return (
     <div className="w-screen h-screen bg-pink1">
-      <div>{`${param} auth loading...`}</div>
+      <div>{`${provider} auth loading...`}</div>
     </div>
   );
 };
