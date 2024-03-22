@@ -95,7 +95,7 @@ const SlideOrderList = ({ orderList }: Props) => {
     router2.push('/order')
   }
   const handleClickLinkOrderList = () => {
-    router2.push('/')
+    router2.push('/home')
   }
   return (
     <div className="pl-4 pr-4 pb-4 bg-white">
@@ -124,15 +124,17 @@ const SlideOrderList = ({ orderList }: Props) => {
 const CardOrdered = ({ orderList }: Props) => {
   //const orderStateMap = ['주문확인','조리중','배달중','배달완료'];
   //const orderTypeMap = ['가게배달', '포장'];
+  const router = useRouter();
 
   const handleReOrder = (shopId : number) => {
     console.log(`shop id [${shopId}] 상세페이지로 연결해야함~`)
+    router.push(`/detail?id=${shopId}`)
   }
   const handleWriteReview = (order : OrderInfo) => {
-    console.log(`주문번호 [${order.orderId}] 상세페이지로 연결해야함~`)
+    console.log(`주문번호 [${order.orderId}] 의 내용을 장바구니에 담고 주문 경로로 이동해야함`)
   }
   const handleOrderDetail = (orderId : number) => {
-    console.log(`order id [${orderId}] 주문상세내역으로 연결해야함~`)
+    router.push(`/order/detail/${orderId}`)
   }
 
   return(
