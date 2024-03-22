@@ -68,12 +68,6 @@ export interface SocialLogin {
   providerType: string;
 }
 
-export interface DynamicRoute {
-  params: {
-    param: string;
-  }
-}
-
 export interface ReqAuth {
   code: string;
   client_id: string;
