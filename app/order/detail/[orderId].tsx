@@ -1,4 +1,4 @@
-import { DynamicRoute, Order } from "@/types/types"
+import { DynamicRoute, Ordered } from "@/types/types"
 import { useEffect, useState } from "react";
 
 import DeliState from "@/components/order/detail/deliState";
@@ -8,7 +8,7 @@ import { getOrderDetail } from "@/services/orderAPI";
 
 const OrderDetailDynamic = ({param}: DynamicRoute) => {
   const orderId = param;
-  const [orderInfo, setOrderInfo] = useState<Order | null>(null);
+  const [orderInfo, setOrderInfo] = useState<Ordered | null>(null);
   
   useEffect(()=>{
     handleAPI()
@@ -23,8 +23,8 @@ const OrderDetailDynamic = ({param}: DynamicRoute) => {
     <div>
       {orderInfo?
       <div className='w-screen min-h-screen bg-grey7'>
-        <DeliState />
-        <ShopInfo orderInfo={orderInfo}/>
+        <DeliState delState={orderInfo.status} orderType={orderInfo.orderType}/>
+        <ShopInfo shopName={orderInfo.shopName} shopId={orderInfo.shopId}/>
         <Receipt />
       </div>
       :<></>}
