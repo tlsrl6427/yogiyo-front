@@ -2,7 +2,7 @@ import { baseAxiosInstance } from './apiConfig';
 
 export const getOrderDetail = async (id: string) => {
   const res = await baseAxiosInstance.get(`member/order/details?orderId=${id}`);
-  return res.data;
+  return res;
 };
 
 export const postOrder = async (bill: any) => {
