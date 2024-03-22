@@ -1,3 +1,4 @@
+'use client'
 import { DynamicRoute, Ordered } from "@/types/types"
 import { useEffect, useState } from "react";
 
@@ -11,6 +12,7 @@ const OrderDetailDynamic = ({ params }: DynamicRoute) => {
   const [orderInfo, setOrderInfo] = useState<Ordered | null>(null);
   
   useEffect(()=>{
+    console.log(`${orderId} 주문 상세 페이지`)
     handleAPI()
   },[])
 
