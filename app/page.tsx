@@ -4,7 +4,7 @@ import Footer from '@/components/common/Footer';
 import HomePage from './home/page';
 import Head from 'next/head';
 
-const RootPage  = () => {
+const RootPage = () => {
   return (
     <div>
       <Head>
