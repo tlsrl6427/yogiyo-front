@@ -34,7 +34,8 @@ const Loading = ({ params }: Props) => {
     try{
       const resLogin = await getCookie(reqAuth);
       if(resLogin){
-        setUserInfo({...userInfo, userId: resLogin.userId});
+        // setUserInfo({...userInfo, userId: resLogin.userId});
+        setUserInfo({...userInfo, userId: resLogin.userId, isLogin: resLogin.isLogin});
         router.push('/home');
       }else{
         throw new Error('200');
