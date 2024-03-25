@@ -302,14 +302,14 @@ const FoodDetail = ({shop, thisMenu}: any) => {
       <div className="flex justify-between flex-wrap bg-grey7 p-[20px] mb-[100px]">
         <span className="font-bold text-[1.1rem]">총 주문금액</span>
         <span className="font-black text-[1.3rem] text-red-600">{(moneyCalc(menuInfo?.price || 0, optionPrice, quantity)).toLocaleString()}원</span>
-        <p className="w-full text-end text-[0.9rem] text-slate-700">(배달 최소주문금액 {shop.minOrderPrice.toLocaleString()}원)</p>
+        <p className="w-full text-end text-[0.9rem] text-slate-700">(배달 최소주문금액 {shop?.minOrderPrice.toLocaleString()}원)</p>
       </div>
 
       <div 
         className='fixed z-50 bottom-0 left-0 w-full px-[20px] h-[100px] flex flex-col gap-[10px] justify-center items-center bg-white border-t rounded-t-xl'
         onClick={handleAddOrder}
       >
-        <p className="font-semibold text-red-600">{shop.minOrderPrice.toLocaleString()}원부터 배달 가능해요</p>
+        <p className="font-semibold text-red-600">{shop?.minOrderPrice.toLocaleString()}원부터 배달 가능해요</p>
         <p className='w-full flex justify-center gap-[5px] py-[10px] mx-[10px] rounded-xl bg-pink1 font-bold text-white'>
           {(moneyCalc(menuInfo?.price || 0, optionPrice, quantity)).toLocaleString()}원 담기
         </p>

@@ -68,12 +68,6 @@ export interface SocialLogin {
   providerType: string;
 }
 
-export interface DynamicRoute {
-  params: {
-    provider: string;
-  };
-}
-
 export interface ReqAuth {
   code: string;
   client_id: string;
@@ -150,6 +144,38 @@ export interface Order {
   deliveryTime?: number;
   totalPaymentPrice?: number; //ex 21000
   code: string; //ex "1171010200"
+}
+
+export interface Ordered {
+  orderId : number;
+  status : string;
+  orderType : string;
+  shopName : string;
+  shopId : number;
+  orderNumber : string;
+  orderTime : string;
+  orderItems : {
+    id : number;
+    price : number;
+    quantity : number;
+    menuName : string;
+    menuId : number;
+    orderItemOptions : {
+      optionName : string;
+      price : number;
+    }[];
+  }[];
+  totalPrice : number;
+  deliveryPrice : number;
+  paymentPrice : number;
+  paymentType : string;
+  address : {
+    street : string;
+    detail : string;
+  },
+  requestMsg : string;
+  requestDoor : boolean;
+  requestSpoon : boolean;
 }
 
 export interface OrderInfo {

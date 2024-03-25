@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { currentCoord, currentRegionCode, thisAddressId } from '@/recoil/address';
 
-const Homes = () => {
+const HomePage = () => {
   const router = useRouter();
   const [user, setUser] = useRecoilState(userInfoAtom);
   const regiCode = useRecoilValue(currentRegionCode);
@@ -56,4 +56,4 @@ const Homes = () => {
   );
 };
 
-export default Homes;
+export default HomePage;
