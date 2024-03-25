@@ -21,6 +21,7 @@ const ClientComponent = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useRecoilState(loadingState);
 
   useEffect(() => {
+    console.log(userInfo)
     // 현재 유저의 위치 찾기
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
