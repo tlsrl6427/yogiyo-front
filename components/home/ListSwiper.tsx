@@ -51,16 +51,28 @@ const ListSwiper = ({ thisAddress, kind }: ListSwiperProps) => {
   //무한스크롤 종료 state
   const [limit, setLimit] = useState(false);
 
-  const getOrderShopList = async (cursor: number, subCursor: number) => {
-    const response = await getOrderList(0)
-    if(response?.orderHistories){
-      let idList = response?.orderHistories.map((order: OrderHistoriesType) => {
-        return {shopId: order.shopId, shopName: order.shopName}
-      })
-      const collectList = [...new Set(idList)]
-      setOrderListData(collectList)
+  const getOrderShopList = async (cursor: number, subCursor: number): Promise<void> => {
+    const response = await getOrderList(0);
+    if (response?.orderHistories) {
+      let idList: Array<{ shopId: number; shopName: string; shopImg: string }> = response.orderHistories.map((order: OrderHistoriesType) => ({
+        shopId: order.shopId,
+        shopName: order.shopName,
+        shopImg: order.shopImg,
+      }));
+  
+      // shopId를 기준으로 중복 제거
+      const uniqueIdList = idList.reduce((acc: Array<{ shopId: number; shopName: string; shopImg: string }>, current) => {
+        const x = acc.find(item => item.shopId === current.shopId);
+        if (!x) {
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
+  
+      setOrderListData(uniqueIdList);
     }
-  }
+  };
 
   const getShopList = async (cursor: number, subCursor: number) => {
     try {
@@ -145,6 +157,7 @@ const ListSwiper = ({ thisAddress, kind }: ListSwiperProps) => {
         slidesPerGroup={1}
       >
         {(kind === 'myOrder' ? orderListData : shopListData)?.map((shop, i) => {
+          console.log(shop)
           return (
             <SwiperSlide style={slideStyle} key={i}>
               <MarketInfoCard shop={shop} />
@@ -170,3 +183,4 @@ const ListSwiper = ({ thisAddress, kind }: ListSwiperProps) => {
 };
 
 export default ListSwiper;
+
