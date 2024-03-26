@@ -1,8 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import RecoilRootWrapper from './RecoilRootWrapper';
+
 import { noto_sans } from '@/lib/font';
-import ClientComponent from './ClientComponent';
+import RecoilRootWrapper from './RecoilRootWrapper';
 
 export const metadata: Metadata = {
   title: 'yogiyo front test',
@@ -14,9 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body className={noto_sans.className}>
-        <RecoilRootWrapper>
-          <ClientComponent>{children}</ClientComponent>
-        </RecoilRootWrapper>
+        <RecoilRootWrapper>{children}</RecoilRootWrapper>
       </body>
     </html>
   );
