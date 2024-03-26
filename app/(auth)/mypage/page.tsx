@@ -1,7 +1,7 @@
 'use client';
 import React, {useEffect, useState} from 'react';
-import LoggedOut from '../../components/mypage/LoggedOut';
-import LoggedIn from '../../components/mypage/LoggedIn';
+import LoggedOut from '@/components/mypage/LoggedOut';
+import LoggedIn from '@/components/mypage/LoggedIn';
 import { userInfoAtom } from '@/recoil/state';
 import { useRecoilValue } from 'recoil';
 import Footer from '@/components/common/Footer';
