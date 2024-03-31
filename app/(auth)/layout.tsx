@@ -23,12 +23,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       {user.isLogin ? 
         <>
           <Header />
-          {children}
+          <div>{children}</div>
+          <div className="pb-[70px] bg-blue-300"></div>
           <Footer />
         </> :
         <></>
       }
-      
     </div>
   );
 }

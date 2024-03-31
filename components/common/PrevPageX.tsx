@@ -20,8 +20,6 @@ const PrevPageX = (props :Props) => {
     router.back();
   };
 
-  console.log(size)
-
   return (
     <div className='ml-[-3px]'>
       <GoX style={size} onClick={handleX} />
