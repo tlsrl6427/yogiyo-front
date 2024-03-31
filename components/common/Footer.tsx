@@ -25,7 +25,7 @@ const Footer = () => {
   const iconList = [BiHomeAlt, AiOutlineHeart, BiSearch, LuNewspaper, RiContactsLine];
   const pathname = usePathname();
   return (
-    <div className="w-full h-40px border-t border-slate-300 bg-white flex fixed left-0 bottom-0 z-10">
+    <div className="w-full h-[70px] border-t border-slate-300 bg-white flex fixed left-0 bottom-0 z-10">
       {footerList.map((name, i) => {
         const IconComponent = iconList[i];
         return (

@@ -273,3 +273,16 @@ export interface OrderHistoriesType {
   menuCount : number,
   totalMenuCount : number
 }
+
+export interface OrderList {
+  menuCount : number;
+  menuName : string;
+  orderId : number;
+  orderTime : string;
+  orderType : string;
+  shopId : number;
+  shopImg : string;
+  shopName : string;
+  status : string;
+  totalMenuCount : number;
+}
