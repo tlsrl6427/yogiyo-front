@@ -4,7 +4,6 @@ import '/lib/animations.css';
 import { Tab } from '@/types/types';
 
 const TabMenu = (props: Tab) => {
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [tabIndex, setTabIndex] = useState('default')
 
   useEffect(() => {
