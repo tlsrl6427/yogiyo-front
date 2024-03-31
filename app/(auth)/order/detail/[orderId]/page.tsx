@@ -33,7 +33,7 @@ const OrderDetailDynamic = ({ params }: Props) => {
       <div className='w-screen min-h-screen bg-grey7'>
         <DeliState delState={orderInfo.status} orderType={orderInfo.orderType}/>
         <ShopInfo shopName={orderInfo.shopName} shopId={orderInfo.shopId}/>
-        <Receipt />
+        <Receipt orderInfo={orderInfo}/>
       </div>
       :<></>}
     </div>

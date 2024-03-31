@@ -14,10 +14,9 @@ export interface MenuOption {
 
 export interface Tab {
   tabData: {
-    left: Tabdata;
-    right: Tabdata;
+    left: string;
+    right: string;
   };
-  isInitialLoad?: boolean;
   selectedTab: string;
   handleGetSelected: (selectedTab: string) => void;
 }
