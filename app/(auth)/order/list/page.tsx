@@ -1,7 +1,8 @@
 'use client';
 import TabMenu from '@/components/common/TabMenu';
 import React, { useState, useEffect } from 'react';
-import DeliveryOrderList from './(delivery)/page';
+import DeliveryOrderList from '@/components/order/list/delivery/page';
+import YomartOrderList from '@/components/order/list/yomart/page';
 
 const tabData = {
   left: '배달/포장',
@@ -26,7 +27,7 @@ const OrderList = () => {
       {
         tab === 'left' ? 
         <DeliveryOrderList /> : 
-        <div></div>
+        <YomartOrderList />
       }
     </div>
   );
