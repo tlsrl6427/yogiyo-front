@@ -9,7 +9,6 @@ const CardOrdered = () => {
   const orderList = useRecoilValue(orderListAtom);
 
   const handleReOrder = (shopId : number) => {
-    console.log(`shop id [${shopId}] 상세페이지로 연결해야함~`)
     router.push(`/detail?id=${shopId}`)
   }
   const handleWriteReview = (orderId : number) => {
