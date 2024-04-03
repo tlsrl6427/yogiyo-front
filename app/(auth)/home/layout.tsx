@@ -7,11 +7,11 @@ interface Props {
 
 const HomeLayout = ({ children }: Props) => {
   return (
-    <main className="pt-[50px] pb-[70px]">
+    <main className="pt-[50px]">
       {/* @ts-ignore */}
       <Header />
       <>{children}</>
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 };
