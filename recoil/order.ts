@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import { Order } from '@/types/types';
+import { Order, OrderList } from '@/types/types';
 
 export const orderAtom = atom<Order>({
   key: 'orderAtom',
@@ -65,3 +65,18 @@ export const pricesSelector = selector({
   },
 });
 
+export const orderListAtom = atom<OrderList[]>({
+  key: 'orderListAtom',
+  default: [{
+    menuCount : 1,
+    menuName : 'default',
+    orderId : 0,
+    orderTime : 'default',
+    orderType : 'DELIVERY',
+    shopId : 111111,
+    shopImg : '/shopImg.png',
+    shopName : 'default',
+    status : 'DONE',
+    totalMenuCount : 1,
+  }]
+})

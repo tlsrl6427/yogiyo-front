@@ -14,10 +14,9 @@ export interface MenuOption {
 
 export interface Tab {
   tabData: {
-    left: Tabdata;
-    right: Tabdata;
+    left: string;
+    right: string;
   };
-  isInitialLoad?: boolean;
   selectedTab: string;
   handleGetSelected: (selectedTab: string) => void;
 }
@@ -272,4 +271,17 @@ export interface OrderHistoriesType {
   menuName : string,
   menuCount : number,
   totalMenuCount : number
+}
+
+export interface OrderList {
+  menuCount : number;
+  menuName : string;
+  orderId : number;
+  orderTime : string;
+  orderType : string;
+  shopId : number;
+  shopImg : string;
+  shopName : string;
+  status : string;
+  totalMenuCount : number;
 }

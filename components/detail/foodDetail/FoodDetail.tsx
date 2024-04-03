@@ -180,7 +180,7 @@ const FoodDetail = ({shop, thisMenu}: any) => {
     }
 
     // 담긴 메뉴가 존재하고, 현재 가게와 다른 가게일 때
-    if(order.orderItems && order.shopId !== shop.id){
+    if(order.orderItems.length > 0 && order.shopId !== shop.id){
       Swal.fire({
         title: "요기요",
         html: '장바구니에 담긴 메뉴를 취소하고 새로운 가게에서 주문하시겠어요?',
@@ -302,7 +302,7 @@ const FoodDetail = ({shop, thisMenu}: any) => {
       <div className="flex justify-between flex-wrap bg-grey7 p-[20px] mb-[100px]">
         <span className="font-bold text-[1.1rem]">총 주문금액</span>
         <span className="font-black text-[1.3rem] text-red-600">{(moneyCalc(menuInfo?.price || 0, optionPrice, quantity)).toLocaleString()}원</span>
-        <p className="w-full text-end text-[0.9rem] text-slate-700">(배달 최소주문금액 {shop?.minOrderPrice.toLocaleString()}원)</p>
+        <p className="w-full text-end text-[0.9rem] text-slate-700">(배달 최소주문금액 {(shop?.minOrderPrice|0).toLocaleString()}원)</p>
       </div>
 
       <div 

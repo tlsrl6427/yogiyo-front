@@ -5,10 +5,9 @@ import { currentAddress, currentCoord, currentRegionCode, thisAddressId, userAdd
 import { loadingState, userInfoAtom } from '@/recoil/state';
 import { useState } from 'react';
 import { fetchAddress } from '@/lib/fetchAddress';
-import SplashPage from '@/components/common/SplashPage';
-import LoginPage from '@/components/common/LoginPage';
+import { useRouter } from 'next/navigation';
 
-const ClientComponent = ({ children }: { children: React.ReactNode }) => {
+const LandingPage = () => {
   const [curCoord, setCurCoord] = useRecoilState(currentCoord);
   const [regionCode, setRegionCode] = useRecoilState(currentRegionCode);
   const [curAdd, setCurAdd] = useRecoilState(currentAddress);
@@ -20,31 +19,35 @@ const ClientComponent = ({ children }: { children: React.ReactNode }) => {
   const [regionCodeLoaded, setRegionCodeLoaded] = useState(false);
   const [isLoading, setIsLoading] = useRecoilState(loadingState);
 
+  const router = useRouter();
+
   useEffect(() => {
-    console.log(userInfo)
-    // 현재 유저의 위치 찾기
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          setCurCoord({ lat, lng });
-          setLocationLoaded(true);
-        },
-        (error) => {
-          // 오류날 경우 or 유저가 위치추적권한을 허용하지 않을 경우 임의 좌표 설정
-          setCurCoord({ lat: 37.566826, lng: 126.9786567 }); // Default to Seoul
-          setLocationLoaded(true);
-        },
-      );
+    if(!isLoading){
+      router.push('/home')
     }else{
-      setLocationLoaded(true);
+    // 현재 유저의 위치 찾기
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            setCurCoord({ lat, lng });
+            setLocationLoaded(true);
+          },
+          (error) => {
+            // 오류날 경우 or 유저가 위치추적권한을 허용하지 않을 경우 임의 좌표 설정
+            setCurCoord({ lat: 37.566826, lng: 126.9786567 }); // Default to Seoul
+            setLocationLoaded(true);
+          },
+        );
+      }else{
+        setLocationLoaded(true);
+      }
     }
-  }, []);
+  }, [isLoading]);
 
   useEffect(() => {
     if (!curCoord) return; // 현재 유저의 위치 찾기 전이라면 return
-
     const kakaoMapScript = document.createElement('script');
     kakaoMapScript.async = false;
     kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_APP_KEY}&autoload=false&libraries=services`;
@@ -109,18 +112,12 @@ const ClientComponent = ({ children }: { children: React.ReactNode }) => {
   }, [locationLoaded, regionCodeLoaded]);
 
   return (
-    <>
-      {isLoading ? (
-        <SplashPage />
-      ) :
-      userInfo.isLogin ? (
-        <>{children}</>
-      ) : (
-        <LoginPage />
-      )
-    }
-    </>
+    <div className="w-full h-[100vh] flex justify-center items-center bg-rose-600">
+      <div className="w-[220px] h-[100px] flex justify-center items-center rounded-3xl bg-white">
+        <div className="w-[200px] h-[50px]" style={{background: 'url(/img/yogiyo_new_logo.svg) center center/contain no-repeat'}} />
+      </div>
+    </div>
   );
 };
 
-export default ClientComponent;
+export default LandingPage;

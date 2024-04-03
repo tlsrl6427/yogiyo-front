@@ -1,46 +1,42 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import TabMenu from '@/components/common/TabMenu';
-import ToggleMenu from '@/components/mypage/ToggleMenu';
+import ToggleMenu from '@/components/common/ToggleMenu';
 import { BsPencil } from 'react-icons/bs';
 import CardOrder from '@/components/common/CardOrder';
 
 const tabData1 = {
-  left: { id: 'deliveryAndTogo', name: '배달/포장' },
-  right: { id: 'yomart', name: '요마트' },
+  left: '배달/포장',
+  right: '요마트',
 };
 const tabData2 = {
-  left: { id: 'writable', name: '작성 가능한 리뷰' },
-  right: { id: 'written', name: '작성한 리뷰' },
+  left: '작성 가능한 리뷰',
+  right: '작성한 리뷰',
 };
 
 const Review = () => {
   const [tab1, setTab1] = useState('left');
   const [tab2, setTab2] = useState('left');
 
-  const handleGetTab2 = (selectedTab: string) => {
-    setTab2(selectedTab);
-    //if(isInitialLoad) setIsInitialLoad(false)
-    console.log('tab2 change');
-  };
-
   const handleGetTab1 = (selectedTab: string) => {
     setTab1(selectedTab);
-    //if(isInitialLoad) setIsInitialLoad(false)
     console.log('tab1 change');
   };
 
+  const handleGetTab2 = (selectedTab: string) => {
+    setTab2(selectedTab);
+    console.log('tab2 change');
+  };
   return (
     <div className="bg-grey1">
+     
       <TabMenu
-        //isInitialLoad={isInitialLoad}
         tabData={tabData1}
         selectedTab={tab1}
         handleGetSelected={handleGetTab1}
       ></TabMenu>
       <div className="p-4 bg-white">
         <ToggleMenu
-          //isInitialLoad={isInitialLoad}
           tabData={tabData2}
           selectedTab={tab2}
           handleGetSelected={handleGetTab2}

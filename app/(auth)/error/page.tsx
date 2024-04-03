@@ -32,7 +32,7 @@ const ErrorPage = () => {
       message = '해당 페이지를 찾을 수 없습니다.';
       break;
     case '003':
-      message = '접근할 수 없는 페이지입니다.';
+      message = '접근할 수 없는 페이지입니다..';
       break;
   }
 

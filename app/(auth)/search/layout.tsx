@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchHeader from '@/components/search/SearchHeader';
+import Footer from '@/components/common/Footer';
 
 interface Props {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ const SearchLayout = ({ children }: Props) => {
       {/* @ts-ignore */}
       <SearchHeader />
       <>{children}</>
+      <Footer />
     </div>
   );
 };
