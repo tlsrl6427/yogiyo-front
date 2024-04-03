@@ -3,7 +3,6 @@ import { BiHomeAlt, BiSearch } from 'react-icons/bi';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { LuNewspaper } from 'react-icons/lu';
 import { RiContactsLine } from 'react-icons/ri';
-
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -21,7 +20,7 @@ const isFirstRootHome = (pathname: string, currentPath: string) => {
 
 const Footer = () => {
   const footerList = ['홈', '찜', '검색', '주문내역', '마이요기요'];
-  const routerPath = ['/', '/pick', '/search', '/order/list', '/mypage'];
+  const routerPath = ['/home', '/pick', '/search', '/order/list', '/mypage'];
   const iconList = [BiHomeAlt, AiOutlineHeart, BiSearch, LuNewspaper, RiContactsLine];
   const pathname = usePathname();
   return (

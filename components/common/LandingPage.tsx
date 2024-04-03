@@ -5,8 +5,6 @@ import { currentAddress, currentCoord, currentRegionCode, thisAddressId, userAdd
 import { loadingState, userInfoAtom } from '@/recoil/state';
 import { useState } from 'react';
 import { fetchAddress } from '@/lib/fetchAddress';
-import SplashPage from '@/components/common/SplashPage';
-import LoginPage from '@/components/common/LoginPage';
 import { useRouter } from 'next/navigation';
 
 const LandingPage = () => {
@@ -24,7 +22,6 @@ const LandingPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(userInfo)
     if(!isLoading){
       router.push('/home')
     }else{
@@ -51,7 +48,6 @@ const LandingPage = () => {
 
   useEffect(() => {
     if (!curCoord) return; // 현재 유저의 위치 찾기 전이라면 return
-
     const kakaoMapScript = document.createElement('script');
     kakaoMapScript.async = false;
     kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_APP_KEY}&autoload=false&libraries=services`;
@@ -116,9 +112,11 @@ const LandingPage = () => {
   }, [locationLoaded, regionCodeLoaded]);
 
   return (
-    <>
-      <SplashPage />
-    </>
+    <div className="w-full h-[100vh] flex justify-center items-center bg-rose-600">
+      <div className="w-[220px] h-[100px] flex justify-center items-center rounded-3xl bg-white">
+        <div className="w-[200px] h-[50px]" style={{background: 'url(/img/yogiyo_new_logo.svg) center center/contain no-repeat'}} />
+      </div>
+    </div>
   );
 };
 
