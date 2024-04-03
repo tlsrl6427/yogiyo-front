@@ -7,6 +7,12 @@ import { BsPencil } from 'react-icons/bs';
 import Writable from '@/components/review/writable';
 import Written from '@/components/review/written';
 
+/**
+ * 리뷰 페이지
+ * 탭과 토글, 그 선택값에 따른 컨텐츠를 렌더링함
+ * @todo: 실제 데이터 사용 필요
+ */
+
 const tabData1 = {
   left: '배달/포장',
   right: '요마트',

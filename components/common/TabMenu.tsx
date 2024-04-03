@@ -3,6 +3,15 @@ import React, { useState, useEffect } from 'react';
 import '/lib/animations.css';
 import { TabAndToggle } from '@/types/types';
 
+/**
+ * 탭 요소 컴포넌트
+ * @Props : {data, selected, handleGetSelected}
+ * @propsType: TabAndToggle
+ * @param data : {left, right} 왼쪽, 오른쪽 메뉴 라벨에 들어갈 텍스트
+ * @param selected : 현재 선택된 메뉴
+ * @param handleGetSelected : 현재 선택된 메뉴를 변경하는 핸들러 함수
+ */
+
 const TabMenu = (props: TabAndToggle) => {
   const [tabIndex, setTabIndex] = useState('default')
 
