@@ -15,13 +15,11 @@ const OrderList = () => {
     setTab(selectedTab);
   };
 
-  const abc = 0;
-
   return (
     <div className="bg-grey1">
       <TabMenu
-        tabData={tabData}
-        selectedTab={tab}
+        data={tabData}
+        selected={tab}
         handleGetSelected={handleGetSelected}
       ></TabMenu>
       {

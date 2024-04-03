@@ -3,7 +3,15 @@ import React, { useState, useEffect } from 'react';
 import TabMenu from '@/components/common/TabMenu';
 import ToggleMenu from '@/components/common/ToggleMenu';
 import { BsPencil } from 'react-icons/bs';
-import CardOrder from '@/components/common/CardOrder';
+
+import Writable from '@/components/review/writable';
+import Written from '@/components/review/written';
+
+/**
+ * 리뷰 페이지
+ * 탭과 토글, 그 선택값에 따른 컨텐츠를 렌더링함
+ * @todo: 실제 데이터 사용 필요
+ */
 
 const tabData1 = {
   left: '배달/포장',
@@ -20,25 +28,22 @@ const Review = () => {
 
   const handleGetTab1 = (selectedTab: string) => {
     setTab1(selectedTab);
-    console.log('tab1 change');
   };
-
   const handleGetTab2 = (selectedTab: string) => {
     setTab2(selectedTab);
-    console.log('tab2 change');
   };
+
   return (
     <div className="bg-grey1">
-     
       <TabMenu
-        tabData={tabData1}
-        selectedTab={tab1}
+        data={tabData1}
+        selected={tab1}
         handleGetSelected={handleGetTab1}
       ></TabMenu>
       <div className="p-4 bg-white">
         <ToggleMenu
-          tabData={tabData2}
-          selectedTab={tab2}
+          data={tabData2}
+          selected={tab2}
           handleGetSelected={handleGetTab2}
         ></ToggleMenu>
       </div>
@@ -50,7 +55,7 @@ const Review = () => {
           포토리뷰 작성시 <span className="text-pink1">100 포인트</span>를 드려요.
         </p>
       </div>
-      {tab2 === 'left' ? <CardOrder type={0} /> : <CardOrder type={1} />}
+      {tab2 === 'left' ? <Writable /> : <Written />}
     </div>
   );
 };

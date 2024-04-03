@@ -1,13 +1,22 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import '/lib/animations.css';
-import { Tab } from '@/types/types';
+import { TabAndToggle } from '@/types/types';
 
-const TabMenu = (props: Tab) => {
+/**
+ * 탭 요소 컴포넌트
+ * @Props : {data, selected, handleGetSelected}
+ * @propsType: TabAndToggle
+ * @param data : {left, right} 왼쪽, 오른쪽 메뉴 라벨에 들어갈 텍스트
+ * @param selected : 현재 선택된 메뉴
+ * @param handleGetSelected : 현재 선택된 메뉴를 변경하는 핸들러 함수
+ */
+
+const TabMenu = (props: TabAndToggle) => {
   const [tabIndex, setTabIndex] = useState('default')
 
   useEffect(() => {
-    console.log(`selectedTab: ${props.selectedTab}`);
+    console.log(`selectedTab: ${props.selected}`);
   }, [props]);
 
   const handleTabChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,30 +41,30 @@ const TabMenu = (props: Tab) => {
         <div className="w-[50%]">
           <input
             type="radio"
-            id='left'
+            id='tabLeft'
             value="left"
             style={{ display: 'none' }}
-            checked={props.selectedTab === 'left'}
+            checked={tabIndex === 'left'}
             onChange={handleTabChange}
           />
-          <label htmlFor='left'>
-            <p className={`text-center p-3 ${props.selectedTab === 'left' ? 'font-bold' : ''}`}>
-              {props.tabData.left}
+          <label htmlFor='tabLeft'>
+            <p className={`text-center p-3 ${tabIndex === 'left' ? 'font-bold' : ''}`}>
+              {props.data.left}
             </p>
           </label>
         </div>
         <div className="w-[50%]">
           <input
             type="radio"
-            id='right'
+            id="tabRight"
             value="right"
             style={{ display: 'none' }}
-            checked={props.selectedTab === 'right'}
+            checked={tabIndex === 'right'}
             onChange={handleTabChange}
           />
-          <label htmlFor="right">
-            <p className={`text-center p-3 ${props.selectedTab === 'right' ? 'font-bold' : ''}`}>
-              {props.tabData.right}
+          <label htmlFor="tabRight">
+            <p className={`text-center p-3 ${tabIndex === 'right' ? 'font-bold' : ''}`}>
+              {props.data.right}
             </p>
           </label>
         </div>
