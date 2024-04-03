@@ -15,8 +15,6 @@ const OrderList = () => {
     setTab(selectedTab);
   };
 
-  const abc = 0;
-
   return (
     <div className="bg-grey1">
       <TabMenu

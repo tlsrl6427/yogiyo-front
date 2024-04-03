@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import TabMenu from '@/components/common/TabMenu';
 import ToggleMenu from '@/components/common/ToggleMenu';
 import { BsPencil } from 'react-icons/bs';
-import CardOrder from '@/components/common/CardOrder';
+import Reviews from '@/components/review/page';
 
 const tabData1 = {
   left: '배달/포장',
@@ -20,12 +20,10 @@ const Review = () => {
 
   const handleGetTab1 = (selectedTab: string) => {
     setTab1(selectedTab);
-    console.log('tab1 change');
   };
 
   const handleGetTab2 = (selectedTab: string) => {
     setTab2(selectedTab);
-    console.log('tab2 change');
   };
   return (
     <div className="bg-grey1">
@@ -50,7 +48,7 @@ const Review = () => {
           포토리뷰 작성시 <span className="text-pink1">100 포인트</span>를 드려요.
         </p>
       </div>
-      {tab2 === 'left' ? <CardOrder type={0} /> : <CardOrder type={1} />}
+      {tab2 === 'left' ? <Reviews type={0} /> : <Reviews type={1} />}
     </div>
   );
 };
