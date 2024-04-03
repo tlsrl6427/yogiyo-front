@@ -7,19 +7,15 @@ export interface Coordinate {
   lng: number;
 }
 
-export interface MenuOption {
-  name: string;
-  content: string;
-}
-
-export interface Tab {
-  tabData: {
+export interface TabAndToggle {
+  data: {
     left: string;
     right: string;
   };
-  selectedTab: string;
-  handleGetSelected: (selectedTab: string) => void;
+  selected: string;
+  handleGetSelected: (selected: string) => void;
 }
+
 export interface Tabdata {
   id: string;
   name?: string;
