@@ -4,4 +4,4 @@ const RootPage = () => {
   return <LandingPage />;
 }
 
-export default RootPage ;
+export default RootPage;
