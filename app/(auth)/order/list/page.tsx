@@ -4,6 +4,11 @@ import React, { useState, useEffect } from 'react';
 import DeliveryOrderList from '@/components/order/list/delivery/page';
 import YomartOrderList from '@/components/order/list/yomart/page';
 
+/**
+ * @memberof order
+ * Order Page 에서 Tab과 Tab에 따른 조건부 렌더링 (delivery or yomart)
+ */
+
 const tabData = {
   left: '배달/포장',
   right: '요마트/요편의점' };
