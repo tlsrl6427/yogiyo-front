@@ -9,7 +9,7 @@ import ReviewCreate from '@/components/review/create';
  */
 
 const Review = () => {
-  const [cursor, setCursor] = useState('list');
+  const [cursor, setCursor] = useState('create');
 
   return(
     <>
