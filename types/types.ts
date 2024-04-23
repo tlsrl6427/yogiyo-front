@@ -288,3 +288,8 @@ export interface ReviewRatings {
   taste: number,
   delivery: number
 }
+
+export interface ReviewPage {
+  page: boolean,
+  orderId: number
+}

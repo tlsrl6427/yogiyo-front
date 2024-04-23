@@ -10,6 +10,13 @@ interface Props {
   labelSize?: number
 }
 
+/**
+ * 레이팅 입력용 5개짜리 별
+ * 상태: 유저의 클릭에 따라 변경, ratingAtom에 저장
+ * @param props (subject: overall | amount | taste | delivery, ?size: rem값, ?label, ?labelSize)
+ * @returns 요소 렌더
+ */
+
 const Stars = (props: Props) => {
   const [ratings, setRatings] = useRecoilState(ratingAtom)
   const [star, setStar] = useState(0);

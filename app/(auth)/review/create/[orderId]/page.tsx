@@ -1,15 +1,27 @@
 /**
- * [Component]
- * @memberof review
+ * [Page]
+ * 이 페이지로 이동할 때, orderId를 하위 주소로서 포함해야 함 (create/[orderId])
+ * orderId에 해당하는 주문의 리뷰를 작성하고 서버로 전송하는 페이지
  */
 
-import Stars from "../common/Stars";
+import Stars from "@/components/common/Stars";
 import { ratingAtom } from "@/recoil/review";
 import { useRecoilValue } from "recoil";
 
+interface Props {
+  params : {
+    orderId: string
+  }
+}
 
-const ReviewCreate = () => {
+const ReviewCreate = ({params} : Props) => {
   const ratings = useRecoilValue(ratingAtom)
+  const orderId = params.orderId;
+
+  const handleCreateReview = () => {
+    // ratingAtom에서 가져온 ratings 의 값을 서버로 전송해야함. (api문서 문제로 확인 불가능-작업보류)
+  }
+
   console.log(ratings)
   return (
     <>
