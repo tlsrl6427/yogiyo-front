@@ -1,3 +1,4 @@
+'use client';
 /**
  * [Page]
  * 이 페이지로 이동할 때, orderId를 하위 주소로서 포함해야 함 (create/[orderId])
@@ -19,6 +20,7 @@ const ReviewCreate = ({params} : Props) => {
   const orderId = params.orderId;
 
   const handleCreateReview = () => {
+    console.log(orderId)
     // ratingAtom에서 가져온 ratings 의 값을 서버로 전송해야함. (api문서 문제로 확인 불가능-작업보류)
   }
 
@@ -43,6 +45,7 @@ const ReviewCreate = ({params} : Props) => {
         <div>상세 리뷰 : 메시지 박스</div>
         <div>이미지 등록 3개</div>
       </div>
+      <div onClick={handleCreateReview}>리뷰작성하기버튼</div>
     </>
   )
 }
