@@ -9,10 +9,11 @@ const CardOrdered = () => {
   const orderList = useRecoilValue(orderListAtom);
 
   const handleReOrder = (shopId : number) => {
-    router.push(`/detail?id=${shopId}`)
+    //router.push(`/detail?id=${shopId}`)
+    console.log('재주문 미구현')
   }
   const handleWriteReview = (orderId : number) => {
-    console.log(`주문번호 [${orderId}] 의 내용을 장바구니에 담고 주문 경로로 이동해야함`)
+    router.push(`/review/create/${orderId}`)
   }
   const handleOrderDetail = (orderId : number) => {
     router.push(`/order/detail/${orderId}`)
