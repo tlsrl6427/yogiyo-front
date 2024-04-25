@@ -8,8 +8,9 @@ import Writable from '@/components/review/writable';
 import Written from '@/components/review/written';
 
 /**
- * 리뷰 페이지
- * 탭과 토글, 그 선택값에 따른 컨텐츠를 렌더링함
+ * [Page]
+ * @member writable, written
+ * 리뷰 목록에서 탭과 토글, 그 선택값에 따른 컨텐츠를 렌더링 (writable or written)
  * @todo: 실제 데이터 사용 필요
  */
 
@@ -32,6 +33,7 @@ const Review = () => {
   const handleGetTab2 = (selectedTab: string) => {
     setTab2(selectedTab);
   };
+
 
   return (
     <div className="bg-grey1">

@@ -281,3 +281,15 @@ export interface OrderList {
   status : string;
   totalMenuCount : number;
 }
+
+export interface ReviewRatings {
+  overall: number,
+  amount: number,
+  taste: number,
+  delivery: number
+}
+
+export interface ReviewPage {
+  page: boolean,
+  orderId: number
+}
