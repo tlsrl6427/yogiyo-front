@@ -1,15 +1,12 @@
 import Link from 'next/link';
 import ShopName from './shopName';
-import { useRecoilState } from 'recoil';
-import { reviewMode } from '@/recoil/review';
 
 const Writable = () => {
-  const [review, setReview] = useRecoilState(reviewMode);
   const imagebox = 'w-[70px] h-[70px] bg-grey1 rounded-md overflow-hidden';
   const whiteButton = 'text-sm pt-2 pb-2 pr-4 pl-4 border border-grey2 rounded-md';
 
   const handleCreate = () => {
-    setReview({page: !review.page, orderId: 0})
+    return 0;
   }
 
   return (
