@@ -1,3 +1,4 @@
+'use client'
 import React, {useEffect, useState} from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { ratingAtom } from "@/recoil/review";
