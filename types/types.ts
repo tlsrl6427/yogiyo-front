@@ -293,3 +293,19 @@ export interface ReviewPage {
   page: boolean,
   orderId: number
 }
+
+export interface Review {
+  orderId : string,
+  tasteScore : number,
+  quantityScore : number,
+  deliveryScore : number,
+  content : string,
+  shopId : string,
+  shopName : string,
+}
+
+export interface IDsInOrder {
+  orderId: number,
+  shopId: number,
+  shopName: string,
+}

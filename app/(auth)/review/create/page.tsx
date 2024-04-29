@@ -8,20 +8,39 @@
 import Stars from "@/components/common/Stars";
 import { ratingAtom } from "@/recoil/review";
 import { useRecoilValue } from "recoil";
+import { useSearchParams, useServerInsertedHTML } from "next/navigation";
+import { postReview } from "@/services/reviewApi";
 
-interface Props {
-  params : {
-    orderId: string
-  }
-}
-
-const ReviewCreate = ({params} : Props) => {
+const ReviewCreate = () => {
   const ratings = useRecoilValue(ratingAtom)
-  const orderId = params.orderId;
+  const params = useSearchParams();
 
-  const handleCreateReview = () => {
-    console.log(orderId)
+  const orderId = params.get('orderId');
+  const shopId = params.get('shopId');
+  const shopName = params.get('shopName');
+
+  //params 가 유효하지 않게 들어왔을 때를 처리해야 할까?
+  if(!orderId || !shopId || !shopName){
+    return 0;
+  }
+
+  const handleCreateReview = async () => {
+    const reviewData = {
+      orderId: orderId,
+      tasteScore: ratings.taste,
+      quantityScore: ratings.amount,
+      deliveryScore: ratings.delivery,
+      content: "message",
+      shopId: shopId,
+      shopName: shopName,
+    }
+    console.log(reviewData)
+    console.log(typeof reviewData.orderId)
+    console.log(typeof reviewData.shopId)
+    const res = await postReview(reviewData)
+    console.log(res)
     // ratingAtom에서 가져온 ratings 의 값을 서버로 전송해야함. (api문서 문제로 확인 불가능-작업보류)
+    // dynamic routing -> query parameter 변경중
   }
 
   console.log(ratings)
