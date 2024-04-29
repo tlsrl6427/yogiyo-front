@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import { ReviewPage, ReviewRatings} from '@/types/types';
+import { Review, ReviewPage, ReviewRatings} from '@/types/types';
 
 export const ratingAtom = atom<ReviewRatings>({
   key: 'ratingAtom',
