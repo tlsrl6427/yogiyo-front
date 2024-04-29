@@ -10,19 +10,28 @@ import { ratingAtom } from "@/recoil/review";
 import { useRecoilValue } from "recoil";
 import { useSearchParams, useServerInsertedHTML } from "next/navigation";
 import { postReview } from "@/services/reviewApi";
+import { useState } from "react";
+import { Handler } from "@/types/types";
 
 const ReviewCreate = () => {
+  const [textValue, setTextValue] = useState('');
   const ratings = useRecoilValue(ratingAtom)
   const params = useSearchParams();
 
   const orderId = params.get('orderId');
   const shopId = params.get('shopId');
   const shopName = params.get('shopName');
+  const menuName = params.get('menuName');
+  const count = params.get('count');
+  const tcount = params.get('tcount');
 
   //params 가 유효하지 않게 들어왔을 때를 처리해야 할까?
-  if(!orderId || !shopId || !shopName){
+  if(!orderId || !shopId || !shopName || !menuName || !count || !tcount){
     return 0;
   }
+
+  let menuInfo = `${menuName} x ${count}`;
+  if(parseInt(tcount) > 1) menuInfo += `외 ${tcount}건`;
 
   const handleCreateReview = async () => {
     const reviewData = {
@@ -30,24 +39,25 @@ const ReviewCreate = () => {
       tasteScore: ratings.taste,
       quantityScore: ratings.amount,
       deliveryScore: ratings.delivery,
-      content: "message",
+      content: textValue,
       shopId: shopId,
       shopName: shopName,
     }
-    console.log(reviewData)
-    console.log(typeof reviewData.orderId)
-    console.log(typeof reviewData.shopId)
     const res = await postReview(reviewData)
     console.log(res)
-    // ratingAtom에서 가져온 ratings 의 값을 서버로 전송해야함. (api문서 문제로 확인 불가능-작업보류)
-    // dynamic routing -> query parameter 변경중
   }
 
+  const handleChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextValue(e.target.value)
+  }
   console.log(ratings)
+
+  const defaultText = `사진과 함께 리뷰 작성해야 100포인트 적립 가능!\n음식에 대한 솔직한 리뷰를 남겨주세요(10자이상)`
+
   return (
-    <>
-      <div>울엄마김치찜 오창점</div>
-      <div>목살반삼겹살 어쩌구 x1</div>
+    <div className="w-full">
+      <div>{shopName}</div>
+      <div>{menuInfo}</div>
       <div className="flex flex-col items-center">
         <div>이 가게를 추천하시겠어요?</div>
         <Stars subject="overall" size={3}/>
@@ -60,12 +70,13 @@ const ReviewCreate = () => {
           <Stars subject="delivery" label="배달" labelSize={1} size={1.2}/>
         </div>
       </div>
-      <div>
-        <div>상세 리뷰 : 메시지 박스</div>
-        <div>이미지 등록 3개</div>
+      <div className="p-4">
+      <textarea name="textarea" value={textValue} onChange={handleChangeTextArea} placeholder={defaultText}
+        className="w-full h-[10rem] p-4 border border-grey2">
+      </textarea>
       </div>
       <div onClick={handleCreateReview}>리뷰작성하기버튼</div>
-    </>
+    </div>
   )
 }
 

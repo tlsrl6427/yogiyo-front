@@ -13,9 +13,10 @@ const CardOrdered = () => {
     //router.push(`/detail?id=${shopId}`)
     console.log('재주문 미구현')
   }
-  const handleWriteReview = (IDs : IDsInOrder) => {
-    const {orderId, shopId, shopName} = IDs;
-    router.push(`/review/create?orderId=${orderId}&shopId=${shopId}&shopName=${shopName}`)
+  const handleWriteReview = (index : number) => {
+    console.log(orderList[index])
+    const {orderId, shopId, shopName, menuName, menuCount, totalMenuCount} = orderList[index];
+    router.push(`/review/create?orderId=${orderId}&shopId=${shopId}&shopName=${shopName}&menuName=${menuName}&count=${menuCount}&tcount=${totalMenuCount}`)
   }
   const handleOrderDetail = (orderId : number) => {
     router.push(`/order/detail/${orderId}`)
@@ -44,11 +45,7 @@ const CardOrdered = () => {
                         <button className={`${buttonStyles.active}`} onClick={()=>handleReOrder(order.shopId)}>재주문</button>
                       </div>
                       <div className="h-full flex-1 pr-2">
-                        <button className={`${buttonStyles.inactive}`} onClick={()=>handleWriteReview({
-                          orderId: order.orderId,
-                          shopId: order.shopId,
-                          shopName: order.shopName,
-                        })}>리뷰쓰기</button>
+                        <button className={`${buttonStyles.inactive}`} onClick={()=>handleWriteReview(index)}>리뷰쓰기</button>
                       </div>
                       <div className="h-full flex-1 pr-2">
                         <button className={`${buttonStyles.inactive}`} onClick={()=>handleOrderDetail(order.orderId)}>주문상세</button>
