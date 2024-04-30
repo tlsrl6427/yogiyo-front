@@ -16,7 +16,7 @@ const CardOrdered = () => {
   const handleWriteReview = (index : number) => {
     console.log(orderList[index])
     const {orderId, shopId, shopName, menuName, menuCount, totalMenuCount} = orderList[index];
-    router.push(`/review/create?orderId=${orderId}&shopId=${shopId}&shopName=${shopName}&menuName=${menuName}&count=${menuCount}&tcount=${totalMenuCount}`)
+    router.push(`/review-write?orderId=${orderId}&shopId=${shopId}&shopName=${shopName}&menuName=${menuName}&count=${menuCount}&tcount=${totalMenuCount}`)
   }
   const handleOrderDetail = (orderId : number) => {
     router.push(`/order/detail/${orderId}`)
