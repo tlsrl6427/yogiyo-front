@@ -14,7 +14,7 @@ interface Props {
 /**
  * 레이팅 입력용 5개짜리 별
  * 상태: 유저의 클릭에 따라 변경, ratingAtom에 저장
- * @param props (subject: overall | amount | taste | delivery, ?size: rem값, ?label, ?labelSize)
+ * @param props (subject: overall | amount | taste | delivery, ?label)
  * @returns 요소 렌더
  */
 
@@ -29,10 +29,7 @@ const Stars = (props: Props) => {
     if(props.subject === 'delivery') setStar(ratings.delivery)
   },[ratings])
   
-  const starSize = props.size ? `${props.size}rem` : "1rem" ;
-  const labelWidth = props.labelSize ? `${props.labelSize * 2}rem` : "2rem" ;
-  const labelSize = props.labelSize ? `${props.labelSize}rem` : "1rem" ;
-
+  const starSize = props.size ? `${props.size}rem` : "1.4rem" ;
   const starRender = Array(5).fill(null).map((_, index) => {
     if (index < star) {
       return (<div className="p-[3px]" onClick={() => handleChangeStar(index)} key={index}>
@@ -46,7 +43,6 @@ const Stars = (props: Props) => {
   });
 
   const handleChangeStar = (index: number) => {
-    //setStar(index+1);
     setRatings(prevState => {
       return {
         ...prevState,
@@ -56,8 +52,8 @@ const Stars = (props: Props) => {
   }
 
   return(
-    <div className="flex">
-      {props.label && <div style={{ width: labelWidth, fontSize: labelSize }}>{props.label}</div>}
+    <div className="flex items-center p-2">
+      {props.label && <div className={`w-[3.6rem] text-sm pr-4 font-semibold`}>{props.label}</div>}
       <div className="flex">
         {starRender}
       </div>

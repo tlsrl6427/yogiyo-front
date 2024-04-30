@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
 import { useRouter } from 'next/navigation';
-import Footer from '@/components/common/Footer';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const user = useRecoilValue(userInfoAtom);
@@ -20,8 +19,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       {user.isLogin ? 
         <>
           <div>{children}</div>
-          <div className="pb-[70px]"></div>
-          <Footer />
         </> :
         <></>
       }

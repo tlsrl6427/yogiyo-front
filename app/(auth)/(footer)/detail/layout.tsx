@@ -1,4 +1,3 @@
-import Footer from '@/components/common/Footer';
 import React from 'react';
 
 const DetailLayout = ({ children }: {children: React.ReactNode}) => {
