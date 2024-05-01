@@ -3,6 +3,13 @@ import { useRecoilValue } from "recoil";
 import { orderListAtom } from "@/recoil/order";
 import { IDsInOrder } from "@/types/types";
 
+/**
+ * [Component]
+ * @memberof CardOrdered(c)
+ * 주문 목록 나열 부분
+ * 각 주문마다 재주문, 리뷰쓰기, 주문상세 버튼 있음
+ */
+
 const CardOrdered = () => {
   //const orderStateMap = ['주문확인','조리중','배달중','배달완료'];
   //const orderTypeMap = ['가게배달', '포장'];

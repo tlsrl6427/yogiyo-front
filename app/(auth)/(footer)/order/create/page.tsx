@@ -1,21 +1,26 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { postOrder } from '@/services/orderAPI';
+import { shopApi } from '@/services/shopApi';
+import { Handler } from '@/types/types';
+
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userInfoAtom } from '@/recoil/state';
+
+import { orderAtom, orderDetailCursor, orderItemsWithPriceSelector, pricesSelector } from '@/recoil/order';
+import { thisAddressId } from '@/recoil/address';
 
 import { HiOutlineHome } from 'react-icons/hi';
 import { HiOutlineChevronRight } from 'react-icons/hi2';
 import { FiPlus } from 'react-icons/fi';
 import { LuPlus, LuMinus, LuX } from 'react-icons/lu';
 
-import { Order, Handler } from '@/types/types';
-import { shopApi } from '@/services/shopApi';
-import { useRouter } from 'next/navigation';
-
-import { orderAtom, orderDetailCursor, orderItemsWithPriceSelector, pricesSelector } from '@/recoil/order';
-
-import { thisAddressId } from '@/recoil/address';
+/**
+ * [Page]
+ * @access shopApi, portOrder
+ * @todo 컴포넌트 분리
+ */
 
 const OrderPage = () => {
   const thisAddId = useRecoilValue(thisAddressId);

@@ -1,12 +1,14 @@
 'use client';
 import TabMenu from '@/components/common/TabMenu';
 import React, { useState, useEffect } from 'react';
-import DeliveryOrderList from '@/components/order/list/delivery/page';
+import DeliveryOrderList from '@/components/order/list/delivery/deliveryOrderList';
 import YomartOrderList from '@/components/order/list/yomart/page';
 
 /**
- * @memberof order
- * Order Page 에서 Tab과 Tab에 따른 조건부 렌더링 (delivery or yomart)
+ * [Page]
+ * @memberof /order
+ * @member DeliveryOrderList, YomartOrderList
+ * Order Page 에서 Tab선택과 그에 따른 화면 분기를 담당(delivery or yomart)
  */
 
 const tabData = {

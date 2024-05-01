@@ -3,10 +3,16 @@ import React, { useState, useEffect } from 'react';
 
 import { getOrderList } from '@/services/orderAPI';
 import { useRecoilState } from 'recoil';
-import CardOrdered from '@/components/order/list/cardOrdered';
-import SlideOrderList from '@/components/order/list/slideOderList';
 import { orderListAtom } from '@/recoil/order';
+import CardOrdered from '@/components/order/list/delivery/cardOrdered';
+import SlideOrderList from '@/components/order/list/delivery/slideOderList';
 
+/**
+ * [Component]
+ * @memberof order/list/delivery(p)
+ * @member CardOrdered(c), SlideOrderList(c)
+ * @access getOrderList
+ */
 const DeliveryOrderList = () => {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 
