@@ -7,17 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { getUserInfo } from '@/services/loginAPI';
 
 const Mypage = () => {
-  //const accessToken = typeof window !== 'undefined' ? sessionStorage.getItem('accessToken') : null;
   const userInfo = useRecoilValue(userInfoAtom);
-
-  console.log(`=====================================`);
-  console.log(`[test] mypage 진입, 현재 userinfo atom : `);
-  console.log(userInfo);
-  console.log(`=====================================`);
-  //문제(240118):
-  //로그인 후, 페이지를 오랫동안 방치한 후에 mypage로 접근 시 logout 상태인 것으로 인식하여
-  //LoggedOut 컴포넌트를 렌더링, 로그인 폼이 표출되는데 거기서 로그인을 하면 에러 발생
-  //페이지를 새로고침하여 다시 로그인 폼으로 접근하면 로그인 정상작동
 
   return (
     <div className="w-screen relative">
