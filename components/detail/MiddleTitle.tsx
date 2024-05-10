@@ -111,7 +111,7 @@ const MiddleTitle = ({shopInfo}: Props) => {
       </div>
       <div className="py-2 px-4 flex gap-2">
         <Link
-          href={`review?shopId=${23}`}
+          href={`review/shop?id=${shopInfo?.id}&name=${shopInfo?.name}`}
           className="rounded-xl border border-slate-400 py-3 flex-1 flex justify-center items-center"
         >
           리뷰 {shopInfo?.reviewNum}

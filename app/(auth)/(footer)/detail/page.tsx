@@ -64,7 +64,12 @@ const Detail = () => {
             param.longitude = curCoord?.lng || 0
           }
           const result = await shopApi.getShopInfo(param);
-          setShopInfo(result)
+          const nullToZeroResult = () => {
+            const newMinOrderPrice = result.minOrderPrice ?? 0
+            const newMinDeliveryPrice = result.minDeliveryPrice ?? 0
+            return {...result, minOrderPrice : newMinOrderPrice , minDeliveryPrice : newMinDeliveryPrice}
+          }
+          setShopInfo(nullToZeroResult)
         }
       } catch (error) {
         console.error('컴포넌트 내부 에러', error);

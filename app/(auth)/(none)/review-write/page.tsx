@@ -12,7 +12,7 @@ import { useRecoilState } from "recoil";
 import { useSearchParams } from "next/navigation";
 import { postReview } from "@/services/reviewApi";
 import { useEffect, useState } from "react";
-import PrevPageC from "@/components/common/PrevPageC";
+import Header from "@/components/common/Header";
 
 const ReviewWrite = () => {
   const [textValue, setTextValue] = useState('');
@@ -67,12 +67,7 @@ const ReviewWrite = () => {
 
   return (
     <div className="w-full bg-grey1">
-      <div className="flex py-4 px-2 bg-white text-[1.1rem] items-center">
-        <div><PrevPageC /></div>
-        <div className="flex flex-1">
-          <p className="w-full font-bold text-center">{shopName}</p></div>
-        <div className="w-[28px] h-[28px]"></div>
-      </div>
+      <Header type={1} label={shopName} />
       <div className="mt-0.5 p-6 bg-white">
         <p className="text-center text-grey4">{menuInfo}</p>
       </div>

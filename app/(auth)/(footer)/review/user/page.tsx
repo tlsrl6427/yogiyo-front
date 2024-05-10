@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import TabMenu from '@/components/common/TabMenu';
 import ToggleMenu from '@/components/common/ToggleMenu';
 import { BsPencil } from 'react-icons/bs';
-import { useSearchParams } from 'next/navigation';
 
 import Writable from '@/components/review/writable';
 import Written from '@/components/review/written';
@@ -24,7 +23,7 @@ const tabData2 = {
   right: '작성한 리뷰',
 };
 
-const Review = () => {
+const UserReview = () => {
   const [tab1, setTab1] = useState('left');
   const [tab2, setTab2] = useState('left');
 
@@ -34,11 +33,6 @@ const Review = () => {
   const handleGetTab2 = (selectedTab: string) => {
     setTab2(selectedTab);
   };
-
-  const searchParams = useSearchParams();
-  const shopId = searchParams.get('shopId');
-
-  console.log(shopId)
 
   return (
     <div className="bg-grey1">
@@ -67,4 +61,4 @@ const Review = () => {
   );
 };
 
-export default Review;
+export default UserReview;
