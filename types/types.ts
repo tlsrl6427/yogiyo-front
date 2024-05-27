@@ -315,3 +315,10 @@ export interface ShopNotice {
   notice: string,
   images: string[]
 }
+
+export interface ShopReviewParams {
+  shopId: number,
+  sort: string,
+  cursor: number,
+  limit: number
+}

@@ -1,6 +1,6 @@
 import type { ShopList } from '@/types/types';
 import { baseAxiosInstance } from './apiConfig';
-import type { ShopInfoType } from '@/types/types';
+import { ShopReviewParams } from '@/types/types';
 
 export const shopApi = {
   // 상점 리스트 조회
@@ -80,4 +80,24 @@ export const shopApi = {
       console.error(error);
     }
   },
+
+  // 상점 리뷰 요약
+  async getShopReviewSummary(shopId: number) {
+    try {
+      const response = await baseAxiosInstance.get(`member/review/shop-review-summary?shopId=${shopId}`);
+      return response.data;
+    }catch(error){
+      console.error(error)
+    }
+  },
+
+  // 상점 리뷰 가져오기
+  async getShopReviews({shopId, sort, cursor, limit}: ShopReviewParams){
+    try{
+      const response = await baseAxiosInstance.get(`/member/review/shop-review?shopId=${shopId}&sort=${sort}&cursor=${cursor}&limit=${limit}`) 
+      return response.data;
+    }catch(error){
+      console.error(error)
+    }
+  }
 };

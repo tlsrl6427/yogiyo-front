@@ -11,7 +11,7 @@ import Written from '@/components/review/written';
 /**
  * [Page]
  * @member writable, written
- * 리뷰 목록에서 탭과 토글, 그 선택값에 따른 컨텐츠를 렌더링 (writable or written)
+ * 유저의 리뷰 목록에서 탭과 토글, 그 선택값에 따른 컨텐츠를 렌더링 (writable or written)
  * @todo: 실제 데이터 사용 필요
  */
 
